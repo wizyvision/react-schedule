@@ -6052,9 +6052,19 @@ const SchedulerProvider = ({
     theme: theme
   }, children));
 };
+const useSchedulerContext = () => {
+  return useContext(SchedulerContext);
+};
+
+function Calendar() {
+  const {
+    color
+  } = useSchedulerContext();
+  return /*#__PURE__*/React__default.createElement("div", null, color);
+}
 
 const Scheduler = props => {
-  return /*#__PURE__*/React__default.createElement(SchedulerProvider, props, /*#__PURE__*/React__default.createElement("div", null, "Hello world"));
+  return /*#__PURE__*/React__default.createElement(SchedulerProvider, props, /*#__PURE__*/React__default.createElement("div", null, "Hello world"), /*#__PURE__*/React__default.createElement(Calendar, null));
 };
 
 export { Scheduler };
