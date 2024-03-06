@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 
-const SchedulerContext = /*#__PURE__*/createContext();
+const SchedulerContext = /*#__PURE__*/React.createContext();
 const SchedulerProvider = ({
   children,
   SlotProps,
@@ -41,7 +41,7 @@ const SchedulerProvider = ({
   }, children);
 };
 const useSchedulerContext = () => {
-  return useContext(SchedulerContext);
+  return React.useContext(SchedulerContext);
 };
 
 function Calendar() {

@@ -8,7 +8,7 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
-const SchedulerContext = /*#__PURE__*/React.createContext();
+const SchedulerContext = /*#__PURE__*/React__default["default"].createContext();
 const SchedulerProvider = ({
   children,
   SlotProps,
@@ -49,7 +49,7 @@ const SchedulerProvider = ({
   }, children);
 };
 const useSchedulerContext = () => {
-  return React.useContext(SchedulerContext);
+  return React__default["default"].useContext(SchedulerContext);
 };
 
 function Calendar() {
