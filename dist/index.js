@@ -1,24 +1,14 @@
 'use strict';
 
 var React = require('react');
+var SchedulerProvider = require('../../context/SchedulerProvider'); // Import SchedulerProvider
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 const SchedulerContext = /*#__PURE__*/React.createContext();
-const SchedulerProvider = props => {
-  const {
-    children,
-    color
-  } = props;
-  const value = {
-    color
-  };
-  return /*#__PURE__*/React__default["default"].createElement(SchedulerContext.Provider, {
-    value: value
-  }, children);
-};
+
 const useSchedulerContext = () => {
   return React.useContext(SchedulerContext);
 };
