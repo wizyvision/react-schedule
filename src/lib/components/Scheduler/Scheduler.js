@@ -1,5 +1,5 @@
 import React from 'react';
-import { SchedulerProvider } from './SchedulerProvider';
+import { SchedulerProvider } from '../../context/SchedulerProvider';
 import Calendar from '../Calendar';
 
 export const Scheduler = (props) => {

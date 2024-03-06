@@ -1,48 +1,19 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 
-const SchedulerContext = /*#__PURE__*/React.createContext();
-const SchedulerProvider = ({
-  children,
-  SlotProps,
-  AppointmentProps,
-  groupId,
-  groups,
-  users,
-  appointmentList,
-  onAppointmentChange,
-  durationOptions,
-  duration = 60,
-  onDurationChange,
-  date,
-  onDateChange,
-  onPrevDate,
-  onNextDate,
-  color
-}) => {
+const SchedulerContext = /*#__PURE__*/createContext();
+const SchedulerProvider = props => {
+  const {
+    children,
+    color
+  } = props;
   const value = {
-    groupId,
-    groups,
-    users,
-    appointmentList,
-    onAppointmentChange,
-    durationOptions,
-    duration,
-    onDurationChange,
-    date,
-    onDateChange,
-    onPrevDate,
-    onNextDate,
-    SlotProps,
-    AppointmentProps,
     color
   };
   return /*#__PURE__*/React.createElement(SchedulerContext.Provider, {
     value: value
   }, children);
 };
-const useSchedulerContext = () => {
-  return React.useContext(SchedulerContext);
-};
+const useSchedulerContext = () => useContext(SchedulerContext);
 
 function Calendar() {
   const {

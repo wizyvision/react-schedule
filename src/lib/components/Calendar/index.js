@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSchedulerContext } from '../Scheduler/SchedulerProvider'
+import { useSchedulerContext } from '../../context/SchedulerProvider'
 
 function Calendar() {
   const {color} = useSchedulerContext()

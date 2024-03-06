@@ -8,49 +8,20 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
-const SchedulerContext = /*#__PURE__*/React__default["default"].createContext();
-const SchedulerProvider = ({
-  children,
-  SlotProps,
-  AppointmentProps,
-  groupId,
-  groups,
-  users,
-  appointmentList,
-  onAppointmentChange,
-  durationOptions,
-  duration = 60,
-  onDurationChange,
-  date,
-  onDateChange,
-  onPrevDate,
-  onNextDate,
-  color
-}) => {
+const SchedulerContext = /*#__PURE__*/React.createContext();
+const SchedulerProvider = props => {
+  const {
+    children,
+    color
+  } = props;
   const value = {
-    groupId,
-    groups,
-    users,
-    appointmentList,
-    onAppointmentChange,
-    durationOptions,
-    duration,
-    onDurationChange,
-    date,
-    onDateChange,
-    onPrevDate,
-    onNextDate,
-    SlotProps,
-    AppointmentProps,
     color
   };
   return /*#__PURE__*/React__default["default"].createElement(SchedulerContext.Provider, {
     value: value
   }, children);
 };
-const useSchedulerContext = () => {
-  return React__default["default"].useContext(SchedulerContext);
-};
+const useSchedulerContext = () => React.useContext(SchedulerContext);
 
 function Calendar() {
   const {
