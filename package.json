@@ -2,8 +2,8 @@
   "name": "@wizyvision/react-schedule",
   "version": "0.1.19",
   "description": "React scheduler",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
