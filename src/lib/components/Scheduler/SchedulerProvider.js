@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 
-const SchedulerContext = createContext();
+const SchedulerContext = React.createContext();
 
 export const SchedulerProvider = ({
   children,
@@ -46,5 +46,5 @@ export const SchedulerProvider = ({
 };
 
 export const useSchedulerContext = () => {
-  return useContext(SchedulerContext);
+  return React.useContext(SchedulerContext);
 };
