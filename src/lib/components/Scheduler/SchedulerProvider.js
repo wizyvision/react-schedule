@@ -1,7 +1,4 @@
 import React, { createContext, useContext } from 'react';
-import { ThemeProvider } from '@mui/material/styles'
-import theme from '../../constants/theme';
-
 
 const SchedulerContext = createContext();
 
@@ -22,7 +19,7 @@ export const SchedulerProvider = ({
   onPrevDate,
   onNextDate,
   color,
-}) =>  {
+}) => {
   const value = {
     groupId,
     groups,
@@ -43,12 +40,10 @@ export const SchedulerProvider = ({
 
   return (
     <SchedulerContext.Provider value={value}>
-      <ThemeProvider theme={theme} >
-        {children}
-      </ThemeProvider>
+      {children}
     </SchedulerContext.Provider>
   );
-}
+};
 
 export const useSchedulerContext = () => {
   return useContext(SchedulerContext);
