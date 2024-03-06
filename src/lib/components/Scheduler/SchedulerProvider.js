@@ -5,7 +5,7 @@ import theme from '../../constants/theme';
 
 const SchedulerContext = createContext();
 
-const SchedulerProvider = ({
+export const SchedulerProvider = ({
   children,
   SlotProps,
   AppointmentProps,
@@ -50,8 +50,6 @@ const SchedulerProvider = ({
   );
 }
 
-const useSchedulerContext = () => {
+export const useSchedulerContext = () => {
   return useContext(SchedulerContext);
 };
-
-export { SchedulerProvider, useSchedulerContext };

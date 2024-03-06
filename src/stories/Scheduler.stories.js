@@ -14,4 +14,6 @@ const Template = (args) => {
 };
 
 export const ResourceTimeline = Template.bind({});
-
+ResourceTimeline.args = {
+  color: 'hello world'
+}
