@@ -1,7 +1,6 @@
 import React, { createContext, useContext } from 'react';
-import { ThemeProvider } from '@mui/material'
+import { ThemeProvider } from '@mui/material/styles'
 import theme from '../../constants/theme';
-
 
 
 const SchedulerContext = createContext();
