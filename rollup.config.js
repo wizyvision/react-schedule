@@ -7,7 +7,7 @@ const commonjs = require('@rollup/plugin-commonjs')
 // eslint-disable-next-line import/no-anonymous-default-export
 module.exports = [
   {
-    input: 'src/index.js',
+    input: './src/index.js',
     output: [
       {
         file: 'dist/index.js',
@@ -29,4 +29,5 @@ module.exports = [
         commonjs()
     ]
   },
+  
 ];
