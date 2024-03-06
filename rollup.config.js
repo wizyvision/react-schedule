@@ -1,5 +1,3 @@
-import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external'; 
-
 const babel = require('rollup-plugin-babel') ;
 const resolve = require('@rollup/plugin-node-resolve')
 const external = require('rollup-plugin-peer-deps-external')
@@ -26,7 +24,6 @@ module.exports = [
             exclude: 'node_modules/**',
             presets: ['@babel/preset-react'],
         }),
-        PeerDepsExternalPlugin(),
         external(),
         resolve(),
         commonjs()

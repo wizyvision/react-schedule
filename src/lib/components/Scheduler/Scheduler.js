@@ -2,7 +2,8 @@ import React from 'react';
 import { SchedulerProvider } from '../../context/SchedulerProvider';
 import Calendar from '../Calendar';
 
-export const Scheduler = (props) => {
+const Scheduler = (props) => {
+    console.log(props)
   return (
     <SchedulerProvider {...props}>
       <div>Hello world</div>
@@ -10,3 +11,5 @@ export const Scheduler = (props) => {
     </SchedulerProvider>
   );
 };
+
+export default Scheduler
