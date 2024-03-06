@@ -1,4 +1,3 @@
 ./node_modules
-.npmignore
 .npmrc
 .rollup.config.js
