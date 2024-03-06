@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Scheduler } from '../lib/components/Scheduler'
+import Scheduler from '../lib/components/Scheduler'
 
 export default {
   title: 'Scheduler',
@@ -9,7 +9,6 @@ export default {
 };
 
 const Template = (args) => {
-
   return (<Scheduler {...args} />);
 };
 

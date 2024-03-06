@@ -16,6 +16,8 @@ const SchedulerProvider = (props) => {
   );
 };
 
-const useSchedulerContext = () => useContext(SchedulerContext);
+const useSchedulerContext = () => {
+  return useContext(SchedulerContext);
+};
 
 export { SchedulerProvider, useSchedulerContext };

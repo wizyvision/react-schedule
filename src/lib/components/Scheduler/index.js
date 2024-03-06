@@ -1,1 +1,2 @@
-export * from './Scheduler'
+import Scheduler from './Scheduler'
+export default Scheduler
