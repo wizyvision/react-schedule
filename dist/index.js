@@ -23,8 +23,8 @@ function _interopNamespace(e) {
 	return Object.freeze(n);
 }
 
-var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var React__namespace = /*#__PURE__*/_interopNamespace(React);
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -1240,230 +1240,6 @@ if (process.env.NODE_ENV !== 'production') {
 var propTypesExports = propTypes.exports;
 var PropTypes = /*@__PURE__*/getDefaultExportFromCjs(propTypesExports);
 
-const SchedulerContext = /*#__PURE__*/React.createContext();
-const SchedulerProvider = props => {
-  const {
-    children,
-    color
-  } = props;
-  const value = {
-    color
-  };
-  return /*#__PURE__*/React__default["default"].createElement(SchedulerContext.Provider, {
-    value: value
-  }, children);
-};
-const useSchedulerContext = () => {
-  return React.useContext(SchedulerContext);
-};
-
-const common = {
-  black: '#000',
-  white: '#fff'
-};
-var common$1 = common;
-
-const red = {
-  50: '#ffebee',
-  100: '#ffcdd2',
-  200: '#ef9a9a',
-  300: '#e57373',
-  400: '#ef5350',
-  500: '#f44336',
-  600: '#e53935',
-  700: '#d32f2f',
-  800: '#c62828',
-  900: '#b71c1c',
-  A100: '#ff8a80',
-  A200: '#ff5252',
-  A400: '#ff1744',
-  A700: '#d50000'
-};
-var red$1 = red;
-
-const purple = {
-  50: '#f3e5f5',
-  100: '#e1bee7',
-  200: '#ce93d8',
-  300: '#ba68c8',
-  400: '#ab47bc',
-  500: '#9c27b0',
-  600: '#8e24aa',
-  700: '#7b1fa2',
-  800: '#6a1b9a',
-  900: '#4a148c',
-  A100: '#ea80fc',
-  A200: '#e040fb',
-  A400: '#d500f9',
-  A700: '#aa00ff'
-};
-var purple$1 = purple;
-
-const blue = {
-  50: '#e3f2fd',
-  100: '#bbdefb',
-  200: '#90caf9',
-  300: '#64b5f6',
-  400: '#42a5f5',
-  500: '#2196f3',
-  600: '#1e88e5',
-  700: '#1976d2',
-  800: '#1565c0',
-  900: '#0d47a1',
-  A100: '#82b1ff',
-  A200: '#448aff',
-  A400: '#2979ff',
-  A700: '#2962ff'
-};
-var blue$1 = blue;
-
-const lightBlue = {
-  50: '#e1f5fe',
-  100: '#b3e5fc',
-  200: '#81d4fa',
-  300: '#4fc3f7',
-  400: '#29b6f6',
-  500: '#03a9f4',
-  600: '#039be5',
-  700: '#0288d1',
-  800: '#0277bd',
-  900: '#01579b',
-  A100: '#80d8ff',
-  A200: '#40c4ff',
-  A400: '#00b0ff',
-  A700: '#0091ea'
-};
-var lightBlue$1 = lightBlue;
-
-const green = {
-  50: '#e8f5e9',
-  100: '#c8e6c9',
-  200: '#a5d6a7',
-  300: '#81c784',
-  400: '#66bb6a',
-  500: '#4caf50',
-  600: '#43a047',
-  700: '#388e3c',
-  800: '#2e7d32',
-  900: '#1b5e20',
-  A100: '#b9f6ca',
-  A200: '#69f0ae',
-  A400: '#00e676',
-  A700: '#00c853'
-};
-var green$1 = green;
-
-const orange = {
-  50: '#fff3e0',
-  100: '#ffe0b2',
-  200: '#ffcc80',
-  300: '#ffb74d',
-  400: '#ffa726',
-  500: '#ff9800',
-  600: '#fb8c00',
-  700: '#f57c00',
-  800: '#ef6c00',
-  900: '#e65100',
-  A100: '#ffd180',
-  A200: '#ffab40',
-  A400: '#ff9100',
-  A700: '#ff6d00'
-};
-var orange$1 = orange;
-
-const grey = {
-  50: '#fafafa',
-  100: '#f5f5f5',
-  200: '#eeeeee',
-  300: '#e0e0e0',
-  400: '#bdbdbd',
-  500: '#9e9e9e',
-  600: '#757575',
-  700: '#616161',
-  800: '#424242',
-  900: '#212121',
-  A100: '#f5f5f5',
-  A200: '#eeeeee',
-  A400: '#bdbdbd',
-  A700: '#616161'
-};
-var grey$1 = grey;
-
-/**
- * WARNING: Don't import this directly.
- * Use `MuiError` from `@mui/internal-babel-macros/MuiError.macro` instead.
- * @param {number} code
- */
-function formatMuiErrorMessage$2(code) {
-  // Apply babel-plugin-transform-template-literals in loose mode
-  // loose mode is safe if we're concatenating primitives
-  // see https://babeljs.io/docs/en/babel-plugin-transform-template-literals#loose
-  /* eslint-disable prefer-template */
-  let url = 'https://mui.com/production-error/?code=' + code;
-  for (let i = 1; i < arguments.length; i += 1) {
-    // rest params over-transpile for this case
-    // eslint-disable-next-line prefer-rest-params
-    url += '&args[]=' + encodeURIComponent(arguments[i]);
-  }
-  return 'Minified MUI error #' + code + '; visit ' + url + ' for the full message.';
-  /* eslint-enable prefer-template */
-}
-
-var formatMuiErrorMessage$1 = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	'default': formatMuiErrorMessage$2
-});
-
-var THEME_ID = '$$material';
-
-function _extends$1() {
-  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-    return target;
-  };
-  return _extends$1.apply(this, arguments);
-}
-
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-  return target;
-}
-
-function memoize$2(fn) {
-  var cache = Object.create(null);
-  return function (arg) {
-    if (cache[arg] === undefined) cache[arg] = fn(arg);
-    return cache[arg];
-  };
-}
-
-var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|disableRemotePlayback|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
-
-var isPropValid = /* #__PURE__ */memoize$2(function (prop) {
-  return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
-  /* o */
-  && prop.charCodeAt(1) === 110
-  /* n */
-  && prop.charCodeAt(2) < 91;
-}
-/* Z+1 */
-);
-
 /*
 
 Based off glamor's StyleSheet, thanks Sunil ❤️
@@ -2230,6 +2006,14 @@ var weakMemoize = function weakMemoize(func) {
   };
 };
 
+function memoize$1(fn) {
+  var cache = Object.create(null);
+  return function (arg) {
+    if (cache[arg] === undefined) cache[arg] = fn(arg);
+    return cache[arg];
+  };
+}
+
 var identifierWithPointTracking = function identifierWithPointTracking(begin, points, index) {
   var previous = 0;
   var character = 0;
@@ -2677,7 +2461,7 @@ var prefixer = function prefixer(element, index, children, callback) {
 
 var isBrowser$5 = typeof document !== 'undefined';
 var getServerStylisCache = isBrowser$5 ? undefined : weakMemoize(function () {
-  return memoize$2(function () {
+  return memoize$1(function () {
     var cache = {};
     return function (name) {
       return cache[name];
@@ -2871,6 +2655,21 @@ var createCache = function createCache(options) {
   cache.sheet.hydrate(nodesToHydrate);
   return cache;
 };
+
+function _extends$1() {
+  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends$1.apply(this, arguments);
+}
 
 var reactIs$2 = {exports: {}};
 
@@ -3285,7 +3084,7 @@ var isProcessableValue = function isProcessableValue(value) {
   return value != null && typeof value !== 'boolean';
 };
 
-var processStyleName = /* #__PURE__ */memoize$2(function (styleName) {
+var processStyleName = /* #__PURE__ */memoize$1(function (styleName) {
   return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, '-$&').toLowerCase();
 });
 
@@ -3650,6 +3449,41 @@ var ThemeContext = /* #__PURE__ */React__namespace.createContext({});
 if (process.env.NODE_ENV !== 'production') {
   ThemeContext.displayName = 'EmotionThemeContext';
 }
+
+var getTheme = function getTheme(outerTheme, theme) {
+  if (typeof theme === 'function') {
+    var mergedTheme = theme(outerTheme);
+
+    if (process.env.NODE_ENV !== 'production' && (mergedTheme == null || typeof mergedTheme !== 'object' || Array.isArray(mergedTheme))) {
+      throw new Error('[ThemeProvider] Please return an object from your theme function, i.e. theme={() => ({})}!');
+    }
+
+    return mergedTheme;
+  }
+
+  if (process.env.NODE_ENV !== 'production' && (theme == null || typeof theme !== 'object' || Array.isArray(theme))) {
+    throw new Error('[ThemeProvider] Please make your theme prop a plain object');
+  }
+
+  return _extends$1({}, outerTheme, theme);
+};
+
+var createCacheWithTheme = /* #__PURE__ */weakMemoize(function (outerTheme) {
+  return weakMemoize(function (theme) {
+    return getTheme(outerTheme, theme);
+  });
+});
+var ThemeProvider = function ThemeProvider(props) {
+  var theme = React__namespace.useContext(ThemeContext);
+
+  if (props.theme !== theme) {
+    theme = createCacheWithTheme(theme)(props.theme);
+  }
+
+  return /*#__PURE__*/React__namespace.createElement(ThemeContext.Provider, {
+    value: theme
+  }, props.children);
+};
 
 var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
 var labelPropName = '__EMOTION_LABEL_PLEASE_DO_NOT_USE__';
@@ -4048,7 +3882,7 @@ var classnames = function classnames(args) {
   return cls;
 };
 
-function merge$2(registered, css, className) {
+function merge$1(registered, css, className) {
   var registeredStyles = [];
   var rawClassName = getRegisteredStyles(registered, registeredStyles, className);
 
@@ -4120,7 +3954,7 @@ var ClassNames = /* #__PURE__ */withEmotionCache(function (props, cache) {
       args[_key2] = arguments[_key2];
     }
 
-    return merge$2(cache.registered, css, classnames(args));
+    return merge$1(cache.registered, css, classnames(args));
   };
 
   var content = {
@@ -4159,6 +3993,58 @@ if (process.env.NODE_ENV !== 'production') {
     globalContext[globalKey] = true;
   }
 }
+
+/**
+ * WARNING: Don't import this directly.
+ * Use `MuiError` from `@mui/internal-babel-macros/MuiError.macro` instead.
+ * @param {number} code
+ */
+function formatMuiErrorMessage$1(code) {
+  // Apply babel-plugin-transform-template-literals in loose mode
+  // loose mode is safe if we're concatenating primitives
+  // see https://babeljs.io/docs/en/babel-plugin-transform-template-literals#loose
+  /* eslint-disable prefer-template */
+  let url = 'https://mui.com/production-error/?code=' + code;
+  for (let i = 1; i < arguments.length; i += 1) {
+    // rest params over-transpile for this case
+    // eslint-disable-next-line prefer-rest-params
+    url += '&args[]=' + encodeURIComponent(arguments[i]);
+  }
+  return 'Minified MUI error #' + code + '; visit ' + url + ' for the full message.';
+  /* eslint-enable prefer-template */
+}
+
+var formatMuiErrorMessage = /*#__PURE__*/Object.freeze({
+	__proto__: null,
+	'default': formatMuiErrorMessage$1
+});
+
+var THEME_ID = '$$material';
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+
+var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|disableRemotePlayback|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
+
+var isPropValid = /* #__PURE__ */memoize$1(function (prop) {
+  return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
+  /* o */
+  && prop.charCodeAt(1) === 110
+  /* n */
+  && prop.charCodeAt(2) < 91;
+}
+/* Z+1 */
+);
 
 var testOmitPropsOnStringTag = isPropValid;
 
@@ -4446,38 +4332,38 @@ var styledEngine = /*#__PURE__*/Object.freeze({
 });
 
 // https://github.com/sindresorhus/is-plain-obj/blob/main/index.js
-function isPlainObject$1(item) {
+function isPlainObject(item) {
   if (typeof item !== 'object' || item === null) {
     return false;
   }
   const prototype = Object.getPrototypeOf(item);
   return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in item) && !(Symbol.iterator in item);
 }
-function deepClone$1(source) {
-  if (!isPlainObject$1(source)) {
+function deepClone(source) {
+  if (!isPlainObject(source)) {
     return source;
   }
   const output = {};
   Object.keys(source).forEach(key => {
-    output[key] = deepClone$1(source[key]);
+    output[key] = deepClone(source[key]);
   });
   return output;
 }
-function deepmerge$2(target, source, options = {
+function deepmerge$1(target, source, options = {
   clone: true
 }) {
   const output = options.clone ? _extends$1({}, target) : target;
-  if (isPlainObject$1(target) && isPlainObject$1(source)) {
+  if (isPlainObject(target) && isPlainObject(source)) {
     Object.keys(source).forEach(key => {
       // Avoid prototype pollution
       if (key === '__proto__') {
         return;
       }
-      if (isPlainObject$1(source[key]) && key in target && isPlainObject$1(target[key])) {
+      if (isPlainObject(source[key]) && key in target && isPlainObject(target[key])) {
         // Since `output` is a clone of `target` and we have narrowed `target` in this block we can cast to the same type.
-        output[key] = deepmerge$2(target[key], source[key], options);
+        output[key] = deepmerge$1(target[key], source[key], options);
       } else if (options.clone) {
-        output[key] = isPlainObject$1(source[key]) ? deepClone$1(source[key]) : source[key];
+        output[key] = isPlainObject(source[key]) ? deepClone(source[key]) : source[key];
       } else {
         output[key] = source[key];
       }
@@ -4486,14 +4372,14 @@ function deepmerge$2(target, source, options = {
   return output;
 }
 
-var deepmerge$1 = /*#__PURE__*/Object.freeze({
+var deepmerge = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': deepmerge$2,
-	isPlainObject: isPlainObject$1
+	'default': deepmerge$1,
+	isPlainObject: isPlainObject
 });
 
-const _excluded$d = ["values", "unit", "step"];
-const sortBreakpointsValues$1 = values => {
+const _excluded$f = ["values", "unit", "step"];
+const sortBreakpointsValues = values => {
   const breakpointsAsArray = Object.keys(values).map(key => ({
     key,
     val: values[key]
@@ -4508,7 +4394,7 @@ const sortBreakpointsValues$1 = values => {
 };
 
 // Keep in mind that @media is inclusive by the CSS specification.
-function createBreakpoints$1(breakpoints) {
+function createBreakpoints(breakpoints) {
   const {
       // The breakpoint **start** at this value.
       // For instance with the first breakpoint xs: [xs, sm).
@@ -4526,8 +4412,8 @@ function createBreakpoints$1(breakpoints) {
       unit = 'px',
       step = 5
     } = breakpoints,
-    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$d);
-  const sortedValues = sortBreakpointsValues$1(values);
+    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$f);
+  const sortedValues = sortBreakpointsValues(values);
   const keys = Object.keys(sortedValues);
   function up(key) {
     const value = typeof values[key] === 'number' ? values[key] : key;
@@ -4570,26 +4456,26 @@ function createBreakpoints$1(breakpoints) {
   }, other);
 }
 
-const shape$2 = {
+const shape = {
   borderRadius: 4
 };
-var shape$3 = shape$2;
+var shape$1 = shape;
 
-const responsivePropType$2 = process.env.NODE_ENV !== 'production' ? PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.object, PropTypes.array]) : {};
-var responsivePropType$3 = responsivePropType$2;
+const responsivePropType = process.env.NODE_ENV !== 'production' ? PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.object, PropTypes.array]) : {};
+var responsivePropType$1 = responsivePropType;
 
-function merge$1(acc, item) {
+function merge(acc, item) {
   if (!item) {
     return acc;
   }
-  return deepmerge$2(acc, item, {
+  return deepmerge$1(acc, item, {
     clone: false // No need to clone deep, it's way faster.
   });
 }
 
 // The breakpoint **start** at this value.
 // For instance with the first breakpoint xs: [xs, sm[.
-const values$1 = {
+const values = {
   xs: 0,
   // phone
   sm: 600,
@@ -4600,26 +4486,26 @@ const values$1 = {
   // desktop
   xl: 1536 // large screen
 };
-const defaultBreakpoints$1 = {
+const defaultBreakpoints = {
   // Sorted ASC by size. That's important.
   // It can't be configured as it's used statically for propTypes.
   keys: ['xs', 'sm', 'md', 'lg', 'xl'],
-  up: key => `@media (min-width:${values$1[key]}px)`
+  up: key => `@media (min-width:${values[key]}px)`
 };
-function handleBreakpoints$1(props, propValue, styleFromPropValue) {
+function handleBreakpoints(props, propValue, styleFromPropValue) {
   const theme = props.theme || {};
   if (Array.isArray(propValue)) {
-    const themeBreakpoints = theme.breakpoints || defaultBreakpoints$1;
+    const themeBreakpoints = theme.breakpoints || defaultBreakpoints;
     return propValue.reduce((acc, item, index) => {
       acc[themeBreakpoints.up(themeBreakpoints.keys[index])] = styleFromPropValue(propValue[index]);
       return acc;
     }, {});
   }
   if (typeof propValue === 'object') {
-    const themeBreakpoints = theme.breakpoints || defaultBreakpoints$1;
+    const themeBreakpoints = theme.breakpoints || defaultBreakpoints;
     return Object.keys(propValue).reduce((acc, breakpoint) => {
       // key is breakpoint
-      if (Object.keys(themeBreakpoints.values || values$1).indexOf(breakpoint) !== -1) {
+      if (Object.keys(themeBreakpoints.values || values).indexOf(breakpoint) !== -1) {
         const mediaKey = themeBreakpoints.up(breakpoint);
         acc[mediaKey] = styleFromPropValue(propValue[breakpoint], breakpoint);
       } else {
@@ -4632,7 +4518,7 @@ function handleBreakpoints$1(props, propValue, styleFromPropValue) {
   const output = styleFromPropValue(propValue);
   return output;
 }
-function createEmptyBreakpointObject$1(breakpointsInput = {}) {
+function createEmptyBreakpointObject(breakpointsInput = {}) {
   var _breakpointsInput$key;
   const breakpointsInOrder = (_breakpointsInput$key = breakpointsInput.keys) == null ? void 0 : _breakpointsInput$key.reduce((acc, key) => {
     const breakpointStyleKey = breakpointsInput.up(key);
@@ -4641,7 +4527,7 @@ function createEmptyBreakpointObject$1(breakpointsInput = {}) {
   }, {});
   return breakpointsInOrder || {};
 }
-function removeUnusedBreakpoints$1(breakpointKeys, style) {
+function removeUnusedBreakpoints(breakpointKeys, style) {
   return breakpointKeys.reduce((acc, key) => {
     const breakpointOutput = acc[key];
     const isBreakpointUnused = !breakpointOutput || Object.keys(breakpointOutput).length === 0;
@@ -4656,19 +4542,19 @@ function removeUnusedBreakpoints$1(breakpointKeys, style) {
 //
 // A strict capitalization should uppercase the first letter of each word in the sentence.
 // We only handle the first word.
-function capitalize$2(string) {
+function capitalize$1(string) {
   if (typeof string !== 'string') {
-    throw new Error(process.env.NODE_ENV !== "production" ? `MUI: \`capitalize(string)\` expects a string argument.` : formatMuiErrorMessage$2(7));
+    throw new Error(process.env.NODE_ENV !== "production" ? `MUI: \`capitalize(string)\` expects a string argument.` : formatMuiErrorMessage$1(7));
   }
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-var capitalize$1 = /*#__PURE__*/Object.freeze({
+var capitalize = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': capitalize$2
+	'default': capitalize$1
 });
 
-function getPath$1(obj, path, checkVars = true) {
+function getPath(obj, path, checkVars = true) {
   if (!path || typeof path !== 'string') {
     return null;
   }
@@ -4687,21 +4573,21 @@ function getPath$1(obj, path, checkVars = true) {
     return null;
   }, obj);
 }
-function getStyleValue$1(themeMapping, transform, propValueFinal, userValue = propValueFinal) {
+function getStyleValue(themeMapping, transform, propValueFinal, userValue = propValueFinal) {
   let value;
   if (typeof themeMapping === 'function') {
     value = themeMapping(propValueFinal);
   } else if (Array.isArray(themeMapping)) {
     value = themeMapping[propValueFinal] || userValue;
   } else {
-    value = getPath$1(themeMapping, propValueFinal) || userValue;
+    value = getPath(themeMapping, propValueFinal) || userValue;
   }
   if (transform) {
     value = transform(value, userValue, themeMapping);
   }
   return value;
 }
-function style$3(options) {
+function style$1(options) {
   const {
     prop,
     cssProperty = options.prop,
@@ -4717,12 +4603,12 @@ function style$3(options) {
     }
     const propValue = props[prop];
     const theme = props.theme;
-    const themeMapping = getPath$1(theme, themeKey) || {};
+    const themeMapping = getPath(theme, themeKey) || {};
     const styleFromPropValue = propValueFinal => {
-      let value = getStyleValue$1(themeMapping, transform, propValueFinal);
+      let value = getStyleValue(themeMapping, transform, propValueFinal);
       if (propValueFinal === value && typeof propValueFinal === 'string') {
         // Haven't found value
-        value = getStyleValue$1(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize$2(propValueFinal)}`, propValueFinal);
+        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize$1(propValueFinal)}`, propValueFinal);
       }
       if (cssProperty === false) {
         return value;
@@ -4731,16 +4617,16 @@ function style$3(options) {
         [cssProperty]: value
       };
     };
-    return handleBreakpoints$1(props, propValue, styleFromPropValue);
+    return handleBreakpoints(props, propValue, styleFromPropValue);
   };
   fn.propTypes = process.env.NODE_ENV !== 'production' ? {
-    [prop]: responsivePropType$3
+    [prop]: responsivePropType$1
   } : {};
   fn.filterProps = [prop];
   return fn;
 }
 
-function memoize$1(fn) {
+function memoize(fn) {
   const cache = {};
   return arg => {
     if (cache[arg] === undefined) {
@@ -4750,11 +4636,11 @@ function memoize$1(fn) {
   };
 }
 
-const properties$1 = {
+const properties = {
   m: 'margin',
   p: 'padding'
 };
-const directions$1 = {
+const directions = {
   t: 'Top',
   r: 'Right',
   b: 'Bottom',
@@ -4762,7 +4648,7 @@ const directions$1 = {
   x: ['Left', 'Right'],
   y: ['Top', 'Bottom']
 };
-const aliases$1 = {
+const aliases = {
   marginX: 'mx',
   marginY: 'my',
   paddingX: 'px',
@@ -4772,26 +4658,26 @@ const aliases$1 = {
 // memoize() impact:
 // From 300,000 ops/sec
 // To 350,000 ops/sec
-const getCssProperties$1 = memoize$1(prop => {
+const getCssProperties = memoize(prop => {
   // It's not a shorthand notation.
   if (prop.length > 2) {
-    if (aliases$1[prop]) {
-      prop = aliases$1[prop];
+    if (aliases[prop]) {
+      prop = aliases[prop];
     } else {
       return [prop];
     }
   }
   const [a, b] = prop.split('');
-  const property = properties$1[a];
-  const direction = directions$1[b] || '';
+  const property = properties[a];
+  const direction = directions[b] || '';
   return Array.isArray(direction) ? direction.map(dir => property + dir) : [property + direction];
 });
-const marginKeys$1 = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'margin', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft', 'marginX', 'marginY', 'marginInline', 'marginInlineStart', 'marginInlineEnd', 'marginBlock', 'marginBlockStart', 'marginBlockEnd'];
-const paddingKeys$1 = ['p', 'pt', 'pr', 'pb', 'pl', 'px', 'py', 'padding', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'paddingX', 'paddingY', 'paddingInline', 'paddingInlineStart', 'paddingInlineEnd', 'paddingBlock', 'paddingBlockStart', 'paddingBlockEnd'];
-const spacingKeys$1 = [...marginKeys$1, ...paddingKeys$1];
-function createUnaryUnit$1(theme, themeKey, defaultValue, propName) {
+const marginKeys = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'margin', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft', 'marginX', 'marginY', 'marginInline', 'marginInlineStart', 'marginInlineEnd', 'marginBlock', 'marginBlockStart', 'marginBlockEnd'];
+const paddingKeys = ['p', 'pt', 'pr', 'pb', 'pl', 'px', 'py', 'padding', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'paddingX', 'paddingY', 'paddingInline', 'paddingInlineStart', 'paddingInlineEnd', 'paddingBlock', 'paddingBlockStart', 'paddingBlockEnd'];
+const spacingKeys = [...marginKeys, ...paddingKeys];
+function createUnaryUnit(theme, themeKey, defaultValue, propName) {
   var _getPath;
-  const themeSpacing = (_getPath = getPath$1(theme, themeKey, false)) != null ? _getPath : defaultValue;
+  const themeSpacing = (_getPath = getPath(theme, themeKey, false)) != null ? _getPath : defaultValue;
   if (typeof themeSpacing === 'number') {
     return abs => {
       if (typeof abs === 'string') {
@@ -4828,10 +4714,10 @@ function createUnaryUnit$1(theme, themeKey, defaultValue, propName) {
   }
   return () => undefined;
 }
-function createUnarySpacing$1(theme) {
-  return createUnaryUnit$1(theme, 'spacing', 8, 'spacing');
+function createUnarySpacing(theme) {
+  return createUnaryUnit(theme, 'spacing', 8, 'spacing');
 }
-function getValue$1(transformer, propValue) {
+function getValue(transformer, propValue) {
   if (typeof propValue === 'string' || propValue == null) {
     return propValue;
   }
@@ -4845,52 +4731,52 @@ function getValue$1(transformer, propValue) {
   }
   return `-${transformed}`;
 }
-function getStyleFromPropValue$1(cssProperties, transformer) {
+function getStyleFromPropValue(cssProperties, transformer) {
   return propValue => cssProperties.reduce((acc, cssProperty) => {
-    acc[cssProperty] = getValue$1(transformer, propValue);
+    acc[cssProperty] = getValue(transformer, propValue);
     return acc;
   }, {});
 }
-function resolveCssProperty$1(props, keys, prop, transformer) {
+function resolveCssProperty(props, keys, prop, transformer) {
   // Using a hash computation over an array iteration could be faster, but with only 28 items,
   // it's doesn't worth the bundle size.
   if (keys.indexOf(prop) === -1) {
     return null;
   }
-  const cssProperties = getCssProperties$1(prop);
-  const styleFromPropValue = getStyleFromPropValue$1(cssProperties, transformer);
+  const cssProperties = getCssProperties(prop);
+  const styleFromPropValue = getStyleFromPropValue(cssProperties, transformer);
   const propValue = props[prop];
-  return handleBreakpoints$1(props, propValue, styleFromPropValue);
+  return handleBreakpoints(props, propValue, styleFromPropValue);
 }
-function style$2(props, keys) {
-  const transformer = createUnarySpacing$1(props.theme);
-  return Object.keys(props).map(prop => resolveCssProperty$1(props, keys, prop, transformer)).reduce(merge$1, {});
+function style(props, keys) {
+  const transformer = createUnarySpacing(props.theme);
+  return Object.keys(props).map(prop => resolveCssProperty(props, keys, prop, transformer)).reduce(merge, {});
 }
-function margin$1(props) {
-  return style$2(props, marginKeys$1);
+function margin(props) {
+  return style(props, marginKeys);
 }
-margin$1.propTypes = process.env.NODE_ENV !== 'production' ? marginKeys$1.reduce((obj, key) => {
-  obj[key] = responsivePropType$3;
+margin.propTypes = process.env.NODE_ENV !== 'production' ? marginKeys.reduce((obj, key) => {
+  obj[key] = responsivePropType$1;
   return obj;
 }, {}) : {};
-margin$1.filterProps = marginKeys$1;
-function padding$1(props) {
-  return style$2(props, paddingKeys$1);
+margin.filterProps = marginKeys;
+function padding(props) {
+  return style(props, paddingKeys);
 }
-padding$1.propTypes = process.env.NODE_ENV !== 'production' ? paddingKeys$1.reduce((obj, key) => {
-  obj[key] = responsivePropType$3;
+padding.propTypes = process.env.NODE_ENV !== 'production' ? paddingKeys.reduce((obj, key) => {
+  obj[key] = responsivePropType$1;
   return obj;
 }, {}) : {};
-padding$1.filterProps = paddingKeys$1;
-process.env.NODE_ENV !== 'production' ? spacingKeys$1.reduce((obj, key) => {
-  obj[key] = responsivePropType$3;
+padding.filterProps = paddingKeys;
+process.env.NODE_ENV !== 'production' ? spacingKeys.reduce((obj, key) => {
+  obj[key] = responsivePropType$1;
   return obj;
 }, {}) : {};
 
 // The different signatures imply different meaning for their arguments that can't be expressed structurally.
 // We express the difference with variable names.
 
-function createSpacing$1(spacingInput = 8) {
+function createSpacing(spacingInput = 8) {
   // Already transformed.
   if (spacingInput.mui) {
     return spacingInput;
@@ -4899,7 +4785,7 @@ function createSpacing$1(spacingInput = 8) {
   // Material Design layouts are visually balanced. Most measurements align to an 8dp grid, which aligns both spacing and the overall layout.
   // Smaller components, such as icons, can align to a 4dp grid.
   // https://m2.material.io/design/layout/understanding-layout.html
-  const transform = createUnarySpacing$1({
+  const transform = createUnarySpacing({
     spacing: spacingInput
   });
   const spacing = (...argsInput) => {
@@ -4918,7 +4804,7 @@ function createSpacing$1(spacingInput = 8) {
   return spacing;
 }
 
-function compose$1(...styles) {
+function compose(...styles) {
   const handlers = styles.reduce((acc, style) => {
     style.filterProps.forEach(prop => {
       acc[prop] = style;
@@ -4931,7 +4817,7 @@ function compose$1(...styles) {
   const fn = props => {
     return Object.keys(props).reduce((acc, prop) => {
       if (handlers[prop]) {
-        return merge$1(acc, handlers[prop](props));
+        return merge(acc, handlers[prop](props));
       }
       return acc;
     }, {});
@@ -4941,168 +4827,168 @@ function compose$1(...styles) {
   return fn;
 }
 
-function borderTransform$1(value) {
+function borderTransform(value) {
   if (typeof value !== 'number') {
     return value;
   }
   return `${value}px solid`;
 }
-function createBorderStyle$1(prop, transform) {
-  return style$3({
+function createBorderStyle(prop, transform) {
+  return style$1({
     prop,
     themeKey: 'borders',
     transform
   });
 }
-const border$1 = createBorderStyle$1('border', borderTransform$1);
-const borderTop$1 = createBorderStyle$1('borderTop', borderTransform$1);
-const borderRight$1 = createBorderStyle$1('borderRight', borderTransform$1);
-const borderBottom$1 = createBorderStyle$1('borderBottom', borderTransform$1);
-const borderLeft$1 = createBorderStyle$1('borderLeft', borderTransform$1);
-const borderColor$1 = createBorderStyle$1('borderColor');
-const borderTopColor$1 = createBorderStyle$1('borderTopColor');
-const borderRightColor$1 = createBorderStyle$1('borderRightColor');
-const borderBottomColor$1 = createBorderStyle$1('borderBottomColor');
-const borderLeftColor$1 = createBorderStyle$1('borderLeftColor');
-const outline$1 = createBorderStyle$1('outline', borderTransform$1);
-const outlineColor$1 = createBorderStyle$1('outlineColor');
+const border = createBorderStyle('border', borderTransform);
+const borderTop = createBorderStyle('borderTop', borderTransform);
+const borderRight = createBorderStyle('borderRight', borderTransform);
+const borderBottom = createBorderStyle('borderBottom', borderTransform);
+const borderLeft = createBorderStyle('borderLeft', borderTransform);
+const borderColor = createBorderStyle('borderColor');
+const borderTopColor = createBorderStyle('borderTopColor');
+const borderRightColor = createBorderStyle('borderRightColor');
+const borderBottomColor = createBorderStyle('borderBottomColor');
+const borderLeftColor = createBorderStyle('borderLeftColor');
+const outline = createBorderStyle('outline', borderTransform);
+const outlineColor = createBorderStyle('outlineColor');
 
 // false positive
 // eslint-disable-next-line react/function-component-definition
-const borderRadius$1 = props => {
+const borderRadius = props => {
   if (props.borderRadius !== undefined && props.borderRadius !== null) {
-    const transformer = createUnaryUnit$1(props.theme, 'shape.borderRadius', 4, 'borderRadius');
+    const transformer = createUnaryUnit(props.theme, 'shape.borderRadius', 4, 'borderRadius');
     const styleFromPropValue = propValue => ({
-      borderRadius: getValue$1(transformer, propValue)
+      borderRadius: getValue(transformer, propValue)
     });
-    return handleBreakpoints$1(props, props.borderRadius, styleFromPropValue);
+    return handleBreakpoints(props, props.borderRadius, styleFromPropValue);
   }
   return null;
 };
-borderRadius$1.propTypes = process.env.NODE_ENV !== 'production' ? {
-  borderRadius: responsivePropType$3
+borderRadius.propTypes = process.env.NODE_ENV !== 'production' ? {
+  borderRadius: responsivePropType$1
 } : {};
-borderRadius$1.filterProps = ['borderRadius'];
-compose$1(border$1, borderTop$1, borderRight$1, borderBottom$1, borderLeft$1, borderColor$1, borderTopColor$1, borderRightColor$1, borderBottomColor$1, borderLeftColor$1, borderRadius$1, outline$1, outlineColor$1);
+borderRadius.filterProps = ['borderRadius'];
+compose(border, borderTop, borderRight, borderBottom, borderLeft, borderColor, borderTopColor, borderRightColor, borderBottomColor, borderLeftColor, borderRadius, outline, outlineColor);
 
 // false positive
 // eslint-disable-next-line react/function-component-definition
-const gap$1 = props => {
+const gap = props => {
   if (props.gap !== undefined && props.gap !== null) {
-    const transformer = createUnaryUnit$1(props.theme, 'spacing', 8, 'gap');
+    const transformer = createUnaryUnit(props.theme, 'spacing', 8, 'gap');
     const styleFromPropValue = propValue => ({
-      gap: getValue$1(transformer, propValue)
+      gap: getValue(transformer, propValue)
     });
-    return handleBreakpoints$1(props, props.gap, styleFromPropValue);
+    return handleBreakpoints(props, props.gap, styleFromPropValue);
   }
   return null;
 };
-gap$1.propTypes = process.env.NODE_ENV !== 'production' ? {
-  gap: responsivePropType$3
+gap.propTypes = process.env.NODE_ENV !== 'production' ? {
+  gap: responsivePropType$1
 } : {};
-gap$1.filterProps = ['gap'];
+gap.filterProps = ['gap'];
 
 // false positive
 // eslint-disable-next-line react/function-component-definition
-const columnGap$1 = props => {
+const columnGap = props => {
   if (props.columnGap !== undefined && props.columnGap !== null) {
-    const transformer = createUnaryUnit$1(props.theme, 'spacing', 8, 'columnGap');
+    const transformer = createUnaryUnit(props.theme, 'spacing', 8, 'columnGap');
     const styleFromPropValue = propValue => ({
-      columnGap: getValue$1(transformer, propValue)
+      columnGap: getValue(transformer, propValue)
     });
-    return handleBreakpoints$1(props, props.columnGap, styleFromPropValue);
+    return handleBreakpoints(props, props.columnGap, styleFromPropValue);
   }
   return null;
 };
-columnGap$1.propTypes = process.env.NODE_ENV !== 'production' ? {
-  columnGap: responsivePropType$3
+columnGap.propTypes = process.env.NODE_ENV !== 'production' ? {
+  columnGap: responsivePropType$1
 } : {};
-columnGap$1.filterProps = ['columnGap'];
+columnGap.filterProps = ['columnGap'];
 
 // false positive
 // eslint-disable-next-line react/function-component-definition
-const rowGap$1 = props => {
+const rowGap = props => {
   if (props.rowGap !== undefined && props.rowGap !== null) {
-    const transformer = createUnaryUnit$1(props.theme, 'spacing', 8, 'rowGap');
+    const transformer = createUnaryUnit(props.theme, 'spacing', 8, 'rowGap');
     const styleFromPropValue = propValue => ({
-      rowGap: getValue$1(transformer, propValue)
+      rowGap: getValue(transformer, propValue)
     });
-    return handleBreakpoints$1(props, props.rowGap, styleFromPropValue);
+    return handleBreakpoints(props, props.rowGap, styleFromPropValue);
   }
   return null;
 };
-rowGap$1.propTypes = process.env.NODE_ENV !== 'production' ? {
-  rowGap: responsivePropType$3
+rowGap.propTypes = process.env.NODE_ENV !== 'production' ? {
+  rowGap: responsivePropType$1
 } : {};
-rowGap$1.filterProps = ['rowGap'];
-const gridColumn$1 = style$3({
+rowGap.filterProps = ['rowGap'];
+const gridColumn = style$1({
   prop: 'gridColumn'
 });
-const gridRow$1 = style$3({
+const gridRow = style$1({
   prop: 'gridRow'
 });
-const gridAutoFlow$1 = style$3({
+const gridAutoFlow = style$1({
   prop: 'gridAutoFlow'
 });
-const gridAutoColumns$1 = style$3({
+const gridAutoColumns = style$1({
   prop: 'gridAutoColumns'
 });
-const gridAutoRows$1 = style$3({
+const gridAutoRows = style$1({
   prop: 'gridAutoRows'
 });
-const gridTemplateColumns$1 = style$3({
+const gridTemplateColumns = style$1({
   prop: 'gridTemplateColumns'
 });
-const gridTemplateRows$1 = style$3({
+const gridTemplateRows = style$1({
   prop: 'gridTemplateRows'
 });
-const gridTemplateAreas$1 = style$3({
+const gridTemplateAreas = style$1({
   prop: 'gridTemplateAreas'
 });
-const gridArea$1 = style$3({
+const gridArea = style$1({
   prop: 'gridArea'
 });
-compose$1(gap$1, columnGap$1, rowGap$1, gridColumn$1, gridRow$1, gridAutoFlow$1, gridAutoColumns$1, gridAutoRows$1, gridTemplateColumns$1, gridTemplateRows$1, gridTemplateAreas$1, gridArea$1);
+compose(gap, columnGap, rowGap, gridColumn, gridRow, gridAutoFlow, gridAutoColumns, gridAutoRows, gridTemplateColumns, gridTemplateRows, gridTemplateAreas, gridArea);
 
-function paletteTransform$1(value, userValue) {
+function paletteTransform(value, userValue) {
   if (userValue === 'grey') {
     return userValue;
   }
   return value;
 }
-const color$1 = style$3({
+const color = style$1({
   prop: 'color',
   themeKey: 'palette',
-  transform: paletteTransform$1
+  transform: paletteTransform
 });
-const bgcolor$1 = style$3({
+const bgcolor = style$1({
   prop: 'bgcolor',
   cssProperty: 'backgroundColor',
   themeKey: 'palette',
-  transform: paletteTransform$1
+  transform: paletteTransform
 });
-const backgroundColor$1 = style$3({
+const backgroundColor = style$1({
   prop: 'backgroundColor',
   themeKey: 'palette',
-  transform: paletteTransform$1
+  transform: paletteTransform
 });
-compose$1(color$1, bgcolor$1, backgroundColor$1);
+compose(color, bgcolor, backgroundColor);
 
-function sizingTransform$1(value) {
+function sizingTransform(value) {
   return value <= 1 && value !== 0 ? `${value * 100}%` : value;
 }
-const width$1 = style$3({
+const width = style$1({
   prop: 'width',
-  transform: sizingTransform$1
+  transform: sizingTransform
 });
-const maxWidth$1 = props => {
+const maxWidth = props => {
   if (props.maxWidth !== undefined && props.maxWidth !== null) {
     const styleFromPropValue = propValue => {
       var _props$theme, _props$theme2;
-      const breakpoint = ((_props$theme = props.theme) == null || (_props$theme = _props$theme.breakpoints) == null || (_props$theme = _props$theme.values) == null ? void 0 : _props$theme[propValue]) || values$1[propValue];
+      const breakpoint = ((_props$theme = props.theme) == null || (_props$theme = _props$theme.breakpoints) == null || (_props$theme = _props$theme.values) == null ? void 0 : _props$theme[propValue]) || values[propValue];
       if (!breakpoint) {
         return {
-          maxWidth: sizingTransform$1(propValue)
+          maxWidth: sizingTransform(propValue)
         };
       }
       if (((_props$theme2 = props.theme) == null || (_props$theme2 = _props$theme2.breakpoints) == null ? void 0 : _props$theme2.unit) !== 'px') {
@@ -5114,63 +5000,63 @@ const maxWidth$1 = props => {
         maxWidth: breakpoint
       };
     };
-    return handleBreakpoints$1(props, props.maxWidth, styleFromPropValue);
+    return handleBreakpoints(props, props.maxWidth, styleFromPropValue);
   }
   return null;
 };
-maxWidth$1.filterProps = ['maxWidth'];
-const minWidth$1 = style$3({
+maxWidth.filterProps = ['maxWidth'];
+const minWidth = style$1({
   prop: 'minWidth',
-  transform: sizingTransform$1
+  transform: sizingTransform
 });
-const height$1 = style$3({
+const height = style$1({
   prop: 'height',
-  transform: sizingTransform$1
+  transform: sizingTransform
 });
-const maxHeight$1 = style$3({
+const maxHeight = style$1({
   prop: 'maxHeight',
-  transform: sizingTransform$1
+  transform: sizingTransform
 });
-const minHeight$1 = style$3({
+const minHeight = style$1({
   prop: 'minHeight',
-  transform: sizingTransform$1
+  transform: sizingTransform
 });
-style$3({
+style$1({
   prop: 'size',
   cssProperty: 'width',
-  transform: sizingTransform$1
+  transform: sizingTransform
 });
-style$3({
+style$1({
   prop: 'size',
   cssProperty: 'height',
-  transform: sizingTransform$1
+  transform: sizingTransform
 });
-const boxSizing$1 = style$3({
+const boxSizing = style$1({
   prop: 'boxSizing'
 });
-compose$1(width$1, maxWidth$1, minWidth$1, height$1, maxHeight$1, minHeight$1, boxSizing$1);
+compose(width, maxWidth, minWidth, height, maxHeight, minHeight, boxSizing);
 
-const defaultSxConfig$2 = {
+const defaultSxConfig = {
   // borders
   border: {
     themeKey: 'borders',
-    transform: borderTransform$1
+    transform: borderTransform
   },
   borderTop: {
     themeKey: 'borders',
-    transform: borderTransform$1
+    transform: borderTransform
   },
   borderRight: {
     themeKey: 'borders',
-    transform: borderTransform$1
+    transform: borderTransform
   },
   borderBottom: {
     themeKey: 'borders',
-    transform: borderTransform$1
+    transform: borderTransform
   },
   borderLeft: {
     themeKey: 'borders',
-    transform: borderTransform$1
+    transform: borderTransform
   },
   borderColor: {
     themeKey: 'palette'
@@ -5189,149 +5075,149 @@ const defaultSxConfig$2 = {
   },
   outline: {
     themeKey: 'borders',
-    transform: borderTransform$1
+    transform: borderTransform
   },
   outlineColor: {
     themeKey: 'palette'
   },
   borderRadius: {
     themeKey: 'shape.borderRadius',
-    style: borderRadius$1
+    style: borderRadius
   },
   // palette
   color: {
     themeKey: 'palette',
-    transform: paletteTransform$1
+    transform: paletteTransform
   },
   bgcolor: {
     themeKey: 'palette',
     cssProperty: 'backgroundColor',
-    transform: paletteTransform$1
+    transform: paletteTransform
   },
   backgroundColor: {
     themeKey: 'palette',
-    transform: paletteTransform$1
+    transform: paletteTransform
   },
   // spacing
   p: {
-    style: padding$1
+    style: padding
   },
   pt: {
-    style: padding$1
+    style: padding
   },
   pr: {
-    style: padding$1
+    style: padding
   },
   pb: {
-    style: padding$1
+    style: padding
   },
   pl: {
-    style: padding$1
+    style: padding
   },
   px: {
-    style: padding$1
+    style: padding
   },
   py: {
-    style: padding$1
+    style: padding
   },
   padding: {
-    style: padding$1
+    style: padding
   },
   paddingTop: {
-    style: padding$1
+    style: padding
   },
   paddingRight: {
-    style: padding$1
+    style: padding
   },
   paddingBottom: {
-    style: padding$1
+    style: padding
   },
   paddingLeft: {
-    style: padding$1
+    style: padding
   },
   paddingX: {
-    style: padding$1
+    style: padding
   },
   paddingY: {
-    style: padding$1
+    style: padding
   },
   paddingInline: {
-    style: padding$1
+    style: padding
   },
   paddingInlineStart: {
-    style: padding$1
+    style: padding
   },
   paddingInlineEnd: {
-    style: padding$1
+    style: padding
   },
   paddingBlock: {
-    style: padding$1
+    style: padding
   },
   paddingBlockStart: {
-    style: padding$1
+    style: padding
   },
   paddingBlockEnd: {
-    style: padding$1
+    style: padding
   },
   m: {
-    style: margin$1
+    style: margin
   },
   mt: {
-    style: margin$1
+    style: margin
   },
   mr: {
-    style: margin$1
+    style: margin
   },
   mb: {
-    style: margin$1
+    style: margin
   },
   ml: {
-    style: margin$1
+    style: margin
   },
   mx: {
-    style: margin$1
+    style: margin
   },
   my: {
-    style: margin$1
+    style: margin
   },
   margin: {
-    style: margin$1
+    style: margin
   },
   marginTop: {
-    style: margin$1
+    style: margin
   },
   marginRight: {
-    style: margin$1
+    style: margin
   },
   marginBottom: {
-    style: margin$1
+    style: margin
   },
   marginLeft: {
-    style: margin$1
+    style: margin
   },
   marginX: {
-    style: margin$1
+    style: margin
   },
   marginY: {
-    style: margin$1
+    style: margin
   },
   marginInline: {
-    style: margin$1
+    style: margin
   },
   marginInlineStart: {
-    style: margin$1
+    style: margin
   },
   marginInlineEnd: {
-    style: margin$1
+    style: margin
   },
   marginBlock: {
-    style: margin$1
+    style: margin
   },
   marginBlockStart: {
-    style: margin$1
+    style: margin
   },
   marginBlockEnd: {
-    style: margin$1
+    style: margin
   },
   // display
   displayPrint: {
@@ -5363,13 +5249,13 @@ const defaultSxConfig$2 = {
   justifySelf: {},
   // grid
   gap: {
-    style: gap$1
+    style: gap
   },
   rowGap: {
-    style: rowGap$1
+    style: rowGap
   },
   columnGap: {
-    style: columnGap$1
+    style: columnGap
   },
   gridColumn: {},
   gridRow: {},
@@ -5395,22 +5281,22 @@ const defaultSxConfig$2 = {
   },
   // sizing
   width: {
-    transform: sizingTransform$1
+    transform: sizingTransform
   },
   maxWidth: {
-    style: maxWidth$1
+    style: maxWidth
   },
   minWidth: {
-    transform: sizingTransform$1
+    transform: sizingTransform
   },
   height: {
-    transform: sizingTransform$1
+    transform: sizingTransform
   },
   maxHeight: {
-    transform: sizingTransform$1
+    transform: sizingTransform
   },
   minHeight: {
-    transform: sizingTransform$1
+    transform: sizingTransform
   },
   boxSizing: {},
   // typography
@@ -5435,19 +5321,19 @@ const defaultSxConfig$2 = {
     themeKey: 'typography'
   }
 };
-var defaultSxConfig$3 = defaultSxConfig$2;
+var defaultSxConfig$1 = defaultSxConfig;
 
-function objectsHaveSameKeys$1(...objects) {
+function objectsHaveSameKeys(...objects) {
   const allKeys = objects.reduce((keys, object) => keys.concat(Object.keys(object)), []);
   const union = new Set(allKeys);
   return objects.every(object => union.size === Object.keys(object).length);
 }
-function callIfFn$1(maybeFn, arg) {
+function callIfFn(maybeFn, arg) {
   return typeof maybeFn === 'function' ? maybeFn(arg) : maybeFn;
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-function unstable_createStyleFunctionSx$1() {
+function unstable_createStyleFunctionSx() {
   function getThemeValue(prop, val, theme, config) {
     const props = {
       [prop]: val,
@@ -5475,15 +5361,15 @@ function unstable_createStyleFunctionSx$1() {
         [prop]: val
       };
     }
-    const themeMapping = getPath$1(theme, themeKey) || {};
+    const themeMapping = getPath(theme, themeKey) || {};
     if (style) {
       return style(props);
     }
     const styleFromPropValue = propValueFinal => {
-      let value = getStyleValue$1(themeMapping, transform, propValueFinal);
+      let value = getStyleValue(themeMapping, transform, propValueFinal);
       if (propValueFinal === value && typeof propValueFinal === 'string') {
         // Haven't found value
-        value = getStyleValue$1(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize$2(propValueFinal)}`, propValueFinal);
+        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize$1(propValueFinal)}`, propValueFinal);
       }
       if (cssProperty === false) {
         return value;
@@ -5492,7 +5378,7 @@ function unstable_createStyleFunctionSx$1() {
         [cssProperty]: value
       };
     };
-    return handleBreakpoints$1(props, val, styleFromPropValue);
+    return handleBreakpoints(props, val, styleFromPropValue);
   }
   function styleFunctionSx(props) {
     var _theme$unstable_sxCon;
@@ -5503,7 +5389,7 @@ function unstable_createStyleFunctionSx$1() {
     if (!sx) {
       return null; // Emotion & styled-components will neglect null
     }
-    const config = (_theme$unstable_sxCon = theme.unstable_sxConfig) != null ? _theme$unstable_sxCon : defaultSxConfig$3;
+    const config = (_theme$unstable_sxCon = theme.unstable_sxConfig) != null ? _theme$unstable_sxCon : defaultSxConfig$1;
 
     /*
      * Receive `sxInput` as object or callback
@@ -5521,44 +5407,44 @@ function unstable_createStyleFunctionSx$1() {
       if (!sxObject) {
         return null;
       }
-      const emptyBreakpoints = createEmptyBreakpointObject$1(theme.breakpoints);
+      const emptyBreakpoints = createEmptyBreakpointObject(theme.breakpoints);
       const breakpointsKeys = Object.keys(emptyBreakpoints);
       let css = emptyBreakpoints;
       Object.keys(sxObject).forEach(styleKey => {
-        const value = callIfFn$1(sxObject[styleKey], theme);
+        const value = callIfFn(sxObject[styleKey], theme);
         if (value !== null && value !== undefined) {
           if (typeof value === 'object') {
             if (config[styleKey]) {
-              css = merge$1(css, getThemeValue(styleKey, value, theme, config));
+              css = merge(css, getThemeValue(styleKey, value, theme, config));
             } else {
-              const breakpointsValues = handleBreakpoints$1({
+              const breakpointsValues = handleBreakpoints({
                 theme
               }, value, x => ({
                 [styleKey]: x
               }));
-              if (objectsHaveSameKeys$1(breakpointsValues, value)) {
+              if (objectsHaveSameKeys(breakpointsValues, value)) {
                 css[styleKey] = styleFunctionSx({
                   sx: value,
                   theme
                 });
               } else {
-                css = merge$1(css, breakpointsValues);
+                css = merge(css, breakpointsValues);
               }
             }
           } else {
-            css = merge$1(css, getThemeValue(styleKey, value, theme, config));
+            css = merge(css, getThemeValue(styleKey, value, theme, config));
           }
         }
       });
-      return removeUnusedBreakpoints$1(breakpointsKeys, css);
+      return removeUnusedBreakpoints(breakpointsKeys, css);
     }
     return Array.isArray(sx) ? sx.map(traverse) : traverse(sx);
   }
   return styleFunctionSx;
 }
-const styleFunctionSx$3 = unstable_createStyleFunctionSx$1();
-styleFunctionSx$3.filterProps = ['sx'];
-var styleFunctionSx$4 = styleFunctionSx$3;
+const styleFunctionSx$1 = unstable_createStyleFunctionSx();
+styleFunctionSx$1.filterProps = ['sx'];
+var styleFunctionSx$2 = styleFunctionSx$1;
 
 /**
  * A universal utility to style components with multiple color modes. Always use it from the theme object.
@@ -5618,7 +5504,7 @@ var styleFunctionSx$4 = styleFunctionSx$3;
  *   })
  *```
  */
-function applyStyles$1(key, styles) {
+function applyStyles(key, styles) {
   // @ts-expect-error this is 'any' type
   const theme = this;
   if (theme.vars && typeof theme.getColorSchemeSelector === 'function') {
@@ -5635,18 +5521,18 @@ function applyStyles$1(key, styles) {
   return {};
 }
 
-const _excluded$c = ["breakpoints", "palette", "spacing", "shape"];
-function createTheme$3(options = {}, ...args) {
+const _excluded$e = ["breakpoints", "palette", "spacing", "shape"];
+function createTheme$2(options = {}, ...args) {
   const {
       breakpoints: breakpointsInput = {},
       palette: paletteInput = {},
       spacing: spacingInput,
       shape: shapeInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$c);
-  const breakpoints = createBreakpoints$1(breakpointsInput);
-  const spacing = createSpacing$1(spacingInput);
-  let muiTheme = deepmerge$2({
+    other = _objectWithoutPropertiesLoose(options, _excluded$e);
+  const breakpoints = createBreakpoints(breakpointsInput);
+  const spacing = createSpacing(spacingInput);
+  let muiTheme = deepmerge$1({
     breakpoints,
     direction: 'ltr',
     components: {},
@@ -5655,13 +5541,13 @@ function createTheme$3(options = {}, ...args) {
       mode: 'light'
     }, paletteInput),
     spacing,
-    shape: _extends$1({}, shape$3, shapeInput)
+    shape: _extends$1({}, shape$1, shapeInput)
   }, other);
-  muiTheme.applyStyles = applyStyles$1;
-  muiTheme = args.reduce((acc, argument) => deepmerge$2(acc, argument), muiTheme);
-  muiTheme.unstable_sxConfig = _extends$1({}, defaultSxConfig$3, other == null ? void 0 : other.unstable_sxConfig);
+  muiTheme.applyStyles = applyStyles;
+  muiTheme = args.reduce((acc, argument) => deepmerge$1(acc, argument), muiTheme);
+  muiTheme.unstable_sxConfig = _extends$1({}, defaultSxConfig$1, other == null ? void 0 : other.unstable_sxConfig);
   muiTheme.unstable_sx = function sx(props) {
-    return styleFunctionSx$4({
+    return styleFunctionSx$2({
       sx: props,
       theme: this
     });
@@ -5669,11 +5555,11 @@ function createTheme$3(options = {}, ...args) {
   return muiTheme;
 }
 
-var createTheme$2 = /*#__PURE__*/Object.freeze({
+var createTheme$1 = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': createTheme$3,
-	private_createBreakpoints: createBreakpoints$1,
-	unstable_applyStyles: applyStyles$1
+	'default': createTheme$2,
+	private_createBreakpoints: createBreakpoints,
+	unstable_applyStyles: applyStyles
 });
 
 function isObjectEmpty(obj) {
@@ -5684,19 +5570,19 @@ function useTheme$2(defaultTheme = null) {
   return !contextTheme || isObjectEmpty(contextTheme) ? defaultTheme : contextTheme;
 }
 
-const systemDefaultTheme$2 = createTheme$3();
+const systemDefaultTheme$2 = createTheme$2();
 function useTheme$1(defaultTheme = systemDefaultTheme$2) {
   return useTheme$2(defaultTheme);
 }
 
-const _excluded$b = ["sx"];
+const _excluded$d = ["sx"];
 const splitProps = props => {
   var _props$theme$unstable, _props$theme;
   const result = {
     systemProps: {},
     otherProps: {}
   };
-  const config = (_props$theme$unstable = props == null || (_props$theme = props.theme) == null ? void 0 : _props$theme.unstable_sxConfig) != null ? _props$theme$unstable : defaultSxConfig$3;
+  const config = (_props$theme$unstable = props == null || (_props$theme = props.theme) == null ? void 0 : _props$theme.unstable_sxConfig) != null ? _props$theme$unstable : defaultSxConfig$1;
   Object.keys(props).forEach(prop => {
     if (config[prop]) {
       result.systemProps[prop] = props[prop];
@@ -5710,7 +5596,7 @@ function extendSxProp(props) {
   const {
       sx: inSx
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$b);
+    other = _objectWithoutPropertiesLoose(props, _excluded$d);
   const {
     systemProps,
     otherProps
@@ -5721,7 +5607,7 @@ function extendSxProp(props) {
   } else if (typeof inSx === 'function') {
     finalSx = (...args) => {
       const result = inSx(...args);
-      if (!isPlainObject$1(result)) {
+      if (!isPlainObject(result)) {
         return systemProps;
       }
       return _extends$1({}, systemProps, result);
@@ -5734,12 +5620,12 @@ function extendSxProp(props) {
   });
 }
 
-var styleFunctionSx$2 = /*#__PURE__*/Object.freeze({
+var styleFunctionSx = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': styleFunctionSx$4,
-	unstable_createStyleFunctionSx: unstable_createStyleFunctionSx$1,
+	'default': styleFunctionSx$2,
+	unstable_createStyleFunctionSx: unstable_createStyleFunctionSx,
 	extendSxProp: extendSxProp,
-	unstable_defaultSxConfig: defaultSxConfig$3
+	unstable_defaultSxConfig: defaultSxConfig$1
 });
 
 const defaultGenerator = componentName => componentName;
@@ -6055,17 +5941,17 @@ var reactIsExports = reactIs.exports;
 
 // Simplified polyfill for IE11 support
 // https://github.com/JamesMGreene/Function.name/blob/58b314d4a983110c3682f1228f845d39ccca1817/Function.name.js#L3
-const fnNameMatchRegex$1 = /^\s*function(?:\s|\s*\/\*.*\*\/\s*)+([^(\s/]*)\s*/;
-function getFunctionName$1(fn) {
-  const match = `${fn}`.match(fnNameMatchRegex$1);
+const fnNameMatchRegex = /^\s*function(?:\s|\s*\/\*.*\*\/\s*)+([^(\s/]*)\s*/;
+function getFunctionName(fn) {
+  const match = `${fn}`.match(fnNameMatchRegex);
   const name = match && match[1];
   return name || '';
 }
-function getFunctionComponentName$1(Component, fallback = '') {
-  return Component.displayName || Component.name || getFunctionName$1(Component) || fallback;
+function getFunctionComponentName(Component, fallback = '') {
+  return Component.displayName || Component.name || getFunctionName(Component) || fallback;
 }
-function getWrappedName$1(outerType, innerType, wrapperName) {
-  const functionName = getFunctionComponentName$1(innerType);
+function getWrappedName(outerType, innerType, wrapperName) {
+  const functionName = getFunctionComponentName(innerType);
   return outerType.displayName || (functionName !== '' ? `${wrapperName}(${functionName})` : wrapperName);
 }
 
@@ -6074,7 +5960,7 @@ function getWrappedName$1(outerType, innerType, wrapperName) {
  * https://github.com/facebook/react/blob/769b1f270e1251d9dbdce0fcbd9e92e502d059b8/packages/shared/getComponentName.js
  * originally forked from recompose/getDisplayName with added IE11 support
  */
-function getDisplayName$2(Component) {
+function getDisplayName$1(Component) {
   if (Component == null) {
     return undefined;
   }
@@ -6082,16 +5968,16 @@ function getDisplayName$2(Component) {
     return Component;
   }
   if (typeof Component === 'function') {
-    return getFunctionComponentName$1(Component, 'Component');
+    return getFunctionComponentName(Component, 'Component');
   }
 
   // TypeScript can't have components as objects but they exist in the form of `memo` or `Suspense`
   if (typeof Component === 'object') {
     switch (Component.$$typeof) {
       case reactIsExports.ForwardRef:
-        return getWrappedName$1(Component, Component.render, 'ForwardRef');
+        return getWrappedName(Component, Component.render, 'ForwardRef');
       case reactIsExports.Memo:
-        return getWrappedName$1(Component, Component.type, 'memo');
+        return getWrappedName(Component, Component.type, 'memo');
       default:
         return undefined;
     }
@@ -6099,11 +5985,246 @@ function getDisplayName$2(Component) {
   return undefined;
 }
 
-var getDisplayName$1 = /*#__PURE__*/Object.freeze({
+var getDisplayName = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': getDisplayName$2,
-	getFunctionName: getFunctionName$1
+	'default': getDisplayName$1,
+	getFunctionName: getFunctionName
 });
+
+const _excluded$c = ["ownerState"],
+  _excluded2$1 = ["variants"],
+  _excluded3$1 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
+function isEmpty$1(obj) {
+  return Object.keys(obj).length === 0;
+}
+
+// https://github.com/emotion-js/emotion/blob/26ded6109fcd8ca9875cc2ce4564fee678a3f3c5/packages/styled/src/utils.js#L40
+function isStringTag$1(tag) {
+  return typeof tag === 'string' &&
+  // 96 is one less than the char code
+  // for "a" so this is checking that
+  // it's a lowercase character
+  tag.charCodeAt(0) > 96;
+}
+
+// Update /system/styled/#api in case if this changes
+function shouldForwardProp$1(prop) {
+  return prop !== 'ownerState' && prop !== 'theme' && prop !== 'sx' && prop !== 'as';
+}
+const systemDefaultTheme$1 = createTheme$2();
+const lowercaseFirstLetter$1 = string => {
+  if (!string) {
+    return string;
+  }
+  return string.charAt(0).toLowerCase() + string.slice(1);
+};
+function resolveTheme$1({
+  defaultTheme,
+  theme,
+  themeId
+}) {
+  return isEmpty$1(theme) ? defaultTheme : theme[themeId] || theme;
+}
+function defaultOverridesResolver$1(slot) {
+  if (!slot) {
+    return null;
+  }
+  return (props, styles) => styles[slot];
+}
+function processStyleArg$1(callableStyle, _ref) {
+  let {
+      ownerState
+    } = _ref,
+    props = _objectWithoutPropertiesLoose(_ref, _excluded$c);
+  const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle(_extends$1({
+    ownerState
+  }, props)) : callableStyle;
+  if (Array.isArray(resolvedStylesArg)) {
+    return resolvedStylesArg.flatMap(resolvedStyle => processStyleArg$1(resolvedStyle, _extends$1({
+      ownerState
+    }, props)));
+  }
+  if (!!resolvedStylesArg && typeof resolvedStylesArg === 'object' && Array.isArray(resolvedStylesArg.variants)) {
+    const {
+        variants = []
+      } = resolvedStylesArg,
+      otherStyles = _objectWithoutPropertiesLoose(resolvedStylesArg, _excluded2$1);
+    let result = otherStyles;
+    variants.forEach(variant => {
+      let isMatch = true;
+      if (typeof variant.props === 'function') {
+        isMatch = variant.props(_extends$1({
+          ownerState
+        }, props, ownerState));
+      } else {
+        Object.keys(variant.props).forEach(key => {
+          if ((ownerState == null ? void 0 : ownerState[key]) !== variant.props[key] && props[key] !== variant.props[key]) {
+            isMatch = false;
+          }
+        });
+      }
+      if (isMatch) {
+        if (!Array.isArray(result)) {
+          result = [result];
+        }
+        result.push(typeof variant.style === 'function' ? variant.style(_extends$1({
+          ownerState
+        }, props, ownerState)) : variant.style);
+      }
+    });
+    return result;
+  }
+  return resolvedStylesArg;
+}
+function createStyled$2(input = {}) {
+  const {
+    themeId,
+    defaultTheme = systemDefaultTheme$1,
+    rootShouldForwardProp = shouldForwardProp$1,
+    slotShouldForwardProp = shouldForwardProp$1
+  } = input;
+  const systemSx = props => {
+    return styleFunctionSx$2(_extends$1({}, props, {
+      theme: resolveTheme$1(_extends$1({}, props, {
+        defaultTheme,
+        themeId
+      }))
+    }));
+  };
+  systemSx.__mui_systemSx = true;
+  return (tag, inputOptions = {}) => {
+    // Filter out the `sx` style function from the previous styled component to prevent unnecessary styles generated by the composite components.
+    internal_processStyles(tag, styles => styles.filter(style => !(style != null && style.__mui_systemSx)));
+    const {
+        name: componentName,
+        slot: componentSlot,
+        skipVariantsResolver: inputSkipVariantsResolver,
+        skipSx: inputSkipSx,
+        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
+        // For more details: https://github.com/mui/material-ui/pull/37908
+        overridesResolver = defaultOverridesResolver$1(lowercaseFirstLetter$1(componentSlot))
+      } = inputOptions,
+      options = _objectWithoutPropertiesLoose(inputOptions, _excluded3$1);
+
+    // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
+    const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver :
+    // TODO v6: remove `Root` in the next major release
+    // For more details: https://github.com/mui/material-ui/pull/37908
+    componentSlot && componentSlot !== 'Root' && componentSlot !== 'root' || false;
+    const skipSx = inputSkipSx || false;
+    let label;
+    if (process.env.NODE_ENV !== 'production') {
+      if (componentName) {
+        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
+        // For more details: https://github.com/mui/material-ui/pull/37908
+        label = `${componentName}-${lowercaseFirstLetter$1(componentSlot || 'Root')}`;
+      }
+    }
+    let shouldForwardPropOption = shouldForwardProp$1;
+
+    // TODO v6: remove `Root` in the next major release
+    // For more details: https://github.com/mui/material-ui/pull/37908
+    if (componentSlot === 'Root' || componentSlot === 'root') {
+      shouldForwardPropOption = rootShouldForwardProp;
+    } else if (componentSlot) {
+      // any other slot specified
+      shouldForwardPropOption = slotShouldForwardProp;
+    } else if (isStringTag$1(tag)) {
+      // for string (html) tag, preserve the behavior in emotion & styled-components.
+      shouldForwardPropOption = undefined;
+    }
+    const defaultStyledResolver = styled$4(tag, _extends$1({
+      shouldForwardProp: shouldForwardPropOption,
+      label
+    }, options));
+    const transformStyleArg = stylesArg => {
+      // On the server Emotion doesn't use React.forwardRef for creating components, so the created
+      // component stays as a function. This condition makes sure that we do not interpolate functions
+      // which are basically components used as a selectors.
+      if (typeof stylesArg === 'function' && stylesArg.__emotion_real !== stylesArg || isPlainObject(stylesArg)) {
+        return props => processStyleArg$1(stylesArg, _extends$1({}, props, {
+          theme: resolveTheme$1({
+            theme: props.theme,
+            defaultTheme,
+            themeId
+          })
+        }));
+      }
+      return stylesArg;
+    };
+    const muiStyledResolver = (styleArg, ...expressions) => {
+      let transformedStyleArg = transformStyleArg(styleArg);
+      const expressionsWithDefaultTheme = expressions ? expressions.map(transformStyleArg) : [];
+      if (componentName && overridesResolver) {
+        expressionsWithDefaultTheme.push(props => {
+          const theme = resolveTheme$1(_extends$1({}, props, {
+            defaultTheme,
+            themeId
+          }));
+          if (!theme.components || !theme.components[componentName] || !theme.components[componentName].styleOverrides) {
+            return null;
+          }
+          const styleOverrides = theme.components[componentName].styleOverrides;
+          const resolvedStyleOverrides = {};
+          // TODO: v7 remove iteration and use `resolveStyleArg(styleOverrides[slot])` directly
+          Object.entries(styleOverrides).forEach(([slotKey, slotStyle]) => {
+            resolvedStyleOverrides[slotKey] = processStyleArg$1(slotStyle, _extends$1({}, props, {
+              theme
+            }));
+          });
+          return overridesResolver(props, resolvedStyleOverrides);
+        });
+      }
+      if (componentName && !skipVariantsResolver) {
+        expressionsWithDefaultTheme.push(props => {
+          var _theme$components;
+          const theme = resolveTheme$1(_extends$1({}, props, {
+            defaultTheme,
+            themeId
+          }));
+          const themeVariants = theme == null || (_theme$components = theme.components) == null || (_theme$components = _theme$components[componentName]) == null ? void 0 : _theme$components.variants;
+          return processStyleArg$1({
+            variants: themeVariants
+          }, _extends$1({}, props, {
+            theme
+          }));
+        });
+      }
+      if (!skipSx) {
+        expressionsWithDefaultTheme.push(systemSx);
+      }
+      const numOfCustomFnsApplied = expressionsWithDefaultTheme.length - expressions.length;
+      if (Array.isArray(styleArg) && numOfCustomFnsApplied > 0) {
+        const placeholders = new Array(numOfCustomFnsApplied).fill('');
+        // If the type is array, than we need to add placeholders in the template for the overrides, variants and the sx styles.
+        transformedStyleArg = [...styleArg, ...placeholders];
+        transformedStyleArg.raw = [...styleArg.raw, ...placeholders];
+      }
+      const Component = defaultStyledResolver(transformedStyleArg, ...expressionsWithDefaultTheme);
+      if (process.env.NODE_ENV !== 'production') {
+        let displayName;
+        if (componentName) {
+          displayName = `${componentName}${capitalize$1(componentSlot || '')}`;
+        }
+        if (displayName === undefined) {
+          displayName = `Styled(${getDisplayName$1(tag)})`;
+        }
+        Component.displayName = displayName;
+      }
+      if (tag.muiName) {
+        Component.muiName = tag.muiName;
+      }
+      return Component;
+    };
+    if (defaultStyledResolver.withConfig) {
+      muiStyledResolver.withConfig = defaultStyledResolver.withConfig;
+    }
+    return muiStyledResolver;
+  };
+}
+
+const styled$2 = createStyled$2();
+var styled$3 = styled$2;
 
 /**
  * Add keys, values of `defaultProps` that does not exist in `props`
@@ -6178,6 +6299,195 @@ var clamp = /*#__PURE__*/Object.freeze({
 	'default': clamp$1
 });
 
+/**
+ * Returns a number whose value is limited to the given range.
+ * @param {number} value The value to be clamped
+ * @param {number} min The lower boundary of the output range
+ * @param {number} max The upper boundary of the output range
+ * @returns {number} A number in the range [min, max]
+ */
+function clampWrapper$1(value, min = 0, max = 1) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (value < min || value > max) {
+      console.error(`MUI: The value provided ${value} is out of range [${min}, ${max}].`);
+    }
+  }
+  return clamp$1(value, min, max);
+}
+
+/**
+ * Converts a color from CSS hex format to CSS rgb format.
+ * @param {string} color - Hex color, i.e. #nnn or #nnnnnn
+ * @returns {string} A CSS rgb color string
+ */
+function hexToRgb$1(color) {
+  color = color.slice(1);
+  const re = new RegExp(`.{1,${color.length >= 6 ? 2 : 1}}`, 'g');
+  let colors = color.match(re);
+  if (colors && colors[0].length === 1) {
+    colors = colors.map(n => n + n);
+  }
+  return colors ? `rgb${colors.length === 4 ? 'a' : ''}(${colors.map((n, index) => {
+    return index < 3 ? parseInt(n, 16) : Math.round(parseInt(n, 16) / 255 * 1000) / 1000;
+  }).join(', ')})` : '';
+}
+
+/**
+ * Returns an object with the type and values of a color.
+ *
+ * Note: Does not support rgb % values.
+ * @param {string} color - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color()
+ * @returns {object} - A MUI color object: {type: string, values: number[]}
+ */
+function decomposeColor$1(color) {
+  // Idempotent
+  if (color.type) {
+    return color;
+  }
+  if (color.charAt(0) === '#') {
+    return decomposeColor$1(hexToRgb$1(color));
+  }
+  const marker = color.indexOf('(');
+  const type = color.substring(0, marker);
+  if (['rgb', 'rgba', 'hsl', 'hsla', 'color'].indexOf(type) === -1) {
+    throw new Error(process.env.NODE_ENV !== "production" ? `MUI: Unsupported \`${color}\` color.
+The following formats are supported: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color().` : formatMuiErrorMessage$1(9, color));
+  }
+  let values = color.substring(marker + 1, color.length - 1);
+  let colorSpace;
+  if (type === 'color') {
+    values = values.split(' ');
+    colorSpace = values.shift();
+    if (values.length === 4 && values[3].charAt(0) === '/') {
+      values[3] = values[3].slice(1);
+    }
+    if (['srgb', 'display-p3', 'a98-rgb', 'prophoto-rgb', 'rec-2020'].indexOf(colorSpace) === -1) {
+      throw new Error(process.env.NODE_ENV !== "production" ? `MUI: unsupported \`${colorSpace}\` color space.
+The following color spaces are supported: srgb, display-p3, a98-rgb, prophoto-rgb, rec-2020.` : formatMuiErrorMessage$1(10, colorSpace));
+    }
+  } else {
+    values = values.split(',');
+  }
+  values = values.map(value => parseFloat(value));
+  return {
+    type,
+    values,
+    colorSpace
+  };
+}
+
+/**
+ * Converts a color object with type and values to a string.
+ * @param {object} color - Decomposed color
+ * @param {string} color.type - One of: 'rgb', 'rgba', 'hsl', 'hsla', 'color'
+ * @param {array} color.values - [n,n,n] or [n,n,n,n]
+ * @returns {string} A CSS color string
+ */
+function recomposeColor$1(color) {
+  const {
+    type,
+    colorSpace
+  } = color;
+  let {
+    values
+  } = color;
+  if (type.indexOf('rgb') !== -1) {
+    // Only convert the first 3 values to int (i.e. not alpha)
+    values = values.map((n, i) => i < 3 ? parseInt(n, 10) : n);
+  } else if (type.indexOf('hsl') !== -1) {
+    values[1] = `${values[1]}%`;
+    values[2] = `${values[2]}%`;
+  }
+  if (type.indexOf('color') !== -1) {
+    values = `${colorSpace} ${values.join(' ')}`;
+  } else {
+    values = `${values.join(', ')}`;
+  }
+  return `${type}(${values})`;
+}
+
+/**
+ * Sets the absolute transparency of a color.
+ * Any existing alpha values are overwritten.
+ * @param {string} color - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color()
+ * @param {number} value - value to set the alpha channel to in the range 0 - 1
+ * @returns {string} A CSS color string. Hex input values are returned as rgb
+ */
+function alpha$1(color, value) {
+  color = decomposeColor$1(color);
+  value = clampWrapper$1(value);
+  if (color.type === 'rgb' || color.type === 'hsl') {
+    color.type += 'a';
+  }
+  if (color.type === 'color') {
+    color.values[3] = `/${value}`;
+  } else {
+    color.values[3] = value;
+  }
+  return recomposeColor$1(color);
+}
+
+function chainPropTypes(propType1, propType2) {
+  if (process.env.NODE_ENV === 'production') {
+    return () => null;
+  }
+  return function validate(...args) {
+    return propType1(...args) || propType2(...args);
+  };
+}
+
+function getTypeByValue(value) {
+  const valueType = typeof value;
+  switch (valueType) {
+    case 'number':
+      if (Number.isNaN(value)) {
+        return 'NaN';
+      }
+      if (!Number.isFinite(value)) {
+        return 'Infinity';
+      }
+      if (value !== Math.floor(value)) {
+        return 'float';
+      }
+      return 'number';
+    case 'object':
+      if (value === null) {
+        return 'null';
+      }
+      return value.constructor.name;
+    default:
+      return valueType;
+  }
+}
+
+// IE 11 support
+function ponyfillIsInteger(x) {
+  // eslint-disable-next-line no-restricted-globals
+  return typeof x === 'number' && isFinite(x) && Math.floor(x) === x;
+}
+const isInteger = Number.isInteger || ponyfillIsInteger;
+function requiredInteger(props, propName, componentName, location) {
+  const propValue = props[propName];
+  if (propValue == null || !isInteger(propValue)) {
+    const propType = getTypeByValue(propValue);
+    return new RangeError(`Invalid ${location} \`${propName}\` of type \`${propType}\` supplied to \`${componentName}\`, expected \`integer\`.`);
+  }
+  return null;
+}
+function validator(props, propName, ...other) {
+  const propValue = props[propName];
+  if (propValue === undefined) {
+    return null;
+  }
+  return requiredInteger(props, propName, ...other);
+}
+function validatorNoop() {
+  return null;
+}
+validator.isRequired = requiredInteger;
+validatorNoop.isRequired = validatorNoop;
+var integerPropType = process.env.NODE_ENV === 'production' ? validatorNoop : validator;
+
 function composeClasses(slots, getUtilityClass, classes = undefined) {
   const output = {};
   Object.keys(slots).forEach(
@@ -6233,7 +6543,7 @@ interopRequireDefault.exports;
 
 var interopRequireDefaultExports = interopRequireDefault.exports;
 
-var require$$1$1 = /*@__PURE__*/getAugmentedNamespace(formatMuiErrorMessage$1);
+var require$$1$1 = /*@__PURE__*/getAugmentedNamespace(formatMuiErrorMessage);
 
 var require$$2 = /*@__PURE__*/getAugmentedNamespace(clamp);
 
@@ -6608,7 +6918,139 @@ function blend(background, overlay, opacity, gamma = 1.0) {
   });
 }
 
-const _excluded$a = ["mode", "contrastThreshold", "tonalOffset"];
+const common = {
+  black: '#000',
+  white: '#fff'
+};
+var common$1 = common;
+
+const grey = {
+  50: '#fafafa',
+  100: '#f5f5f5',
+  200: '#eeeeee',
+  300: '#e0e0e0',
+  400: '#bdbdbd',
+  500: '#9e9e9e',
+  600: '#757575',
+  700: '#616161',
+  800: '#424242',
+  900: '#212121',
+  A100: '#f5f5f5',
+  A200: '#eeeeee',
+  A400: '#bdbdbd',
+  A700: '#616161'
+};
+var grey$1 = grey;
+
+const purple = {
+  50: '#f3e5f5',
+  100: '#e1bee7',
+  200: '#ce93d8',
+  300: '#ba68c8',
+  400: '#ab47bc',
+  500: '#9c27b0',
+  600: '#8e24aa',
+  700: '#7b1fa2',
+  800: '#6a1b9a',
+  900: '#4a148c',
+  A100: '#ea80fc',
+  A200: '#e040fb',
+  A400: '#d500f9',
+  A700: '#aa00ff'
+};
+var purple$1 = purple;
+
+const red = {
+  50: '#ffebee',
+  100: '#ffcdd2',
+  200: '#ef9a9a',
+  300: '#e57373',
+  400: '#ef5350',
+  500: '#f44336',
+  600: '#e53935',
+  700: '#d32f2f',
+  800: '#c62828',
+  900: '#b71c1c',
+  A100: '#ff8a80',
+  A200: '#ff5252',
+  A400: '#ff1744',
+  A700: '#d50000'
+};
+var red$1 = red;
+
+const orange = {
+  50: '#fff3e0',
+  100: '#ffe0b2',
+  200: '#ffcc80',
+  300: '#ffb74d',
+  400: '#ffa726',
+  500: '#ff9800',
+  600: '#fb8c00',
+  700: '#f57c00',
+  800: '#ef6c00',
+  900: '#e65100',
+  A100: '#ffd180',
+  A200: '#ffab40',
+  A400: '#ff9100',
+  A700: '#ff6d00'
+};
+var orange$1 = orange;
+
+const blue = {
+  50: '#e3f2fd',
+  100: '#bbdefb',
+  200: '#90caf9',
+  300: '#64b5f6',
+  400: '#42a5f5',
+  500: '#2196f3',
+  600: '#1e88e5',
+  700: '#1976d2',
+  800: '#1565c0',
+  900: '#0d47a1',
+  A100: '#82b1ff',
+  A200: '#448aff',
+  A400: '#2979ff',
+  A700: '#2962ff'
+};
+var blue$1 = blue;
+
+const lightBlue = {
+  50: '#e1f5fe',
+  100: '#b3e5fc',
+  200: '#81d4fa',
+  300: '#4fc3f7',
+  400: '#29b6f6',
+  500: '#03a9f4',
+  600: '#039be5',
+  700: '#0288d1',
+  800: '#0277bd',
+  900: '#01579b',
+  A100: '#80d8ff',
+  A200: '#40c4ff',
+  A400: '#00b0ff',
+  A700: '#0091ea'
+};
+var lightBlue$1 = lightBlue;
+
+const green = {
+  50: '#e8f5e9',
+  100: '#c8e6c9',
+  200: '#a5d6a7',
+  300: '#81c784',
+  400: '#66bb6a',
+  500: '#4caf50',
+  600: '#43a047',
+  700: '#388e3c',
+  800: '#2e7d32',
+  900: '#1b5e20',
+  A100: '#b9f6ca',
+  A200: '#69f0ae',
+  A400: '#00e676',
+  A700: '#00c853'
+};
+var green$1 = green;
+
+const _excluded$b = ["mode", "contrastThreshold", "tonalOffset"];
 const light = {
   // The colors used to style the text.
   text: {
@@ -6777,7 +7219,7 @@ function createPalette(palette) {
       contrastThreshold = 3,
       tonalOffset = 0.2
     } = palette,
-    other = _objectWithoutPropertiesLoose(palette, _excluded$a);
+    other = _objectWithoutPropertiesLoose(palette, _excluded$b);
   const primary = palette.primary || getDefaultPrimary(mode);
   const secondary = palette.secondary || getDefaultSecondary(mode);
   const error = palette.error || getDefaultError(mode);
@@ -6811,7 +7253,7 @@ function createPalette(palette) {
     }
     if (!color.hasOwnProperty('main')) {
       throw new Error(process.env.NODE_ENV !== "production" ? `MUI: The color${name ? ` (${name})` : ''} provided to augmentColor(color) is invalid.
-The color object needs to have a \`main\` property or a \`${mainShade}\` property.` : formatMuiErrorMessage$2(11, name ? ` (${name})` : '', mainShade));
+The color object needs to have a \`main\` property or a \`${mainShade}\` property.` : formatMuiErrorMessage$1(11, name ? ` (${name})` : '', mainShade));
     }
     if (typeof color.main !== 'string') {
       throw new Error(process.env.NODE_ENV !== "production" ? `MUI: The color${name ? ` (${name})` : ''} provided to augmentColor(color) is invalid.
@@ -6827,7 +7269,7 @@ const theme1 = createTheme({ palette: {
 
 const theme2 = createTheme({ palette: {
   primary: { main: green[500] },
-} });` : formatMuiErrorMessage$2(12, name ? ` (${name})` : '', JSON.stringify(color.main)));
+} });` : formatMuiErrorMessage$1(12, name ? ` (${name})` : '', JSON.stringify(color.main)));
     }
     addLightOrDark(color, 'light', lightShade, tonalOffset);
     addLightOrDark(color, 'dark', darkShade, tonalOffset);
@@ -6845,7 +7287,7 @@ const theme2 = createTheme({ palette: {
       console.error(`MUI: The palette mode \`${mode}\` is not supported.`);
     }
   }
-  const paletteOutput = deepmerge$2(_extends$1({
+  const paletteOutput = deepmerge$1(_extends$1({
     // A collection of common colors.
     common: _extends$1({}, common$1),
     // prevent mutable object.
@@ -6901,7 +7343,7 @@ const theme2 = createTheme({ palette: {
   return paletteOutput;
 }
 
-const _excluded$9 = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
+const _excluded$a = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
 function round(value) {
   return Math.round(value * 1e5) / 1e5;
 }
@@ -6932,7 +7374,7 @@ function createTypography(palette, typography) {
       allVariants,
       pxToRem: pxToRem2
     } = _ref,
-    other = _objectWithoutPropertiesLoose(_ref, _excluded$9);
+    other = _objectWithoutPropertiesLoose(_ref, _excluded$a);
   if (process.env.NODE_ENV !== 'production') {
     if (typeof fontSize !== 'number') {
       console.error('MUI: `fontSize` is required to be a number.');
@@ -6975,7 +7417,7 @@ function createTypography(palette, typography) {
       letterSpacing: 'inherit'
     }
   };
-  return deepmerge$2(_extends$1({
+  return deepmerge$1(_extends$1({
     htmlFontSize,
     pxToRem,
     fontFamily,
@@ -7000,7 +7442,7 @@ function createShadow(...px) {
 const shadows = ['none', createShadow(0, 2, 1, -1, 0, 1, 1, 0, 0, 1, 3, 0), createShadow(0, 3, 1, -2, 0, 2, 2, 0, 0, 1, 5, 0), createShadow(0, 3, 3, -2, 0, 3, 4, 0, 0, 1, 8, 0), createShadow(0, 2, 4, -1, 0, 4, 5, 0, 0, 1, 10, 0), createShadow(0, 3, 5, -1, 0, 5, 8, 0, 0, 1, 14, 0), createShadow(0, 3, 5, -1, 0, 6, 10, 0, 0, 1, 18, 0), createShadow(0, 4, 5, -2, 0, 7, 10, 1, 0, 2, 16, 1), createShadow(0, 5, 5, -3, 0, 8, 10, 1, 0, 3, 14, 2), createShadow(0, 5, 6, -3, 0, 9, 12, 1, 0, 3, 16, 2), createShadow(0, 6, 6, -3, 0, 10, 14, 1, 0, 4, 18, 3), createShadow(0, 6, 7, -4, 0, 11, 15, 1, 0, 4, 20, 3), createShadow(0, 7, 8, -4, 0, 12, 17, 2, 0, 5, 22, 4), createShadow(0, 7, 8, -4, 0, 13, 19, 2, 0, 5, 24, 4), createShadow(0, 7, 9, -4, 0, 14, 21, 2, 0, 5, 26, 4), createShadow(0, 8, 9, -5, 0, 15, 22, 2, 0, 6, 28, 5), createShadow(0, 8, 10, -5, 0, 16, 24, 2, 0, 6, 30, 5), createShadow(0, 8, 11, -5, 0, 17, 26, 2, 0, 6, 32, 5), createShadow(0, 9, 11, -5, 0, 18, 28, 2, 0, 7, 34, 6), createShadow(0, 9, 12, -6, 0, 19, 29, 2, 0, 7, 36, 6), createShadow(0, 10, 13, -6, 0, 20, 31, 3, 0, 8, 38, 7), createShadow(0, 10, 13, -6, 0, 21, 33, 3, 0, 8, 40, 7), createShadow(0, 10, 14, -6, 0, 22, 35, 3, 0, 8, 42, 7), createShadow(0, 11, 14, -7, 0, 23, 36, 3, 0, 9, 44, 8), createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8)];
 var shadows$1 = shadows;
 
-const _excluded$8 = ["duration", "easing", "delay"];
+const _excluded$9 = ["duration", "easing", "delay"];
 // Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
 // to learn the context in which each easing should be used.
 const easing = {
@@ -7051,7 +7493,7 @@ function createTransitions(inputTransitions) {
         easing: easingOption = mergedEasing.easeInOut,
         delay = 0
       } = options,
-      other = _objectWithoutPropertiesLoose(options, _excluded$8);
+      other = _objectWithoutPropertiesLoose(options, _excluded$9);
     if (process.env.NODE_ENV !== 'production') {
       const isString = value => typeof value === 'string';
       // IE11 support, replace with Number.isNaN
@@ -7101,22 +7543,22 @@ const zIndex = {
 };
 var zIndex$1 = zIndex;
 
-const _excluded$7 = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
-function createTheme$1(options = {}, ...args) {
+const _excluded$8 = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
+function createTheme(options = {}, ...args) {
   const {
       mixins: mixinsInput = {},
       palette: paletteInput = {},
       transitions: transitionsInput = {},
       typography: typographyInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$7);
+    other = _objectWithoutPropertiesLoose(options, _excluded$8);
   if (options.vars) {
     throw new Error(process.env.NODE_ENV !== "production" ? `MUI: \`vars\` is a private field used for CSS variables support.
-Please use another name.` : formatMuiErrorMessage$2(18));
+Please use another name.` : formatMuiErrorMessage$1(18));
   }
   const palette = createPalette(paletteInput);
-  const systemTheme = createTheme$3(options);
-  let muiTheme = deepmerge$2(systemTheme, {
+  const systemTheme = createTheme$2(options);
+  let muiTheme = deepmerge$1(systemTheme, {
     mixins: createMixins(systemTheme.breakpoints, mixinsInput),
     palette,
     // Don't use [...shadows] until you've verified its transpiled code is not invoking the iterator protocol.
@@ -7125,8 +7567,8 @@ Please use another name.` : formatMuiErrorMessage$2(18));
     transitions: createTransitions(transitionsInput),
     zIndex: _extends$1({}, zIndex$1)
   });
-  muiTheme = deepmerge$2(muiTheme, other);
-  muiTheme = args.reduce((acc, argument) => deepmerge$2(acc, argument), muiTheme);
+  muiTheme = deepmerge$1(muiTheme, other);
+  muiTheme = args.reduce((acc, argument) => deepmerge$1(acc, argument), muiTheme);
   if (process.env.NODE_ENV !== 'production') {
     // TODO v6: Refactor to use globalStateClassesMapping from @mui/utils once `readOnly` state class is used in Rating component.
     const stateClasses = ['active', 'checked', 'completed', 'disabled', 'error', 'expanded', 'focused', 'focusVisible', 'required', 'selected'];
@@ -7157,9 +7599,9 @@ Please use another name.` : formatMuiErrorMessage$2(18));
       }
     });
   }
-  muiTheme.unstable_sxConfig = _extends$1({}, defaultSxConfig$3, other == null ? void 0 : other.unstable_sxConfig);
+  muiTheme.unstable_sxConfig = _extends$1({}, defaultSxConfig$1, other == null ? void 0 : other.unstable_sxConfig);
   muiTheme.unstable_sx = function sx(props) {
-    return styleFunctionSx$4({
+    return styleFunctionSx$2({
       sx: props,
       theme: this
     });
@@ -7167,7 +7609,7 @@ Please use another name.` : formatMuiErrorMessage$2(18));
   return muiTheme;
 }
 
-const defaultTheme = createTheme$1();
+const defaultTheme = createTheme();
 var defaultTheme$1 = defaultTheme;
 
 function useTheme() {
@@ -7191,7 +7633,7 @@ function useThemeProps({
   });
 }
 
-var createStyled$2 = {};
+var createStyled$1 = {};
 
 var _extends = {exports: {}};
 
@@ -7251,23 +7693,23 @@ function requireObjectWithoutPropertiesLoose () {
 
 var require$$1 = /*@__PURE__*/getAugmentedNamespace(styledEngine);
 
-var require$$4 = /*@__PURE__*/getAugmentedNamespace(deepmerge$1);
+var require$$4 = /*@__PURE__*/getAugmentedNamespace(deepmerge);
 
-var require$$5 = /*@__PURE__*/getAugmentedNamespace(capitalize$1);
+var require$$5 = /*@__PURE__*/getAugmentedNamespace(capitalize);
 
-var require$$6 = /*@__PURE__*/getAugmentedNamespace(getDisplayName$1);
+var require$$6 = /*@__PURE__*/getAugmentedNamespace(getDisplayName);
 
-var require$$7 = /*@__PURE__*/getAugmentedNamespace(createTheme$2);
+var require$$7 = /*@__PURE__*/getAugmentedNamespace(createTheme$1);
 
-var require$$8 = /*@__PURE__*/getAugmentedNamespace(styleFunctionSx$2);
+var require$$8 = /*@__PURE__*/getAugmentedNamespace(styleFunctionSx);
 
 var _interopRequireDefault = interopRequireDefaultExports;
-Object.defineProperty(createStyled$2, "__esModule", {
+Object.defineProperty(createStyled$1, "__esModule", {
   value: true
 });
-var _default = createStyled$2.default = createStyled$1;
-var shouldForwardProp_1 = createStyled$2.shouldForwardProp = shouldForwardProp$1;
-createStyled$2.systemDefaultTheme = void 0;
+var _default = createStyled$1.default = createStyled;
+var shouldForwardProp_1 = createStyled$1.shouldForwardProp = shouldForwardProp;
+createStyled$1.systemDefaultTheme = void 0;
 var _extends2 = _interopRequireDefault(require_extends());
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(requireObjectWithoutPropertiesLoose());
 var _styledEngine = _interopRequireWildcard(require$$1);
@@ -7276,18 +7718,18 @@ var _capitalize = _interopRequireDefault(require$$5);
 var _getDisplayName = _interopRequireDefault(require$$6);
 var _createTheme = _interopRequireDefault(require$$7);
 var _styleFunctionSx = _interopRequireDefault(require$$8);
-const _excluded$6 = ["ownerState"],
-  _excluded2$1 = ["variants"],
-  _excluded3$1 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
+const _excluded$7 = ["ownerState"],
+  _excluded2 = ["variants"],
+  _excluded3 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
 /* eslint-disable no-underscore-dangle */
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-function isEmpty$1(obj) {
+function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
 
 // https://github.com/emotion-js/emotion/blob/26ded6109fcd8ca9875cc2ce4564fee678a3f3c5/packages/styled/src/utils.js#L40
-function isStringTag$1(tag) {
+function isStringTag(tag) {
   return typeof tag === 'string' &&
   // 96 is one less than the char code
   // for "a" so this is checking that
@@ -7296,39 +7738,39 @@ function isStringTag$1(tag) {
 }
 
 // Update /system/styled/#api in case if this changes
-function shouldForwardProp$1(prop) {
+function shouldForwardProp(prop) {
   return prop !== 'ownerState' && prop !== 'theme' && prop !== 'sx' && prop !== 'as';
 }
-const systemDefaultTheme$1 = createStyled$2.systemDefaultTheme = (0, _createTheme.default)();
-const lowercaseFirstLetter$1 = string => {
+const systemDefaultTheme = createStyled$1.systemDefaultTheme = (0, _createTheme.default)();
+const lowercaseFirstLetter = string => {
   if (!string) {
     return string;
   }
   return string.charAt(0).toLowerCase() + string.slice(1);
 };
-function resolveTheme$1({
+function resolveTheme({
   defaultTheme,
   theme,
   themeId
 }) {
-  return isEmpty$1(theme) ? defaultTheme : theme[themeId] || theme;
+  return isEmpty(theme) ? defaultTheme : theme[themeId] || theme;
 }
-function defaultOverridesResolver$1(slot) {
+function defaultOverridesResolver(slot) {
   if (!slot) {
     return null;
   }
   return (props, styles) => styles[slot];
 }
-function processStyleArg$1(callableStyle, _ref) {
+function processStyleArg(callableStyle, _ref) {
   let {
       ownerState
     } = _ref,
-    props = (0, _objectWithoutPropertiesLoose2.default)(_ref, _excluded$6);
+    props = (0, _objectWithoutPropertiesLoose2.default)(_ref, _excluded$7);
   const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle((0, _extends2.default)({
     ownerState
   }, props)) : callableStyle;
   if (Array.isArray(resolvedStylesArg)) {
-    return resolvedStylesArg.flatMap(resolvedStyle => processStyleArg$1(resolvedStyle, (0, _extends2.default)({
+    return resolvedStylesArg.flatMap(resolvedStyle => processStyleArg(resolvedStyle, (0, _extends2.default)({
       ownerState
     }, props)));
   }
@@ -7336,7 +7778,7 @@ function processStyleArg$1(callableStyle, _ref) {
     const {
         variants = []
       } = resolvedStylesArg,
-      otherStyles = (0, _objectWithoutPropertiesLoose2.default)(resolvedStylesArg, _excluded2$1);
+      otherStyles = (0, _objectWithoutPropertiesLoose2.default)(resolvedStylesArg, _excluded2);
     let result = otherStyles;
     variants.forEach(variant => {
       let isMatch = true;
@@ -7364,16 +7806,16 @@ function processStyleArg$1(callableStyle, _ref) {
   }
   return resolvedStylesArg;
 }
-function createStyled$1(input = {}) {
+function createStyled(input = {}) {
   const {
     themeId,
-    defaultTheme = systemDefaultTheme$1,
-    rootShouldForwardProp = shouldForwardProp$1,
-    slotShouldForwardProp = shouldForwardProp$1
+    defaultTheme = systemDefaultTheme,
+    rootShouldForwardProp = shouldForwardProp,
+    slotShouldForwardProp = shouldForwardProp
   } = input;
   const systemSx = props => {
     return (0, _styleFunctionSx.default)((0, _extends2.default)({}, props, {
-      theme: resolveTheme$1((0, _extends2.default)({}, props, {
+      theme: resolveTheme((0, _extends2.default)({}, props, {
         defaultTheme,
         themeId
       }))
@@ -7390,9 +7832,9 @@ function createStyled$1(input = {}) {
         skipSx: inputSkipSx,
         // TODO v6: remove `lowercaseFirstLetter()` in the next major release
         // For more details: https://github.com/mui/material-ui/pull/37908
-        overridesResolver = defaultOverridesResolver$1(lowercaseFirstLetter$1(componentSlot))
+        overridesResolver = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
       } = inputOptions,
-      options = (0, _objectWithoutPropertiesLoose2.default)(inputOptions, _excluded3$1);
+      options = (0, _objectWithoutPropertiesLoose2.default)(inputOptions, _excluded3);
 
     // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
     const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver :
@@ -7405,10 +7847,10 @@ function createStyled$1(input = {}) {
       if (componentName) {
         // TODO v6: remove `lowercaseFirstLetter()` in the next major release
         // For more details: https://github.com/mui/material-ui/pull/37908
-        label = `${componentName}-${lowercaseFirstLetter$1(componentSlot || 'Root')}`;
+        label = `${componentName}-${lowercaseFirstLetter(componentSlot || 'Root')}`;
       }
     }
-    let shouldForwardPropOption = shouldForwardProp$1;
+    let shouldForwardPropOption = shouldForwardProp;
 
     // TODO v6: remove `Root` in the next major release
     // For more details: https://github.com/mui/material-ui/pull/37908
@@ -7417,7 +7859,7 @@ function createStyled$1(input = {}) {
     } else if (componentSlot) {
       // any other slot specified
       shouldForwardPropOption = slotShouldForwardProp;
-    } else if (isStringTag$1(tag)) {
+    } else if (isStringTag(tag)) {
       // for string (html) tag, preserve the behavior in emotion & styled-components.
       shouldForwardPropOption = undefined;
     }
@@ -7430,8 +7872,8 @@ function createStyled$1(input = {}) {
       // component stays as a function. This condition makes sure that we do not interpolate functions
       // which are basically components used as a selectors.
       if (typeof stylesArg === 'function' && stylesArg.__emotion_real !== stylesArg || (0, _deepmerge.isPlainObject)(stylesArg)) {
-        return props => processStyleArg$1(stylesArg, (0, _extends2.default)({}, props, {
-          theme: resolveTheme$1({
+        return props => processStyleArg(stylesArg, (0, _extends2.default)({}, props, {
+          theme: resolveTheme({
             theme: props.theme,
             defaultTheme,
             themeId
@@ -7445,7 +7887,7 @@ function createStyled$1(input = {}) {
       const expressionsWithDefaultTheme = expressions ? expressions.map(transformStyleArg) : [];
       if (componentName && overridesResolver) {
         expressionsWithDefaultTheme.push(props => {
-          const theme = resolveTheme$1((0, _extends2.default)({}, props, {
+          const theme = resolveTheme((0, _extends2.default)({}, props, {
             defaultTheme,
             themeId
           }));
@@ -7456,7 +7898,7 @@ function createStyled$1(input = {}) {
           const resolvedStyleOverrides = {};
           // TODO: v7 remove iteration and use `resolveStyleArg(styleOverrides[slot])` directly
           Object.entries(styleOverrides).forEach(([slotKey, slotStyle]) => {
-            resolvedStyleOverrides[slotKey] = processStyleArg$1(slotStyle, (0, _extends2.default)({}, props, {
+            resolvedStyleOverrides[slotKey] = processStyleArg(slotStyle, (0, _extends2.default)({}, props, {
               theme
             }));
           });
@@ -7466,12 +7908,12 @@ function createStyled$1(input = {}) {
       if (componentName && !skipVariantsResolver) {
         expressionsWithDefaultTheme.push(props => {
           var _theme$components;
-          const theme = resolveTheme$1((0, _extends2.default)({}, props, {
+          const theme = resolveTheme((0, _extends2.default)({}, props, {
             defaultTheme,
             themeId
           }));
           const themeVariants = theme == null || (_theme$components = theme.components) == null || (_theme$components = _theme$components[componentName]) == null ? void 0 : _theme$components.variants;
-          return processStyleArg$1({
+          return processStyleArg({
             variants: themeVariants
           }, (0, _extends2.default)({}, props, {
             theme
@@ -7512,12 +7954,232 @@ function createStyled$1(input = {}) {
 }
 
 const rootShouldForwardProp = prop => shouldForwardProp_1(prop) && prop !== 'classes';
-const styled$2 = _default({
+const styled = _default({
   themeId: THEME_ID,
   defaultTheme: defaultTheme$1,
   rootShouldForwardProp
 });
-var styled$3 = styled$2;
+var styled$1 = styled;
+
+// Inspired by https://github.com/material-components/material-components-ios/blob/bca36107405594d5b7b16265a5b0ed698f85a5ee/components/Elevation/src/UIColor%2BMaterialElevation.m#L61
+const getOverlayAlpha = elevation => {
+  let alphaValue;
+  if (elevation < 1) {
+    alphaValue = 5.11916 * elevation ** 2;
+  } else {
+    alphaValue = 4.5 * Math.log(elevation + 1) + 2;
+  }
+  return (alphaValue / 100).toFixed(2);
+};
+var getOverlayAlpha$1 = getOverlayAlpha;
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#303f9f',
+      light: '#5e35b1'
+    },
+    drop: {
+      main: alpha$1('#303f9f', 0.5),
+      light: alpha$1('#303f9f', 0.35),
+      mainTwo: alpha$1('#5e35b1', 0.5),
+      lightTwo: alpha$1('#5e35b1', 0.35)
+    },
+    slotBg: {
+      main: 'transparent'
+    },
+    drag: {
+      main: '#E0E0E0'
+    },
+    borderRightColor: {
+      main: '#666666',
+      light: 'rgba(0, 0, 0, 0.05)'
+    }
+  }
+});
+
+const SchedulerContext = /*#__PURE__*/React.createContext();
+const SchedulerProvider = props => {
+  const {
+    children,
+    SlotProps,
+    AppointmentProps,
+    groupId,
+    groups,
+    users,
+    appointmentList,
+    onAppointmentChange,
+    durationOptions,
+    duration = 60,
+    onDurationChange,
+    date,
+    onDateChange,
+    onPrevDate,
+    onNextDate,
+    color
+  } = props;
+  const value = {
+    groupId,
+    groups,
+    users,
+    appointmentList,
+    onAppointmentChange,
+    durationOptions,
+    duration,
+    onDurationChange,
+    date,
+    onDateChange,
+    onPrevDate,
+    onNextDate,
+    SlotProps,
+    AppointmentProps,
+    color
+  };
+  return /*#__PURE__*/React__default["default"].createElement(SchedulerContext.Provider, {
+    value: value
+  }, /*#__PURE__*/React__default["default"].createElement(ThemeProvider, {
+    theme: theme
+  }, children));
+};
+const useSchedulerContext = () => {
+  return React.useContext(SchedulerContext);
+};
+
+function getPaperUtilityClass(slot) {
+  return generateUtilityClass('MuiPaper', slot);
+}
+generateUtilityClasses('MuiPaper', ['root', 'rounded', 'outlined', 'elevation', 'elevation0', 'elevation1', 'elevation2', 'elevation3', 'elevation4', 'elevation5', 'elevation6', 'elevation7', 'elevation8', 'elevation9', 'elevation10', 'elevation11', 'elevation12', 'elevation13', 'elevation14', 'elevation15', 'elevation16', 'elevation17', 'elevation18', 'elevation19', 'elevation20', 'elevation21', 'elevation22', 'elevation23', 'elevation24']);
+
+const _excluded$6 = ["className", "component", "elevation", "square", "variant"];
+const useUtilityClasses$6 = ownerState => {
+  const {
+    square,
+    elevation,
+    variant,
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root', variant, !square && 'rounded', variant === 'elevation' && `elevation${elevation}`]
+  };
+  return composeClasses(slots, getPaperUtilityClass, classes);
+};
+const PaperRoot = styled$1('div', {
+  name: 'MuiPaper',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, styles[ownerState.variant], !ownerState.square && styles.rounded, ownerState.variant === 'elevation' && styles[`elevation${ownerState.elevation}`]];
+  }
+})(({
+  theme,
+  ownerState
+}) => {
+  var _theme$vars$overlays;
+  return _extends$1({
+    backgroundColor: (theme.vars || theme).palette.background.paper,
+    color: (theme.vars || theme).palette.text.primary,
+    transition: theme.transitions.create('box-shadow')
+  }, !ownerState.square && {
+    borderRadius: theme.shape.borderRadius
+  }, ownerState.variant === 'outlined' && {
+    border: `1px solid ${(theme.vars || theme).palette.divider}`
+  }, ownerState.variant === 'elevation' && _extends$1({
+    boxShadow: (theme.vars || theme).shadows[ownerState.elevation]
+  }, !theme.vars && theme.palette.mode === 'dark' && {
+    backgroundImage: `linear-gradient(${alpha_1('#fff', getOverlayAlpha$1(ownerState.elevation))}, ${alpha_1('#fff', getOverlayAlpha$1(ownerState.elevation))})`
+  }, theme.vars && {
+    backgroundImage: (_theme$vars$overlays = theme.vars.overlays) == null ? void 0 : _theme$vars$overlays[ownerState.elevation]
+  }));
+});
+const Paper = /*#__PURE__*/React__namespace.forwardRef(function Paper(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiPaper'
+  });
+  const {
+      className,
+      component = 'div',
+      elevation = 1,
+      square = false,
+      variant = 'elevation'
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$6);
+  const ownerState = _extends$1({}, props, {
+    component,
+    elevation,
+    square,
+    variant
+  });
+  const classes = useUtilityClasses$6(ownerState);
+  if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const theme = useTheme();
+    if (theme.shadows[elevation] === undefined) {
+      console.error([`MUI: The elevation provided <Paper elevation={${elevation}}> is not available in the theme.`, `Please make sure that \`theme.shadows[${elevation}]\` is defined.`].join('\n'));
+    }
+  }
+  return /*#__PURE__*/jsxRuntime.jsx(PaperRoot, _extends$1({
+    as: component,
+    ownerState: ownerState,
+    className: clsx(classes.root, className),
+    ref: ref
+  }, other));
+});
+process.env.NODE_ENV !== "production" ? Paper.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * Shadow depth, corresponds to `dp` in the spec.
+   * It accepts values between 0 and 24 inclusive.
+   * @default 1
+   */
+  elevation: chainPropTypes(integerPropType, props => {
+    const {
+      elevation,
+      variant
+    } = props;
+    if (elevation > 0 && variant === 'outlined') {
+      return new Error(`MUI: Combining \`elevation={${elevation}}\` with \`variant="${variant}"\` has no effect. Either use \`elevation={0}\` or use a different \`variant\`.`);
+    }
+    return null;
+  }),
+  /**
+   * If `true`, rounded corners are disabled.
+   * @default false
+   */
+  square: PropTypes.bool,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
+  /**
+   * The variant to use.
+   * @default 'elevation'
+   */
+  variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['elevation', 'outlined']), PropTypes.string])
+} : void 0;
+var Paper$1 = Paper;
 
 /**
  * @ignore - internal component.
@@ -7534,7 +8196,7 @@ function getTableUtilityClass(slot) {
 generateUtilityClasses('MuiTable', ['root', 'stickyHeader']);
 
 const _excluded$5 = ["className", "component", "padding", "size", "stickyHeader"];
-const useUtilityClasses$2 = ownerState => {
+const useUtilityClasses$5 = ownerState => {
   const {
     classes,
     stickyHeader
@@ -7544,7 +8206,7 @@ const useUtilityClasses$2 = ownerState => {
   };
   return composeClasses(slots, getTableUtilityClass, classes);
 };
-const TableRoot = styled$3('table', {
+const TableRoot = styled$1('table', {
   name: 'MuiTable',
   slot: 'Root',
   overridesResolver: (props, styles) => {
@@ -7570,7 +8232,7 @@ const TableRoot = styled$3('table', {
 }, ownerState.stickyHeader && {
   borderCollapse: 'separate'
 }));
-const defaultComponent = 'table';
+const defaultComponent$3 = 'table';
 const Table = /*#__PURE__*/React__namespace.forwardRef(function Table(inProps, ref) {
   const props = useThemeProps({
     props: inProps,
@@ -7578,7 +8240,7 @@ const Table = /*#__PURE__*/React__namespace.forwardRef(function Table(inProps, r
   });
   const {
       className,
-      component = defaultComponent,
+      component = defaultComponent$3,
       padding = 'normal',
       size = 'medium',
       stickyHeader = false
@@ -7590,7 +8252,7 @@ const Table = /*#__PURE__*/React__namespace.forwardRef(function Table(inProps, r
     size,
     stickyHeader
   });
-  const classes = useUtilityClasses$2(ownerState);
+  const classes = useUtilityClasses$5(ownerState);
   const table = React__namespace.useMemo(() => ({
     padding,
     size,
@@ -7600,7 +8262,7 @@ const Table = /*#__PURE__*/React__namespace.forwardRef(function Table(inProps, r
     value: table,
     children: /*#__PURE__*/jsxRuntime.jsx(TableRoot, _extends$1({
       as: component,
-      role: component === defaultComponent ? null : 'table',
+      role: component === defaultComponent$3 ? null : 'table',
       ref: ref,
       className: clsx(classes.root, className),
       ownerState: ownerState
@@ -7662,14 +8324,94 @@ if (process.env.NODE_ENV !== 'production') {
 }
 var Tablelvl2Context$1 = Tablelvl2Context;
 
+function getTableBodyUtilityClass(slot) {
+  return generateUtilityClass('MuiTableBody', slot);
+}
+generateUtilityClasses('MuiTableBody', ['root']);
+
+const _excluded$4 = ["className", "component"];
+const useUtilityClasses$4 = ownerState => {
+  const {
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root']
+  };
+  return composeClasses(slots, getTableBodyUtilityClass, classes);
+};
+const TableBodyRoot = styled$1('tbody', {
+  name: 'MuiTableBody',
+  slot: 'Root',
+  overridesResolver: (props, styles) => styles.root
+})({
+  display: 'table-row-group'
+});
+const tablelvl2$1 = {
+  variant: 'body'
+};
+const defaultComponent$2 = 'tbody';
+const TableBody = /*#__PURE__*/React__namespace.forwardRef(function TableBody(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTableBody'
+  });
+  const {
+      className,
+      component = defaultComponent$2
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$4);
+  const ownerState = _extends$1({}, props, {
+    component
+  });
+  const classes = useUtilityClasses$4(ownerState);
+  return /*#__PURE__*/jsxRuntime.jsx(Tablelvl2Context$1.Provider, {
+    value: tablelvl2$1,
+    children: /*#__PURE__*/jsxRuntime.jsx(TableBodyRoot, _extends$1({
+      className: clsx(classes.root, className),
+      as: component,
+      ref: ref,
+      role: component === defaultComponent$2 ? null : 'rowgroup',
+      ownerState: ownerState
+    }, other))
+  });
+});
+process.env.NODE_ENV !== "production" ? TableBody.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the component, normally `TableRow`.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var TableBody$1 = TableBody;
+
 function getTableCellUtilityClass(slot) {
   return generateUtilityClass('MuiTableCell', slot);
 }
 const tableCellClasses = generateUtilityClasses('MuiTableCell', ['root', 'head', 'body', 'footer', 'sizeSmall', 'sizeMedium', 'paddingCheckbox', 'paddingNone', 'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'stickyHeader']);
 var tableCellClasses$1 = tableCellClasses;
 
-const _excluded$4 = ["align", "className", "component", "padding", "scope", "size", "sortDirection", "variant"];
-const useUtilityClasses$1 = ownerState => {
+const _excluded$3 = ["align", "className", "component", "padding", "scope", "size", "sortDirection", "variant"];
+const useUtilityClasses$3 = ownerState => {
   const {
     classes,
     variant,
@@ -7679,18 +8421,18 @@ const useUtilityClasses$1 = ownerState => {
     stickyHeader
   } = ownerState;
   const slots = {
-    root: ['root', variant, stickyHeader && 'stickyHeader', align !== 'inherit' && `align${capitalize$2(align)}`, padding !== 'normal' && `padding${capitalize$2(padding)}`, `size${capitalize$2(size)}`]
+    root: ['root', variant, stickyHeader && 'stickyHeader', align !== 'inherit' && `align${capitalize$1(align)}`, padding !== 'normal' && `padding${capitalize$1(padding)}`, `size${capitalize$1(size)}`]
   };
   return composeClasses(slots, getTableCellUtilityClass, classes);
 };
-const TableCellRoot = styled$3('td', {
+const TableCellRoot = styled$1('td', {
   name: 'MuiTableCell',
   slot: 'Root',
   overridesResolver: (props, styles) => {
     const {
       ownerState
     } = props;
-    return [styles.root, styles[ownerState.variant], styles[`size${capitalize$2(ownerState.size)}`], ownerState.padding !== 'normal' && styles[`padding${capitalize$2(ownerState.padding)}`], ownerState.align !== 'inherit' && styles[`align${capitalize$2(ownerState.align)}`], ownerState.stickyHeader && styles.stickyHeader];
+    return [styles.root, styles[ownerState.variant], styles[`size${capitalize$1(ownerState.size)}`], ownerState.padding !== 'normal' && styles[`padding${capitalize$1(ownerState.padding)}`], ownerState.align !== 'inherit' && styles[`align${capitalize$1(ownerState.align)}`], ownerState.stickyHeader && styles.stickyHeader];
   }
 })(({
   theme,
@@ -7765,7 +8507,7 @@ const TableCell = /*#__PURE__*/React__namespace.forwardRef(function TableCell(in
       sortDirection,
       variant: variantProp
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$4);
+    other = _objectWithoutPropertiesLoose(props, _excluded$3);
   const table = React__namespace.useContext(TableContext$1);
   const tablelvl2 = React__namespace.useContext(Tablelvl2Context$1);
   const isHeadCell = tablelvl2 && tablelvl2.variant === 'head';
@@ -7793,7 +8535,7 @@ const TableCell = /*#__PURE__*/React__namespace.forwardRef(function TableCell(in
     stickyHeader: variant === 'head' && table && table.stickyHeader,
     variant
   });
-  const classes = useUtilityClasses$1(ownerState);
+  const classes = useUtilityClasses$3(ownerState);
   let ariaSort = null;
   if (sortDirection) {
     ariaSort = sortDirection === 'asc' ? 'ascending' : 'descending';
@@ -7872,8 +8614,8 @@ function getTableContainerUtilityClass(slot) {
 }
 generateUtilityClasses('MuiTableContainer', ['root']);
 
-const _excluded$3 = ["className", "component"];
-const useUtilityClasses = ownerState => {
+const _excluded$2 = ["className", "component"];
+const useUtilityClasses$2 = ownerState => {
   const {
     classes
   } = ownerState;
@@ -7882,7 +8624,7 @@ const useUtilityClasses = ownerState => {
   };
   return composeClasses(slots, getTableContainerUtilityClass, classes);
 };
-const TableContainerRoot = styled$3('div', {
+const TableContainerRoot = styled$1('div', {
   name: 'MuiTableContainer',
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
@@ -7899,11 +8641,11 @@ const TableContainer = /*#__PURE__*/React__namespace.forwardRef(function TableCo
       className,
       component = 'div'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$3);
+    other = _objectWithoutPropertiesLoose(props, _excluded$2);
   const ownerState = _extends$1({}, props, {
     component
   });
-  const classes = useUtilityClasses(ownerState);
+  const classes = useUtilityClasses$2(ownerState);
   return /*#__PURE__*/jsxRuntime.jsx(TableContainerRoot, _extends$1({
     ref: ref,
     as: component,
@@ -7940,13 +8682,213 @@ process.env.NODE_ENV !== "production" ? TableContainer.propTypes /* remove-propt
 } : void 0;
 var TableContainer$1 = TableContainer;
 
+function getTableHeadUtilityClass(slot) {
+  return generateUtilityClass('MuiTableHead', slot);
+}
+generateUtilityClasses('MuiTableHead', ['root']);
+
+const _excluded$1 = ["className", "component"];
+const useUtilityClasses$1 = ownerState => {
+  const {
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root']
+  };
+  return composeClasses(slots, getTableHeadUtilityClass, classes);
+};
+const TableHeadRoot = styled$1('thead', {
+  name: 'MuiTableHead',
+  slot: 'Root',
+  overridesResolver: (props, styles) => styles.root
+})({
+  display: 'table-header-group'
+});
+const tablelvl2 = {
+  variant: 'head'
+};
+const defaultComponent$1 = 'thead';
+const TableHead = /*#__PURE__*/React__namespace.forwardRef(function TableHead(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTableHead'
+  });
+  const {
+      className,
+      component = defaultComponent$1
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$1);
+  const ownerState = _extends$1({}, props, {
+    component
+  });
+  const classes = useUtilityClasses$1(ownerState);
+  return /*#__PURE__*/jsxRuntime.jsx(Tablelvl2Context$1.Provider, {
+    value: tablelvl2,
+    children: /*#__PURE__*/jsxRuntime.jsx(TableHeadRoot, _extends$1({
+      as: component,
+      className: clsx(classes.root, className),
+      ref: ref,
+      role: component === defaultComponent$1 ? null : 'rowgroup',
+      ownerState: ownerState
+    }, other))
+  });
+});
+process.env.NODE_ENV !== "production" ? TableHead.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the component, normally `TableRow`.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var TableHead$1 = TableHead;
+
+function getTableRowUtilityClass(slot) {
+  return generateUtilityClass('MuiTableRow', slot);
+}
+const tableRowClasses = generateUtilityClasses('MuiTableRow', ['root', 'selected', 'hover', 'head', 'footer']);
+var tableRowClasses$1 = tableRowClasses;
+
+const _excluded = ["className", "component", "hover", "selected"];
+const useUtilityClasses = ownerState => {
+  const {
+    classes,
+    selected,
+    hover,
+    head,
+    footer
+  } = ownerState;
+  const slots = {
+    root: ['root', selected && 'selected', hover && 'hover', head && 'head', footer && 'footer']
+  };
+  return composeClasses(slots, getTableRowUtilityClass, classes);
+};
+const TableRowRoot = styled$1('tr', {
+  name: 'MuiTableRow',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, ownerState.head && styles.head, ownerState.footer && styles.footer];
+  }
+})(({
+  theme
+}) => ({
+  color: 'inherit',
+  display: 'table-row',
+  verticalAlign: 'middle',
+  // We disable the focus ring for mouse, touch and keyboard users.
+  outline: 0,
+  [`&.${tableRowClasses$1.hover}:hover`]: {
+    backgroundColor: (theme.vars || theme).palette.action.hover
+  },
+  [`&.${tableRowClasses$1.selected}`]: {
+    backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+    '&:hover': {
+      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity)
+    }
+  }
+}));
+const defaultComponent = 'tr';
+/**
+ * Will automatically set dynamic row height
+ * based on the material table element parent (head, body, etc).
+ */
+const TableRow = /*#__PURE__*/React__namespace.forwardRef(function TableRow(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTableRow'
+  });
+  const {
+      className,
+      component = defaultComponent,
+      hover = false,
+      selected = false
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded);
+  const tablelvl2 = React__namespace.useContext(Tablelvl2Context$1);
+  const ownerState = _extends$1({}, props, {
+    component,
+    hover,
+    selected,
+    head: tablelvl2 && tablelvl2.variant === 'head',
+    footer: tablelvl2 && tablelvl2.variant === 'footer'
+  });
+  const classes = useUtilityClasses(ownerState);
+  return /*#__PURE__*/jsxRuntime.jsx(TableRowRoot, _extends$1({
+    as: component,
+    ref: ref,
+    className: clsx(classes.root, className),
+    role: component === defaultComponent ? null : 'row',
+    ownerState: ownerState
+  }, other));
+});
+process.env.NODE_ENV !== "production" ? TableRow.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * Should be valid `<tr>` children such as `TableCell`.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * If `true`, the table row will shade on hover.
+   * @default false
+   */
+  hover: PropTypes.bool,
+  /**
+   * If `true`, the table row will have the selected shading.
+   * @default false
+   */
+  selected: PropTypes.bool,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var TableRow$1 = TableRow;
+
 function commonjsRequire(path) {
 	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }
 
-var moment = {exports: {}};
+var moment$1 = {exports: {}};
 
-moment.exports;
+moment$1.exports;
 
 (function (module, exports) {
 (function (global, factory) {
@@ -13628,1525 +14570,39 @@ moment.exports;
 	    return hooks;
 
 	}))); 
-} (moment, moment.exports));
+} (moment$1, moment$1.exports));
 
-moment.exports;
+var momentExports = moment$1.exports;
+var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);
 
-/**
- * WARNING: Don't import this directly.
- * Use `MuiError` from `@mui/internal-babel-macros/MuiError.macro` instead.
- * @param {number} code
- */
-function formatMuiErrorMessage(code) {
-  // Apply babel-plugin-transform-template-literals in loose mode
-  // loose mode is safe if we're concatenating primitives
-  // see https://babeljs.io/docs/en/babel-plugin-transform-template-literals#loose
-  /* eslint-disable prefer-template */
-  let url = 'https://mui.com/production-error/?code=' + code;
-  for (let i = 1; i < arguments.length; i += 1) {
-    // rest params over-transpile for this case
-    // eslint-disable-next-line prefer-rest-params
-    url += '&args[]=' + encodeURIComponent(arguments[i]);
-  }
-  return 'Minified MUI error #' + code + '; visit ' + url + ' for the full message.';
-  /* eslint-enable prefer-template */
-}
-
-// https://github.com/sindresorhus/is-plain-obj/blob/main/index.js
-function isPlainObject(item) {
-  if (typeof item !== 'object' || item === null) {
-    return false;
-  }
-  const prototype = Object.getPrototypeOf(item);
-  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in item) && !(Symbol.iterator in item);
-}
-function deepClone(source) {
-  if (!isPlainObject(source)) {
-    return source;
-  }
-  const output = {};
-  Object.keys(source).forEach(key => {
-    output[key] = deepClone(source[key]);
-  });
-  return output;
-}
-function deepmerge(target, source, options = {
-  clone: true
-}) {
-  const output = options.clone ? _extends$1({}, target) : target;
-  if (isPlainObject(target) && isPlainObject(source)) {
-    Object.keys(source).forEach(key => {
-      // Avoid prototype pollution
-      if (key === '__proto__') {
-        return;
-      }
-      if (isPlainObject(source[key]) && key in target && isPlainObject(target[key])) {
-        // Since `output` is a clone of `target` and we have narrowed `target` in this block we can cast to the same type.
-        output[key] = deepmerge(target[key], source[key], options);
-      } else if (options.clone) {
-        output[key] = isPlainObject(source[key]) ? deepClone(source[key]) : source[key];
-      } else {
-        output[key] = source[key];
-      }
-    });
-  }
-  return output;
-}
-
-const _excluded$2 = ["values", "unit", "step"];
-const sortBreakpointsValues = values => {
-  const breakpointsAsArray = Object.keys(values).map(key => ({
-    key,
-    val: values[key]
-  })) || [];
-  // Sort in ascending order
-  breakpointsAsArray.sort((breakpoint1, breakpoint2) => breakpoint1.val - breakpoint2.val);
-  return breakpointsAsArray.reduce((acc, obj) => {
-    return _extends$1({}, acc, {
-      [obj.key]: obj.val
-    });
-  }, {});
-};
-
-// Keep in mind that @media is inclusive by the CSS specification.
-function createBreakpoints(breakpoints) {
-  const {
-      // The breakpoint **start** at this value.
-      // For instance with the first breakpoint xs: [xs, sm).
-      values = {
-        xs: 0,
-        // phone
-        sm: 600,
-        // tablet
-        md: 900,
-        // small laptop
-        lg: 1200,
-        // desktop
-        xl: 1536 // large screen
-      },
-      unit = 'px',
-      step = 5
-    } = breakpoints,
-    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$2);
-  const sortedValues = sortBreakpointsValues(values);
-  const keys = Object.keys(sortedValues);
-  function up(key) {
-    const value = typeof values[key] === 'number' ? values[key] : key;
-    return `@media (min-width:${value}${unit})`;
-  }
-  function down(key) {
-    const value = typeof values[key] === 'number' ? values[key] : key;
-    return `@media (max-width:${value - step / 100}${unit})`;
-  }
-  function between(start, end) {
-    const endIndex = keys.indexOf(end);
-    return `@media (min-width:${typeof values[start] === 'number' ? values[start] : start}${unit}) and ` + `(max-width:${(endIndex !== -1 && typeof values[keys[endIndex]] === 'number' ? values[keys[endIndex]] : end) - step / 100}${unit})`;
-  }
-  function only(key) {
-    if (keys.indexOf(key) + 1 < keys.length) {
-      return between(key, keys[keys.indexOf(key) + 1]);
-    }
-    return up(key);
-  }
-  function not(key) {
-    // handle first and last key separately, for better readability
-    const keyIndex = keys.indexOf(key);
-    if (keyIndex === 0) {
-      return up(keys[1]);
-    }
-    if (keyIndex === keys.length - 1) {
-      return down(keys[keyIndex]);
-    }
-    return between(key, keys[keys.indexOf(key) + 1]).replace('@media', '@media not all and');
-  }
-  return _extends$1({
-    keys,
-    values: sortedValues,
-    up,
-    down,
-    between,
-    only,
-    not,
-    unit
-  }, other);
-}
-
-const shape = {
-  borderRadius: 4
-};
-var shape$1 = shape;
-
-const responsivePropType = process.env.NODE_ENV !== 'production' ? PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.object, PropTypes.array]) : {};
-var responsivePropType$1 = responsivePropType;
-
-function merge(acc, item) {
-  if (!item) {
-    return acc;
-  }
-  return deepmerge(acc, item, {
-    clone: false // No need to clone deep, it's way faster.
-  });
-}
-
-// The breakpoint **start** at this value.
-// For instance with the first breakpoint xs: [xs, sm[.
-const values = {
-  xs: 0,
-  // phone
-  sm: 600,
-  // tablet
-  md: 900,
-  // small laptop
-  lg: 1200,
-  // desktop
-  xl: 1536 // large screen
-};
-const defaultBreakpoints = {
-  // Sorted ASC by size. That's important.
-  // It can't be configured as it's used statically for propTypes.
-  keys: ['xs', 'sm', 'md', 'lg', 'xl'],
-  up: key => `@media (min-width:${values[key]}px)`
-};
-function handleBreakpoints(props, propValue, styleFromPropValue) {
-  const theme = props.theme || {};
-  if (Array.isArray(propValue)) {
-    const themeBreakpoints = theme.breakpoints || defaultBreakpoints;
-    return propValue.reduce((acc, item, index) => {
-      acc[themeBreakpoints.up(themeBreakpoints.keys[index])] = styleFromPropValue(propValue[index]);
-      return acc;
-    }, {});
-  }
-  if (typeof propValue === 'object') {
-    const themeBreakpoints = theme.breakpoints || defaultBreakpoints;
-    return Object.keys(propValue).reduce((acc, breakpoint) => {
-      // key is breakpoint
-      if (Object.keys(themeBreakpoints.values || values).indexOf(breakpoint) !== -1) {
-        const mediaKey = themeBreakpoints.up(breakpoint);
-        acc[mediaKey] = styleFromPropValue(propValue[breakpoint], breakpoint);
-      } else {
-        const cssKey = breakpoint;
-        acc[cssKey] = propValue[cssKey];
-      }
-      return acc;
-    }, {});
-  }
-  const output = styleFromPropValue(propValue);
-  return output;
-}
-function createEmptyBreakpointObject(breakpointsInput = {}) {
-  var _breakpointsInput$key;
-  const breakpointsInOrder = (_breakpointsInput$key = breakpointsInput.keys) == null ? void 0 : _breakpointsInput$key.reduce((acc, key) => {
-    const breakpointStyleKey = breakpointsInput.up(key);
-    acc[breakpointStyleKey] = {};
-    return acc;
-  }, {});
-  return breakpointsInOrder || {};
-}
-function removeUnusedBreakpoints(breakpointKeys, style) {
-  return breakpointKeys.reduce((acc, key) => {
-    const breakpointOutput = acc[key];
-    const isBreakpointUnused = !breakpointOutput || Object.keys(breakpointOutput).length === 0;
-    if (isBreakpointUnused) {
-      delete acc[key];
-    }
-    return acc;
-  }, style);
-}
-
-// It should to be noted that this function isn't equivalent to `text-transform: capitalize`.
-//
-// A strict capitalization should uppercase the first letter of each word in the sentence.
-// We only handle the first word.
-function capitalize(string) {
-  if (typeof string !== 'string') {
-    throw new Error(process.env.NODE_ENV !== "production" ? `MUI: \`capitalize(string)\` expects a string argument.` : formatMuiErrorMessage(7));
-  }
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function getPath(obj, path, checkVars = true) {
-  if (!path || typeof path !== 'string') {
-    return null;
-  }
-
-  // Check if CSS variables are used
-  if (obj && obj.vars && checkVars) {
-    const val = `vars.${path}`.split('.').reduce((acc, item) => acc && acc[item] ? acc[item] : null, obj);
-    if (val != null) {
-      return val;
+const shiftStartTime = date => moment(date).set({
+  hours: 8,
+  minutes: 0,
+  seconds: 0,
+  milliseconds: 0
+});
+const shiftEndTime = date => moment(date).set({
+  hours: 23,
+  minutes: 59,
+  seconds: 59,
+  milliseconds: 999
+});
+function generateTimeSlotsForShift(date, intervalInMinutes) {
+  const startOfDay = moment(shiftStartTime(date));
+  const endOfDay = moment(shiftEndTime(date));
+  const timeSlots = [];
+  let currentTimeSlot = moment(startOfDay);
+  while (currentTimeSlot <= endOfDay) {
+    timeSlots.push(currentTimeSlot.format('hh:mm a'));
+    currentTimeSlot.add(intervalInMinutes, 'minutes');
+    if (currentTimeSlot.hours() > 23) {
+      currentTimeSlot = moment(shiftStartTime(currentTimeSlot)).add(1, 'days');
     }
   }
-  return path.split('.').reduce((acc, item) => {
-    if (acc && acc[item] != null) {
-      return acc[item];
-    }
-    return null;
-  }, obj);
-}
-function getStyleValue(themeMapping, transform, propValueFinal, userValue = propValueFinal) {
-  let value;
-  if (typeof themeMapping === 'function') {
-    value = themeMapping(propValueFinal);
-  } else if (Array.isArray(themeMapping)) {
-    value = themeMapping[propValueFinal] || userValue;
-  } else {
-    value = getPath(themeMapping, propValueFinal) || userValue;
-  }
-  if (transform) {
-    value = transform(value, userValue, themeMapping);
-  }
-  return value;
-}
-function style$1(options) {
-  const {
-    prop,
-    cssProperty = options.prop,
-    themeKey,
-    transform
-  } = options;
-
-  // false positive
-  // eslint-disable-next-line react/function-component-definition
-  const fn = props => {
-    if (props[prop] == null) {
-      return null;
-    }
-    const propValue = props[prop];
-    const theme = props.theme;
-    const themeMapping = getPath(theme, themeKey) || {};
-    const styleFromPropValue = propValueFinal => {
-      let value = getStyleValue(themeMapping, transform, propValueFinal);
-      if (propValueFinal === value && typeof propValueFinal === 'string') {
-        // Haven't found value
-        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize(propValueFinal)}`, propValueFinal);
-      }
-      if (cssProperty === false) {
-        return value;
-      }
-      return {
-        [cssProperty]: value
-      };
-    };
-    return handleBreakpoints(props, propValue, styleFromPropValue);
-  };
-  fn.propTypes = process.env.NODE_ENV !== 'production' ? {
-    [prop]: responsivePropType$1
-  } : {};
-  fn.filterProps = [prop];
-  return fn;
+  return timeSlots;
 }
 
-function memoize(fn) {
-  const cache = {};
-  return arg => {
-    if (cache[arg] === undefined) {
-      cache[arg] = fn(arg);
-    }
-    return cache[arg];
-  };
-}
-
-const properties = {
-  m: 'margin',
-  p: 'padding'
-};
-const directions = {
-  t: 'Top',
-  r: 'Right',
-  b: 'Bottom',
-  l: 'Left',
-  x: ['Left', 'Right'],
-  y: ['Top', 'Bottom']
-};
-const aliases = {
-  marginX: 'mx',
-  marginY: 'my',
-  paddingX: 'px',
-  paddingY: 'py'
-};
-
-// memoize() impact:
-// From 300,000 ops/sec
-// To 350,000 ops/sec
-const getCssProperties = memoize(prop => {
-  // It's not a shorthand notation.
-  if (prop.length > 2) {
-    if (aliases[prop]) {
-      prop = aliases[prop];
-    } else {
-      return [prop];
-    }
-  }
-  const [a, b] = prop.split('');
-  const property = properties[a];
-  const direction = directions[b] || '';
-  return Array.isArray(direction) ? direction.map(dir => property + dir) : [property + direction];
-});
-const marginKeys = ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'margin', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft', 'marginX', 'marginY', 'marginInline', 'marginInlineStart', 'marginInlineEnd', 'marginBlock', 'marginBlockStart', 'marginBlockEnd'];
-const paddingKeys = ['p', 'pt', 'pr', 'pb', 'pl', 'px', 'py', 'padding', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'paddingX', 'paddingY', 'paddingInline', 'paddingInlineStart', 'paddingInlineEnd', 'paddingBlock', 'paddingBlockStart', 'paddingBlockEnd'];
-const spacingKeys = [...marginKeys, ...paddingKeys];
-function createUnaryUnit(theme, themeKey, defaultValue, propName) {
-  var _getPath;
-  const themeSpacing = (_getPath = getPath(theme, themeKey, false)) != null ? _getPath : defaultValue;
-  if (typeof themeSpacing === 'number') {
-    return abs => {
-      if (typeof abs === 'string') {
-        return abs;
-      }
-      if (process.env.NODE_ENV !== 'production') {
-        if (typeof abs !== 'number') {
-          console.error(`MUI: Expected ${propName} argument to be a number or a string, got ${abs}.`);
-        }
-      }
-      return themeSpacing * abs;
-    };
-  }
-  if (Array.isArray(themeSpacing)) {
-    return abs => {
-      if (typeof abs === 'string') {
-        return abs;
-      }
-      if (process.env.NODE_ENV !== 'production') {
-        if (!Number.isInteger(abs)) {
-          console.error([`MUI: The \`theme.${themeKey}\` array type cannot be combined with non integer values.` + `You should either use an integer value that can be used as index, or define the \`theme.${themeKey}\` as a number.`].join('\n'));
-        } else if (abs > themeSpacing.length - 1) {
-          console.error([`MUI: The value provided (${abs}) overflows.`, `The supported values are: ${JSON.stringify(themeSpacing)}.`, `${abs} > ${themeSpacing.length - 1}, you need to add the missing values.`].join('\n'));
-        }
-      }
-      return themeSpacing[abs];
-    };
-  }
-  if (typeof themeSpacing === 'function') {
-    return themeSpacing;
-  }
-  if (process.env.NODE_ENV !== 'production') {
-    console.error([`MUI: The \`theme.${themeKey}\` value (${themeSpacing}) is invalid.`, 'It should be a number, an array or a function.'].join('\n'));
-  }
-  return () => undefined;
-}
-function createUnarySpacing(theme) {
-  return createUnaryUnit(theme, 'spacing', 8, 'spacing');
-}
-function getValue(transformer, propValue) {
-  if (typeof propValue === 'string' || propValue == null) {
-    return propValue;
-  }
-  const abs = Math.abs(propValue);
-  const transformed = transformer(abs);
-  if (propValue >= 0) {
-    return transformed;
-  }
-  if (typeof transformed === 'number') {
-    return -transformed;
-  }
-  return `-${transformed}`;
-}
-function getStyleFromPropValue(cssProperties, transformer) {
-  return propValue => cssProperties.reduce((acc, cssProperty) => {
-    acc[cssProperty] = getValue(transformer, propValue);
-    return acc;
-  }, {});
-}
-function resolveCssProperty(props, keys, prop, transformer) {
-  // Using a hash computation over an array iteration could be faster, but with only 28 items,
-  // it's doesn't worth the bundle size.
-  if (keys.indexOf(prop) === -1) {
-    return null;
-  }
-  const cssProperties = getCssProperties(prop);
-  const styleFromPropValue = getStyleFromPropValue(cssProperties, transformer);
-  const propValue = props[prop];
-  return handleBreakpoints(props, propValue, styleFromPropValue);
-}
-function style(props, keys) {
-  const transformer = createUnarySpacing(props.theme);
-  return Object.keys(props).map(prop => resolveCssProperty(props, keys, prop, transformer)).reduce(merge, {});
-}
-function margin(props) {
-  return style(props, marginKeys);
-}
-margin.propTypes = process.env.NODE_ENV !== 'production' ? marginKeys.reduce((obj, key) => {
-  obj[key] = responsivePropType$1;
-  return obj;
-}, {}) : {};
-margin.filterProps = marginKeys;
-function padding(props) {
-  return style(props, paddingKeys);
-}
-padding.propTypes = process.env.NODE_ENV !== 'production' ? paddingKeys.reduce((obj, key) => {
-  obj[key] = responsivePropType$1;
-  return obj;
-}, {}) : {};
-padding.filterProps = paddingKeys;
-process.env.NODE_ENV !== 'production' ? spacingKeys.reduce((obj, key) => {
-  obj[key] = responsivePropType$1;
-  return obj;
-}, {}) : {};
-
-// The different signatures imply different meaning for their arguments that can't be expressed structurally.
-// We express the difference with variable names.
-
-function createSpacing(spacingInput = 8) {
-  // Already transformed.
-  if (spacingInput.mui) {
-    return spacingInput;
-  }
-
-  // Material Design layouts are visually balanced. Most measurements align to an 8dp grid, which aligns both spacing and the overall layout.
-  // Smaller components, such as icons, can align to a 4dp grid.
-  // https://m2.material.io/design/layout/understanding-layout.html
-  const transform = createUnarySpacing({
-    spacing: spacingInput
-  });
-  const spacing = (...argsInput) => {
-    if (process.env.NODE_ENV !== 'production') {
-      if (!(argsInput.length <= 4)) {
-        console.error(`MUI: Too many arguments provided, expected between 0 and 4, got ${argsInput.length}`);
-      }
-    }
-    const args = argsInput.length === 0 ? [1] : argsInput;
-    return args.map(argument => {
-      const output = transform(argument);
-      return typeof output === 'number' ? `${output}px` : output;
-    }).join(' ');
-  };
-  spacing.mui = true;
-  return spacing;
-}
-
-function compose(...styles) {
-  const handlers = styles.reduce((acc, style) => {
-    style.filterProps.forEach(prop => {
-      acc[prop] = style;
-    });
-    return acc;
-  }, {});
-
-  // false positive
-  // eslint-disable-next-line react/function-component-definition
-  const fn = props => {
-    return Object.keys(props).reduce((acc, prop) => {
-      if (handlers[prop]) {
-        return merge(acc, handlers[prop](props));
-      }
-      return acc;
-    }, {});
-  };
-  fn.propTypes = process.env.NODE_ENV !== 'production' ? styles.reduce((acc, style) => Object.assign(acc, style.propTypes), {}) : {};
-  fn.filterProps = styles.reduce((acc, style) => acc.concat(style.filterProps), []);
-  return fn;
-}
-
-function borderTransform(value) {
-  if (typeof value !== 'number') {
-    return value;
-  }
-  return `${value}px solid`;
-}
-function createBorderStyle(prop, transform) {
-  return style$1({
-    prop,
-    themeKey: 'borders',
-    transform
-  });
-}
-const border = createBorderStyle('border', borderTransform);
-const borderTop = createBorderStyle('borderTop', borderTransform);
-const borderRight = createBorderStyle('borderRight', borderTransform);
-const borderBottom = createBorderStyle('borderBottom', borderTransform);
-const borderLeft = createBorderStyle('borderLeft', borderTransform);
-const borderColor = createBorderStyle('borderColor');
-const borderTopColor = createBorderStyle('borderTopColor');
-const borderRightColor = createBorderStyle('borderRightColor');
-const borderBottomColor = createBorderStyle('borderBottomColor');
-const borderLeftColor = createBorderStyle('borderLeftColor');
-const outline = createBorderStyle('outline', borderTransform);
-const outlineColor = createBorderStyle('outlineColor');
-
-// false positive
-// eslint-disable-next-line react/function-component-definition
-const borderRadius = props => {
-  if (props.borderRadius !== undefined && props.borderRadius !== null) {
-    const transformer = createUnaryUnit(props.theme, 'shape.borderRadius', 4, 'borderRadius');
-    const styleFromPropValue = propValue => ({
-      borderRadius: getValue(transformer, propValue)
-    });
-    return handleBreakpoints(props, props.borderRadius, styleFromPropValue);
-  }
-  return null;
-};
-borderRadius.propTypes = process.env.NODE_ENV !== 'production' ? {
-  borderRadius: responsivePropType$1
-} : {};
-borderRadius.filterProps = ['borderRadius'];
-compose(border, borderTop, borderRight, borderBottom, borderLeft, borderColor, borderTopColor, borderRightColor, borderBottomColor, borderLeftColor, borderRadius, outline, outlineColor);
-
-// false positive
-// eslint-disable-next-line react/function-component-definition
-const gap = props => {
-  if (props.gap !== undefined && props.gap !== null) {
-    const transformer = createUnaryUnit(props.theme, 'spacing', 8, 'gap');
-    const styleFromPropValue = propValue => ({
-      gap: getValue(transformer, propValue)
-    });
-    return handleBreakpoints(props, props.gap, styleFromPropValue);
-  }
-  return null;
-};
-gap.propTypes = process.env.NODE_ENV !== 'production' ? {
-  gap: responsivePropType$1
-} : {};
-gap.filterProps = ['gap'];
-
-// false positive
-// eslint-disable-next-line react/function-component-definition
-const columnGap = props => {
-  if (props.columnGap !== undefined && props.columnGap !== null) {
-    const transformer = createUnaryUnit(props.theme, 'spacing', 8, 'columnGap');
-    const styleFromPropValue = propValue => ({
-      columnGap: getValue(transformer, propValue)
-    });
-    return handleBreakpoints(props, props.columnGap, styleFromPropValue);
-  }
-  return null;
-};
-columnGap.propTypes = process.env.NODE_ENV !== 'production' ? {
-  columnGap: responsivePropType$1
-} : {};
-columnGap.filterProps = ['columnGap'];
-
-// false positive
-// eslint-disable-next-line react/function-component-definition
-const rowGap = props => {
-  if (props.rowGap !== undefined && props.rowGap !== null) {
-    const transformer = createUnaryUnit(props.theme, 'spacing', 8, 'rowGap');
-    const styleFromPropValue = propValue => ({
-      rowGap: getValue(transformer, propValue)
-    });
-    return handleBreakpoints(props, props.rowGap, styleFromPropValue);
-  }
-  return null;
-};
-rowGap.propTypes = process.env.NODE_ENV !== 'production' ? {
-  rowGap: responsivePropType$1
-} : {};
-rowGap.filterProps = ['rowGap'];
-const gridColumn = style$1({
-  prop: 'gridColumn'
-});
-const gridRow = style$1({
-  prop: 'gridRow'
-});
-const gridAutoFlow = style$1({
-  prop: 'gridAutoFlow'
-});
-const gridAutoColumns = style$1({
-  prop: 'gridAutoColumns'
-});
-const gridAutoRows = style$1({
-  prop: 'gridAutoRows'
-});
-const gridTemplateColumns = style$1({
-  prop: 'gridTemplateColumns'
-});
-const gridTemplateRows = style$1({
-  prop: 'gridTemplateRows'
-});
-const gridTemplateAreas = style$1({
-  prop: 'gridTemplateAreas'
-});
-const gridArea = style$1({
-  prop: 'gridArea'
-});
-compose(gap, columnGap, rowGap, gridColumn, gridRow, gridAutoFlow, gridAutoColumns, gridAutoRows, gridTemplateColumns, gridTemplateRows, gridTemplateAreas, gridArea);
-
-function paletteTransform(value, userValue) {
-  if (userValue === 'grey') {
-    return userValue;
-  }
-  return value;
-}
-const color = style$1({
-  prop: 'color',
-  themeKey: 'palette',
-  transform: paletteTransform
-});
-const bgcolor = style$1({
-  prop: 'bgcolor',
-  cssProperty: 'backgroundColor',
-  themeKey: 'palette',
-  transform: paletteTransform
-});
-const backgroundColor = style$1({
-  prop: 'backgroundColor',
-  themeKey: 'palette',
-  transform: paletteTransform
-});
-compose(color, bgcolor, backgroundColor);
-
-function sizingTransform(value) {
-  return value <= 1 && value !== 0 ? `${value * 100}%` : value;
-}
-const width = style$1({
-  prop: 'width',
-  transform: sizingTransform
-});
-const maxWidth = props => {
-  if (props.maxWidth !== undefined && props.maxWidth !== null) {
-    const styleFromPropValue = propValue => {
-      var _props$theme, _props$theme2;
-      const breakpoint = ((_props$theme = props.theme) == null || (_props$theme = _props$theme.breakpoints) == null || (_props$theme = _props$theme.values) == null ? void 0 : _props$theme[propValue]) || values[propValue];
-      if (!breakpoint) {
-        return {
-          maxWidth: sizingTransform(propValue)
-        };
-      }
-      if (((_props$theme2 = props.theme) == null || (_props$theme2 = _props$theme2.breakpoints) == null ? void 0 : _props$theme2.unit) !== 'px') {
-        return {
-          maxWidth: `${breakpoint}${props.theme.breakpoints.unit}`
-        };
-      }
-      return {
-        maxWidth: breakpoint
-      };
-    };
-    return handleBreakpoints(props, props.maxWidth, styleFromPropValue);
-  }
-  return null;
-};
-maxWidth.filterProps = ['maxWidth'];
-const minWidth = style$1({
-  prop: 'minWidth',
-  transform: sizingTransform
-});
-const height = style$1({
-  prop: 'height',
-  transform: sizingTransform
-});
-const maxHeight = style$1({
-  prop: 'maxHeight',
-  transform: sizingTransform
-});
-const minHeight = style$1({
-  prop: 'minHeight',
-  transform: sizingTransform
-});
-style$1({
-  prop: 'size',
-  cssProperty: 'width',
-  transform: sizingTransform
-});
-style$1({
-  prop: 'size',
-  cssProperty: 'height',
-  transform: sizingTransform
-});
-const boxSizing = style$1({
-  prop: 'boxSizing'
-});
-compose(width, maxWidth, minWidth, height, maxHeight, minHeight, boxSizing);
-
-const defaultSxConfig = {
-  // borders
-  border: {
-    themeKey: 'borders',
-    transform: borderTransform
-  },
-  borderTop: {
-    themeKey: 'borders',
-    transform: borderTransform
-  },
-  borderRight: {
-    themeKey: 'borders',
-    transform: borderTransform
-  },
-  borderBottom: {
-    themeKey: 'borders',
-    transform: borderTransform
-  },
-  borderLeft: {
-    themeKey: 'borders',
-    transform: borderTransform
-  },
-  borderColor: {
-    themeKey: 'palette'
-  },
-  borderTopColor: {
-    themeKey: 'palette'
-  },
-  borderRightColor: {
-    themeKey: 'palette'
-  },
-  borderBottomColor: {
-    themeKey: 'palette'
-  },
-  borderLeftColor: {
-    themeKey: 'palette'
-  },
-  outline: {
-    themeKey: 'borders',
-    transform: borderTransform
-  },
-  outlineColor: {
-    themeKey: 'palette'
-  },
-  borderRadius: {
-    themeKey: 'shape.borderRadius',
-    style: borderRadius
-  },
-  // palette
-  color: {
-    themeKey: 'palette',
-    transform: paletteTransform
-  },
-  bgcolor: {
-    themeKey: 'palette',
-    cssProperty: 'backgroundColor',
-    transform: paletteTransform
-  },
-  backgroundColor: {
-    themeKey: 'palette',
-    transform: paletteTransform
-  },
-  // spacing
-  p: {
-    style: padding
-  },
-  pt: {
-    style: padding
-  },
-  pr: {
-    style: padding
-  },
-  pb: {
-    style: padding
-  },
-  pl: {
-    style: padding
-  },
-  px: {
-    style: padding
-  },
-  py: {
-    style: padding
-  },
-  padding: {
-    style: padding
-  },
-  paddingTop: {
-    style: padding
-  },
-  paddingRight: {
-    style: padding
-  },
-  paddingBottom: {
-    style: padding
-  },
-  paddingLeft: {
-    style: padding
-  },
-  paddingX: {
-    style: padding
-  },
-  paddingY: {
-    style: padding
-  },
-  paddingInline: {
-    style: padding
-  },
-  paddingInlineStart: {
-    style: padding
-  },
-  paddingInlineEnd: {
-    style: padding
-  },
-  paddingBlock: {
-    style: padding
-  },
-  paddingBlockStart: {
-    style: padding
-  },
-  paddingBlockEnd: {
-    style: padding
-  },
-  m: {
-    style: margin
-  },
-  mt: {
-    style: margin
-  },
-  mr: {
-    style: margin
-  },
-  mb: {
-    style: margin
-  },
-  ml: {
-    style: margin
-  },
-  mx: {
-    style: margin
-  },
-  my: {
-    style: margin
-  },
-  margin: {
-    style: margin
-  },
-  marginTop: {
-    style: margin
-  },
-  marginRight: {
-    style: margin
-  },
-  marginBottom: {
-    style: margin
-  },
-  marginLeft: {
-    style: margin
-  },
-  marginX: {
-    style: margin
-  },
-  marginY: {
-    style: margin
-  },
-  marginInline: {
-    style: margin
-  },
-  marginInlineStart: {
-    style: margin
-  },
-  marginInlineEnd: {
-    style: margin
-  },
-  marginBlock: {
-    style: margin
-  },
-  marginBlockStart: {
-    style: margin
-  },
-  marginBlockEnd: {
-    style: margin
-  },
-  // display
-  displayPrint: {
-    cssProperty: false,
-    transform: value => ({
-      '@media print': {
-        display: value
-      }
-    })
-  },
-  display: {},
-  overflow: {},
-  textOverflow: {},
-  visibility: {},
-  whiteSpace: {},
-  // flexbox
-  flexBasis: {},
-  flexDirection: {},
-  flexWrap: {},
-  justifyContent: {},
-  alignItems: {},
-  alignContent: {},
-  order: {},
-  flex: {},
-  flexGrow: {},
-  flexShrink: {},
-  alignSelf: {},
-  justifyItems: {},
-  justifySelf: {},
-  // grid
-  gap: {
-    style: gap
-  },
-  rowGap: {
-    style: rowGap
-  },
-  columnGap: {
-    style: columnGap
-  },
-  gridColumn: {},
-  gridRow: {},
-  gridAutoFlow: {},
-  gridAutoColumns: {},
-  gridAutoRows: {},
-  gridTemplateColumns: {},
-  gridTemplateRows: {},
-  gridTemplateAreas: {},
-  gridArea: {},
-  // positions
-  position: {},
-  zIndex: {
-    themeKey: 'zIndex'
-  },
-  top: {},
-  right: {},
-  bottom: {},
-  left: {},
-  // shadows
-  boxShadow: {
-    themeKey: 'shadows'
-  },
-  // sizing
-  width: {
-    transform: sizingTransform
-  },
-  maxWidth: {
-    style: maxWidth
-  },
-  minWidth: {
-    transform: sizingTransform
-  },
-  height: {
-    transform: sizingTransform
-  },
-  maxHeight: {
-    transform: sizingTransform
-  },
-  minHeight: {
-    transform: sizingTransform
-  },
-  boxSizing: {},
-  // typography
-  fontFamily: {
-    themeKey: 'typography'
-  },
-  fontSize: {
-    themeKey: 'typography'
-  },
-  fontStyle: {
-    themeKey: 'typography'
-  },
-  fontWeight: {
-    themeKey: 'typography'
-  },
-  letterSpacing: {},
-  textTransform: {},
-  lineHeight: {},
-  textAlign: {},
-  typography: {
-    cssProperty: false,
-    themeKey: 'typography'
-  }
-};
-var defaultSxConfig$1 = defaultSxConfig;
-
-function objectsHaveSameKeys(...objects) {
-  const allKeys = objects.reduce((keys, object) => keys.concat(Object.keys(object)), []);
-  const union = new Set(allKeys);
-  return objects.every(object => union.size === Object.keys(object).length);
-}
-function callIfFn(maybeFn, arg) {
-  return typeof maybeFn === 'function' ? maybeFn(arg) : maybeFn;
-}
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-function unstable_createStyleFunctionSx() {
-  function getThemeValue(prop, val, theme, config) {
-    const props = {
-      [prop]: val,
-      theme
-    };
-    const options = config[prop];
-    if (!options) {
-      return {
-        [prop]: val
-      };
-    }
-    const {
-      cssProperty = prop,
-      themeKey,
-      transform,
-      style
-    } = options;
-    if (val == null) {
-      return null;
-    }
-
-    // TODO v6: remove, see https://github.com/mui/material-ui/pull/38123
-    if (themeKey === 'typography' && val === 'inherit') {
-      return {
-        [prop]: val
-      };
-    }
-    const themeMapping = getPath(theme, themeKey) || {};
-    if (style) {
-      return style(props);
-    }
-    const styleFromPropValue = propValueFinal => {
-      let value = getStyleValue(themeMapping, transform, propValueFinal);
-      if (propValueFinal === value && typeof propValueFinal === 'string') {
-        // Haven't found value
-        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize(propValueFinal)}`, propValueFinal);
-      }
-      if (cssProperty === false) {
-        return value;
-      }
-      return {
-        [cssProperty]: value
-      };
-    };
-    return handleBreakpoints(props, val, styleFromPropValue);
-  }
-  function styleFunctionSx(props) {
-    var _theme$unstable_sxCon;
-    const {
-      sx,
-      theme = {}
-    } = props || {};
-    if (!sx) {
-      return null; // Emotion & styled-components will neglect null
-    }
-    const config = (_theme$unstable_sxCon = theme.unstable_sxConfig) != null ? _theme$unstable_sxCon : defaultSxConfig$1;
-
-    /*
-     * Receive `sxInput` as object or callback
-     * and then recursively check keys & values to create media query object styles.
-     * (the result will be used in `styled`)
-     */
-    function traverse(sxInput) {
-      let sxObject = sxInput;
-      if (typeof sxInput === 'function') {
-        sxObject = sxInput(theme);
-      } else if (typeof sxInput !== 'object') {
-        // value
-        return sxInput;
-      }
-      if (!sxObject) {
-        return null;
-      }
-      const emptyBreakpoints = createEmptyBreakpointObject(theme.breakpoints);
-      const breakpointsKeys = Object.keys(emptyBreakpoints);
-      let css = emptyBreakpoints;
-      Object.keys(sxObject).forEach(styleKey => {
-        const value = callIfFn(sxObject[styleKey], theme);
-        if (value !== null && value !== undefined) {
-          if (typeof value === 'object') {
-            if (config[styleKey]) {
-              css = merge(css, getThemeValue(styleKey, value, theme, config));
-            } else {
-              const breakpointsValues = handleBreakpoints({
-                theme
-              }, value, x => ({
-                [styleKey]: x
-              }));
-              if (objectsHaveSameKeys(breakpointsValues, value)) {
-                css[styleKey] = styleFunctionSx({
-                  sx: value,
-                  theme
-                });
-              } else {
-                css = merge(css, breakpointsValues);
-              }
-            }
-          } else {
-            css = merge(css, getThemeValue(styleKey, value, theme, config));
-          }
-        }
-      });
-      return removeUnusedBreakpoints(breakpointsKeys, css);
-    }
-    return Array.isArray(sx) ? sx.map(traverse) : traverse(sx);
-  }
-  return styleFunctionSx;
-}
-const styleFunctionSx = unstable_createStyleFunctionSx();
-styleFunctionSx.filterProps = ['sx'];
-var styleFunctionSx$1 = styleFunctionSx;
-
-/**
- * A universal utility to style components with multiple color modes. Always use it from the theme object.
- * It works with:
- *  - [Basic theme](https://mui.com/material-ui/customization/dark-mode/)
- *  - [CSS theme variables](https://mui.com/material-ui/experimental-api/css-theme-variables/overview/)
- *  - Zero-runtime engine
- *
- * Tips: Use an array over object spread and place `theme.applyStyles()` last.
- *
- * ✅ [{ background: '#e5e5e5' }, theme.applyStyles('dark', { background: '#1c1c1c' })]
- *
- * 🚫 { background: '#e5e5e5', ...theme.applyStyles('dark', { background: '#1c1c1c' })}
- *
- * @example
- * 1. using with `styled`:
- * ```jsx
- *   const Component = styled('div')(({ theme }) => [
- *     { background: '#e5e5e5' },
- *     theme.applyStyles('dark', {
- *       background: '#1c1c1c',
- *       color: '#fff',
- *     }),
- *   ]);
- * ```
- *
- * @example
- * 2. using with `sx` prop:
- * ```jsx
- *   <Box sx={theme => [
- *     { background: '#e5e5e5' },
- *     theme.applyStyles('dark', {
- *        background: '#1c1c1c',
- *        color: '#fff',
- *      }),
- *     ]}
- *   />
- * ```
- *
- * @example
- * 3. theming a component:
- * ```jsx
- *   extendTheme({
- *     components: {
- *       MuiButton: {
- *         styleOverrides: {
- *           root: ({ theme }) => [
- *             { background: '#e5e5e5' },
- *             theme.applyStyles('dark', {
- *               background: '#1c1c1c',
- *               color: '#fff',
- *             }),
- *           ],
- *         },
- *       }
- *     }
- *   })
- *```
- */
-function applyStyles(key, styles) {
-  // @ts-expect-error this is 'any' type
-  const theme = this;
-  if (theme.vars && typeof theme.getColorSchemeSelector === 'function') {
-    // If CssVarsProvider is used as a provider,
-    // returns '* :where([data-mui-color-scheme="light|dark"]) &'
-    const selector = theme.getColorSchemeSelector(key).replace(/(\[[^\]]+\])/, '*:where($1)');
-    return {
-      [selector]: styles
-    };
-  }
-  if (theme.palette.mode === key) {
-    return styles;
-  }
-  return {};
-}
-
-const _excluded$1 = ["breakpoints", "palette", "spacing", "shape"];
-function createTheme(options = {}, ...args) {
-  const {
-      breakpoints: breakpointsInput = {},
-      palette: paletteInput = {},
-      spacing: spacingInput,
-      shape: shapeInput = {}
-    } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$1);
-  const breakpoints = createBreakpoints(breakpointsInput);
-  const spacing = createSpacing(spacingInput);
-  let muiTheme = deepmerge({
-    breakpoints,
-    direction: 'ltr',
-    components: {},
-    // Inject component definitions.
-    palette: _extends$1({
-      mode: 'light'
-    }, paletteInput),
-    spacing,
-    shape: _extends$1({}, shape$1, shapeInput)
-  }, other);
-  muiTheme.applyStyles = applyStyles;
-  muiTheme = args.reduce((acc, argument) => deepmerge(acc, argument), muiTheme);
-  muiTheme.unstable_sxConfig = _extends$1({}, defaultSxConfig$1, other == null ? void 0 : other.unstable_sxConfig);
-  muiTheme.unstable_sx = function sx(props) {
-    return styleFunctionSx$1({
-      sx: props,
-      theme: this
-    });
-  };
-  return muiTheme;
-}
-
-// Simplified polyfill for IE11 support
-// https://github.com/JamesMGreene/Function.name/blob/58b314d4a983110c3682f1228f845d39ccca1817/Function.name.js#L3
-const fnNameMatchRegex = /^\s*function(?:\s|\s*\/\*.*\*\/\s*)+([^(\s/]*)\s*/;
-function getFunctionName(fn) {
-  const match = `${fn}`.match(fnNameMatchRegex);
-  const name = match && match[1];
-  return name || '';
-}
-function getFunctionComponentName(Component, fallback = '') {
-  return Component.displayName || Component.name || getFunctionName(Component) || fallback;
-}
-function getWrappedName(outerType, innerType, wrapperName) {
-  const functionName = getFunctionComponentName(innerType);
-  return outerType.displayName || (functionName !== '' ? `${wrapperName}(${functionName})` : wrapperName);
-}
-
-/**
- * cherry-pick from
- * https://github.com/facebook/react/blob/769b1f270e1251d9dbdce0fcbd9e92e502d059b8/packages/shared/getComponentName.js
- * originally forked from recompose/getDisplayName with added IE11 support
- */
-function getDisplayName(Component) {
-  if (Component == null) {
-    return undefined;
-  }
-  if (typeof Component === 'string') {
-    return Component;
-  }
-  if (typeof Component === 'function') {
-    return getFunctionComponentName(Component, 'Component');
-  }
-
-  // TypeScript can't have components as objects but they exist in the form of `memo` or `Suspense`
-  if (typeof Component === 'object') {
-    switch (Component.$$typeof) {
-      case reactIsExports.ForwardRef:
-        return getWrappedName(Component, Component.render, 'ForwardRef');
-      case reactIsExports.Memo:
-        return getWrappedName(Component, Component.type, 'memo');
-      default:
-        return undefined;
-    }
-  }
-  return undefined;
-}
-
-const _excluded = ["ownerState"],
-  _excluded2 = ["variants"],
-  _excluded3 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
-
-// https://github.com/emotion-js/emotion/blob/26ded6109fcd8ca9875cc2ce4564fee678a3f3c5/packages/styled/src/utils.js#L40
-function isStringTag(tag) {
-  return typeof tag === 'string' &&
-  // 96 is one less than the char code
-  // for "a" so this is checking that
-  // it's a lowercase character
-  tag.charCodeAt(0) > 96;
-}
-
-// Update /system/styled/#api in case if this changes
-function shouldForwardProp(prop) {
-  return prop !== 'ownerState' && prop !== 'theme' && prop !== 'sx' && prop !== 'as';
-}
-const systemDefaultTheme = createTheme();
-const lowercaseFirstLetter = string => {
-  if (!string) {
-    return string;
-  }
-  return string.charAt(0).toLowerCase() + string.slice(1);
-};
-function resolveTheme({
-  defaultTheme,
-  theme,
-  themeId
-}) {
-  return isEmpty(theme) ? defaultTheme : theme[themeId] || theme;
-}
-function defaultOverridesResolver(slot) {
-  if (!slot) {
-    return null;
-  }
-  return (props, styles) => styles[slot];
-}
-function processStyleArg(callableStyle, _ref) {
-  let {
-      ownerState
-    } = _ref,
-    props = _objectWithoutPropertiesLoose(_ref, _excluded);
-  const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle(_extends$1({
-    ownerState
-  }, props)) : callableStyle;
-  if (Array.isArray(resolvedStylesArg)) {
-    return resolvedStylesArg.flatMap(resolvedStyle => processStyleArg(resolvedStyle, _extends$1({
-      ownerState
-    }, props)));
-  }
-  if (!!resolvedStylesArg && typeof resolvedStylesArg === 'object' && Array.isArray(resolvedStylesArg.variants)) {
-    const {
-        variants = []
-      } = resolvedStylesArg,
-      otherStyles = _objectWithoutPropertiesLoose(resolvedStylesArg, _excluded2);
-    let result = otherStyles;
-    variants.forEach(variant => {
-      let isMatch = true;
-      if (typeof variant.props === 'function') {
-        isMatch = variant.props(_extends$1({
-          ownerState
-        }, props, ownerState));
-      } else {
-        Object.keys(variant.props).forEach(key => {
-          if ((ownerState == null ? void 0 : ownerState[key]) !== variant.props[key] && props[key] !== variant.props[key]) {
-            isMatch = false;
-          }
-        });
-      }
-      if (isMatch) {
-        if (!Array.isArray(result)) {
-          result = [result];
-        }
-        result.push(typeof variant.style === 'function' ? variant.style(_extends$1({
-          ownerState
-        }, props, ownerState)) : variant.style);
-      }
-    });
-    return result;
-  }
-  return resolvedStylesArg;
-}
-function createStyled(input = {}) {
-  const {
-    themeId,
-    defaultTheme = systemDefaultTheme,
-    rootShouldForwardProp = shouldForwardProp,
-    slotShouldForwardProp = shouldForwardProp
-  } = input;
-  const systemSx = props => {
-    return styleFunctionSx$1(_extends$1({}, props, {
-      theme: resolveTheme(_extends$1({}, props, {
-        defaultTheme,
-        themeId
-      }))
-    }));
-  };
-  systemSx.__mui_systemSx = true;
-  return (tag, inputOptions = {}) => {
-    // Filter out the `sx` style function from the previous styled component to prevent unnecessary styles generated by the composite components.
-    internal_processStyles(tag, styles => styles.filter(style => !(style != null && style.__mui_systemSx)));
-    const {
-        name: componentName,
-        slot: componentSlot,
-        skipVariantsResolver: inputSkipVariantsResolver,
-        skipSx: inputSkipSx,
-        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
-        // For more details: https://github.com/mui/material-ui/pull/37908
-        overridesResolver = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
-      } = inputOptions,
-      options = _objectWithoutPropertiesLoose(inputOptions, _excluded3);
-
-    // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
-    const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver :
-    // TODO v6: remove `Root` in the next major release
-    // For more details: https://github.com/mui/material-ui/pull/37908
-    componentSlot && componentSlot !== 'Root' && componentSlot !== 'root' || false;
-    const skipSx = inputSkipSx || false;
-    let label;
-    if (process.env.NODE_ENV !== 'production') {
-      if (componentName) {
-        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
-        // For more details: https://github.com/mui/material-ui/pull/37908
-        label = `${componentName}-${lowercaseFirstLetter(componentSlot || 'Root')}`;
-      }
-    }
-    let shouldForwardPropOption = shouldForwardProp;
-
-    // TODO v6: remove `Root` in the next major release
-    // For more details: https://github.com/mui/material-ui/pull/37908
-    if (componentSlot === 'Root' || componentSlot === 'root') {
-      shouldForwardPropOption = rootShouldForwardProp;
-    } else if (componentSlot) {
-      // any other slot specified
-      shouldForwardPropOption = slotShouldForwardProp;
-    } else if (isStringTag(tag)) {
-      // for string (html) tag, preserve the behavior in emotion & styled-components.
-      shouldForwardPropOption = undefined;
-    }
-    const defaultStyledResolver = styled$4(tag, _extends$1({
-      shouldForwardProp: shouldForwardPropOption,
-      label
-    }, options));
-    const transformStyleArg = stylesArg => {
-      // On the server Emotion doesn't use React.forwardRef for creating components, so the created
-      // component stays as a function. This condition makes sure that we do not interpolate functions
-      // which are basically components used as a selectors.
-      if (typeof stylesArg === 'function' && stylesArg.__emotion_real !== stylesArg || isPlainObject(stylesArg)) {
-        return props => processStyleArg(stylesArg, _extends$1({}, props, {
-          theme: resolveTheme({
-            theme: props.theme,
-            defaultTheme,
-            themeId
-          })
-        }));
-      }
-      return stylesArg;
-    };
-    const muiStyledResolver = (styleArg, ...expressions) => {
-      let transformedStyleArg = transformStyleArg(styleArg);
-      const expressionsWithDefaultTheme = expressions ? expressions.map(transformStyleArg) : [];
-      if (componentName && overridesResolver) {
-        expressionsWithDefaultTheme.push(props => {
-          const theme = resolveTheme(_extends$1({}, props, {
-            defaultTheme,
-            themeId
-          }));
-          if (!theme.components || !theme.components[componentName] || !theme.components[componentName].styleOverrides) {
-            return null;
-          }
-          const styleOverrides = theme.components[componentName].styleOverrides;
-          const resolvedStyleOverrides = {};
-          // TODO: v7 remove iteration and use `resolveStyleArg(styleOverrides[slot])` directly
-          Object.entries(styleOverrides).forEach(([slotKey, slotStyle]) => {
-            resolvedStyleOverrides[slotKey] = processStyleArg(slotStyle, _extends$1({}, props, {
-              theme
-            }));
-          });
-          return overridesResolver(props, resolvedStyleOverrides);
-        });
-      }
-      if (componentName && !skipVariantsResolver) {
-        expressionsWithDefaultTheme.push(props => {
-          var _theme$components;
-          const theme = resolveTheme(_extends$1({}, props, {
-            defaultTheme,
-            themeId
-          }));
-          const themeVariants = theme == null || (_theme$components = theme.components) == null || (_theme$components = _theme$components[componentName]) == null ? void 0 : _theme$components.variants;
-          return processStyleArg({
-            variants: themeVariants
-          }, _extends$1({}, props, {
-            theme
-          }));
-        });
-      }
-      if (!skipSx) {
-        expressionsWithDefaultTheme.push(systemSx);
-      }
-      const numOfCustomFnsApplied = expressionsWithDefaultTheme.length - expressions.length;
-      if (Array.isArray(styleArg) && numOfCustomFnsApplied > 0) {
-        const placeholders = new Array(numOfCustomFnsApplied).fill('');
-        // If the type is array, than we need to add placeholders in the template for the overrides, variants and the sx styles.
-        transformedStyleArg = [...styleArg, ...placeholders];
-        transformedStyleArg.raw = [...styleArg.raw, ...placeholders];
-      }
-      const Component = defaultStyledResolver(transformedStyleArg, ...expressionsWithDefaultTheme);
-      if (process.env.NODE_ENV !== 'production') {
-        let displayName;
-        if (componentName) {
-          displayName = `${componentName}${capitalize(componentSlot || '')}`;
-        }
-        if (displayName === undefined) {
-          displayName = `Styled(${getDisplayName(tag)})`;
-        }
-        Component.displayName = displayName;
-      }
-      if (tag.muiName) {
-        Component.muiName = tag.muiName;
-      }
-      return Component;
-    };
-    if (defaultStyledResolver.withConfig) {
-      muiStyledResolver.withConfig = defaultStyledResolver.withConfig;
-    }
-    return muiStyledResolver;
-  };
-}
-
-const styled = createStyled();
-var styled$1 = styled;
-
-styled$1(TableContainer$1)({
+const CalendarContainer = styled$3(TableContainer$1)({
   scrollbarWidth: 'none',
   '&::-webkit-scrollbar': {
     display: 'none'
@@ -15157,11 +14613,11 @@ styled$1(TableContainer$1)({
   overflowY: 'auto',
   position: 'relative'
 });
-styled$1(Table$1)({
+styled$3(Table$1)({
   width: 900,
   overflowX: 'auto'
 });
-styled$1(TableCell$1)({
+const Divider = styled$3(TableCell$1)({
   left: '232px',
   top: 0,
   right: 0,
@@ -15172,7 +14628,7 @@ styled$1(TableCell$1)({
   border: 'none',
   padding: '1px'
 });
-styled$1(TableCell$1)({
+const Resources = styled$3(TableCell$1)({
   left: 0,
   position: 'sticky',
   zIndex: 900,
@@ -15180,7 +14636,7 @@ styled$1(TableCell$1)({
   width: '200px',
   minWidth: '200px'
 });
-styled$1(TableCell$1)({
+const Slots = styled$3(TableCell$1)({
   textAlign: 'center'
 });
 
@@ -15216,7 +14672,7 @@ const slotBg = (canDrop, isOver, slotBackground, theme, color) => {
   return backgroundColor;
 };
 
-styled$1(TableCell$1)(props => {
+const Slot = styled$3(TableCell$1)(props => {
   const {
     color = "primary",
     SlotProps
@@ -15283,12 +14739,188 @@ styled$1(TableCell$1)(props => {
   };
 });
 
+function UserTimeSlot(props) {
+  const {
+    user,
+    timeSlot,
+    index
+  } = props;
+  useSchedulerContext();
+
+  //   const [{ isOver, canDrop }, drop] = useDrop({
+  //     accept: 'APPOINTMENT',
+  //     drop: (appointment, monitor) => {
+  //       const droppedAppointment = appointment.appointment;
+  //       const updatedAppointments = getUpdatedAppointments(
+  //         appointmentList,
+  //         droppedAppointment,
+  //         date,
+  //         timeSlot,
+  //         duration,
+  //         user
+  //       );
+  //       onAppointmentChange(updatedAppointments);
+  //     },
+  //     collect: (monitor) => ({
+  //       isOver: monitor.isOver(),
+  //       canDrop: monitor.canDrop(),
+  //     }),
+  //   });
+
+  //   const sortedAppointments = getSortAppointments(appointmentList, user);
+  //   const concurrentAppointments = {};
+  //   let previousConcurrentCount = 0;
+  //   sortedAppointments.forEach((event, index) => {
+  //     const startDate = moment(event.schedule.startDate);
+  //     const count = sortedAppointments.reduce((acc, otherEvent, otherIndex) => {
+  //       if (
+  //         index !== otherIndex &&
+  //         moment(otherEvent.schedule.startDate).isBefore(startDate) &&
+  //         moment(otherEvent.schedule.endDate).isAfter(startDate)
+  //       ) {
+  //         return acc + 1;
+  //       }
+  //       return acc;
+  //     }, 0);
+  //     concurrentAppointments[event.id] =
+  //       count > 0 ? count + previousConcurrentCount : 0;
+  //     // Update previousConcurrentCount for the next event
+  //     previousConcurrentCount = count > 0 ? concurrentAppointments[event.id] : 0;
+  //   });
+
+  //   const filteredAppointments = getFilteredAppointments(
+  //     appointmentList,
+  //     user,
+  //     timeSlot,
+  //     date,
+  //     secondaryDuration,
+  //     concurrentAppointments
+  //   );
+
+  //   const width = getSlotWidth(secondaryDuration);
+
+  return /*#__PURE__*/React__default["default"].createElement(Slot, {
+    colSpan: 1
+    //   ref={drop}
+    ,
+    index: index
+    //   canDrop={canDrop}
+    //   isOver={isOver}
+    //   width={width}
+  });
+}
+
 function Calendar() {
   const {
-    color
+    date,
+    users,
+    SlotProps
   } = useSchedulerContext();
-  return /*#__PURE__*/React__default["default"].createElement("div", null, color);
+  console.log(SlotProps);
+  console.log(date);
+  const {
+    primaryDuration = 60,
+    secondaryDuration,
+    colSpan
+  } = SlotProps || {};
+  const timeSlotsHead = generateTimeSlotsForShift(date, primaryDuration);
+  const timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
+  return /*#__PURE__*/React__default["default"].createElement(CalendarContainer, {
+    component: Paper$1
+  }, /*#__PURE__*/React__default["default"].createElement(Table$1, {
+    stickyHeader: true
+  }, /*#__PURE__*/React__default["default"].createElement(TableHead$1, null, /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
+    sx: {
+      overflowY: 'hidden',
+      backgroundColor: 'white',
+      position: 'sticky',
+      top: 0,
+      zIndex: 1000
+    }
+  }, /*#__PURE__*/React__default["default"].createElement(Resources, null, "User"), /*#__PURE__*/React__default["default"].createElement(Divider, null), timeSlotsHead.map(slot => /*#__PURE__*/React__default["default"].createElement(Slots, {
+    key: slot,
+    colSpan: colSpan
+  }, slot)))), /*#__PURE__*/React__default["default"].createElement(TableBody$1, null, users.map(user => {
+    return /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
+      key: user.name
+    }, /*#__PURE__*/React__default["default"].createElement(Resources, {
+      align: "left"
+    }, user.name), /*#__PURE__*/React__default["default"].createElement(Divider, {
+      align: "left"
+    }), timeSlotsBody.map((slot, index) => /*#__PURE__*/React__default["default"].createElement(UserTimeSlot, {
+      key: `${user.name}-${slot}`,
+      index: index,
+      user: user,
+      timeSlot: slot
+    })));
+  }))));
 }
+
+const AppointmentPropTypes = PropTypes.shape({
+  /**
+   * Set the background color for the appointment when it is being dragged
+   */
+  dragBgColor: PropTypes.string,
+  /**
+  * You can override the styles
+  */
+  style: PropTypes.object
+});
+const AppointmentDefaultValue = {
+  dragBgColor: '#E0E0E0',
+  style: {}
+};
+
+const SlotBackgroundPropTypes = PropTypes.shape({
+  /**
+  * set background of drop, when the appointment can be drop in the slot
+  */
+  dropBg: PropTypes.string,
+  /**
+  * set background of drop, when the appointment is over the slot
+  */
+  overBg: PropTypes.string
+});
+const SlotPropTypes = PropTypes.shape({
+  /**
+  * Set the primary duration - Primary Duration is the duration in header of the scheduler
+  * @default 60
+  */
+  primaryDuration: PropTypes.number,
+  /**
+  * Set the secondary duration, Secondary Duration is the duration inside each Primary Duration
+  * @default 30
+  */
+  secondaryDuration: PropTypes.number,
+  /**
+  * colSpan should be set accordingly to secondaryDuration
+  * @default 2
+  */
+  colSpan: PropTypes.number,
+  /**
+  * component is used to wrapped the whole scheduler
+  */
+  component: PropTypes.node,
+  /**
+  * Override the style
+  */
+  style: PropTypes.object,
+  /**
+  * Override the slot background when it is to be dropped or its just over the slot
+  */
+  slotBackground: SlotBackgroundPropTypes
+});
+const SlotDefaultValues = {
+  primaryDuration: 60,
+  secondaryDuration: 30,
+  colSpan: 2,
+  component: /*#__PURE__*/React__default["default"].createElement("div", null),
+  style: PropTypes.object,
+  slotBackground: {
+    dropBg: undefined,
+    overBg: undefined
+  }
+};
 
 /**
  * <p>Scheduler is composed of different libraries such as React-DND, moment, and MUI.</p>
@@ -15309,18 +14941,17 @@ function Calendar() {
  * </ul>
  *  */
 const Scheduler = props => {
-  console.log(props);
   return /*#__PURE__*/React__default["default"].createElement(SchedulerProvider, props, /*#__PURE__*/React__default["default"].createElement("div", null, "Hello world"), /*#__PURE__*/React__default["default"].createElement(Calendar, null));
 };
 Scheduler.propTypes = {
   /**
    * Selected `groupId` to filter the users
-   * @default `null`
+   * @default ''
    */
   groupId: PropTypes.string,
   /**
    * `groups` is the list of groupId to filter the users
-   * @default `null`
+   * @default []
    */
   groups: PropTypes.array,
   /**
@@ -15370,11 +15001,11 @@ Scheduler.propTypes = {
   /**
    * This is to customized the Slots
    */
-  SlotProps: PropTypes.object,
+  SlotProps: SlotPropTypes,
   /**
    * This is to customized the Slots
    */
-  AppointmentProps: PropTypes.object,
+  AppointmentProps: AppointmentPropTypes,
   /**
    * Color is used to change the theme of the scheduler: `primary` | `secondary`
    * @default `primary`
@@ -15382,14 +15013,16 @@ Scheduler.propTypes = {
   color: PropTypes.string
 };
 Scheduler.defaultProps = {
-  groupId: `null`,
-  groups: `null`,
+  groupId: '',
+  groups: [],
   users: [],
   appointmentList: [],
   durationOptions: [30, 60, 120],
   duration: 60,
   date: Date.now(),
-  color: 'primary'
+  color: 'primary',
+  SlotProps: SlotDefaultValues,
+  AppointmentProps: AppointmentDefaultValue
 };
 
 module.exports = Scheduler;

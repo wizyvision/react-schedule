@@ -2,7 +2,7 @@ import { TableCell, useTheme, lighten } from '@mui/material';
 import { HEIGHT } from '../../constants/appointment';
 import { slotBg } from '../../utils/getAppointmentStyle';
 import { useSchedulerContext } from '../../context/SchedulerProvider';
-import { styled } from '@mui/system'
+import { styled } from '@mui/system';
 
 const Slot = styled(TableCell)((props) => {
   const { color = "primary", SlotProps, } = useSchedulerContext()

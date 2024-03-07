@@ -1,8 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import { SchedulerProvider } from '../../context/SchedulerProvider';
 import Calendar from '../Calendar';
+import {
+  AppointmentPropTypes,
+  AppointmentDefaultValue,
+} from '../../propTypes/AppointmentProps';
+import { SlotPropTypes, SlotDefaultValues } from '../../propTypes/SlotProps';
 
 /**
  * <p>Scheduler is composed of different libraries such as React-DND, moment, and MUI.</p>
@@ -23,7 +28,6 @@ import Calendar from '../Calendar';
  * </ul>
  *  */
 const Scheduler = (props) => {
-    console.log(props)
   return (
     <SchedulerProvider {...props}>
       <div>Hello world</div>
@@ -35,12 +39,12 @@ const Scheduler = (props) => {
 Scheduler.propTypes = {
   /**
    * Selected `groupId` to filter the users
-   * @default `null`
+   * @default ''
    */
   groupId: PropTypes.string,
   /**
    * `groups` is the list of groupId to filter the users
-   * @default `null`
+   * @default []
    */
   groups: PropTypes.array,
   /**
@@ -90,11 +94,11 @@ Scheduler.propTypes = {
   /**
    * This is to customized the Slots
    */
-  SlotProps: PropTypes.object,
+  SlotProps: SlotPropTypes,
   /**
    * This is to customized the Slots
    */
-  AppointmentProps: PropTypes.object,
+  AppointmentProps: AppointmentPropTypes,
   /**
    * Color is used to change the theme of the scheduler: `primary` | `secondary`
    * @default `primary`
@@ -103,14 +107,16 @@ Scheduler.propTypes = {
 };
 
 Scheduler.defaultProps = {
-  groupId: `null`,
-  groups: `null`,
+  groupId: '',
+  groups: [],
   users: [],
   appointmentList: [],
   durationOptions: [30, 60, 120],
   duration: 60,
   date: Date.now(),
   color: 'primary',
+  SlotProps: SlotDefaultValues,
+  AppointmentProps: AppointmentDefaultValue
 };
 
-export default Scheduler
+export default Scheduler;
