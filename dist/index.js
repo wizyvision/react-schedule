@@ -14640,6 +14640,7 @@ const Slots = styled$3(TableCell$1)({
   textAlign: 'center'
 });
 
+const WIDTH = 100;
 const HEIGHT = 65;
 
 const slotBackgroundColor = theme => ({
@@ -14670,6 +14671,14 @@ const slotBg = (canDrop, isOver, slotBackground, theme, color) => {
     backgroundColor = overBg || overColor[color]; // Color when only canDrop is true
   }
   return backgroundColor;
+};
+const getSlotWidth = slotDuration => {
+  switch (slotDuration) {
+    case 15:
+      return WIDTH / 2;
+    default:
+      return WIDTH;
+  }
 };
 
 const Slot = styled$3(TableCell$1)(props => {
@@ -14745,7 +14754,16 @@ function UserTimeSlot(props) {
     timeSlot,
     index
   } = props;
-  useSchedulerContext();
+  const {
+    appointmentList,
+    onAppointmentChange,
+    duration,
+    date,
+    SlotProps
+  } = useSchedulerContext();
+  const {
+    secondaryDuration = 30
+  } = SlotProps || {};
 
   //   const [{ isOver, canDrop }, drop] = useDrop({
   //     accept: 'APPOINTMENT',
@@ -14797,8 +14815,7 @@ function UserTimeSlot(props) {
   //     concurrentAppointments
   //   );
 
-  //   const width = getSlotWidth(secondaryDuration);
-
+  const width = getSlotWidth(secondaryDuration);
   return /*#__PURE__*/React__default["default"].createElement(Slot, {
     colSpan: 1
     //   ref={drop}
@@ -14806,8 +14823,14 @@ function UserTimeSlot(props) {
     index: index
     //   canDrop={canDrop}
     //   isOver={isOver}
-    //   width={width}
-  });
+    ,
+    width: width
+  }, /*#__PURE__*/React__default["default"].createElement("div", {
+    style: {
+      overflow: 'visible',
+      width: width
+    }
+  }));
 }
 
 function Calendar() {
@@ -14816,18 +14839,18 @@ function Calendar() {
     users,
     SlotProps
   } = useSchedulerContext();
-  console.log(SlotProps);
-  console.log(date);
   const {
     primaryDuration = 60,
     secondaryDuration,
     colSpan
   } = SlotProps || {};
+  const classes = useStyles();
   const timeSlotsHead = generateTimeSlotsForShift(date, primaryDuration);
   const timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
   return /*#__PURE__*/React__default["default"].createElement(CalendarContainer, {
     component: Paper$1
   }, /*#__PURE__*/React__default["default"].createElement(Table$1, {
+    sx: classes.table,
     stickyHeader: true
   }, /*#__PURE__*/React__default["default"].createElement(TableHead$1, null, /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
     sx: {
@@ -14855,6 +14878,12 @@ function Calendar() {
     })));
   }))));
 }
+const useStyles = () => ({
+  table: {
+    width: 900,
+    overflowX: 'auto'
+  }
+});
 
 const AppointmentPropTypes = PropTypes.shape({
   /**

@@ -15,21 +15,20 @@ import UserTimeSlot from './UserTimeSlot';
 
 function Calendar() {
   const { date, users, SlotProps } = useSchedulerContext();
-  console.log(SlotProps)
-  console.log(date)
   const { 
     primaryDuration = 60, 
     secondaryDuration, 
     colSpan
   } = SlotProps || {};
 
+  const classes = useStyles()
  
   const timeSlotsHead = generateTimeSlotsForShift(date, primaryDuration);
   const timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
 
   return (
     <CalendarContainer component={Paper}>
-      <Table stickyHeader>
+      <Table sx={classes.table} stickyHeader>
         <TableHead>
           <TableRow sx={{overflowY: 'hidden', backgroundColor: 'white', position: 'sticky', top: 0, zIndex: 1000,}} >
             <Resources>User</Resources>

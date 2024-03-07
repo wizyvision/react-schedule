@@ -67,7 +67,7 @@ function UserTimeSlot(props) {
 //     concurrentAppointments
 //   );
 
-//   const width = getSlotWidth(secondaryDuration);
+  const width = getSlotWidth(secondaryDuration);
 
   return (
     <Slot
@@ -76,8 +76,11 @@ function UserTimeSlot(props) {
       index={index}
     //   canDrop={canDrop}
     //   isOver={isOver}
-    //   width={width}
+      width={width}
     >
+      <div style={{ overflow: 'visible', width: width }}>
+
+      </div>
       {/* <div style={{ overflow: 'visible', width: width }}>
         <FilteredAppointments
           appointments={filteredAppointments}
