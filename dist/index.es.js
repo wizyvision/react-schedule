@@ -14593,24 +14593,26 @@ styled$3(Table$1)({
   width: 900,
   overflowX: 'auto'
 });
-const Divider = styled$3(TableCell$1)({
-  left: '232px',
+styled$3(TableCell$1)({
+  left: 0,
   top: 0,
   right: 0,
   position: 'sticky',
-  zIndex: 200,
   backgroundColor: 'grey',
   width: '1px',
   border: 'none',
-  padding: '1px'
+  padding: '1px',
+  overflow: 'hidden'
 });
 const Resources = styled$3(TableCell$1)({
   left: 0,
   position: 'sticky',
   zIndex: 900,
   backgroundColor: 'white',
-  width: '200px',
-  minWidth: '200px'
+  width: 200,
+  minWidth: 200,
+  padding: 0,
+  borderRight: '1px solid black'
 });
 const Slots = styled$3(TableCell$1)({
   textAlign: 'center'
@@ -14836,7 +14838,18 @@ function Calendar() {
       top: 0,
       zIndex: 1000
     }
-  }, /*#__PURE__*/React__default.createElement(Resources, null, "User"), /*#__PURE__*/React__default.createElement(Divider, null), timeSlotsHead.map(slot => /*#__PURE__*/React__default.createElement(Slots, {
+  }, /*#__PURE__*/React__default.createElement(Resources, {
+    align: "left"
+  }, /*#__PURE__*/React__default.createElement(TableCell$1, {
+    sx: {
+      border: 'none',
+      width: '200px'
+    }
+  }, "Users"), /*#__PURE__*/React__default.createElement(TableCell$1, {
+    sx: {
+      border: 'none'
+    }
+  })), timeSlotsHead.map(slot => /*#__PURE__*/React__default.createElement(Slots, {
     key: slot,
     colSpan: colSpan
   }, slot)))), /*#__PURE__*/React__default.createElement(TableBody$1, null, users.map(user => {
@@ -14844,9 +14857,16 @@ function Calendar() {
       key: user.name
     }, /*#__PURE__*/React__default.createElement(Resources, {
       align: "left"
-    }, user.name), /*#__PURE__*/React__default.createElement(Divider, {
-      align: "left"
-    }), timeSlotsBody.map((slot, index) => /*#__PURE__*/React__default.createElement(UserTimeSlot, {
+    }, /*#__PURE__*/React__default.createElement(TableCell$1, {
+      sx: {
+        border: 'none',
+        width: '200px'
+      }
+    }, user.name), /*#__PURE__*/React__default.createElement(TableCell$1, {
+      sx: {
+        border: 'none'
+      }
+    })), timeSlotsBody.map((slot, index) => /*#__PURE__*/React__default.createElement(UserTimeSlot, {
       key: `${user.name}-${slot}`,
       index: index,
       user: user,

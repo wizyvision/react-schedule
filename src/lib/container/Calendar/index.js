@@ -19,15 +19,15 @@ const CalendarTable = styled(Table)({
 });
 
 const Divider = styled(TableCell)({
-  left: '232px',
+  left: 0,
   top: 0,
   right: 0,
   position: 'sticky',
-  zIndex: 200,
   backgroundColor: 'grey',
   width: '1px',
   border: 'none',
   padding: '1px',
+  overflow: 'hidden',
 });
 
 const Resources = styled(TableCell)({
@@ -35,8 +35,10 @@ const Resources = styled(TableCell)({
   position: 'sticky',
   zIndex: 900,
   backgroundColor: 'white',
-  width: '200px',
-  minWidth: '200px',
+  width: 200,
+  minWidth: 200,
+  padding: 0,
+  borderRight: '1px solid black'
 });
 
 const Slots = styled(TableCell)({
