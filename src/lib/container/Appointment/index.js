@@ -1,8 +1,10 @@
-import { styled, darken } from '@mui/system'
+
 import { useTheme } from '@mui/material'
-import { HEIGHT } from '../constants/appointment';
-import { useSchedulerContext } from '../components/Scheduler/SchedulerProvider';
-import { dragBackgroundColor } from '../utils/theme';
+import { styled, darken } from '@mui/system'
+
+import { HEIGHT } from '../../constants/appointment';
+import { useSchedulerContext } from '../../context/SchedulerProvider';
+import { dragBackgroundColor } from '../../utils/theme';
 
 const AppointmentContainer = styled('div')((props) => {
     const {  isDragging, height, width, appointmentColor } = props;
