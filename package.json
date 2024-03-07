@@ -1,6 +1,6 @@
 {
   "name": "@wizyvision/react-schedule",
-  "version": "0.1.30",
+  "version": "0.1.31",
   "description": "React scheduler",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
