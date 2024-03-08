@@ -1,6 +1,9 @@
 import { ThemeProvider } from '@emotion/react';
 import React, { useContext, createContext } from 'react';
-import theme from '../constants/theme'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { enUS } from 'date-fns/locale';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import theme from '../constants/theme';
 
 const SchedulerContext = createContext();
 
@@ -24,6 +27,7 @@ const SchedulerProvider = (props) => {
     color,
   } = props;
 
+  const locales = { en: enUS };
   const value = {
     groupId,
     groups,
@@ -45,7 +49,12 @@ const SchedulerProvider = (props) => {
   return (
     <SchedulerContext.Provider value={value}>
       <ThemeProvider theme={theme}>
-        {children}
+        <LocalizationProvider
+          dateAdapter={AdapterDateFns}
+          adapterLocale={locales['en']}
+        >
+          {children}
+        </LocalizationProvider>
       </ThemeProvider>
     </SchedulerContext.Provider>
   );

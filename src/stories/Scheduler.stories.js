@@ -19,50 +19,45 @@ export default {
 const Template = (args) => {
   const locales = { en: enUS };
   const [date, setDate] = useState(new Date());
-  const [duration, setDuration] = useState(60)
+  const [duration, setDuration] = useState(60);
 
   const handleChangeDate = (newDate) => {
     setDate(newDate);
   };
 
   const handleChangeDuration = (value) => {
-    setDuration(value)
-  }
+    setDuration(value);
+  };
 
   const handlePrevDate = () => {
-    const prevDate = moment(date).add(1, 'days').toDate()
-    setDate(prevDate)
-  }
+    const prevDate = moment(date).add(1, 'days').toDate();
+    setDate(prevDate);
+  };
 
   const handleNextDate = () => {
-    const nextDate = moment(date).subtract(1, 'days').toDate()
-    setDate(nextDate)
-  }
+    const nextDate = moment(date).subtract(1, 'days').toDate();
+    setDate(nextDate);
+  };
 
   return (
-   <>
-      <LocalizationProvider
-        dateAdapter={AdapterDateFns}
-        adapterLocale={locales['en']}
-      >
-        <div>
-          <DndProvider backend={HTML5Backend}>
-            <div>
-              <Scheduler
-                {...args}
-                date={date}
-                onDateChange={handleChangeDate}
-                onPrevDate={handlePrevDate}
-                onNextDate={handleNextDate}
-                duration={duration}
-                onDurationChange={handleChangeDuration}
-                users={users}
-              />
-            </div>
-          </DndProvider>
-        </div>
-      </LocalizationProvider>
-   </>
+    <>
+      <div>
+        <DndProvider backend={HTML5Backend}>
+          <div>
+            <Scheduler
+              {...args}
+              date={date}
+              onDateChange={handleChangeDate}
+              onPrevDate={handlePrevDate}
+              onNextDate={handleNextDate}
+              duration={duration}
+              onDurationChange={handleChangeDuration}
+              users={users}
+            />
+          </div>
+        </DndProvider>
+      </div>
+    </>
   );
 };
 
