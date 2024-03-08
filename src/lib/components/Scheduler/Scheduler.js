@@ -8,6 +8,7 @@ import {
   AppointmentDefaultValue,
 } from '../../propTypes/AppointmentProps';
 import { SlotPropTypes, SlotDefaultValues } from '../../propTypes/SlotProps';
+import Header from '../Header';
 
 /**
  * <p>Scheduler is composed of different libraries such as React-DND, moment, and MUI.</p>
@@ -31,6 +32,7 @@ const Scheduler = (props) => {
   return (
     <SchedulerProvider {...props}>
       <div>Hello world</div>
+      <Header />
       <Calendar />
     </SchedulerProvider>
   );

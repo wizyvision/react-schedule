@@ -1,14 +1,14 @@
 import React from 'react';
-import { Table, TableHead, TableRow, TableBody, TableCell, Paper } from '@mui/material';
+import { Table, TableHead, TableRow, TableBody, Paper } from '@mui/material';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
 import { generateTimeSlotsForShift } from '../../utils/generateTimeSlot';
 
 import {
   CalendarContainer,
-  CalendarRoot,
   Divider,
   Resources,
+  Resource,
   Slots,
 } from '../../container/Calendar';
 import UserTimeSlot from './UserTimeSlot';
@@ -32,10 +32,9 @@ function Calendar() {
         <TableHead>
           <TableRow sx={{overflowY: 'hidden', backgroundColor: 'white', position: 'sticky', top: 0, zIndex: 1000,}} >
             <Resources align='left'>
-              <TableCell sx={{ border: 'none', width: '200px'}} >Users</TableCell>
-              <TableCell sx={{border: 'none'}} ></TableCell>
+              <Resource>Users</Resource>
+              <Divider></Divider>
             </Resources>
-           
             {timeSlotsHead.map((slot) => (
               <Slots key={slot} colSpan={colSpan}>{slot}</Slots>
             ))}
@@ -46,12 +45,9 @@ function Calendar() {
             return (
               <TableRow key={user.name}>
                 <Resources align='left'>
-                  <TableCell sx={{ border: 'none', width: '200px'}} >
-                  {user.name}
-                  </TableCell>
-                  <TableCell sx={{border: 'none'}} ></TableCell>
+                  <Resource>{user.name}</Resource>
+                  <Divider></Divider>
                 </Resources>
-               
                 {timeSlotsBody.map((slot, index) => (
                   <UserTimeSlot
                     key={`${user.name}-${slot}`}
