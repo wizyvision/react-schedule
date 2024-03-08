@@ -29,5 +29,6 @@ module.exports = [
       resolve(),
       commonjs(),
     ],
+    extensions: ['.js', '.jsx']
   },
 ];
