@@ -8,9 +8,9 @@ function Header() {
     console.log('error')
   return (
     <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}  >
-        {/* <NavigateDateAction /> */}
+        <NavigateDateAction />
         <SchedulerDatePicker />
-        {/* <DurationPicker />  */}
+        <DurationPicker /> 
     </div>
   )
 }
