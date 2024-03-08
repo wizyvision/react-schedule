@@ -12179,7 +12179,7 @@ var deepmerge = /*#__PURE__*/Object.freeze({
 	isPlainObject: isPlainObject
 });
 
-const _excluded$1d = ["values", "unit", "step"];
+const _excluded$1e = ["values", "unit", "step"];
 const sortBreakpointsValues = values => {
   const breakpointsAsArray = Object.keys(values).map(key => ({
     key,
@@ -12213,7 +12213,7 @@ function createBreakpoints(breakpoints) {
       unit = 'px',
       step = 5
     } = breakpoints,
-    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$1d);
+    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$1e);
   const sortedValues = sortBreakpointsValues(values);
   const keys = Object.keys(sortedValues);
   function up(key) {
@@ -13322,7 +13322,7 @@ function applyStyles$2(key, styles) {
   return {};
 }
 
-const _excluded$1c = ["breakpoints", "palette", "spacing", "shape"];
+const _excluded$1d = ["breakpoints", "palette", "spacing", "shape"];
 function createTheme$2(options = {}, ...args) {
   const {
       breakpoints: breakpointsInput = {},
@@ -13330,7 +13330,7 @@ function createTheme$2(options = {}, ...args) {
       spacing: spacingInput,
       shape: shapeInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$1c);
+    other = _objectWithoutPropertiesLoose(options, _excluded$1d);
   const breakpoints = createBreakpoints(breakpointsInput);
   const spacing = createSpacing(spacingInput);
   let muiTheme = deepmerge$1({
@@ -13406,7 +13406,7 @@ process.env.NODE_ENV !== "production" ? GlobalStyles$1.propTypes /* remove-propt
   themeId: PropTypes.string
 } : void 0;
 
-const _excluded$1b = ["sx"];
+const _excluded$1c = ["sx"];
 const splitProps = props => {
   var _props$theme$unstable, _props$theme;
   const result = {
@@ -13427,7 +13427,7 @@ function extendSxProp(props) {
   const {
       sx: inSx
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$1b);
+    other = _objectWithoutPropertiesLoose(props, _excluded$1c);
   const {
     systemProps,
     otherProps
@@ -13476,6 +13476,35 @@ const createClassNameGenerator = () => {
 };
 const ClassNameGenerator = createClassNameGenerator();
 var ClassNameGenerator$1 = ClassNameGenerator;
+
+const _excluded$1b = ["className", "component"];
+function createBox(options = {}) {
+  const {
+    themeId,
+    defaultTheme,
+    defaultClassName = 'MuiBox-root',
+    generateClassName
+  } = options;
+  const BoxRoot = styled$4('div', {
+    shouldForwardProp: prop => prop !== 'theme' && prop !== 'sx' && prop !== 'as'
+  })(styleFunctionSx$2);
+  const Box = /*#__PURE__*/React$1.forwardRef(function Box(inProps, ref) {
+    const theme = useTheme$2(defaultTheme);
+    const _extendSxProp = extendSxProp(inProps),
+      {
+        className,
+        component = 'div'
+      } = _extendSxProp,
+      other = _objectWithoutPropertiesLoose(_extendSxProp, _excluded$1b);
+    return /*#__PURE__*/jsx(BoxRoot, _extends$1({
+      as: component,
+      ref: ref,
+      className: clsx(className, generateClassName ? generateClassName(defaultClassName) : defaultClassName),
+      theme: themeId ? theme[themeId] || theme : theme
+    }, other));
+  });
+  return Box;
+}
 
 const globalStateClasses = {
   active: 'active',
@@ -16095,11 +16124,11 @@ Please use another name.` : formatMuiErrorMessage$1(18));
   return muiTheme;
 }
 
-const defaultTheme = createTheme();
-var defaultTheme$1 = defaultTheme;
+const defaultTheme$1 = createTheme();
+var defaultTheme$2 = defaultTheme$1;
 
 function useTheme$1() {
-  const theme = useTheme$2(defaultTheme$1);
+  const theme = useTheme$2(defaultTheme$2);
   if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     React$1.useDebugValue(theme);
@@ -16114,7 +16143,7 @@ function useThemeProps({
   return useThemeProps$1({
     props,
     name,
-    defaultTheme: defaultTheme$1,
+    defaultTheme: defaultTheme$2,
     themeId: THEME_ID
   });
 }
@@ -16443,7 +16472,7 @@ const rootShouldForwardProp = prop => shouldForwardProp_1(prop) && prop !== 'cla
 const slotShouldForwardProp = shouldForwardProp_1;
 const styled = _default({
   themeId: THEME_ID,
-  defaultTheme: defaultTheme$1,
+  defaultTheme: defaultTheme$2,
   rootShouldForwardProp
 });
 var styled$1 = styled;
@@ -25455,7 +25484,7 @@ function useFormControl() {
 
 function GlobalStyles(props) {
   return /*#__PURE__*/jsx(GlobalStyles$1, _extends$1({}, props, {
-    defaultTheme: defaultTheme$1,
+    defaultTheme: defaultTheme$2,
     themeId: THEME_ID
   }));
 }
@@ -41401,6 +41430,37 @@ var useSchedulerContext = function useSchedulerContext() {
   return useContext(SchedulerContext);
 };
 
+const boxClasses = generateUtilityClasses$1('MuiBox', ['root']);
+var boxClasses$1 = boxClasses;
+
+const defaultTheme = createTheme();
+const Box = createBox({
+  themeId: THEME_ID,
+  defaultTheme,
+  defaultClassName: boxClasses$1.root,
+  generateClassName: ClassNameGenerator$1.generate
+});
+process.env.NODE_ENV !== "production" ? Box.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * @ignore
+   */
+  children: PropTypes.node,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var Box$1 = Box;
+
 /**
  * @ignore - internal component.
  */
@@ -47837,7 +47897,7 @@ var CalendarContainer = styled$3(TableContainer$1)({
   overflowY: 'auto',
   position: 'relative'
 });
-var Divider = styled$3(TableCell$1)({
+var Divider = styled$3(Box$1)({
   border: 'none'
 });
 var Resources = styled$3(TableCell$1)({
@@ -47849,9 +47909,15 @@ var Resources = styled$3(TableCell$1)({
   padding: 0,
   borderRight: '1px solid grey'
 });
-var Resource = styled$3(TableCell$1)({
+var Resource = styled$3(Box$1)({
   border: 'none',
-  width: 200
+  width: 200,
+  paddingLeft: 8,
+  paddingRight: 8
+});
+var Wrapper = styled$3(Box$1)({
+  display: 'flex',
+  alignItems: 'center'
 });
 var Slots = styled$3(TableCell$1)({
   textAlign: 'center'
@@ -48174,7 +48240,7 @@ function Calendar() {
     }
   }, /*#__PURE__*/React__default.createElement(Resources, {
     align: "left"
-  }, /*#__PURE__*/React__default.createElement(Resource, null, "Users"), /*#__PURE__*/React__default.createElement(Divider, null)), timeSlotsHead.map(function (slot) {
+  }, /*#__PURE__*/React__default.createElement(Wrapper, null, /*#__PURE__*/React__default.createElement(Resource, null, "Users"), /*#__PURE__*/React__default.createElement(Divider, null))), timeSlotsHead.map(function (slot) {
     return /*#__PURE__*/React__default.createElement(Slots, {
       key: slot,
       colSpan: colSpan
@@ -48184,7 +48250,7 @@ function Calendar() {
       key: user.name
     }, /*#__PURE__*/React__default.createElement(Resources, {
       align: "left"
-    }, /*#__PURE__*/React__default.createElement(Resource, null, user.name), /*#__PURE__*/React__default.createElement(Divider, null)), timeSlotsBody.map(function (slot, index) {
+    }, /*#__PURE__*/React__default.createElement(Wrapper, null, /*#__PURE__*/React__default.createElement(Resource, null, user.name), /*#__PURE__*/React__default.createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
       return /*#__PURE__*/React__default.createElement(UserTimeSlot, {
         key: "".concat(user.name, "-").concat(slot),
         index: index,

@@ -10,6 +10,7 @@ import {
   Resources,
   Resource,
   Slots,
+  Wrapper
 } from '../../container/Calendar';
 import UserTimeSlot from './UserTimeSlot';
 
@@ -32,8 +33,10 @@ function Calendar() {
         <TableHead>
           <TableRow sx={{overflowY: 'hidden', backgroundColor: 'white', position: 'sticky', top: 0, zIndex: 1000,}} >
             <Resources align='left'>
-              <Resource>Users</Resource>
-              <Divider></Divider>
+              <Wrapper>
+                <Resource>Users</Resource>
+                <Divider></Divider>
+              </Wrapper>
             </Resources>
             {timeSlotsHead.map((slot) => (
               <Slots key={slot} colSpan={colSpan}>{slot}</Slots>
@@ -45,8 +48,10 @@ function Calendar() {
             return (
               <TableRow key={user.name}>
                 <Resources align='left'>
-                  <Resource>{user.name}</Resource>
-                  <Divider></Divider>
+                  <Wrapper>
+                    <Resource>{user.name}</Resource>
+                    <Divider></Divider>
+                  </Wrapper>
                 </Resources>
                 {timeSlotsBody.map((slot, index) => (
                   <UserTimeSlot

@@ -1,4 +1,4 @@
-import { TableCell, TableContainer } from '@mui/material';
+import { TableCell, TableContainer, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
 const CalendarContainer = styled(TableContainer)({
@@ -13,7 +13,7 @@ const CalendarContainer = styled(TableContainer)({
   position: 'relative',
 });
 
-const Divider = styled(TableCell)({
+const Divider = styled(Box)({
   border: 'none'
 });
 
@@ -24,16 +24,23 @@ const Resources = styled(TableCell)({
   backgroundColor: 'white',
   minWidth: 200,
   padding: 0,
-  borderRight: '1px solid grey'
+  borderRight: '1px solid grey',
 });
 
-const Resource = styled(TableCell)({
+const Resource = styled(Box)({
   border: 'none',
-  width: 200
+  width: 200,
+  paddingLeft: 8,
+  paddingRight: 8
 });
+
+const Wrapper = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+})
 
 const Slots = styled(TableCell)({
   textAlign: 'center',
 });
 
-export { CalendarContainer, Divider, Resources, Resource, Slots };
+export { CalendarContainer, Divider, Resources, Resource, Wrapper, Slots };
