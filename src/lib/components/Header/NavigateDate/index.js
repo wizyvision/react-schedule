@@ -6,7 +6,7 @@ import DateNavigation from './DateNavigation'
 function NavigateDateAction() {
   return (
     <div style={{display: 'flex', alignItems: 'center'}} >
-        <TodayButton />
+        {/* <TodayButton /> */}
         <DateNavigation />
     </div>
   )
