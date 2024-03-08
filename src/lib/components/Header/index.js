@@ -8,7 +8,7 @@ function Header() {
   return (
     <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}  >
         <NavigateDateAction />
-        <SchedulerDatePicker />
+        {/* <SchedulerDatePicker /> */}
         <DurationPicker />
     </div>
   )
