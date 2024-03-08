@@ -5,7 +5,7 @@ import { Typography, darken } from '@mui/material';
 import AppointmentContainer from '../../container/Appointment';
 
 function AppointmentItem(props) {
-  const { appointment, width, key, height } = props;
+  const { appointment, width, height } = props;
 
   const [{ isDragging }, drag] = useDrag({
     type: 'APPOINTMENT',
@@ -19,7 +19,7 @@ function AppointmentItem(props) {
 
   return (
     <AppointmentContainer
-      key={key}
+      key={appointment.id}
       ref={drag}
       isDragging={isDragging}
       height={height}

@@ -1,24 +1,23 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 import moment from 'moment';
+import { useTheme } from '@mui/material';
 
-import {
-  getFilteredAppointments,
-  getSortAppointments,
-  getUpdatedAppointments,
-} from '../../utils/getAppointments';
-import { getSlotWidth } from '../../utils/getAppointmentStyle';
+import { getFilteredAppointments,getSortAppointments, getUpdatedAppointments } from '../../utils/getAppointments';
+import { getSlotWidth, slotBg } from '../../utils/getAppointmentStyle';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
 import Slot from '../../container/Slot';
 import Appointments from './Appointments';
 
+
 function UserTimeSlot(props) {
   const { user, timeSlot, index } = props;
-
-  const { appointmentList, onAppointmentChange, duration, date, SlotProps } =
+  const { appointmentList, onAppointmentChange, duration, date, SlotProps, color } =
     useSchedulerContext();
-  const { secondaryDuration = 30 } = SlotProps || {};
+  const { secondaryDuration = 30, slotBackground } = SlotProps || {};
+
+  const theme = useTheme()
 
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: 'APPOINTMENT',
@@ -71,18 +70,18 @@ function UserTimeSlot(props) {
   );
 
   const width = getSlotWidth(secondaryDuration);
+  const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
   return (
     <Slot
       colSpan={1}
       ref={drop}
       index={index}
-      canDrop={canDrop}
-      isOver={isOver}
+      bg={bg}
       width={width}
     >
       <div style={{ overflow: 'visible', width: width }}>
-        <Appointments
+        <Appointments 
           appointments={filteredAppointments}
           secondaryDuration={secondaryDuration}
           timeSlot={timeSlot}

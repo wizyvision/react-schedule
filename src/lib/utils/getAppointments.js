@@ -49,7 +49,7 @@ export const getUpdatedAppointments = (
   duration,
   user
 ) => {
-  const slotDate = moment(date).format('YYYY-MM-DD') + ' ' + timeSlot;
+  const slotDate =  moment(date, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ').format('YYYY-MM-DD') + ' ' + timeSlot;
   const slotStartTime = moment(slotDate);
 
   const existingIndex = appointments.findIndex(

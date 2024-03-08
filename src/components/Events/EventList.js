@@ -13,7 +13,7 @@ function EventList(props) {
         unscheduledList.filter(appointment => {
           return !appointmentList.some(item => item.id === appointment.id);
         }).map((item) => (
-            <EventItem appointment={item} />
+            <EventItem key={item.id} appointment={item} />
           ))
     }
     </div>
