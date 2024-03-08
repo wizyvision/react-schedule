@@ -40397,6 +40397,12 @@ function SchedulerDatePicker(props) {
     onDateChange
   } = useSchedulerContext();
   const [open, setOpen] = React$1.useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return /*#__PURE__*/React__default["default"].createElement(DatePicker, {
     PopperProps: {
       disablePortal: true
@@ -40405,8 +40411,8 @@ function SchedulerDatePicker(props) {
     value: date,
     onChange: onDateChange,
     open: open,
-    onClose: () => setOpen(false),
-    onOpen: () => setOpen(true),
+    onClose: handleClose,
+    onOpen: handleOpen,
     slots: {
       field: ButtonField,
       ...props.slots

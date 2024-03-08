@@ -42,6 +42,15 @@ function ButtonField(props) {
 function SchedulerDatePicker(props) {
   const { date, onDateChange } = useSchedulerContext();
   const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   return (
     <DatePicker
       PopperProps={{
@@ -51,8 +60,8 @@ function SchedulerDatePicker(props) {
       value={date}
       onChange={onDateChange}
       open={open}
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
+      onClose={handleClose}
+      onOpen={handleOpen}
       slots={{
         field: ButtonField,
         ...props.slots,
