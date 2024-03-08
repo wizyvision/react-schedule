@@ -20669,7 +20669,7 @@ function Header() {
  * </ul>
  *  */
 var Scheduler = function Scheduler(props) {
-  return /*#__PURE__*/React__default.createElement(SchedulerProvider, props, /*#__PURE__*/React__default.createElement("div", null, "Hello world"), /*#__PURE__*/React__default.createElement(Header, null));
+  return /*#__PURE__*/React__default.createElement(SchedulerProvider, props, /*#__PURE__*/React__default.createElement("div", null, "Hello world"), /*#__PURE__*/React__default.createElement(Header, null), /*#__PURE__*/React__default.createElement(Calendar, null));
 };
 Scheduler.propTypes = {
   /**
