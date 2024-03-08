@@ -7175,6 +7175,32 @@ function composeClasses(slots, getUtilityClass, classes = undefined) {
   return output;
 }
 
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, _typeof(o);
+}
+
+function toPrimitive(t, r) {
+  if ("object" != _typeof(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != _typeof(i)) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof(i) ? i : String(i);
+}
+
 function createMixins(breakpoints, mixins) {
   return _extends$1({
     toolbar: {
@@ -8639,7 +8665,7 @@ const getOverlayAlpha = elevation => {
 };
 var getOverlayAlpha$1 = getOverlayAlpha;
 
-const theme = createTheme({
+var theme = createTheme({
   palette: {
     primary: {
       main: '#303f9f',
@@ -8664,42 +8690,41 @@ const theme = createTheme({
   }
 });
 
-const SchedulerContext = /*#__PURE__*/createContext();
-const SchedulerProvider = props => {
-  const {
-    children,
-    SlotProps,
-    AppointmentProps,
-    groupId,
-    groups,
-    users,
-    appointmentList,
-    onAppointmentChange,
-    durationOptions,
-    duration = 60,
-    onDurationChange,
-    date,
-    onDateChange,
-    onPrevDate,
-    onNextDate,
-    color
-  } = props;
-  const value = {
-    groupId,
-    groups,
-    users,
-    appointmentList,
-    onAppointmentChange,
-    durationOptions,
-    duration,
-    onDurationChange,
-    date,
-    onDateChange,
-    onPrevDate,
-    onNextDate,
-    SlotProps,
-    AppointmentProps,
-    color
+var SchedulerContext = /*#__PURE__*/createContext();
+var SchedulerProvider = function SchedulerProvider(props) {
+  var children = props.children,
+    SlotProps = props.SlotProps,
+    AppointmentProps = props.AppointmentProps,
+    groupId = props.groupId,
+    groups = props.groups,
+    users = props.users,
+    appointmentList = props.appointmentList,
+    onAppointmentChange = props.onAppointmentChange,
+    durationOptions = props.durationOptions,
+    _props$duration = props.duration,
+    duration = _props$duration === void 0 ? 60 : _props$duration,
+    onDurationChange = props.onDurationChange,
+    date = props.date,
+    onDateChange = props.onDateChange,
+    onPrevDate = props.onPrevDate,
+    onNextDate = props.onNextDate,
+    color = props.color;
+  var value = {
+    groupId: groupId,
+    groups: groups,
+    users: users,
+    appointmentList: appointmentList,
+    onAppointmentChange: onAppointmentChange,
+    durationOptions: durationOptions,
+    duration: duration,
+    onDurationChange: onDurationChange,
+    date: date,
+    onDateChange: onDateChange,
+    onPrevDate: onPrevDate,
+    onNextDate: onNextDate,
+    SlotProps: SlotProps,
+    AppointmentProps: AppointmentProps,
+    color: color
   };
   return /*#__PURE__*/React__default.createElement(SchedulerContext.Provider, {
     value: value
@@ -8707,7 +8732,7 @@ const SchedulerProvider = props => {
     theme: theme
   }, children));
 };
-const useSchedulerContext = () => {
+var useSchedulerContext = function useSchedulerContext() {
   return useContext(SchedulerContext);
 };
 
@@ -30591,23 +30616,27 @@ moment$1.exports;
 var momentExports = moment$1.exports;
 var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);
 
-const shiftStartTime = date => moment(date).set({
-  hours: 8,
-  minutes: 0,
-  seconds: 0,
-  milliseconds: 0
-});
-const shiftEndTime = date => moment(date).set({
-  hours: 23,
-  minutes: 59,
-  seconds: 59,
-  milliseconds: 999
-});
+var shiftStartTime = function shiftStartTime(date) {
+  return moment(date).set({
+    hours: 8,
+    minutes: 0,
+    seconds: 0,
+    milliseconds: 0
+  });
+};
+var shiftEndTime = function shiftEndTime(date) {
+  return moment(date).set({
+    hours: 23,
+    minutes: 59,
+    seconds: 59,
+    milliseconds: 999
+  });
+};
 function generateTimeSlotsForShift(date, intervalInMinutes) {
-  const startOfDay = moment(shiftStartTime(date));
-  const endOfDay = moment(shiftEndTime(date));
-  const timeSlots = [];
-  let currentTimeSlot = moment(startOfDay);
+  var startOfDay = moment(shiftStartTime(date));
+  var endOfDay = moment(shiftEndTime(date));
+  var timeSlots = [];
+  var currentTimeSlot = moment(startOfDay);
   while (currentTimeSlot <= endOfDay) {
     timeSlots.push(currentTimeSlot.format('hh:mm a'));
     currentTimeSlot.add(intervalInMinutes, 'minutes');
@@ -30618,7 +30647,7 @@ function generateTimeSlotsForShift(date, intervalInMinutes) {
   return timeSlots;
 }
 
-const CalendarContainer = styled$3(TableContainer$1)({
+var CalendarContainer = styled$3(TableContainer$1)({
   scrollbarWidth: 'none',
   '&::-webkit-scrollbar': {
     display: 'none'
@@ -30629,10 +30658,10 @@ const CalendarContainer = styled$3(TableContainer$1)({
   overflowY: 'auto',
   position: 'relative'
 });
-const Divider = styled$3(TableCell$1)({
+var Divider = styled$3(TableCell$1)({
   border: 'none'
 });
-const Resources = styled$3(TableCell$1)({
+var Resources = styled$3(TableCell$1)({
   left: 0,
   position: 'sticky',
   zIndex: 900,
@@ -30641,39 +30670,59 @@ const Resources = styled$3(TableCell$1)({
   padding: 0,
   borderRight: '1px solid grey'
 });
-const Resource = styled$3(TableCell$1)({
+var Resource = styled$3(TableCell$1)({
   border: 'none',
   width: 200
 });
-const Slots = styled$3(TableCell$1)({
+var Slots = styled$3(TableCell$1)({
   textAlign: 'center'
 });
 
-const WIDTH = 100;
-const HEIGHT = 65;
+function _defineProperty(obj, key, value) {
+  key = toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
 
-const slotBackgroundColor = theme => ({
-  primary: theme.palette.slotBg.main,
-  secondary: theme.palette.slotBg.main
-});
-const overBackgroundColor = theme => ({
-  primary: theme.palette.drop.main,
-  secondary: theme.palette.drop.mainTwo
-});
-const dropBackgroundColor = theme => ({
-  primary: theme.palette.drop.light,
-  secondary: theme.palette.drop.lightTwo
-});
+var WIDTH = 100;
+var HEIGHT = 65;
 
-const slotBg = (canDrop, isOver, slotBackground, theme, color) => {
-  const {
-    dropBg,
-    overBg
-  } = slotBackground || {};
-  const slotColor = slotBackgroundColor(theme);
-  const overColor = overBackgroundColor(theme);
-  const dropColor = dropBackgroundColor(theme);
-  let backgroundColor = slotColor[color];
+var slotBackgroundColor = function slotBackgroundColor(theme) {
+  return {
+    primary: theme.palette.slotBg.main,
+    secondary: theme.palette.slotBg.main
+  };
+};
+var overBackgroundColor = function overBackgroundColor(theme) {
+  return {
+    primary: theme.palette.drop.main,
+    secondary: theme.palette.drop.mainTwo
+  };
+};
+var dropBackgroundColor = function dropBackgroundColor(theme) {
+  return {
+    primary: theme.palette.drop.light,
+    secondary: theme.palette.drop.lightTwo
+  };
+};
+
+var slotBg = function slotBg(canDrop, isOver, slotBackground, theme, color) {
+  var _ref = slotBackground || {},
+    dropBg = _ref.dropBg,
+    overBg = _ref.overBg;
+  var slotColor = slotBackgroundColor(theme);
+  var overColor = overBackgroundColor(theme);
+  var dropColor = dropBackgroundColor(theme);
+  var backgroundColor = slotColor[color];
   if (canDrop && isOver) {
     backgroundColor = dropBg || dropColor[color]; // Highlight color when canDrop and isOver
   } else if (canDrop) {
@@ -30681,7 +30730,7 @@ const slotBg = (canDrop, isOver, slotBackground, theme, color) => {
   }
   return backgroundColor;
 };
-const getSlotWidth = slotDuration => {
+var getSlotWidth = function getSlotWidth(slotDuration) {
   switch (slotDuration) {
     case 15:
       return WIDTH / 2;
@@ -30690,24 +30739,23 @@ const getSlotWidth = slotDuration => {
   }
 };
 
-const Slot = styled$3(TableCell$1)(props => {
-  const {
-    color = "primary",
-    SlotProps
-  } = useSchedulerContext();
-  const {
-    index,
-    canDrop,
-    isOver,
-    width
-  } = props;
-  const {
-    secondaryDuration = 30,
-    style,
-    slotBackground
-  } = SlotProps || {};
-  const theme = useTheme$1();
-  const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
+function ownKeys$1(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread$1(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys$1(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys$1(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+var Slot = styled$3(TableCell$1)(function (props) {
+  var _useSchedulerContext = useSchedulerContext(),
+    _useSchedulerContext$ = _useSchedulerContext.color,
+    color = _useSchedulerContext$ === void 0 ? "primary" : _useSchedulerContext$,
+    SlotProps = _useSchedulerContext.SlotProps;
+  props.index;
+    var canDrop = props.canDrop,
+    isOver = props.isOver,
+    width = props.width;
+  var _ref = SlotProps || {};
+    _ref.secondaryDuration;
+    var style = _ref.style,
+    slotBackground = _ref.slotBackground;
+  var theme = useTheme$1();
+  var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
   // const borderRightColor = () => {
   //   let color = theme.palette.borderRightColor.light
@@ -30738,7 +30786,7 @@ const Slot = styled$3(TableCell$1)(props => {
   //   }
   // };
 
-  return {
+  return _objectSpread$1({
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
     paddingLeft: 0,
@@ -30751,28 +30799,23 @@ const Slot = styled$3(TableCell$1)(props => {
     verticalAlign: 'top',
     borderRightWidth: '1px',
     borderRightStyle: 'solid',
-    borderRightColor: theme.palette.borderRightColor.light,
-    // borderRightStyle: borderRightStyle(),
-    ...style
-  };
+    borderRightColor: theme.palette.borderRightColor.light
+  }, style);
 });
 
 function UserTimeSlot(props) {
-  const {
-    user,
-    timeSlot,
-    index
-  } = props;
-  const {
-    appointmentList,
-    onAppointmentChange,
-    duration,
-    date,
-    SlotProps
-  } = useSchedulerContext();
-  const {
-    secondaryDuration = 30
-  } = SlotProps || {};
+  props.user;
+    props.timeSlot;
+    var index = props.index;
+  var _useSchedulerContext = useSchedulerContext();
+    _useSchedulerContext.appointmentList;
+    _useSchedulerContext.onAppointmentChange;
+    _useSchedulerContext.duration;
+    _useSchedulerContext.date;
+    var SlotProps = _useSchedulerContext.SlotProps;
+  var _ref = SlotProps || {},
+    _ref$secondaryDuratio = _ref.secondaryDuration,
+    secondaryDuration = _ref$secondaryDuratio === void 0 ? 30 : _ref$secondaryDuratio;
 
   //   const [{ isOver, canDrop }, drop] = useDrop({
   //     accept: 'APPOINTMENT',
@@ -30824,7 +30867,7 @@ function UserTimeSlot(props) {
   //     concurrentAppointments
   //   );
 
-  const width = getSlotWidth(secondaryDuration);
+  var width = getSlotWidth(secondaryDuration);
   return /*#__PURE__*/React__default.createElement(Slot, {
     colSpan: 1
     //   ref={drop}
@@ -30843,19 +30886,18 @@ function UserTimeSlot(props) {
 }
 
 function Calendar() {
-  const {
-    date,
-    users,
-    SlotProps
-  } = useSchedulerContext();
-  const {
-    primaryDuration = 60,
-    secondaryDuration,
-    colSpan
-  } = SlotProps || {};
-  const classes = useStyles();
-  const timeSlotsHead = generateTimeSlotsForShift(date, primaryDuration);
-  const timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
+  var _useSchedulerContext = useSchedulerContext(),
+    date = _useSchedulerContext.date,
+    users = _useSchedulerContext.users,
+    SlotProps = _useSchedulerContext.SlotProps;
+  var _ref = SlotProps || {},
+    _ref$primaryDuration = _ref.primaryDuration,
+    primaryDuration = _ref$primaryDuration === void 0 ? 60 : _ref$primaryDuration,
+    secondaryDuration = _ref.secondaryDuration,
+    colSpan = _ref.colSpan;
+  var classes = useStyles();
+  var timeSlotsHead = generateTimeSlotsForShift(date, primaryDuration);
+  var timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
   return /*#__PURE__*/React__default.createElement(CalendarContainer, {
     component: MuiPaper
   }, /*#__PURE__*/React__default.createElement(Table$1, {
@@ -30871,30 +30913,36 @@ function Calendar() {
     }
   }, /*#__PURE__*/React__default.createElement(Resources, {
     align: "left"
-  }, /*#__PURE__*/React__default.createElement(Resource, null, "Users"), /*#__PURE__*/React__default.createElement(Divider, null)), timeSlotsHead.map(slot => /*#__PURE__*/React__default.createElement(Slots, {
-    key: slot,
-    colSpan: colSpan
-  }, slot)))), /*#__PURE__*/React__default.createElement(TableBody$1, null, users.map(user => {
+  }, /*#__PURE__*/React__default.createElement(Resource, null, "Users"), /*#__PURE__*/React__default.createElement(Divider, null)), timeSlotsHead.map(function (slot) {
+    return /*#__PURE__*/React__default.createElement(Slots, {
+      key: slot,
+      colSpan: colSpan
+    }, slot);
+  }))), /*#__PURE__*/React__default.createElement(TableBody$1, null, users.map(function (user) {
     return /*#__PURE__*/React__default.createElement(TableRow$1, {
       key: user.name
     }, /*#__PURE__*/React__default.createElement(Resources, {
       align: "left"
-    }, /*#__PURE__*/React__default.createElement(Resource, null, user.name), /*#__PURE__*/React__default.createElement(Divider, null)), timeSlotsBody.map((slot, index) => /*#__PURE__*/React__default.createElement(UserTimeSlot, {
-      key: `${user.name}-${slot}`,
-      index: index,
-      user: user,
-      timeSlot: slot
-    })));
+    }, /*#__PURE__*/React__default.createElement(Resource, null, user.name), /*#__PURE__*/React__default.createElement(Divider, null)), timeSlotsBody.map(function (slot, index) {
+      return /*#__PURE__*/React__default.createElement(UserTimeSlot, {
+        key: "".concat(user.name, "-").concat(slot),
+        index: index,
+        user: user,
+        timeSlot: slot
+      });
+    }));
   }))));
 }
-const useStyles = () => ({
-  table: {
-    width: 900,
-    overflowX: 'auto'
-  }
-});
+var useStyles = function useStyles() {
+  return {
+    table: {
+      width: 900,
+      overflowX: 'auto'
+    }
+  };
+};
 
-const AppointmentPropTypes = PropTypes.shape({
+var AppointmentPropTypes = PropTypes.shape({
   /**
    * Set the background color for the appointment when it is being dragged
    */
@@ -30904,12 +30952,12 @@ const AppointmentPropTypes = PropTypes.shape({
   */
   style: PropTypes.object
 });
-const AppointmentDefaultValue = {
+var AppointmentDefaultValue = {
   dragBgColor: '#E0E0E0',
   style: {}
 };
 
-const SlotBackgroundPropTypes = PropTypes.shape({
+var SlotBackgroundPropTypes = PropTypes.shape({
   /**
   * set background of drop, when the appointment can be drop in the slot
   */
@@ -30919,7 +30967,7 @@ const SlotBackgroundPropTypes = PropTypes.shape({
   */
   overBg: PropTypes.string
 });
-const SlotPropTypes = PropTypes.shape({
+var SlotPropTypes = PropTypes.shape({
   /**
   * Set the primary duration - Primary Duration is the duration in header of the scheduler
   * @default 60
@@ -30948,7 +30996,7 @@ const SlotPropTypes = PropTypes.shape({
   */
   slotBackground: SlotBackgroundPropTypes
 });
-const SlotDefaultValues = {
+var SlotDefaultValues = {
   primaryDuration: 60,
   secondaryDuration: 30,
   colSpan: 2,
@@ -30959,6 +31007,61 @@ const SlotDefaultValues = {
     overBg: undefined
   }
 };
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
 
 const _excluded$m = ["localeText"];
 const MuiPickersAdapterContext = /*#__PURE__*/React$1.createContext(null);
@@ -40338,23 +40441,25 @@ process.env.NODE_ENV !== "production" ? DatePicker.propTypes = {
   yearsPerRow: PropTypes.oneOf([3, 4])
 } : void 0;
 
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function ButtonField(props) {
-  const {
-    setOpen,
-    value,
-    id,
-    disabled,
-    InputProps: {
-      ref
-    } = {},
-    inputProps: {
-      'aria-label': ariaLabel
-    } = {}
-  } = props;
+  var setOpen = props.setOpen,
+    value = props.value,
+    id = props.id,
+    disabled = props.disabled,
+    _props$InputProps = props.InputProps,
+    _props$InputProps2 = _props$InputProps === void 0 ? {} : _props$InputProps,
+    ref = _props$InputProps2.ref,
+    _props$inputProps = props.inputProps,
+    _props$inputProps2 = _props$inputProps === void 0 ? {} : _props$inputProps,
+    ariaLabel = _props$inputProps2['aria-label'];
   // Convert the timestamp to a Date object
-  const date = new Date(value);
-  const handleOpen = () => {
-    setOpen?.(prev => !prev);
+  var date = new Date(value);
+  var handleOpen = function handleOpen() {
+    setOpen === null || setOpen === void 0 || setOpen(function (prev) {
+      return !prev;
+    });
   };
   return /*#__PURE__*/React__default.createElement(Button$1, {
     endIcon: /*#__PURE__*/React__default.createElement(ArrowDropDownIcon, null),
@@ -40370,15 +40475,17 @@ function ButtonField(props) {
   }, moment(date).format('ddd, MMM DD, YYYY')));
 }
 function SchedulerDatePicker(props) {
-  const {
-    date,
-    onDateChange
-  } = useSchedulerContext();
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
+  var _useSchedulerContext = useSchedulerContext(),
+    date = _useSchedulerContext.date,
+    onDateChange = _useSchedulerContext.onDateChange;
+  var _useState = useState(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    open = _useState2[0],
+    setOpen = _useState2[1];
+  var handleOpen = function handleOpen() {
     setOpen(true);
   };
-  const handleClose = () => {
+  var handleClose = function handleClose() {
     setOpen(false);
   };
   return /*#__PURE__*/React__default.createElement(DatePicker, {
@@ -40391,51 +40498,56 @@ function SchedulerDatePicker(props) {
     open: open,
     onClose: handleClose,
     onOpen: handleOpen,
-    slots: {
-      field: ButtonField,
-      ...props.slots
-    },
+    slots: _objectSpread({
+      field: ButtonField
+    }, props.slots),
     slotProps: {
       field: {
-        setOpen
+        setOpen: setOpen
       }
     }
   });
 }
 
 function DurationPicker() {
-  const {
-    durationOptions,
-    duration,
-    onDurationChange
-  } = useSchedulerContext();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const optionValue = option => {
+  var _useSchedulerContext = useSchedulerContext(),
+    durationOptions = _useSchedulerContext.durationOptions,
+    duration = _useSchedulerContext.duration,
+    onDurationChange = _useSchedulerContext.onDurationChange;
+  var _useState = useState(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    anchorEl = _useState2[0],
+    setAnchorEl = _useState2[1];
+  var optionValue = function optionValue(option) {
     switch (true) {
       case option === 60:
-        return `${option / 60} hour`;
+        return "".concat(option / 60, " hour");
       case option > 59:
-        return `${option / 60} hours`;
+        return "".concat(option / 60, " hours");
       case option === 15:
-        return `${option} minutes`;
+        return "".concat(option, " minutes");
       default:
-        return `${option} minutes`;
+        return "".concat(option, " minutes");
     }
   };
-  const handleButtonClick = event => {
+  var handleButtonClick = function handleButtonClick(event) {
     setAnchorEl(event.currentTarget);
   };
-  const handleMenuItemClick = option => {
+  var handleMenuItemClick = function handleMenuItemClick(option) {
     onDurationChange && onDurationChange(option);
     setAnchorEl(null);
   };
-  const handleClose = () => {
+  var handleClose = function handleClose() {
     setAnchorEl(null);
   };
-  const options = durationOptions?.map(option => /*#__PURE__*/React__default.createElement(MenuItem$1, {
-    onClick: () => handleMenuItemClick(option),
-    value: option
-  }, optionValue(option)));
+  var options = durationOptions === null || durationOptions === void 0 ? void 0 : durationOptions.map(function (option) {
+    return /*#__PURE__*/React__default.createElement(MenuItem$1, {
+      onClick: function onClick() {
+        return handleMenuItemClick(option);
+      },
+      value: option
+    }, optionValue(option));
+  });
   return /*#__PURE__*/React__default.createElement("div", {
     style: {
       display: 'flex',
@@ -40463,20 +40575,17 @@ function DurationPicker() {
 }
 
 function ActionButton(props) {
-  const {
-    icon,
-    onClick
-  } = props;
+  var icon = props.icon,
+    onClick = props.onClick;
   return /*#__PURE__*/React__default.createElement(IconButton$1, {
     onClick: onClick
   }, icon);
 }
 function DateNavigation() {
-  const {
-    onPrevDate,
-    onNextDate
-  } = useSchedulerContext();
-  const actions = [/*#__PURE__*/React__default.createElement(ActionButton, {
+  var _useSchedulerContext = useSchedulerContext(),
+    onPrevDate = _useSchedulerContext.onPrevDate,
+    onNextDate = _useSchedulerContext.onNextDate;
+  var actions = [/*#__PURE__*/React__default.createElement(ActionButton, {
     icon: /*#__PURE__*/React__default.createElement(ArrowLeftIcon, null),
     onClick: onNextDate
   }), /*#__PURE__*/React__default.createElement(ActionButton, {
@@ -40523,7 +40632,7 @@ function Header() {
  * <li>5. Concurrent appointments
  * </ul>
  *  */
-const Scheduler = props => {
+var Scheduler = function Scheduler(props) {
   return /*#__PURE__*/React__default.createElement(SchedulerProvider, props, /*#__PURE__*/React__default.createElement("div", null, "Hello world"), /*#__PURE__*/React__default.createElement(Header, null), /*#__PURE__*/React__default.createElement(Calendar, null));
 };
 Scheduler.propTypes = {

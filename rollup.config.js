@@ -1,8 +1,7 @@
 import PeerDepsExternalPlugin from 'rollup-plugin-peer-deps-external';
-const babel = require('rollup-plugin-babel');
-const resolve = require('@rollup/plugin-node-resolve')
-const commonjs = require('@rollup/plugin-commonjs')
-
+import babel from '@rollup/plugin-babel';
+const resolve = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
 
 // eslint-disable-next-line import/no-anonymous-default-export
 module.exports = [
@@ -20,14 +19,15 @@ module.exports = [
       },
     ],
     plugins: [
-        babel({
-            exclude: 'node_modules/**',
-            presets: ['@babel/preset-react'],
-        }),
-        PeerDepsExternalPlugin(),
-        resolve(),
-        commonjs(),
-    ]
+      babel({
+        exclude: 'node_modules/**',
+        presets: ['@babel/preset-react', '@babel/preset-env'],
+        babelHelpers: 'runtime',
+        plugins: ['@babel/plugin-transform-runtime'],
+      }),
+      PeerDepsExternalPlugin(),
+      resolve(),
+      commonjs(),
+    ],
   },
-  
 ];
