@@ -1,6 +1,8 @@
 import * as React from 'react';
-import React__default, { forwardRef, useContext, createContext, Children, isValidElement, cloneElement } from 'react';
+import React__default, { forwardRef, useContext, createContext, Children, isValidElement, cloneElement, useState } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
+import * as ReactDOM from 'react-dom';
+import ReactDOM__default from 'react-dom';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -4354,7 +4356,7 @@ var deepmerge = /*#__PURE__*/Object.freeze({
 	isPlainObject: isPlainObject
 });
 
-const _excluded$c = ["values", "unit", "step"];
+const _excluded$o = ["values", "unit", "step"];
 const sortBreakpointsValues = values => {
   const breakpointsAsArray = Object.keys(values).map(key => ({
     key,
@@ -4388,7 +4390,7 @@ function createBreakpoints(breakpoints) {
       unit = 'px',
       step = 5
     } = breakpoints,
-    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$c);
+    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$o);
   const sortedValues = sortBreakpointsValues(values);
   const keys = Object.keys(sortedValues);
   function up(key) {
@@ -5497,7 +5499,7 @@ function applyStyles(key, styles) {
   return {};
 }
 
-const _excluded$b = ["breakpoints", "palette", "spacing", "shape"];
+const _excluded$n = ["breakpoints", "palette", "spacing", "shape"];
 function createTheme$2(options = {}, ...args) {
   const {
       breakpoints: breakpointsInput = {},
@@ -5505,7 +5507,7 @@ function createTheme$2(options = {}, ...args) {
       spacing: spacingInput,
       shape: shapeInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$b);
+    other = _objectWithoutPropertiesLoose(options, _excluded$n);
   const breakpoints = createBreakpoints(breakpointsInput);
   const spacing = createSpacing(spacingInput);
   let muiTheme = deepmerge$1({
@@ -5541,17 +5543,17 @@ var createTheme$1 = /*#__PURE__*/Object.freeze({
 function isObjectEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
-function useTheme$1(defaultTheme = null) {
+function useTheme$2(defaultTheme = null) {
   const contextTheme = React.useContext(ThemeContext);
   return !contextTheme || isObjectEmpty(contextTheme) ? defaultTheme : contextTheme;
 }
 
 const systemDefaultTheme$1 = createTheme$2();
-function useTheme(defaultTheme = systemDefaultTheme$1) {
-  return useTheme$1(defaultTheme);
+function useTheme$1(defaultTheme = systemDefaultTheme$1) {
+  return useTheme$2(defaultTheme);
 }
 
-const _excluded$a = ["sx"];
+const _excluded$m = ["sx"];
 const splitProps = props => {
   var _props$theme$unstable, _props$theme;
   const result = {
@@ -5572,7 +5574,7 @@ function extendSxProp(props) {
   const {
       sx: inSx
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$a);
+    other = _objectWithoutPropertiesLoose(props, _excluded$m);
   const {
     systemProps,
     otherProps
@@ -6019,7 +6021,7 @@ function useThemeProps$1({
   defaultTheme,
   themeId
 }) {
-  let theme = useTheme(defaultTheme);
+  let theme = useTheme$1(defaultTheme);
   if (themeId) {
     theme = theme[themeId] || theme;
   }
@@ -6187,6 +6189,47 @@ function chainPropTypes(propType1, propType2) {
   };
 }
 
+function isClassComponent$1(elementType) {
+  // elementType.prototype?.isReactComponent
+  const {
+    prototype = {}
+  } = elementType;
+  return Boolean(prototype.isReactComponent);
+}
+function acceptingRef(props, propName, componentName, location, propFullName) {
+  const element = props[propName];
+  const safePropName = propFullName || propName;
+  if (element == null ||
+  // When server-side rendering React doesn't warn either.
+  // This is not an accurate check for SSR.
+  // This is only in place for Emotion compat.
+  // TODO: Revisit once https://github.com/facebook/react/issues/20047 is resolved.
+  typeof window === 'undefined') {
+    return null;
+  }
+  let warningHint;
+  const elementType = element.type;
+  /**
+   * Blacklisting instead of whitelisting
+   *
+   * Blacklisting will miss some components, such as React.Fragment. Those will at least
+   * trigger a warning in React.
+   * We can't whitelist because there is no safe way to detect React.forwardRef
+   * or class components. "Safe" means there's no public API.
+   *
+   */
+  if (typeof elementType === 'function' && !isClassComponent$1(elementType)) {
+    warningHint = 'Did you accidentally use a plain function component for an element instead?';
+  }
+  if (warningHint !== undefined) {
+    return new Error(`Invalid ${location} \`${safePropName}\` supplied to \`${componentName}\`. ` + `Expected an element that can hold a ref. ${warningHint} ` + 'For more information see https://mui.com/r/caveat-with-refs-guide');
+  }
+  return null;
+}
+const elementAcceptingRef = chainPropTypes(PropTypes.element, acceptingRef);
+elementAcceptingRef.isRequired = chainPropTypes(PropTypes.element.isRequired, acceptingRef);
+var elementAcceptingRef$1 = elementAcceptingRef;
+
 function isClassComponent(elementType) {
   // elementType.prototype?.isReactComponent
   const {
@@ -6226,8 +6269,88 @@ function elementTypeAcceptingRef(props, propName, componentName, location, propF
 }
 var elementTypeAcceptingRef$1 = chainPropTypes(PropTypes.elementType, elementTypeAcceptingRef);
 
+// This module is based on https://github.com/airbnb/prop-types-exact repository.
+// However, in order to reduce the number of dependencies and to remove some extra safe checks
+// the module was forked.
+
+const specialProperty = 'exact-prop: \u200b';
+function exactProp(propTypes) {
+  if (process.env.NODE_ENV === 'production') {
+    return propTypes;
+  }
+  return _extends$1({}, propTypes, {
+    [specialProperty]: props => {
+      const unsupportedProps = Object.keys(props).filter(prop => !propTypes.hasOwnProperty(prop));
+      if (unsupportedProps.length > 0) {
+        return new Error(`The following props are not supported: ${unsupportedProps.map(prop => `\`${prop}\``).join(', ')}. Please remove them.`);
+      }
+      return null;
+    }
+  });
+}
+
+function HTMLElementType(props, propName, componentName, location, propFullName) {
+  if (process.env.NODE_ENV === 'production') {
+    return null;
+  }
+  const propValue = props[propName];
+  const safePropName = propFullName || propName;
+  if (propValue == null) {
+    return null;
+  }
+  if (propValue && propValue.nodeType !== 1) {
+    return new Error(`Invalid ${location} \`${safePropName}\` supplied to \`${componentName}\`. ` + `Expected an HTMLElement.`);
+  }
+  return null;
+}
+
 const refType = PropTypes.oneOfType([PropTypes.func, PropTypes.object]);
 var refType$1 = refType;
+
+/**
+ * Safe chained function.
+ *
+ * Will only create a new function if needed,
+ * otherwise will pass back existing functions or null.
+ */
+function createChainedFunction(...funcs) {
+  return funcs.reduce((acc, func) => {
+    if (func == null) {
+      return acc;
+    }
+    return function chainedFunction(...args) {
+      acc.apply(this, args);
+      func.apply(this, args);
+    };
+  }, () => {});
+}
+
+// Corresponds to 10 frames at 60 Hz.
+// A few bytes payload overhead when lodash/debounce is ~3 kB and debounce ~300 B.
+function debounce(func, wait = 166) {
+  let timeout;
+  function debounced(...args) {
+    const later = () => {
+      // @ts-ignore
+      func.apply(this, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  }
+  debounced.clear = () => {
+    clearTimeout(timeout);
+  };
+  return debounced;
+}
+
+function ownerDocument(node) {
+  return node && node.ownerDocument || document;
+}
+
+function ownerWindow(node) {
+  const doc = ownerDocument(node);
+  return doc.defaultView || window;
+}
 
 /**
  * TODO v5: consider making it private
@@ -6496,6 +6619,66 @@ function useIsFocusVisible() {
     ref
   };
 }
+
+// A change of the browser zoom change the scrollbar size.
+// Credit https://github.com/twbs/bootstrap/blob/488fd8afc535ca3a6ad4dc581f5e89217b6a36ac/js/src/util/scrollbar.js#L14-L18
+function getScrollbarSize(doc) {
+  // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
+  const documentWidth = doc.documentElement.clientWidth;
+  return Math.abs(window.innerWidth - documentWidth);
+}
+
+function getTypeByValue(value) {
+  const valueType = typeof value;
+  switch (valueType) {
+    case 'number':
+      if (Number.isNaN(value)) {
+        return 'NaN';
+      }
+      if (!Number.isFinite(value)) {
+        return 'Infinity';
+      }
+      if (value !== Math.floor(value)) {
+        return 'float';
+      }
+      return 'number';
+    case 'object':
+      if (value === null) {
+        return 'null';
+      }
+      return value.constructor.name;
+    default:
+      return valueType;
+  }
+}
+
+// IE 11 support
+function ponyfillIsInteger(x) {
+  // eslint-disable-next-line no-restricted-globals
+  return typeof x === 'number' && isFinite(x) && Math.floor(x) === x;
+}
+const isInteger = Number.isInteger || ponyfillIsInteger;
+function requiredInteger(props, propName, componentName, location) {
+  const propValue = props[propName];
+  if (propValue == null || !isInteger(propValue)) {
+    const propType = getTypeByValue(propValue);
+    return new RangeError(`Invalid ${location} \`${propName}\` of type \`${propType}\` supplied to \`${componentName}\`, expected \`integer\`.`);
+  }
+  return null;
+}
+function validator(props, propName, ...other) {
+  const propValue = props[propName];
+  if (propValue === undefined) {
+    return null;
+  }
+  return requiredInteger(props, propName, ...other);
+}
+function validatorNoop() {
+  return null;
+}
+validator.isRequired = requiredInteger;
+validatorNoop.isRequired = validatorNoop;
+var integerPropType = process.env.NODE_ENV === 'production' ? validatorNoop : validator;
 
 function composeClasses(slots, getUtilityClass, classes = undefined) {
   const output = {};
@@ -7059,7 +7242,7 @@ const green = {
 };
 var green$1 = green;
 
-const _excluded$9 = ["mode", "contrastThreshold", "tonalOffset"];
+const _excluded$l = ["mode", "contrastThreshold", "tonalOffset"];
 const light = {
   // The colors used to style the text.
   text: {
@@ -7228,7 +7411,7 @@ function createPalette(palette) {
       contrastThreshold = 3,
       tonalOffset = 0.2
     } = palette,
-    other = _objectWithoutPropertiesLoose(palette, _excluded$9);
+    other = _objectWithoutPropertiesLoose(palette, _excluded$l);
   const primary = palette.primary || getDefaultPrimary(mode);
   const secondary = palette.secondary || getDefaultSecondary(mode);
   const error = palette.error || getDefaultError(mode);
@@ -7352,7 +7535,7 @@ const theme2 = createTheme({ palette: {
   return paletteOutput;
 }
 
-const _excluded$8 = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
+const _excluded$k = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
 function round(value) {
   return Math.round(value * 1e5) / 1e5;
 }
@@ -7383,7 +7566,7 @@ function createTypography(palette, typography) {
       allVariants,
       pxToRem: pxToRem2
     } = _ref,
-    other = _objectWithoutPropertiesLoose(_ref, _excluded$8);
+    other = _objectWithoutPropertiesLoose(_ref, _excluded$k);
   if (process.env.NODE_ENV !== 'production') {
     if (typeof fontSize !== 'number') {
       console.error('MUI: `fontSize` is required to be a number.');
@@ -7451,7 +7634,7 @@ function createShadow(...px) {
 const shadows = ['none', createShadow(0, 2, 1, -1, 0, 1, 1, 0, 0, 1, 3, 0), createShadow(0, 3, 1, -2, 0, 2, 2, 0, 0, 1, 5, 0), createShadow(0, 3, 3, -2, 0, 3, 4, 0, 0, 1, 8, 0), createShadow(0, 2, 4, -1, 0, 4, 5, 0, 0, 1, 10, 0), createShadow(0, 3, 5, -1, 0, 5, 8, 0, 0, 1, 14, 0), createShadow(0, 3, 5, -1, 0, 6, 10, 0, 0, 1, 18, 0), createShadow(0, 4, 5, -2, 0, 7, 10, 1, 0, 2, 16, 1), createShadow(0, 5, 5, -3, 0, 8, 10, 1, 0, 3, 14, 2), createShadow(0, 5, 6, -3, 0, 9, 12, 1, 0, 3, 16, 2), createShadow(0, 6, 6, -3, 0, 10, 14, 1, 0, 4, 18, 3), createShadow(0, 6, 7, -4, 0, 11, 15, 1, 0, 4, 20, 3), createShadow(0, 7, 8, -4, 0, 12, 17, 2, 0, 5, 22, 4), createShadow(0, 7, 8, -4, 0, 13, 19, 2, 0, 5, 24, 4), createShadow(0, 7, 9, -4, 0, 14, 21, 2, 0, 5, 26, 4), createShadow(0, 8, 9, -5, 0, 15, 22, 2, 0, 6, 28, 5), createShadow(0, 8, 10, -5, 0, 16, 24, 2, 0, 6, 30, 5), createShadow(0, 8, 11, -5, 0, 17, 26, 2, 0, 6, 32, 5), createShadow(0, 9, 11, -5, 0, 18, 28, 2, 0, 7, 34, 6), createShadow(0, 9, 12, -6, 0, 19, 29, 2, 0, 7, 36, 6), createShadow(0, 10, 13, -6, 0, 20, 31, 3, 0, 8, 38, 7), createShadow(0, 10, 13, -6, 0, 21, 33, 3, 0, 8, 40, 7), createShadow(0, 10, 14, -6, 0, 22, 35, 3, 0, 8, 42, 7), createShadow(0, 11, 14, -7, 0, 23, 36, 3, 0, 9, 44, 8), createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8)];
 var shadows$1 = shadows;
 
-const _excluded$7 = ["duration", "easing", "delay"];
+const _excluded$j = ["duration", "easing", "delay"];
 // Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
 // to learn the context in which each easing should be used.
 const easing = {
@@ -7502,7 +7685,7 @@ function createTransitions(inputTransitions) {
         easing: easingOption = mergedEasing.easeInOut,
         delay = 0
       } = options,
-      other = _objectWithoutPropertiesLoose(options, _excluded$7);
+      other = _objectWithoutPropertiesLoose(options, _excluded$j);
     if (process.env.NODE_ENV !== 'production') {
       const isString = value => typeof value === 'string';
       // IE11 support, replace with Number.isNaN
@@ -7552,7 +7735,7 @@ const zIndex = {
 };
 var zIndex$1 = zIndex;
 
-const _excluded$6 = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
+const _excluded$i = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
 function createTheme(options = {}, ...args) {
   const {
       mixins: mixinsInput = {},
@@ -7560,7 +7743,7 @@ function createTheme(options = {}, ...args) {
       transitions: transitionsInput = {},
       typography: typographyInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$6);
+    other = _objectWithoutPropertiesLoose(options, _excluded$i);
   if (options.vars) {
     throw new Error(process.env.NODE_ENV !== "production" ? `MUI: \`vars\` is a private field used for CSS variables support.
 Please use another name.` : formatMuiErrorMessage$1(18));
@@ -7620,6 +7803,15 @@ Please use another name.` : formatMuiErrorMessage$1(18));
 
 const defaultTheme = createTheme();
 var defaultTheme$1 = defaultTheme;
+
+function useTheme() {
+  const theme = useTheme$1(defaultTheme$1);
+  if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    React.useDebugValue(theme);
+  }
+  return theme[THEME_ID] || theme;
+}
 
 function useThemeProps({
   props,
@@ -7718,9 +7910,9 @@ var _capitalize = _interopRequireDefault(require$$5);
 var _getDisplayName = _interopRequireDefault(require$$6);
 var _createTheme = _interopRequireDefault(require$$7);
 var _styleFunctionSx = _interopRequireDefault(require$$8);
-const _excluded$5 = ["ownerState"],
-  _excluded2 = ["variants"],
-  _excluded3 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
+const _excluded$h = ["ownerState"],
+  _excluded2$2 = ["variants"],
+  _excluded3$1 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
 /* eslint-disable no-underscore-dangle */
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -7765,7 +7957,7 @@ function processStyleArg(callableStyle, _ref) {
   let {
       ownerState
     } = _ref,
-    props = (0, _objectWithoutPropertiesLoose2.default)(_ref, _excluded$5);
+    props = (0, _objectWithoutPropertiesLoose2.default)(_ref, _excluded$h);
   const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle((0, _extends2.default)({
     ownerState
   }, props)) : callableStyle;
@@ -7778,7 +7970,7 @@ function processStyleArg(callableStyle, _ref) {
     const {
         variants = []
       } = resolvedStylesArg,
-      otherStyles = (0, _objectWithoutPropertiesLoose2.default)(resolvedStylesArg, _excluded2);
+      otherStyles = (0, _objectWithoutPropertiesLoose2.default)(resolvedStylesArg, _excluded2$2);
     let result = otherStyles;
     variants.forEach(variant => {
       let isMatch = true;
@@ -7834,7 +8026,7 @@ function createStyled(input = {}) {
         // For more details: https://github.com/mui/material-ui/pull/37908
         overridesResolver = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
       } = inputOptions,
-      options = (0, _objectWithoutPropertiesLoose2.default)(inputOptions, _excluded3);
+      options = (0, _objectWithoutPropertiesLoose2.default)(inputOptions, _excluded3$1);
 
     // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
     const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver :
@@ -7960,6 +8152,18 @@ const styled = _default({
   rootShouldForwardProp
 });
 var styled$1 = styled;
+
+// Inspired by https://github.com/material-components/material-components-ios/blob/bca36107405594d5b7b16265a5b0ed698f85a5ee/components/Elevation/src/UIColor%2BMaterialElevation.m#L61
+const getOverlayAlpha = elevation => {
+  let alphaValue;
+  if (elevation < 1) {
+    alphaValue = 5.11916 * elevation ** 2;
+  } else {
+    alphaValue = 4.5 * Math.log(elevation + 1) + 2;
+  }
+  return (alphaValue / 100).toFixed(2);
+};
+var getOverlayAlpha$1 = getOverlayAlpha;
 
 var theme = createTheme({
   palette: {
@@ -8098,13 +8302,63 @@ var SlotDefaultValues = {
   }
 };
 
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
 function getSvgIconUtilityClass(slot) {
   return generateUtilityClass('MuiSvgIcon', slot);
 }
 generateUtilityClasses('MuiSvgIcon', ['root', 'colorPrimary', 'colorSecondary', 'colorAction', 'colorError', 'colorDisabled', 'fontSizeInherit', 'fontSizeSmall', 'fontSizeMedium', 'fontSizeLarge']);
 
-const _excluded$4 = ["children", "className", "color", "component", "fontSize", "htmlColor", "inheritViewBox", "titleAccess", "viewBox"];
-const useUtilityClasses$3 = ownerState => {
+const _excluded$g = ["children", "className", "color", "component", "fontSize", "htmlColor", "inheritViewBox", "titleAccess", "viewBox"];
+const useUtilityClasses$b = ownerState => {
   const {
     color,
     fontSize,
@@ -8171,7 +8425,7 @@ const SvgIcon = /*#__PURE__*/React.forwardRef(function SvgIcon(inProps, ref) {
       titleAccess,
       viewBox = '0 0 24 24'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$4);
+    other = _objectWithoutPropertiesLoose(props, _excluded$g);
   const hasSvgAsChild = /*#__PURE__*/React.isValidElement(children) && children.type === 'svg';
   const ownerState = _extends$1({}, props, {
     color,
@@ -8186,7 +8440,7 @@ const SvgIcon = /*#__PURE__*/React.forwardRef(function SvgIcon(inProps, ref) {
   if (!inheritViewBox) {
     more.viewBox = viewBox;
   }
-  const classes = useUtilityClasses$3(ownerState);
+  const classes = useUtilityClasses$b(ownerState);
   return /*#__PURE__*/jsxs(SvgIconRoot, _extends$1({
     as: component,
     className: clsx(classes.root, className),
@@ -8309,7 +8563,650 @@ function _inheritsLoose(subClass, superClass) {
   _setPrototypeOf(subClass, superClass);
 }
 
+var config = {
+  disabled: false
+};
+
+var timeoutsShape = process.env.NODE_ENV !== 'production' ? PropTypes.oneOfType([PropTypes.number, PropTypes.shape({
+  enter: PropTypes.number,
+  exit: PropTypes.number,
+  appear: PropTypes.number
+}).isRequired]) : null;
+process.env.NODE_ENV !== 'production' ? PropTypes.oneOfType([PropTypes.string, PropTypes.shape({
+  enter: PropTypes.string,
+  exit: PropTypes.string,
+  active: PropTypes.string
+}), PropTypes.shape({
+  enter: PropTypes.string,
+  enterDone: PropTypes.string,
+  enterActive: PropTypes.string,
+  exit: PropTypes.string,
+  exitDone: PropTypes.string,
+  exitActive: PropTypes.string
+})]) : null;
+
 var TransitionGroupContext = React__default.createContext(null);
+
+var forceReflow = function forceReflow(node) {
+  return node.scrollTop;
+};
+
+var UNMOUNTED = 'unmounted';
+var EXITED = 'exited';
+var ENTERING = 'entering';
+var ENTERED = 'entered';
+var EXITING = 'exiting';
+/**
+ * The Transition component lets you describe a transition from one component
+ * state to another _over time_ with a simple declarative API. Most commonly
+ * it's used to animate the mounting and unmounting of a component, but can also
+ * be used to describe in-place transition states as well.
+ *
+ * ---
+ *
+ * **Note**: `Transition` is a platform-agnostic base component. If you're using
+ * transitions in CSS, you'll probably want to use
+ * [`CSSTransition`](https://reactcommunity.org/react-transition-group/css-transition)
+ * instead. It inherits all the features of `Transition`, but contains
+ * additional features necessary to play nice with CSS transitions (hence the
+ * name of the component).
+ *
+ * ---
+ *
+ * By default the `Transition` component does not alter the behavior of the
+ * component it renders, it only tracks "enter" and "exit" states for the
+ * components. It's up to you to give meaning and effect to those states. For
+ * example we can add styles to a component when it enters or exits:
+ *
+ * ```jsx
+ * import { Transition } from 'react-transition-group';
+ *
+ * const duration = 300;
+ *
+ * const defaultStyle = {
+ *   transition: `opacity ${duration}ms ease-in-out`,
+ *   opacity: 0,
+ * }
+ *
+ * const transitionStyles = {
+ *   entering: { opacity: 1 },
+ *   entered:  { opacity: 1 },
+ *   exiting:  { opacity: 0 },
+ *   exited:  { opacity: 0 },
+ * };
+ *
+ * const Fade = ({ in: inProp }) => (
+ *   <Transition in={inProp} timeout={duration}>
+ *     {state => (
+ *       <div style={{
+ *         ...defaultStyle,
+ *         ...transitionStyles[state]
+ *       }}>
+ *         I'm a fade Transition!
+ *       </div>
+ *     )}
+ *   </Transition>
+ * );
+ * ```
+ *
+ * There are 4 main states a Transition can be in:
+ *  - `'entering'`
+ *  - `'entered'`
+ *  - `'exiting'`
+ *  - `'exited'`
+ *
+ * Transition state is toggled via the `in` prop. When `true` the component
+ * begins the "Enter" stage. During this stage, the component will shift from
+ * its current transition state, to `'entering'` for the duration of the
+ * transition and then to the `'entered'` stage once it's complete. Let's take
+ * the following example (we'll use the
+ * [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook):
+ *
+ * ```jsx
+ * function App() {
+ *   const [inProp, setInProp] = useState(false);
+ *   return (
+ *     <div>
+ *       <Transition in={inProp} timeout={500}>
+ *         {state => (
+ *           // ...
+ *         )}
+ *       </Transition>
+ *       <button onClick={() => setInProp(true)}>
+ *         Click to Enter
+ *       </button>
+ *     </div>
+ *   );
+ * }
+ * ```
+ *
+ * When the button is clicked the component will shift to the `'entering'` state
+ * and stay there for 500ms (the value of `timeout`) before it finally switches
+ * to `'entered'`.
+ *
+ * When `in` is `false` the same thing happens except the state moves from
+ * `'exiting'` to `'exited'`.
+ */
+
+var Transition = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(Transition, _React$Component);
+
+  function Transition(props, context) {
+    var _this;
+
+    _this = _React$Component.call(this, props, context) || this;
+    var parentGroup = context; // In the context of a TransitionGroup all enters are really appears
+
+    var appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear;
+    var initialStatus;
+    _this.appearStatus = null;
+
+    if (props.in) {
+      if (appear) {
+        initialStatus = EXITED;
+        _this.appearStatus = ENTERING;
+      } else {
+        initialStatus = ENTERED;
+      }
+    } else {
+      if (props.unmountOnExit || props.mountOnEnter) {
+        initialStatus = UNMOUNTED;
+      } else {
+        initialStatus = EXITED;
+      }
+    }
+
+    _this.state = {
+      status: initialStatus
+    };
+    _this.nextCallback = null;
+    return _this;
+  }
+
+  Transition.getDerivedStateFromProps = function getDerivedStateFromProps(_ref, prevState) {
+    var nextIn = _ref.in;
+
+    if (nextIn && prevState.status === UNMOUNTED) {
+      return {
+        status: EXITED
+      };
+    }
+
+    return null;
+  } // getSnapshotBeforeUpdate(prevProps) {
+  //   let nextStatus = null
+  //   if (prevProps !== this.props) {
+  //     const { status } = this.state
+  //     if (this.props.in) {
+  //       if (status !== ENTERING && status !== ENTERED) {
+  //         nextStatus = ENTERING
+  //       }
+  //     } else {
+  //       if (status === ENTERING || status === ENTERED) {
+  //         nextStatus = EXITING
+  //       }
+  //     }
+  //   }
+  //   return { nextStatus }
+  // }
+  ;
+
+  var _proto = Transition.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.updateStatus(true, this.appearStatus);
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    var nextStatus = null;
+
+    if (prevProps !== this.props) {
+      var status = this.state.status;
+
+      if (this.props.in) {
+        if (status !== ENTERING && status !== ENTERED) {
+          nextStatus = ENTERING;
+        }
+      } else {
+        if (status === ENTERING || status === ENTERED) {
+          nextStatus = EXITING;
+        }
+      }
+    }
+
+    this.updateStatus(false, nextStatus);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.cancelNextCallback();
+  };
+
+  _proto.getTimeouts = function getTimeouts() {
+    var timeout = this.props.timeout;
+    var exit, enter, appear;
+    exit = enter = appear = timeout;
+
+    if (timeout != null && typeof timeout !== 'number') {
+      exit = timeout.exit;
+      enter = timeout.enter; // TODO: remove fallback for next major
+
+      appear = timeout.appear !== undefined ? timeout.appear : enter;
+    }
+
+    return {
+      exit: exit,
+      enter: enter,
+      appear: appear
+    };
+  };
+
+  _proto.updateStatus = function updateStatus(mounting, nextStatus) {
+    if (mounting === void 0) {
+      mounting = false;
+    }
+
+    if (nextStatus !== null) {
+      // nextStatus will always be ENTERING or EXITING.
+      this.cancelNextCallback();
+
+      if (nextStatus === ENTERING) {
+        if (this.props.unmountOnExit || this.props.mountOnEnter) {
+          var node = this.props.nodeRef ? this.props.nodeRef.current : ReactDOM__default.findDOMNode(this); // https://github.com/reactjs/react-transition-group/pull/749
+          // With unmountOnExit or mountOnEnter, the enter animation should happen at the transition between `exited` and `entering`.
+          // To make the animation happen,  we have to separate each rendering and avoid being processed as batched.
+
+          if (node) forceReflow(node);
+        }
+
+        this.performEnter(mounting);
+      } else {
+        this.performExit();
+      }
+    } else if (this.props.unmountOnExit && this.state.status === EXITED) {
+      this.setState({
+        status: UNMOUNTED
+      });
+    }
+  };
+
+  _proto.performEnter = function performEnter(mounting) {
+    var _this2 = this;
+
+    var enter = this.props.enter;
+    var appearing = this.context ? this.context.isMounting : mounting;
+
+    var _ref2 = this.props.nodeRef ? [appearing] : [ReactDOM__default.findDOMNode(this), appearing],
+        maybeNode = _ref2[0],
+        maybeAppearing = _ref2[1];
+
+    var timeouts = this.getTimeouts();
+    var enterTimeout = appearing ? timeouts.appear : timeouts.enter; // no enter animation skip right to ENTERED
+    // if we are mounting and running this it means appear _must_ be set
+
+    if (!mounting && !enter || config.disabled) {
+      this.safeSetState({
+        status: ENTERED
+      }, function () {
+        _this2.props.onEntered(maybeNode);
+      });
+      return;
+    }
+
+    this.props.onEnter(maybeNode, maybeAppearing);
+    this.safeSetState({
+      status: ENTERING
+    }, function () {
+      _this2.props.onEntering(maybeNode, maybeAppearing);
+
+      _this2.onTransitionEnd(enterTimeout, function () {
+        _this2.safeSetState({
+          status: ENTERED
+        }, function () {
+          _this2.props.onEntered(maybeNode, maybeAppearing);
+        });
+      });
+    });
+  };
+
+  _proto.performExit = function performExit() {
+    var _this3 = this;
+
+    var exit = this.props.exit;
+    var timeouts = this.getTimeouts();
+    var maybeNode = this.props.nodeRef ? undefined : ReactDOM__default.findDOMNode(this); // no exit animation skip right to EXITED
+
+    if (!exit || config.disabled) {
+      this.safeSetState({
+        status: EXITED
+      }, function () {
+        _this3.props.onExited(maybeNode);
+      });
+      return;
+    }
+
+    this.props.onExit(maybeNode);
+    this.safeSetState({
+      status: EXITING
+    }, function () {
+      _this3.props.onExiting(maybeNode);
+
+      _this3.onTransitionEnd(timeouts.exit, function () {
+        _this3.safeSetState({
+          status: EXITED
+        }, function () {
+          _this3.props.onExited(maybeNode);
+        });
+      });
+    });
+  };
+
+  _proto.cancelNextCallback = function cancelNextCallback() {
+    if (this.nextCallback !== null) {
+      this.nextCallback.cancel();
+      this.nextCallback = null;
+    }
+  };
+
+  _proto.safeSetState = function safeSetState(nextState, callback) {
+    // This shouldn't be necessary, but there are weird race conditions with
+    // setState callbacks and unmounting in testing, so always make sure that
+    // we can cancel any pending setState callbacks after we unmount.
+    callback = this.setNextCallback(callback);
+    this.setState(nextState, callback);
+  };
+
+  _proto.setNextCallback = function setNextCallback(callback) {
+    var _this4 = this;
+
+    var active = true;
+
+    this.nextCallback = function (event) {
+      if (active) {
+        active = false;
+        _this4.nextCallback = null;
+        callback(event);
+      }
+    };
+
+    this.nextCallback.cancel = function () {
+      active = false;
+    };
+
+    return this.nextCallback;
+  };
+
+  _proto.onTransitionEnd = function onTransitionEnd(timeout, handler) {
+    this.setNextCallback(handler);
+    var node = this.props.nodeRef ? this.props.nodeRef.current : ReactDOM__default.findDOMNode(this);
+    var doesNotHaveTimeoutOrListener = timeout == null && !this.props.addEndListener;
+
+    if (!node || doesNotHaveTimeoutOrListener) {
+      setTimeout(this.nextCallback, 0);
+      return;
+    }
+
+    if (this.props.addEndListener) {
+      var _ref3 = this.props.nodeRef ? [this.nextCallback] : [node, this.nextCallback],
+          maybeNode = _ref3[0],
+          maybeNextCallback = _ref3[1];
+
+      this.props.addEndListener(maybeNode, maybeNextCallback);
+    }
+
+    if (timeout != null) {
+      setTimeout(this.nextCallback, timeout);
+    }
+  };
+
+  _proto.render = function render() {
+    var status = this.state.status;
+
+    if (status === UNMOUNTED) {
+      return null;
+    }
+
+    var _this$props = this.props,
+        children = _this$props.children;
+        _this$props.in;
+        _this$props.mountOnEnter;
+        _this$props.unmountOnExit;
+        _this$props.appear;
+        _this$props.enter;
+        _this$props.exit;
+        _this$props.timeout;
+        _this$props.addEndListener;
+        _this$props.onEnter;
+        _this$props.onEntering;
+        _this$props.onEntered;
+        _this$props.onExit;
+        _this$props.onExiting;
+        _this$props.onExited;
+        _this$props.nodeRef;
+        var childProps = _objectWithoutPropertiesLoose(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
+
+    return (
+      /*#__PURE__*/
+      // allows for nested Transitions
+      React__default.createElement(TransitionGroupContext.Provider, {
+        value: null
+      }, typeof children === 'function' ? children(status, childProps) : React__default.cloneElement(React__default.Children.only(children), childProps))
+    );
+  };
+
+  return Transition;
+}(React__default.Component);
+
+Transition.contextType = TransitionGroupContext;
+Transition.propTypes = process.env.NODE_ENV !== "production" ? {
+  /**
+   * A React reference to DOM element that need to transition:
+   * https://stackoverflow.com/a/51127130/4671932
+   *
+   *   - When `nodeRef` prop is used, `node` is not passed to callback functions
+   *      (e.g. `onEnter`) because user already has direct access to the node.
+   *   - When changing `key` prop of `Transition` in a `TransitionGroup` a new
+   *     `nodeRef` need to be provided to `Transition` with changed `key` prop
+   *     (see
+   *     [test/CSSTransition-test.js](https://github.com/reactjs/react-transition-group/blob/13435f897b3ab71f6e19d724f145596f5910581c/test/CSSTransition-test.js#L362-L437)).
+   */
+  nodeRef: PropTypes.shape({
+    current: typeof Element === 'undefined' ? PropTypes.any : function (propValue, key, componentName, location, propFullName, secret) {
+      var value = propValue[key];
+      return PropTypes.instanceOf(value && 'ownerDocument' in value ? value.ownerDocument.defaultView.Element : Element)(propValue, key, componentName, location, propFullName, secret);
+    }
+  }),
+
+  /**
+   * A `function` child can be used instead of a React element. This function is
+   * called with the current transition status (`'entering'`, `'entered'`,
+   * `'exiting'`, `'exited'`), which can be used to apply context
+   * specific props to a component.
+   *
+   * ```jsx
+   * <Transition in={this.state.in} timeout={150}>
+   *   {state => (
+   *     <MyComponent className={`fade fade-${state}`} />
+   *   )}
+   * </Transition>
+   * ```
+   */
+  children: PropTypes.oneOfType([PropTypes.func.isRequired, PropTypes.element.isRequired]).isRequired,
+
+  /**
+   * Show the component; triggers the enter or exit states
+   */
+  in: PropTypes.bool,
+
+  /**
+   * By default the child component is mounted immediately along with
+   * the parent `Transition` component. If you want to "lazy mount" the component on the
+   * first `in={true}` you can set `mountOnEnter`. After the first enter transition the component will stay
+   * mounted, even on "exited", unless you also specify `unmountOnExit`.
+   */
+  mountOnEnter: PropTypes.bool,
+
+  /**
+   * By default the child component stays mounted after it reaches the `'exited'` state.
+   * Set `unmountOnExit` if you'd prefer to unmount the component after it finishes exiting.
+   */
+  unmountOnExit: PropTypes.bool,
+
+  /**
+   * By default the child component does not perform the enter transition when
+   * it first mounts, regardless of the value of `in`. If you want this
+   * behavior, set both `appear` and `in` to `true`.
+   *
+   * > **Note**: there are no special appear states like `appearing`/`appeared`, this prop
+   * > only adds an additional enter transition. However, in the
+   * > `<CSSTransition>` component that first enter transition does result in
+   * > additional `.appear-*` classes, that way you can choose to style it
+   * > differently.
+   */
+  appear: PropTypes.bool,
+
+  /**
+   * Enable or disable enter transitions.
+   */
+  enter: PropTypes.bool,
+
+  /**
+   * Enable or disable exit transitions.
+   */
+  exit: PropTypes.bool,
+
+  /**
+   * The duration of the transition, in milliseconds.
+   * Required unless `addEndListener` is provided.
+   *
+   * You may specify a single timeout for all transitions:
+   *
+   * ```jsx
+   * timeout={500}
+   * ```
+   *
+   * or individually:
+   *
+   * ```jsx
+   * timeout={{
+   *  appear: 500,
+   *  enter: 300,
+   *  exit: 500,
+   * }}
+   * ```
+   *
+   * - `appear` defaults to the value of `enter`
+   * - `enter` defaults to `0`
+   * - `exit` defaults to `0`
+   *
+   * @type {number | { enter?: number, exit?: number, appear?: number }}
+   */
+  timeout: function timeout(props) {
+    var pt = timeoutsShape;
+    if (!props.addEndListener) pt = pt.isRequired;
+
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    return pt.apply(void 0, [props].concat(args));
+  },
+
+  /**
+   * Add a custom transition end trigger. Called with the transitioning
+   * DOM node and a `done` callback. Allows for more fine grained transition end
+   * logic. Timeouts are still used as a fallback if provided.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * ```jsx
+   * addEndListener={(node, done) => {
+   *   // use the css transitionend event to mark the finish of a transition
+   *   node.addEventListener('transitionend', done, false);
+   * }}
+   * ```
+   */
+  addEndListener: PropTypes.func,
+
+  /**
+   * Callback fired before the "entering" status is applied. An extra parameter
+   * `isAppearing` is supplied to indicate if the enter stage is occurring on the initial mount
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool) -> void
+   */
+  onEnter: PropTypes.func,
+
+  /**
+   * Callback fired after the "entering" status is applied. An extra parameter
+   * `isAppearing` is supplied to indicate if the enter stage is occurring on the initial mount
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool)
+   */
+  onEntering: PropTypes.func,
+
+  /**
+   * Callback fired after the "entered" status is applied. An extra parameter
+   * `isAppearing` is supplied to indicate if the enter stage is occurring on the initial mount
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool) -> void
+   */
+  onEntered: PropTypes.func,
+
+  /**
+   * Callback fired before the "exiting" status is applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement) -> void
+   */
+  onExit: PropTypes.func,
+
+  /**
+   * Callback fired after the "exiting" status is applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed.
+   *
+   * @type Function(node: HtmlElement) -> void
+   */
+  onExiting: PropTypes.func,
+
+  /**
+   * Callback fired after the "exited" status is applied.
+   *
+   * **Note**: when `nodeRef` prop is passed, `node` is not passed
+   *
+   * @type Function(node: HtmlElement) -> void
+   */
+  onExited: PropTypes.func
+} : {}; // Name the function so it is clearer in the documentation
+
+function noop() {}
+
+Transition.defaultProps = {
+  in: false,
+  mountOnEnter: false,
+  unmountOnExit: false,
+  appear: false,
+  enter: true,
+  exit: true,
+  onEnter: noop,
+  onEntering: noop,
+  onEntered: noop,
+  onExit: noop,
+  onExiting: noop,
+  onExited: noop
+};
+Transition.UNMOUNTED = UNMOUNTED;
+Transition.EXITED = EXITED;
+Transition.ENTERING = ENTERING;
+Transition.ENTERED = ENTERED;
+Transition.EXITING = EXITING;
+var Transition$1 = Transition;
 
 function _assertThisInitialized(self) {
   if (self === void 0) {
@@ -8639,6 +9536,331 @@ TransitionGroup.propTypes = process.env.NODE_ENV !== "production" ? {
 TransitionGroup.defaultProps = defaultProps;
 var TransitionGroup$1 = TransitionGroup;
 
+const reflow = node => node.scrollTop;
+function getTransitionProps(props, options) {
+  var _style$transitionDura, _style$transitionTimi;
+  const {
+    timeout,
+    easing,
+    style = {}
+  } = props;
+  return {
+    duration: (_style$transitionDura = style.transitionDuration) != null ? _style$transitionDura : typeof timeout === 'number' ? timeout : timeout[options.mode] || 0,
+    easing: (_style$transitionTimi = style.transitionTimingFunction) != null ? _style$transitionTimi : typeof easing === 'object' ? easing[options.mode] : easing,
+    delay: style.transitionDelay
+  };
+}
+
+function getPaperUtilityClass(slot) {
+  return generateUtilityClass('MuiPaper', slot);
+}
+generateUtilityClasses('MuiPaper', ['root', 'rounded', 'outlined', 'elevation', 'elevation0', 'elevation1', 'elevation2', 'elevation3', 'elevation4', 'elevation5', 'elevation6', 'elevation7', 'elevation8', 'elevation9', 'elevation10', 'elevation11', 'elevation12', 'elevation13', 'elevation14', 'elevation15', 'elevation16', 'elevation17', 'elevation18', 'elevation19', 'elevation20', 'elevation21', 'elevation22', 'elevation23', 'elevation24']);
+
+const _excluded$f = ["className", "component", "elevation", "square", "variant"];
+const useUtilityClasses$a = ownerState => {
+  const {
+    square,
+    elevation,
+    variant,
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root', variant, !square && 'rounded', variant === 'elevation' && `elevation${elevation}`]
+  };
+  return composeClasses(slots, getPaperUtilityClass, classes);
+};
+const PaperRoot = styled$1('div', {
+  name: 'MuiPaper',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, styles[ownerState.variant], !ownerState.square && styles.rounded, ownerState.variant === 'elevation' && styles[`elevation${ownerState.elevation}`]];
+  }
+})(({
+  theme,
+  ownerState
+}) => {
+  var _theme$vars$overlays;
+  return _extends$1({
+    backgroundColor: (theme.vars || theme).palette.background.paper,
+    color: (theme.vars || theme).palette.text.primary,
+    transition: theme.transitions.create('box-shadow')
+  }, !ownerState.square && {
+    borderRadius: theme.shape.borderRadius
+  }, ownerState.variant === 'outlined' && {
+    border: `1px solid ${(theme.vars || theme).palette.divider}`
+  }, ownerState.variant === 'elevation' && _extends$1({
+    boxShadow: (theme.vars || theme).shadows[ownerState.elevation]
+  }, !theme.vars && theme.palette.mode === 'dark' && {
+    backgroundImage: `linear-gradient(${alpha_1('#fff', getOverlayAlpha$1(ownerState.elevation))}, ${alpha_1('#fff', getOverlayAlpha$1(ownerState.elevation))})`
+  }, theme.vars && {
+    backgroundImage: (_theme$vars$overlays = theme.vars.overlays) == null ? void 0 : _theme$vars$overlays[ownerState.elevation]
+  }));
+});
+const Paper = /*#__PURE__*/React.forwardRef(function Paper(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiPaper'
+  });
+  const {
+      className,
+      component = 'div',
+      elevation = 1,
+      square = false,
+      variant = 'elevation'
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$f);
+  const ownerState = _extends$1({}, props, {
+    component,
+    elevation,
+    square,
+    variant
+  });
+  const classes = useUtilityClasses$a(ownerState);
+  if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const theme = useTheme();
+    if (theme.shadows[elevation] === undefined) {
+      console.error([`MUI: The elevation provided <Paper elevation={${elevation}}> is not available in the theme.`, `Please make sure that \`theme.shadows[${elevation}]\` is defined.`].join('\n'));
+    }
+  }
+  return /*#__PURE__*/jsx(PaperRoot, _extends$1({
+    as: component,
+    ownerState: ownerState,
+    className: clsx(classes.root, className),
+    ref: ref
+  }, other));
+});
+process.env.NODE_ENV !== "production" ? Paper.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * Shadow depth, corresponds to `dp` in the spec.
+   * It accepts values between 0 and 24 inclusive.
+   * @default 1
+   */
+  elevation: chainPropTypes(integerPropType, props => {
+    const {
+      elevation,
+      variant
+    } = props;
+    if (elevation > 0 && variant === 'outlined') {
+      return new Error(`MUI: Combining \`elevation={${elevation}}\` with \`variant="${variant}"\` has no effect. Either use \`elevation={0}\` or use a different \`variant\`.`);
+    }
+    return null;
+  }),
+  /**
+   * If `true`, rounded corners are disabled.
+   * @default false
+   */
+  square: PropTypes.bool,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
+  /**
+   * The variant to use.
+   * @default 'elevation'
+   */
+  variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['elevation', 'outlined']), PropTypes.string])
+} : void 0;
+var MuiPaper = Paper;
+
+/**
+ * Determines if a given element is a DOM element name (i.e. not a React component).
+ */
+function isHostComponent(element) {
+  return typeof element === 'string';
+}
+
+/**
+ * Type of the ownerState based on the type of an element it applies to.
+ * This resolves to the provided OwnerState for React components and `undefined` for host components.
+ * Falls back to `OwnerState | undefined` when the exact type can't be determined in development time.
+ */
+
+/**
+ * Appends the ownerState object to the props, merging with the existing one if necessary.
+ *
+ * @param elementType Type of the element that owns the `existingProps`. If the element is a DOM node or undefined, `ownerState` is not applied.
+ * @param otherProps Props of the element.
+ * @param ownerState
+ */
+function appendOwnerState(elementType, otherProps, ownerState) {
+  if (elementType === undefined || isHostComponent(elementType)) {
+    return otherProps;
+  }
+  return _extends$1({}, otherProps, {
+    ownerState: _extends$1({}, otherProps.ownerState, ownerState)
+  });
+}
+
+/**
+ * Extracts event handlers from a given object.
+ * A prop is considered an event handler if it is a function and its name starts with `on`.
+ *
+ * @param object An object to extract event handlers from.
+ * @param excludeKeys An array of keys to exclude from the returned object.
+ */
+function extractEventHandlers(object, excludeKeys = []) {
+  if (object === undefined) {
+    return {};
+  }
+  const result = {};
+  Object.keys(object).filter(prop => prop.match(/^on[A-Z]/) && typeof object[prop] === 'function' && !excludeKeys.includes(prop)).forEach(prop => {
+    result[prop] = object[prop];
+  });
+  return result;
+}
+
+/**
+ * If `componentProps` is a function, calls it with the provided `ownerState`.
+ * Otherwise, just returns `componentProps`.
+ */
+function resolveComponentProps(componentProps, ownerState, slotState) {
+  if (typeof componentProps === 'function') {
+    return componentProps(ownerState, slotState);
+  }
+  return componentProps;
+}
+
+/**
+ * Removes event handlers from the given object.
+ * A field is considered an event handler if it is a function with a name beginning with `on`.
+ *
+ * @param object Object to remove event handlers from.
+ * @returns Object with event handlers removed.
+ */
+function omitEventHandlers(object) {
+  if (object === undefined) {
+    return {};
+  }
+  const result = {};
+  Object.keys(object).filter(prop => !(prop.match(/^on[A-Z]/) && typeof object[prop] === 'function')).forEach(prop => {
+    result[prop] = object[prop];
+  });
+  return result;
+}
+
+/**
+ * Merges the slot component internal props (usually coming from a hook)
+ * with the externally provided ones.
+ *
+ * The merge order is (the latter overrides the former):
+ * 1. The internal props (specified as a getter function to work with get*Props hook result)
+ * 2. Additional props (specified internally on a Base UI component)
+ * 3. External props specified on the owner component. These should only be used on a root slot.
+ * 4. External props specified in the `slotProps.*` prop.
+ * 5. The `className` prop - combined from all the above.
+ * @param parameters
+ * @returns
+ */
+function mergeSlotProps(parameters) {
+  const {
+    getSlotProps,
+    additionalProps,
+    externalSlotProps,
+    externalForwardedProps,
+    className
+  } = parameters;
+  if (!getSlotProps) {
+    // The simpler case - getSlotProps is not defined, so no internal event handlers are defined,
+    // so we can simply merge all the props without having to worry about extracting event handlers.
+    const joinedClasses = clsx(additionalProps == null ? void 0 : additionalProps.className, className, externalForwardedProps == null ? void 0 : externalForwardedProps.className, externalSlotProps == null ? void 0 : externalSlotProps.className);
+    const mergedStyle = _extends$1({}, additionalProps == null ? void 0 : additionalProps.style, externalForwardedProps == null ? void 0 : externalForwardedProps.style, externalSlotProps == null ? void 0 : externalSlotProps.style);
+    const props = _extends$1({}, additionalProps, externalForwardedProps, externalSlotProps);
+    if (joinedClasses.length > 0) {
+      props.className = joinedClasses;
+    }
+    if (Object.keys(mergedStyle).length > 0) {
+      props.style = mergedStyle;
+    }
+    return {
+      props,
+      internalRef: undefined
+    };
+  }
+
+  // In this case, getSlotProps is responsible for calling the external event handlers.
+  // We don't need to include them in the merged props because of this.
+
+  const eventHandlers = extractEventHandlers(_extends$1({}, externalForwardedProps, externalSlotProps));
+  const componentsPropsWithoutEventHandlers = omitEventHandlers(externalSlotProps);
+  const otherPropsWithoutEventHandlers = omitEventHandlers(externalForwardedProps);
+  const internalSlotProps = getSlotProps(eventHandlers);
+
+  // The order of classes is important here.
+  // Emotion (that we use in libraries consuming Base UI) depends on this order
+  // to properly override style. It requires the most important classes to be last
+  // (see https://github.com/mui/material-ui/pull/33205) for the related discussion.
+  const joinedClasses = clsx(internalSlotProps == null ? void 0 : internalSlotProps.className, additionalProps == null ? void 0 : additionalProps.className, className, externalForwardedProps == null ? void 0 : externalForwardedProps.className, externalSlotProps == null ? void 0 : externalSlotProps.className);
+  const mergedStyle = _extends$1({}, internalSlotProps == null ? void 0 : internalSlotProps.style, additionalProps == null ? void 0 : additionalProps.style, externalForwardedProps == null ? void 0 : externalForwardedProps.style, externalSlotProps == null ? void 0 : externalSlotProps.style);
+  const props = _extends$1({}, internalSlotProps, additionalProps, otherPropsWithoutEventHandlers, componentsPropsWithoutEventHandlers);
+  if (joinedClasses.length > 0) {
+    props.className = joinedClasses;
+  }
+  if (Object.keys(mergedStyle).length > 0) {
+    props.style = mergedStyle;
+  }
+  return {
+    props,
+    internalRef: internalSlotProps.ref
+  };
+}
+
+const _excluded$e = ["elementType", "externalSlotProps", "ownerState", "skipResolvingSlotProps"];
+/**
+ * @ignore - do not document.
+ * Builds the props to be passed into the slot of an unstyled component.
+ * It merges the internal props of the component with the ones supplied by the user, allowing to customize the behavior.
+ * If the slot component is not a host component, it also merges in the `ownerState`.
+ *
+ * @param parameters.getSlotProps - A function that returns the props to be passed to the slot component.
+ */
+function useSlotProps(parameters) {
+  var _parameters$additiona;
+  const {
+      elementType,
+      externalSlotProps,
+      ownerState,
+      skipResolvingSlotProps = false
+    } = parameters,
+    rest = _objectWithoutPropertiesLoose(parameters, _excluded$e);
+  const resolvedComponentsProps = skipResolvingSlotProps ? {} : resolveComponentProps(externalSlotProps, ownerState);
+  const {
+    props: mergedProps,
+    internalRef
+  } = mergeSlotProps(_extends$1({}, rest, {
+    externalSlotProps: resolvedComponentsProps
+  }));
+  const ref = useForkRef(internalRef, resolvedComponentsProps == null ? void 0 : resolvedComponentsProps.ref, (_parameters$additiona = parameters.additionalProps) == null ? void 0 : _parameters$additiona.ref);
+  const props = appendOwnerState(elementType, _extends$1({}, mergedProps, {
+    ref
+  }), ownerState);
+  return props;
+}
+
 function Ripple(props) {
   const {
     className,
@@ -8720,7 +9942,7 @@ process.env.NODE_ENV !== "production" ? Ripple.propTypes = {
 const touchRippleClasses = generateUtilityClasses('MuiTouchRipple', ['root', 'ripple', 'rippleVisible', 'ripplePulsate', 'child', 'childLeaving', 'childPulsate']);
 var touchRippleClasses$1 = touchRippleClasses;
 
-const _excluded$3 = ["center", "classes", "className"];
+const _excluded$d = ["center", "classes", "className"];
 let _ = t => t,
   _t,
   _t2,
@@ -8849,7 +10071,7 @@ const TouchRipple = /*#__PURE__*/React.forwardRef(function TouchRipple(inProps, 
       classes = {},
       className
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$3);
+    other = _objectWithoutPropertiesLoose(props, _excluded$d);
   const [ripples, setRipples] = React.useState([]);
   const nextKey = React.useRef(0);
   const rippleCallback = React.useRef(null);
@@ -9045,8 +10267,8 @@ function getButtonBaseUtilityClass(slot) {
 const buttonBaseClasses = generateUtilityClasses('MuiButtonBase', ['root', 'disabled', 'focusVisible']);
 var buttonBaseClasses$1 = buttonBaseClasses;
 
-const _excluded$2 = ["action", "centerRipple", "children", "className", "component", "disabled", "disableRipple", "disableTouchRipple", "focusRipple", "focusVisibleClassName", "LinkComponent", "onBlur", "onClick", "onContextMenu", "onDragLeave", "onFocus", "onFocusVisible", "onKeyDown", "onKeyUp", "onMouseDown", "onMouseLeave", "onMouseUp", "onTouchEnd", "onTouchMove", "onTouchStart", "tabIndex", "TouchRippleProps", "touchRippleRef", "type"];
-const useUtilityClasses$2 = ownerState => {
+const _excluded$c = ["action", "centerRipple", "children", "className", "component", "disabled", "disableRipple", "disableTouchRipple", "focusRipple", "focusVisibleClassName", "LinkComponent", "onBlur", "onClick", "onContextMenu", "onDragLeave", "onFocus", "onFocusVisible", "onKeyDown", "onKeyUp", "onMouseDown", "onMouseLeave", "onMouseUp", "onTouchEnd", "onTouchMove", "onTouchStart", "tabIndex", "TouchRippleProps", "touchRippleRef", "type"];
+const useUtilityClasses$9 = ownerState => {
   const {
     disabled,
     focusVisible,
@@ -9146,7 +10368,7 @@ const ButtonBase = /*#__PURE__*/React.forwardRef(function ButtonBase(inProps, re
       touchRippleRef,
       type
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$2);
+    other = _objectWithoutPropertiesLoose(props, _excluded$c);
   const buttonRef = React.useRef(null);
   const rippleRef = React.useRef(null);
   const handleRippleRef = useForkRef(rippleRef, touchRippleRef);
@@ -9313,7 +10535,7 @@ const ButtonBase = /*#__PURE__*/React.forwardRef(function ButtonBase(inProps, re
     tabIndex,
     focusVisible
   });
-  const classes = useUtilityClasses$2(ownerState);
+  const classes = useUtilityClasses$9(ownerState);
   return /*#__PURE__*/jsxs(ButtonBaseRoot, _extends$1({
     as: ComponentProp,
     className: clsx(classes.root, className),
@@ -9510,8 +10732,8 @@ function getIconButtonUtilityClass(slot) {
 const iconButtonClasses = generateUtilityClasses('MuiIconButton', ['root', 'disabled', 'colorInherit', 'colorPrimary', 'colorSecondary', 'colorError', 'colorInfo', 'colorSuccess', 'colorWarning', 'edgeStart', 'edgeEnd', 'sizeSmall', 'sizeMedium', 'sizeLarge']);
 var iconButtonClasses$1 = iconButtonClasses;
 
-const _excluded$1 = ["edge", "children", "className", "color", "disabled", "disableFocusRipple", "size"];
-const useUtilityClasses$1 = ownerState => {
+const _excluded$b = ["edge", "children", "className", "color", "disabled", "disableFocusRipple", "size"];
+const useUtilityClasses$8 = ownerState => {
   const {
     classes,
     disabled,
@@ -9611,7 +10833,7 @@ const IconButton = /*#__PURE__*/React.forwardRef(function IconButton(inProps, re
       disableFocusRipple = false,
       size = 'medium'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$1);
+    other = _objectWithoutPropertiesLoose(props, _excluded$b);
   const ownerState = _extends$1({}, props, {
     edge,
     color,
@@ -9619,7 +10841,7 @@ const IconButton = /*#__PURE__*/React.forwardRef(function IconButton(inProps, re
     disableFocusRipple,
     size
   });
-  const classes = useUtilityClasses$1(ownerState);
+  const classes = useUtilityClasses$8(ownerState);
   return /*#__PURE__*/jsx(IconButtonRoot, _extends$1({
     className: clsx(classes.root, className),
     centerRipple: true,
@@ -9700,6 +10922,1388 @@ process.env.NODE_ENV !== "production" ? IconButton.propTypes /* remove-proptypes
 } : void 0;
 var IconButton$1 = IconButton;
 
+function getTypographyUtilityClass(slot) {
+  return generateUtilityClass('MuiTypography', slot);
+}
+generateUtilityClasses('MuiTypography', ['root', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'inherit', 'button', 'caption', 'overline', 'alignLeft', 'alignRight', 'alignCenter', 'alignJustify', 'noWrap', 'gutterBottom', 'paragraph']);
+
+const _excluded$a = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
+const useUtilityClasses$7 = ownerState => {
+  const {
+    align,
+    gutterBottom,
+    noWrap,
+    paragraph,
+    variant,
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root', variant, ownerState.align !== 'inherit' && `align${capitalize$1(align)}`, gutterBottom && 'gutterBottom', noWrap && 'noWrap', paragraph && 'paragraph']
+  };
+  return composeClasses(slots, getTypographyUtilityClass, classes);
+};
+const TypographyRoot = styled$1('span', {
+  name: 'MuiTypography',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, ownerState.variant && styles[ownerState.variant], ownerState.align !== 'inherit' && styles[`align${capitalize$1(ownerState.align)}`], ownerState.noWrap && styles.noWrap, ownerState.gutterBottom && styles.gutterBottom, ownerState.paragraph && styles.paragraph];
+  }
+})(({
+  theme,
+  ownerState
+}) => _extends$1({
+  margin: 0
+}, ownerState.variant === 'inherit' && {
+  // Some elements, like <button> on Chrome have default font that doesn't inherit, reset this.
+  font: 'inherit'
+}, ownerState.variant !== 'inherit' && theme.typography[ownerState.variant], ownerState.align !== 'inherit' && {
+  textAlign: ownerState.align
+}, ownerState.noWrap && {
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap'
+}, ownerState.gutterBottom && {
+  marginBottom: '0.35em'
+}, ownerState.paragraph && {
+  marginBottom: 16
+}));
+const defaultVariantMapping = {
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  h4: 'h4',
+  h5: 'h5',
+  h6: 'h6',
+  subtitle1: 'h6',
+  subtitle2: 'h6',
+  body1: 'p',
+  body2: 'p',
+  inherit: 'p'
+};
+
+// TODO v6: deprecate these color values in v5.x and remove the transformation in v6
+const colorTransformations = {
+  primary: 'primary.main',
+  textPrimary: 'text.primary',
+  secondary: 'secondary.main',
+  textSecondary: 'text.secondary',
+  error: 'error.main'
+};
+const transformDeprecatedColors = color => {
+  return colorTransformations[color] || color;
+};
+const Typography = /*#__PURE__*/React.forwardRef(function Typography(inProps, ref) {
+  const themeProps = useThemeProps({
+    props: inProps,
+    name: 'MuiTypography'
+  });
+  const color = transformDeprecatedColors(themeProps.color);
+  const props = extendSxProp(_extends$1({}, themeProps, {
+    color
+  }));
+  const {
+      align = 'inherit',
+      className,
+      component,
+      gutterBottom = false,
+      noWrap = false,
+      paragraph = false,
+      variant = 'body1',
+      variantMapping = defaultVariantMapping
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$a);
+  const ownerState = _extends$1({}, props, {
+    align,
+    color,
+    className,
+    component,
+    gutterBottom,
+    noWrap,
+    paragraph,
+    variant,
+    variantMapping
+  });
+  const Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
+  const classes = useUtilityClasses$7(ownerState);
+  return /*#__PURE__*/jsx(TypographyRoot, _extends$1({
+    as: Component,
+    ref: ref,
+    ownerState: ownerState,
+    className: clsx(classes.root, className)
+  }, other));
+});
+process.env.NODE_ENV !== "production" ? Typography.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * Set the text-align on the component.
+   * @default 'inherit'
+   */
+  align: PropTypes.oneOf(['center', 'inherit', 'justify', 'left', 'right']),
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * If `true`, the text will have a bottom margin.
+   * @default false
+   */
+  gutterBottom: PropTypes.bool,
+  /**
+   * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
+   *
+   * Note that text overflow can only happen with block or inline-block level elements
+   * (the element needs to have a width in order to overflow).
+   * @default false
+   */
+  noWrap: PropTypes.bool,
+  /**
+   * If `true`, the element will be a paragraph element.
+   * @default false
+   */
+  paragraph: PropTypes.bool,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
+  /**
+   * Applies the theme typography styles.
+   * @default 'body1'
+   */
+  variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['body1', 'body2', 'button', 'caption', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'inherit', 'overline', 'subtitle1', 'subtitle2']), PropTypes.string]),
+  /**
+   * The component maps the variant prop to a range of different HTML element types.
+   * For instance, subtitle1 to `<h6>`.
+   * If you wish to change that mapping, you can provide your own.
+   * Alternatively, you can use the `component` prop.
+   * @default {
+   *   h1: 'h1',
+   *   h2: 'h2',
+   *   h3: 'h3',
+   *   h4: 'h4',
+   *   h5: 'h5',
+   *   h6: 'h6',
+   *   subtitle1: 'h6',
+   *   subtitle2: 'h6',
+   *   body1: 'p',
+   *   body2: 'p',
+   *   inherit: 'p',
+   * }
+   */
+  variantMapping: PropTypes /* @typescript-to-proptypes-ignore */.object
+} : void 0;
+var Typography$1 = Typography;
+
+// Inspired by https://github.com/focus-trap/tabbable
+const candidatesSelector = ['input', 'select', 'textarea', 'a[href]', 'button', '[tabindex]', 'audio[controls]', 'video[controls]', '[contenteditable]:not([contenteditable="false"])'].join(',');
+function getTabIndex(node) {
+  const tabindexAttr = parseInt(node.getAttribute('tabindex') || '', 10);
+  if (!Number.isNaN(tabindexAttr)) {
+    return tabindexAttr;
+  }
+
+  // Browsers do not return `tabIndex` correctly for contentEditable nodes;
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=661108&q=contenteditable%20tabindex&can=2
+  // so if they don't have a tabindex attribute specifically set, assume it's 0.
+  // in Chrome, <details/>, <audio controls/> and <video controls/> elements get a default
+  //  `tabIndex` of -1 when the 'tabindex' attribute isn't specified in the DOM,
+  //  yet they are still part of the regular tab order; in FF, they get a default
+  //  `tabIndex` of 0; since Chrome still puts those elements in the regular tab
+  //  order, consider their tab index to be 0.
+  if (node.contentEditable === 'true' || (node.nodeName === 'AUDIO' || node.nodeName === 'VIDEO' || node.nodeName === 'DETAILS') && node.getAttribute('tabindex') === null) {
+    return 0;
+  }
+  return node.tabIndex;
+}
+function isNonTabbableRadio(node) {
+  if (node.tagName !== 'INPUT' || node.type !== 'radio') {
+    return false;
+  }
+  if (!node.name) {
+    return false;
+  }
+  const getRadio = selector => node.ownerDocument.querySelector(`input[type="radio"]${selector}`);
+  let roving = getRadio(`[name="${node.name}"]:checked`);
+  if (!roving) {
+    roving = getRadio(`[name="${node.name}"]`);
+  }
+  return roving !== node;
+}
+function isNodeMatchingSelectorFocusable(node) {
+  if (node.disabled || node.tagName === 'INPUT' && node.type === 'hidden' || isNonTabbableRadio(node)) {
+    return false;
+  }
+  return true;
+}
+function defaultGetTabbable(root) {
+  const regularTabNodes = [];
+  const orderedTabNodes = [];
+  Array.from(root.querySelectorAll(candidatesSelector)).forEach((node, i) => {
+    const nodeTabIndex = getTabIndex(node);
+    if (nodeTabIndex === -1 || !isNodeMatchingSelectorFocusable(node)) {
+      return;
+    }
+    if (nodeTabIndex === 0) {
+      regularTabNodes.push(node);
+    } else {
+      orderedTabNodes.push({
+        documentOrder: i,
+        tabIndex: nodeTabIndex,
+        node: node
+      });
+    }
+  });
+  return orderedTabNodes.sort((a, b) => a.tabIndex === b.tabIndex ? a.documentOrder - b.documentOrder : a.tabIndex - b.tabIndex).map(a => a.node).concat(regularTabNodes);
+}
+function defaultIsEnabled() {
+  return true;
+}
+
+/**
+ * Utility component that locks focus inside the component.
+ *
+ * Demos:
+ *
+ * - [Focus Trap](https://mui.com/base-ui/react-focus-trap/)
+ *
+ * API:
+ *
+ * - [FocusTrap API](https://mui.com/base-ui/react-focus-trap/components-api/#focus-trap)
+ */
+function FocusTrap(props) {
+  const {
+    children,
+    disableAutoFocus = false,
+    disableEnforceFocus = false,
+    disableRestoreFocus = false,
+    getTabbable = defaultGetTabbable,
+    isEnabled = defaultIsEnabled,
+    open
+  } = props;
+  const ignoreNextEnforceFocus = React.useRef(false);
+  const sentinelStart = React.useRef(null);
+  const sentinelEnd = React.useRef(null);
+  const nodeToRestore = React.useRef(null);
+  const reactFocusEventTarget = React.useRef(null);
+  // This variable is useful when disableAutoFocus is true.
+  // It waits for the active element to move into the component to activate.
+  const activated = React.useRef(false);
+  const rootRef = React.useRef(null);
+  // @ts-expect-error TODO upstream fix
+  const handleRef = useForkRef(children.ref, rootRef);
+  const lastKeydown = React.useRef(null);
+  React.useEffect(() => {
+    // We might render an empty child.
+    if (!open || !rootRef.current) {
+      return;
+    }
+    activated.current = !disableAutoFocus;
+  }, [disableAutoFocus, open]);
+  React.useEffect(() => {
+    // We might render an empty child.
+    if (!open || !rootRef.current) {
+      return;
+    }
+    const doc = ownerDocument(rootRef.current);
+    if (!rootRef.current.contains(doc.activeElement)) {
+      if (!rootRef.current.hasAttribute('tabIndex')) {
+        if (process.env.NODE_ENV !== 'production') {
+          console.error(['MUI: The modal content node does not accept focus.', 'For the benefit of assistive technologies, ' + 'the tabIndex of the node is being set to "-1".'].join('\n'));
+        }
+        rootRef.current.setAttribute('tabIndex', '-1');
+      }
+      if (activated.current) {
+        rootRef.current.focus();
+      }
+    }
+    return () => {
+      // restoreLastFocus()
+      if (!disableRestoreFocus) {
+        // In IE11 it is possible for document.activeElement to be null resulting
+        // in nodeToRestore.current being null.
+        // Not all elements in IE11 have a focus method.
+        // Once IE11 support is dropped the focus() call can be unconditional.
+        if (nodeToRestore.current && nodeToRestore.current.focus) {
+          ignoreNextEnforceFocus.current = true;
+          nodeToRestore.current.focus();
+        }
+        nodeToRestore.current = null;
+      }
+    };
+    // Missing `disableRestoreFocus` which is fine.
+    // We don't support changing that prop on an open FocusTrap
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+  React.useEffect(() => {
+    // We might render an empty child.
+    if (!open || !rootRef.current) {
+      return;
+    }
+    const doc = ownerDocument(rootRef.current);
+    const loopFocus = nativeEvent => {
+      lastKeydown.current = nativeEvent;
+      if (disableEnforceFocus || !isEnabled() || nativeEvent.key !== 'Tab') {
+        return;
+      }
+
+      // Make sure the next tab starts from the right place.
+      // doc.activeElement refers to the origin.
+      if (doc.activeElement === rootRef.current && nativeEvent.shiftKey) {
+        // We need to ignore the next contain as
+        // it will try to move the focus back to the rootRef element.
+        ignoreNextEnforceFocus.current = true;
+        if (sentinelEnd.current) {
+          sentinelEnd.current.focus();
+        }
+      }
+    };
+    const contain = () => {
+      const rootElement = rootRef.current;
+
+      // Cleanup functions are executed lazily in React 17.
+      // Contain can be called between the component being unmounted and its cleanup function being run.
+      if (rootElement === null) {
+        return;
+      }
+      if (!doc.hasFocus() || !isEnabled() || ignoreNextEnforceFocus.current) {
+        ignoreNextEnforceFocus.current = false;
+        return;
+      }
+
+      // The focus is already inside
+      if (rootElement.contains(doc.activeElement)) {
+        return;
+      }
+
+      // The disableEnforceFocus is set and the focus is outside of the focus trap (and sentinel nodes)
+      if (disableEnforceFocus && doc.activeElement !== sentinelStart.current && doc.activeElement !== sentinelEnd.current) {
+        return;
+      }
+
+      // if the focus event is not coming from inside the children's react tree, reset the refs
+      if (doc.activeElement !== reactFocusEventTarget.current) {
+        reactFocusEventTarget.current = null;
+      } else if (reactFocusEventTarget.current !== null) {
+        return;
+      }
+      if (!activated.current) {
+        return;
+      }
+      let tabbable = [];
+      if (doc.activeElement === sentinelStart.current || doc.activeElement === sentinelEnd.current) {
+        tabbable = getTabbable(rootRef.current);
+      }
+
+      // one of the sentinel nodes was focused, so move the focus
+      // to the first/last tabbable element inside the focus trap
+      if (tabbable.length > 0) {
+        var _lastKeydown$current, _lastKeydown$current2;
+        const isShiftTab = Boolean(((_lastKeydown$current = lastKeydown.current) == null ? void 0 : _lastKeydown$current.shiftKey) && ((_lastKeydown$current2 = lastKeydown.current) == null ? void 0 : _lastKeydown$current2.key) === 'Tab');
+        const focusNext = tabbable[0];
+        const focusPrevious = tabbable[tabbable.length - 1];
+        if (typeof focusNext !== 'string' && typeof focusPrevious !== 'string') {
+          if (isShiftTab) {
+            focusPrevious.focus();
+          } else {
+            focusNext.focus();
+          }
+        }
+        // no tabbable elements in the trap focus or the focus was outside of the focus trap
+      } else {
+        rootElement.focus();
+      }
+    };
+    doc.addEventListener('focusin', contain);
+    doc.addEventListener('keydown', loopFocus, true);
+
+    // With Edge, Safari and Firefox, no focus related events are fired when the focused area stops being a focused area.
+    // e.g. https://bugzilla.mozilla.org/show_bug.cgi?id=559561.
+    // Instead, we can look if the active element was restored on the BODY element.
+    //
+    // The whatwg spec defines how the browser should behave but does not explicitly mention any events:
+    // https://html.spec.whatwg.org/multipage/interaction.html#focus-fixup-rule.
+    const interval = setInterval(() => {
+      if (doc.activeElement && doc.activeElement.tagName === 'BODY') {
+        contain();
+      }
+    }, 50);
+    return () => {
+      clearInterval(interval);
+      doc.removeEventListener('focusin', contain);
+      doc.removeEventListener('keydown', loopFocus, true);
+    };
+  }, [disableAutoFocus, disableEnforceFocus, disableRestoreFocus, isEnabled, open, getTabbable]);
+  const onFocus = event => {
+    if (nodeToRestore.current === null) {
+      nodeToRestore.current = event.relatedTarget;
+    }
+    activated.current = true;
+    reactFocusEventTarget.current = event.target;
+    const childrenPropsHandler = children.props.onFocus;
+    if (childrenPropsHandler) {
+      childrenPropsHandler(event);
+    }
+  };
+  const handleFocusSentinel = event => {
+    if (nodeToRestore.current === null) {
+      nodeToRestore.current = event.relatedTarget;
+    }
+    activated.current = true;
+  };
+  return /*#__PURE__*/jsxs(React.Fragment, {
+    children: [/*#__PURE__*/jsx("div", {
+      tabIndex: open ? 0 : -1,
+      onFocus: handleFocusSentinel,
+      ref: sentinelStart,
+      "data-testid": "sentinelStart"
+    }), /*#__PURE__*/React.cloneElement(children, {
+      ref: handleRef,
+      onFocus
+    }), /*#__PURE__*/jsx("div", {
+      tabIndex: open ? 0 : -1,
+      onFocus: handleFocusSentinel,
+      ref: sentinelEnd,
+      "data-testid": "sentinelEnd"
+    })]
+  });
+}
+process.env.NODE_ENV !== "production" ? FocusTrap.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * A single child content element.
+   */
+  children: elementAcceptingRef$1,
+  /**
+   * If `true`, the focus trap will not automatically shift focus to itself when it opens, and
+   * replace it to the last focused element when it closes.
+   * This also works correctly with any focus trap children that have the `disableAutoFocus` prop.
+   *
+   * Generally this should never be set to `true` as it makes the focus trap less
+   * accessible to assistive technologies, like screen readers.
+   * @default false
+   */
+  disableAutoFocus: PropTypes.bool,
+  /**
+   * If `true`, the focus trap will not prevent focus from leaving the focus trap while open.
+   *
+   * Generally this should never be set to `true` as it makes the focus trap less
+   * accessible to assistive technologies, like screen readers.
+   * @default false
+   */
+  disableEnforceFocus: PropTypes.bool,
+  /**
+   * If `true`, the focus trap will not restore focus to previously focused element once
+   * focus trap is hidden or unmounted.
+   * @default false
+   */
+  disableRestoreFocus: PropTypes.bool,
+  /**
+   * Returns an array of ordered tabbable nodes (i.e. in tab order) within the root.
+   * For instance, you can provide the "tabbable" npm dependency.
+   * @param {HTMLElement} root
+   */
+  getTabbable: PropTypes.func,
+  /**
+   * This prop extends the `open` prop.
+   * It allows to toggle the open state without having to wait for a rerender when changing the `open` prop.
+   * This prop should be memoized.
+   * It can be used to support multiple focus trap mounted at the same time.
+   * @default function defaultIsEnabled(): boolean {
+   *   return true;
+   * }
+   */
+  isEnabled: PropTypes.func,
+  /**
+   * If `true`, focus is locked.
+   */
+  open: PropTypes.bool.isRequired
+} : void 0;
+if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line
+  FocusTrap['propTypes' + ''] = exactProp(FocusTrap.propTypes);
+}
+
+function getContainer$1(container) {
+  return typeof container === 'function' ? container() : container;
+}
+
+/**
+ * Portals provide a first-class way to render children into a DOM node
+ * that exists outside the DOM hierarchy of the parent component.
+ *
+ * Demos:
+ *
+ * - [Portal](https://mui.com/base-ui/react-portal/)
+ *
+ * API:
+ *
+ * - [Portal API](https://mui.com/base-ui/react-portal/components-api/#portal)
+ */
+const Portal = /*#__PURE__*/React.forwardRef(function Portal(props, forwardedRef) {
+  const {
+    children,
+    container,
+    disablePortal = false
+  } = props;
+  const [mountNode, setMountNode] = React.useState(null);
+  // @ts-expect-error TODO upstream fix
+  const handleRef = useForkRef( /*#__PURE__*/React.isValidElement(children) ? children.ref : null, forwardedRef);
+  useEnhancedEffect$1(() => {
+    if (!disablePortal) {
+      setMountNode(getContainer$1(container) || document.body);
+    }
+  }, [container, disablePortal]);
+  useEnhancedEffect$1(() => {
+    if (mountNode && !disablePortal) {
+      setRef(forwardedRef, mountNode);
+      return () => {
+        setRef(forwardedRef, null);
+      };
+    }
+    return undefined;
+  }, [forwardedRef, mountNode, disablePortal]);
+  if (disablePortal) {
+    if ( /*#__PURE__*/React.isValidElement(children)) {
+      const newProps = {
+        ref: handleRef
+      };
+      return /*#__PURE__*/React.cloneElement(children, newProps);
+    }
+    return /*#__PURE__*/jsx(React.Fragment, {
+      children: children
+    });
+  }
+  return /*#__PURE__*/jsx(React.Fragment, {
+    children: mountNode ? /*#__PURE__*/ReactDOM.createPortal(children, mountNode) : mountNode
+  });
+});
+process.env.NODE_ENV !== "production" ? Portal.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │ To update them, edit the TypeScript types and run `pnpm proptypes`. │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The children to render into the `container`.
+   */
+  children: PropTypes.node,
+  /**
+   * An HTML element or function that returns one.
+   * The `container` will have the portal children appended to it.
+   *
+   * You can also provide a callback, which is called in a React layout effect.
+   * This lets you set the container from a ref, and also makes server-side rendering possible.
+   *
+   * By default, it uses the body of the top-level document object,
+   * so it's simply `document.body` most of the time.
+   */
+  container: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([HTMLElementType, PropTypes.func]),
+  /**
+   * The `children` will be under the DOM hierarchy of the parent component.
+   * @default false
+   */
+  disablePortal: PropTypes.bool
+} : void 0;
+if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line
+  Portal['propTypes' + ''] = exactProp(Portal.propTypes);
+}
+
+// Is a vertical scrollbar displayed?
+function isOverflowing(container) {
+  const doc = ownerDocument(container);
+  if (doc.body === container) {
+    return ownerWindow(container).innerWidth > doc.documentElement.clientWidth;
+  }
+  return container.scrollHeight > container.clientHeight;
+}
+function ariaHidden(element, show) {
+  if (show) {
+    element.setAttribute('aria-hidden', 'true');
+  } else {
+    element.removeAttribute('aria-hidden');
+  }
+}
+function getPaddingRight(element) {
+  return parseInt(ownerWindow(element).getComputedStyle(element).paddingRight, 10) || 0;
+}
+function isAriaHiddenForbiddenOnElement(element) {
+  // The forbidden HTML tags are the ones from ARIA specification that
+  // can be children of body and can't have aria-hidden attribute.
+  // cf. https://www.w3.org/TR/html-aria/#docconformance
+  const forbiddenTagNames = ['TEMPLATE', 'SCRIPT', 'STYLE', 'LINK', 'MAP', 'META', 'NOSCRIPT', 'PICTURE', 'COL', 'COLGROUP', 'PARAM', 'SLOT', 'SOURCE', 'TRACK'];
+  const isForbiddenTagName = forbiddenTagNames.indexOf(element.tagName) !== -1;
+  const isInputHidden = element.tagName === 'INPUT' && element.getAttribute('type') === 'hidden';
+  return isForbiddenTagName || isInputHidden;
+}
+function ariaHiddenSiblings(container, mountElement, currentElement, elementsToExclude, show) {
+  const blacklist = [mountElement, currentElement, ...elementsToExclude];
+  [].forEach.call(container.children, element => {
+    const isNotExcludedElement = blacklist.indexOf(element) === -1;
+    const isNotForbiddenElement = !isAriaHiddenForbiddenOnElement(element);
+    if (isNotExcludedElement && isNotForbiddenElement) {
+      ariaHidden(element, show);
+    }
+  });
+}
+function findIndexOf(items, callback) {
+  let idx = -1;
+  items.some((item, index) => {
+    if (callback(item)) {
+      idx = index;
+      return true;
+    }
+    return false;
+  });
+  return idx;
+}
+function handleContainer(containerInfo, props) {
+  const restoreStyle = [];
+  const container = containerInfo.container;
+  if (!props.disableScrollLock) {
+    if (isOverflowing(container)) {
+      // Compute the size before applying overflow hidden to avoid any scroll jumps.
+      const scrollbarSize = getScrollbarSize(ownerDocument(container));
+      restoreStyle.push({
+        value: container.style.paddingRight,
+        property: 'padding-right',
+        el: container
+      });
+      // Use computed style, here to get the real padding to add our scrollbar width.
+      container.style.paddingRight = `${getPaddingRight(container) + scrollbarSize}px`;
+
+      // .mui-fixed is a global helper.
+      const fixedElements = ownerDocument(container).querySelectorAll('.mui-fixed');
+      [].forEach.call(fixedElements, element => {
+        restoreStyle.push({
+          value: element.style.paddingRight,
+          property: 'padding-right',
+          el: element
+        });
+        element.style.paddingRight = `${getPaddingRight(element) + scrollbarSize}px`;
+      });
+    }
+    let scrollContainer;
+    if (container.parentNode instanceof DocumentFragment) {
+      scrollContainer = ownerDocument(container).body;
+    } else {
+      // Support html overflow-y: auto for scroll stability between pages
+      // https://css-tricks.com/snippets/css/force-vertical-scrollbar/
+      const parent = container.parentElement;
+      const containerWindow = ownerWindow(container);
+      scrollContainer = (parent == null ? void 0 : parent.nodeName) === 'HTML' && containerWindow.getComputedStyle(parent).overflowY === 'scroll' ? parent : container;
+    }
+
+    // Block the scroll even if no scrollbar is visible to account for mobile keyboard
+    // screensize shrink.
+    restoreStyle.push({
+      value: scrollContainer.style.overflow,
+      property: 'overflow',
+      el: scrollContainer
+    }, {
+      value: scrollContainer.style.overflowX,
+      property: 'overflow-x',
+      el: scrollContainer
+    }, {
+      value: scrollContainer.style.overflowY,
+      property: 'overflow-y',
+      el: scrollContainer
+    });
+    scrollContainer.style.overflow = 'hidden';
+  }
+  const restore = () => {
+    restoreStyle.forEach(({
+      value,
+      el,
+      property
+    }) => {
+      if (value) {
+        el.style.setProperty(property, value);
+      } else {
+        el.style.removeProperty(property);
+      }
+    });
+  };
+  return restore;
+}
+function getHiddenSiblings(container) {
+  const hiddenSiblings = [];
+  [].forEach.call(container.children, element => {
+    if (element.getAttribute('aria-hidden') === 'true') {
+      hiddenSiblings.push(element);
+    }
+  });
+  return hiddenSiblings;
+}
+/**
+ * @ignore - do not document.
+ *
+ * Proper state management for containers and the modals in those containers.
+ * Simplified, but inspired by react-overlay's ModalManager class.
+ * Used by the Modal to ensure proper styling of containers.
+ */
+class ModalManager {
+  constructor() {
+    this.containers = void 0;
+    this.modals = void 0;
+    this.modals = [];
+    this.containers = [];
+  }
+  add(modal, container) {
+    let modalIndex = this.modals.indexOf(modal);
+    if (modalIndex !== -1) {
+      return modalIndex;
+    }
+    modalIndex = this.modals.length;
+    this.modals.push(modal);
+
+    // If the modal we are adding is already in the DOM.
+    if (modal.modalRef) {
+      ariaHidden(modal.modalRef, false);
+    }
+    const hiddenSiblings = getHiddenSiblings(container);
+    ariaHiddenSiblings(container, modal.mount, modal.modalRef, hiddenSiblings, true);
+    const containerIndex = findIndexOf(this.containers, item => item.container === container);
+    if (containerIndex !== -1) {
+      this.containers[containerIndex].modals.push(modal);
+      return modalIndex;
+    }
+    this.containers.push({
+      modals: [modal],
+      container,
+      restore: null,
+      hiddenSiblings
+    });
+    return modalIndex;
+  }
+  mount(modal, props) {
+    const containerIndex = findIndexOf(this.containers, item => item.modals.indexOf(modal) !== -1);
+    const containerInfo = this.containers[containerIndex];
+    if (!containerInfo.restore) {
+      containerInfo.restore = handleContainer(containerInfo, props);
+    }
+  }
+  remove(modal, ariaHiddenState = true) {
+    const modalIndex = this.modals.indexOf(modal);
+    if (modalIndex === -1) {
+      return modalIndex;
+    }
+    const containerIndex = findIndexOf(this.containers, item => item.modals.indexOf(modal) !== -1);
+    const containerInfo = this.containers[containerIndex];
+    containerInfo.modals.splice(containerInfo.modals.indexOf(modal), 1);
+    this.modals.splice(modalIndex, 1);
+
+    // If that was the last modal in a container, clean up the container.
+    if (containerInfo.modals.length === 0) {
+      // The modal might be closed before it had the chance to be mounted in the DOM.
+      if (containerInfo.restore) {
+        containerInfo.restore();
+      }
+      if (modal.modalRef) {
+        // In case the modal wasn't in the DOM yet.
+        ariaHidden(modal.modalRef, ariaHiddenState);
+      }
+      ariaHiddenSiblings(containerInfo.container, modal.mount, modal.modalRef, containerInfo.hiddenSiblings, false);
+      this.containers.splice(containerIndex, 1);
+    } else {
+      // Otherwise make sure the next top modal is visible to a screen reader.
+      const nextTop = containerInfo.modals[containerInfo.modals.length - 1];
+      // as soon as a modal is adding its modalRef is undefined. it can't set
+      // aria-hidden because the dom element doesn't exist either
+      // when modal was unmounted before modalRef gets null
+      if (nextTop.modalRef) {
+        ariaHidden(nextTop.modalRef, false);
+      }
+    }
+    return modalIndex;
+  }
+  isTopModal(modal) {
+    return this.modals.length > 0 && this.modals[this.modals.length - 1] === modal;
+  }
+}
+
+function getContainer(container) {
+  return typeof container === 'function' ? container() : container;
+}
+function getHasTransition(children) {
+  return children ? children.props.hasOwnProperty('in') : false;
+}
+
+// A modal manager used to track and manage the state of open Modals.
+// Modals don't open on the server so this won't conflict with concurrent requests.
+const defaultManager = new ModalManager();
+/**
+ *
+ * Demos:
+ *
+ * - [Modal](https://mui.com/base-ui/react-modal/#hook)
+ *
+ * API:
+ *
+ * - [useModal API](https://mui.com/base-ui/react-modal/hooks-api/#use-modal)
+ */
+function useModal(parameters) {
+  const {
+    container,
+    disableEscapeKeyDown = false,
+    disableScrollLock = false,
+    // @ts-ignore internal logic - Base UI supports the manager as a prop too
+    manager = defaultManager,
+    closeAfterTransition = false,
+    onTransitionEnter,
+    onTransitionExited,
+    children,
+    onClose,
+    open,
+    rootRef
+  } = parameters;
+
+  // @ts-ignore internal logic
+  const modal = React.useRef({});
+  const mountNodeRef = React.useRef(null);
+  const modalRef = React.useRef(null);
+  const handleRef = useForkRef(modalRef, rootRef);
+  const [exited, setExited] = React.useState(!open);
+  const hasTransition = getHasTransition(children);
+  let ariaHiddenProp = true;
+  if (parameters['aria-hidden'] === 'false' || parameters['aria-hidden'] === false) {
+    ariaHiddenProp = false;
+  }
+  const getDoc = () => ownerDocument(mountNodeRef.current);
+  const getModal = () => {
+    modal.current.modalRef = modalRef.current;
+    modal.current.mount = mountNodeRef.current;
+    return modal.current;
+  };
+  const handleMounted = () => {
+    manager.mount(getModal(), {
+      disableScrollLock
+    });
+
+    // Fix a bug on Chrome where the scroll isn't initially 0.
+    if (modalRef.current) {
+      modalRef.current.scrollTop = 0;
+    }
+  };
+  const handleOpen = useEventCallback(() => {
+    const resolvedContainer = getContainer(container) || getDoc().body;
+    manager.add(getModal(), resolvedContainer);
+
+    // The element was already mounted.
+    if (modalRef.current) {
+      handleMounted();
+    }
+  });
+  const isTopModal = React.useCallback(() => manager.isTopModal(getModal()), [manager]);
+  const handlePortalRef = useEventCallback(node => {
+    mountNodeRef.current = node;
+    if (!node) {
+      return;
+    }
+    if (open && isTopModal()) {
+      handleMounted();
+    } else if (modalRef.current) {
+      ariaHidden(modalRef.current, ariaHiddenProp);
+    }
+  });
+  const handleClose = React.useCallback(() => {
+    manager.remove(getModal(), ariaHiddenProp);
+  }, [ariaHiddenProp, manager]);
+  React.useEffect(() => {
+    return () => {
+      handleClose();
+    };
+  }, [handleClose]);
+  React.useEffect(() => {
+    if (open) {
+      handleOpen();
+    } else if (!hasTransition || !closeAfterTransition) {
+      handleClose();
+    }
+  }, [open, handleClose, hasTransition, closeAfterTransition, handleOpen]);
+  const createHandleKeyDown = otherHandlers => event => {
+    var _otherHandlers$onKeyD;
+    (_otherHandlers$onKeyD = otherHandlers.onKeyDown) == null || _otherHandlers$onKeyD.call(otherHandlers, event);
+
+    // The handler doesn't take event.defaultPrevented into account:
+    //
+    // event.preventDefault() is meant to stop default behaviors like
+    // clicking a checkbox to check it, hitting a button to submit a form,
+    // and hitting left arrow to move the cursor in a text input etc.
+    // Only special HTML elements have these default behaviors.
+    if (event.key !== 'Escape' || event.which === 229 ||
+    // Wait until IME is settled.
+    !isTopModal()) {
+      return;
+    }
+    if (!disableEscapeKeyDown) {
+      // Swallow the event, in case someone is listening for the escape key on the body.
+      event.stopPropagation();
+      if (onClose) {
+        onClose(event, 'escapeKeyDown');
+      }
+    }
+  };
+  const createHandleBackdropClick = otherHandlers => event => {
+    var _otherHandlers$onClic;
+    (_otherHandlers$onClic = otherHandlers.onClick) == null || _otherHandlers$onClic.call(otherHandlers, event);
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+    if (onClose) {
+      onClose(event, 'backdropClick');
+    }
+  };
+  const getRootProps = (otherHandlers = {}) => {
+    const propsEventHandlers = extractEventHandlers(parameters);
+
+    // The custom event handlers shouldn't be spread on the root element
+    delete propsEventHandlers.onTransitionEnter;
+    delete propsEventHandlers.onTransitionExited;
+    const externalEventHandlers = _extends$1({}, propsEventHandlers, otherHandlers);
+    return _extends$1({
+      role: 'presentation'
+    }, externalEventHandlers, {
+      onKeyDown: createHandleKeyDown(externalEventHandlers),
+      ref: handleRef
+    });
+  };
+  const getBackdropProps = (otherHandlers = {}) => {
+    const externalEventHandlers = otherHandlers;
+    return _extends$1({
+      'aria-hidden': true
+    }, externalEventHandlers, {
+      onClick: createHandleBackdropClick(externalEventHandlers),
+      open
+    });
+  };
+  const getTransitionProps = () => {
+    const handleEnter = () => {
+      setExited(false);
+      if (onTransitionEnter) {
+        onTransitionEnter();
+      }
+    };
+    const handleExited = () => {
+      setExited(true);
+      if (onTransitionExited) {
+        onTransitionExited();
+      }
+      if (closeAfterTransition) {
+        handleClose();
+      }
+    };
+    return {
+      onEnter: createChainedFunction(handleEnter, children == null ? void 0 : children.props.onEnter),
+      onExited: createChainedFunction(handleExited, children == null ? void 0 : children.props.onExited)
+    };
+  };
+  return {
+    getRootProps,
+    getBackdropProps,
+    getTransitionProps,
+    rootRef: handleRef,
+    portalRef: handlePortalRef,
+    isTopModal,
+    exited,
+    hasTransition
+  };
+}
+
+const _excluded$9 = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
+const styles$1 = {
+  entering: {
+    opacity: 1
+  },
+  entered: {
+    opacity: 1
+  }
+};
+
+/**
+ * The Fade transition is used by the [Modal](/material-ui/react-modal/) component.
+ * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
+ */
+const Fade = /*#__PURE__*/React.forwardRef(function Fade(props, ref) {
+  const theme = useTheme();
+  const defaultTimeout = {
+    enter: theme.transitions.duration.enteringScreen,
+    exit: theme.transitions.duration.leavingScreen
+  };
+  const {
+      addEndListener,
+      appear = true,
+      children,
+      easing,
+      in: inProp,
+      onEnter,
+      onEntered,
+      onEntering,
+      onExit,
+      onExited,
+      onExiting,
+      style,
+      timeout = defaultTimeout,
+      // eslint-disable-next-line react/prop-types
+      TransitionComponent = Transition$1
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$9);
+  const nodeRef = React.useRef(null);
+  const handleRef = useForkRef(nodeRef, children.ref, ref);
+  const normalizedTransitionCallback = callback => maybeIsAppearing => {
+    if (callback) {
+      const node = nodeRef.current;
+
+      // onEnterXxx and onExitXxx callbacks have a different arguments.length value.
+      if (maybeIsAppearing === undefined) {
+        callback(node);
+      } else {
+        callback(node, maybeIsAppearing);
+      }
+    }
+  };
+  const handleEntering = normalizedTransitionCallback(onEntering);
+  const handleEnter = normalizedTransitionCallback((node, isAppearing) => {
+    reflow(node); // So the animation always start from the start.
+
+    const transitionProps = getTransitionProps({
+      style,
+      timeout,
+      easing
+    }, {
+      mode: 'enter'
+    });
+    node.style.webkitTransition = theme.transitions.create('opacity', transitionProps);
+    node.style.transition = theme.transitions.create('opacity', transitionProps);
+    if (onEnter) {
+      onEnter(node, isAppearing);
+    }
+  });
+  const handleEntered = normalizedTransitionCallback(onEntered);
+  const handleExiting = normalizedTransitionCallback(onExiting);
+  const handleExit = normalizedTransitionCallback(node => {
+    const transitionProps = getTransitionProps({
+      style,
+      timeout,
+      easing
+    }, {
+      mode: 'exit'
+    });
+    node.style.webkitTransition = theme.transitions.create('opacity', transitionProps);
+    node.style.transition = theme.transitions.create('opacity', transitionProps);
+    if (onExit) {
+      onExit(node);
+    }
+  });
+  const handleExited = normalizedTransitionCallback(onExited);
+  const handleAddEndListener = next => {
+    if (addEndListener) {
+      // Old call signature before `react-transition-group` implemented `nodeRef`
+      addEndListener(nodeRef.current, next);
+    }
+  };
+  return /*#__PURE__*/jsx(TransitionComponent, _extends$1({
+    appear: appear,
+    in: inProp,
+    nodeRef: nodeRef ,
+    onEnter: handleEnter,
+    onEntered: handleEntered,
+    onEntering: handleEntering,
+    onExit: handleExit,
+    onExited: handleExited,
+    onExiting: handleExiting,
+    addEndListener: handleAddEndListener,
+    timeout: timeout
+  }, other, {
+    children: (state, childProps) => {
+      return /*#__PURE__*/React.cloneElement(children, _extends$1({
+        style: _extends$1({
+          opacity: 0,
+          visibility: state === 'exited' && !inProp ? 'hidden' : undefined
+        }, styles$1[state], style, children.props.style),
+        ref: handleRef
+      }, childProps));
+    }
+  }));
+});
+process.env.NODE_ENV !== "production" ? Fade.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * Add a custom transition end trigger. Called with the transitioning DOM
+   * node and a done callback. Allows for more fine grained transition end
+   * logic. Note: Timeouts are still used as a fallback if provided.
+   */
+  addEndListener: PropTypes.func,
+  /**
+   * Perform the enter transition when it first mounts if `in` is also `true`.
+   * Set this to `false` to disable this behavior.
+   * @default true
+   */
+  appear: PropTypes.bool,
+  /**
+   * A single child content element.
+   */
+  children: elementAcceptingRef$1.isRequired,
+  /**
+   * The transition timing function.
+   * You may specify a single easing or a object containing enter and exit values.
+   */
+  easing: PropTypes.oneOfType([PropTypes.shape({
+    enter: PropTypes.string,
+    exit: PropTypes.string
+  }), PropTypes.string]),
+  /**
+   * If `true`, the component will transition in.
+   */
+  in: PropTypes.bool,
+  /**
+   * @ignore
+   */
+  onEnter: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onEntered: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onEntering: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onExit: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onExited: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onExiting: PropTypes.func,
+  /**
+   * @ignore
+   */
+  style: PropTypes.object,
+  /**
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   * @default {
+   *   enter: theme.transitions.duration.enteringScreen,
+   *   exit: theme.transitions.duration.leavingScreen,
+   * }
+   */
+  timeout: PropTypes.oneOfType([PropTypes.number, PropTypes.shape({
+    appear: PropTypes.number,
+    enter: PropTypes.number,
+    exit: PropTypes.number
+  })])
+} : void 0;
+var Fade$1 = Fade;
+
+function getBackdropUtilityClass(slot) {
+  return generateUtilityClass('MuiBackdrop', slot);
+}
+generateUtilityClasses('MuiBackdrop', ['root', 'invisible']);
+
+const _excluded$8 = ["children", "className", "component", "components", "componentsProps", "invisible", "open", "slotProps", "slots", "TransitionComponent", "transitionDuration"];
+const useUtilityClasses$6 = ownerState => {
+  const {
+    classes,
+    invisible
+  } = ownerState;
+  const slots = {
+    root: ['root', invisible && 'invisible']
+  };
+  return composeClasses(slots, getBackdropUtilityClass, classes);
+};
+const BackdropRoot = styled$1('div', {
+  name: 'MuiBackdrop',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, ownerState.invisible && styles.invisible];
+  }
+})(({
+  ownerState
+}) => _extends$1({
+  position: 'fixed',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  right: 0,
+  bottom: 0,
+  top: 0,
+  left: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  WebkitTapHighlightColor: 'transparent'
+}, ownerState.invisible && {
+  backgroundColor: 'transparent'
+}));
+const Backdrop = /*#__PURE__*/React.forwardRef(function Backdrop(inProps, ref) {
+  var _slotProps$root, _ref, _slots$root;
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiBackdrop'
+  });
+  const {
+      children,
+      className,
+      component = 'div',
+      components = {},
+      componentsProps = {},
+      invisible = false,
+      open,
+      slotProps = {},
+      slots = {},
+      TransitionComponent = Fade$1,
+      transitionDuration
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$8);
+  const ownerState = _extends$1({}, props, {
+    component,
+    invisible
+  });
+  const classes = useUtilityClasses$6(ownerState);
+  const rootSlotProps = (_slotProps$root = slotProps.root) != null ? _slotProps$root : componentsProps.root;
+  return /*#__PURE__*/jsx(TransitionComponent, _extends$1({
+    in: open,
+    timeout: transitionDuration
+  }, other, {
+    children: /*#__PURE__*/jsx(BackdropRoot, _extends$1({
+      "aria-hidden": true
+    }, rootSlotProps, {
+      as: (_ref = (_slots$root = slots.root) != null ? _slots$root : components.Root) != null ? _ref : component,
+      className: clsx(classes.root, className, rootSlotProps == null ? void 0 : rootSlotProps.className),
+      ownerState: _extends$1({}, ownerState, rootSlotProps == null ? void 0 : rootSlotProps.ownerState),
+      classes: classes,
+      ref: ref,
+      children: children
+    }))
+  }));
+});
+process.env.NODE_ENV !== "production" ? Backdrop.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * The components used for each slot inside.
+   *
+   * This prop is an alias for the `slots` prop.
+   * It's recommended to use the `slots` prop instead.
+   *
+   * @default {}
+   */
+  components: PropTypes.shape({
+    Root: PropTypes.elementType
+  }),
+  /**
+   * The extra props for the slot components.
+   * You can override the existing props or add new ones.
+   *
+   * This prop is an alias for the `slotProps` prop.
+   * It's recommended to use the `slotProps` prop instead, as `componentsProps` will be deprecated in the future.
+   *
+   * @default {}
+   */
+  componentsProps: PropTypes.shape({
+    root: PropTypes.object
+  }),
+  /**
+   * If `true`, the backdrop is invisible.
+   * It can be used when rendering a popover or a custom select component.
+   * @default false
+   */
+  invisible: PropTypes.bool,
+  /**
+   * If `true`, the component is shown.
+   */
+  open: PropTypes.bool.isRequired,
+  /**
+   * The extra props for the slot components.
+   * You can override the existing props or add new ones.
+   *
+   * This prop is an alias for the `componentsProps` prop, which will be deprecated in the future.
+   *
+   * @default {}
+   */
+  slotProps: PropTypes.shape({
+    root: PropTypes.object
+  }),
+  /**
+   * The components used for each slot inside.
+   *
+   * This prop is an alias for the `components` prop, which will be deprecated in the future.
+   *
+   * @default {}
+   */
+  slots: PropTypes.shape({
+    root: PropTypes.elementType
+  }),
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
+  /**
+   * The component used for the transition.
+   * [Follow this guide](/material-ui/transitions/#transitioncomponent-prop) to learn more about the requirements for this component.
+   * @default Fade
+   */
+  TransitionComponent: PropTypes.elementType,
+  /**
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   */
+  transitionDuration: PropTypes.oneOfType([PropTypes.number, PropTypes.shape({
+    appear: PropTypes.number,
+    enter: PropTypes.number,
+    exit: PropTypes.number
+  })])
+} : void 0;
+var Backdrop$1 = Backdrop;
+
 function getButtonUtilityClass(slot) {
   return generateUtilityClass('MuiButton', slot);
 }
@@ -9724,8 +12328,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 var ButtonGroupButtonContext$1 = ButtonGroupButtonContext;
 
-const _excluded = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
-const useUtilityClasses = ownerState => {
+const _excluded$7 = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
+const useUtilityClasses$5 = ownerState => {
   const {
     color,
     disableElevation,
@@ -9951,7 +12555,7 @@ const Button = /*#__PURE__*/React.forwardRef(function Button(inProps, ref) {
       type,
       variant = 'text'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded);
+    other = _objectWithoutPropertiesLoose(props, _excluded$7);
   const ownerState = _extends$1({}, props, {
     color,
     component,
@@ -9963,7 +12567,7 @@ const Button = /*#__PURE__*/React.forwardRef(function Button(inProps, ref) {
     type,
     variant
   });
-  const classes = useUtilityClasses(ownerState);
+  const classes = useUtilityClasses$5(ownerState);
   const startIcon = startIconProp && /*#__PURE__*/jsx(ButtonStartIcon, {
     className: classes.startIcon,
     ownerState: ownerState,
@@ -10085,7 +12689,2087 @@ process.env.NODE_ENV !== "production" ? Button.propTypes /* remove-proptypes */ 
 } : void 0;
 var Button$1 = Button;
 
-createSvgIcon( /*#__PURE__*/jsx("path", {
+function getModalUtilityClass(slot) {
+  return generateUtilityClass('MuiModal', slot);
+}
+generateUtilityClasses('MuiModal', ['root', 'hidden', 'backdrop']);
+
+const _excluded$6 = ["BackdropComponent", "BackdropProps", "classes", "className", "closeAfterTransition", "children", "container", "component", "components", "componentsProps", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "onBackdropClick", "onClose", "onTransitionEnter", "onTransitionExited", "open", "slotProps", "slots", "theme"];
+const useUtilityClasses$4 = ownerState => {
+  const {
+    open,
+    exited,
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root', !open && exited && 'hidden'],
+    backdrop: ['backdrop']
+  };
+  return composeClasses(slots, getModalUtilityClass, classes);
+};
+const ModalRoot = styled$1('div', {
+  name: 'MuiModal',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, !ownerState.open && ownerState.exited && styles.hidden];
+  }
+})(({
+  theme,
+  ownerState
+}) => _extends$1({
+  position: 'fixed',
+  zIndex: (theme.vars || theme).zIndex.modal,
+  right: 0,
+  bottom: 0,
+  top: 0,
+  left: 0
+}, !ownerState.open && ownerState.exited && {
+  visibility: 'hidden'
+}));
+const ModalBackdrop = styled$1(Backdrop$1, {
+  name: 'MuiModal',
+  slot: 'Backdrop',
+  overridesResolver: (props, styles) => {
+    return styles.backdrop;
+  }
+})({
+  zIndex: -1
+});
+
+/**
+ * Modal is a lower-level construct that is leveraged by the following components:
+ *
+ * - [Dialog](/material-ui/api/dialog/)
+ * - [Drawer](/material-ui/api/drawer/)
+ * - [Menu](/material-ui/api/menu/)
+ * - [Popover](/material-ui/api/popover/)
+ *
+ * If you are creating a modal dialog, you probably want to use the [Dialog](/material-ui/api/dialog/) component
+ * rather than directly using Modal.
+ *
+ * This component shares many concepts with [react-overlays](https://react-bootstrap.github.io/react-overlays/#modals).
+ */
+const Modal = /*#__PURE__*/React.forwardRef(function Modal(inProps, ref) {
+  var _ref, _slots$root, _ref2, _slots$backdrop, _slotProps$root, _slotProps$backdrop;
+  const props = useThemeProps({
+    name: 'MuiModal',
+    props: inProps
+  });
+  const {
+      BackdropComponent = ModalBackdrop,
+      BackdropProps,
+      className,
+      closeAfterTransition = false,
+      children,
+      container,
+      component,
+      components = {},
+      componentsProps = {},
+      disableAutoFocus = false,
+      disableEnforceFocus = false,
+      disableEscapeKeyDown = false,
+      disablePortal = false,
+      disableRestoreFocus = false,
+      disableScrollLock = false,
+      hideBackdrop = false,
+      keepMounted = false,
+      onBackdropClick,
+      open,
+      slotProps,
+      slots
+      // eslint-disable-next-line react/prop-types
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$6);
+  const propsWithDefaults = _extends$1({}, props, {
+    closeAfterTransition,
+    disableAutoFocus,
+    disableEnforceFocus,
+    disableEscapeKeyDown,
+    disablePortal,
+    disableRestoreFocus,
+    disableScrollLock,
+    hideBackdrop,
+    keepMounted
+  });
+  const {
+    getRootProps,
+    getBackdropProps,
+    getTransitionProps,
+    portalRef,
+    isTopModal,
+    exited,
+    hasTransition
+  } = useModal(_extends$1({}, propsWithDefaults, {
+    rootRef: ref
+  }));
+  const ownerState = _extends$1({}, propsWithDefaults, {
+    exited
+  });
+  const classes = useUtilityClasses$4(ownerState);
+  const childProps = {};
+  if (children.props.tabIndex === undefined) {
+    childProps.tabIndex = '-1';
+  }
+
+  // It's a Transition like component
+  if (hasTransition) {
+    const {
+      onEnter,
+      onExited
+    } = getTransitionProps();
+    childProps.onEnter = onEnter;
+    childProps.onExited = onExited;
+  }
+  const RootSlot = (_ref = (_slots$root = slots == null ? void 0 : slots.root) != null ? _slots$root : components.Root) != null ? _ref : ModalRoot;
+  const BackdropSlot = (_ref2 = (_slots$backdrop = slots == null ? void 0 : slots.backdrop) != null ? _slots$backdrop : components.Backdrop) != null ? _ref2 : BackdropComponent;
+  const rootSlotProps = (_slotProps$root = slotProps == null ? void 0 : slotProps.root) != null ? _slotProps$root : componentsProps.root;
+  const backdropSlotProps = (_slotProps$backdrop = slotProps == null ? void 0 : slotProps.backdrop) != null ? _slotProps$backdrop : componentsProps.backdrop;
+  const rootProps = useSlotProps({
+    elementType: RootSlot,
+    externalSlotProps: rootSlotProps,
+    externalForwardedProps: other,
+    getSlotProps: getRootProps,
+    additionalProps: {
+      ref,
+      as: component
+    },
+    ownerState,
+    className: clsx(className, rootSlotProps == null ? void 0 : rootSlotProps.className, classes == null ? void 0 : classes.root, !ownerState.open && ownerState.exited && (classes == null ? void 0 : classes.hidden))
+  });
+  const backdropProps = useSlotProps({
+    elementType: BackdropSlot,
+    externalSlotProps: backdropSlotProps,
+    additionalProps: BackdropProps,
+    getSlotProps: otherHandlers => {
+      return getBackdropProps(_extends$1({}, otherHandlers, {
+        onClick: e => {
+          if (onBackdropClick) {
+            onBackdropClick(e);
+          }
+          if (otherHandlers != null && otherHandlers.onClick) {
+            otherHandlers.onClick(e);
+          }
+        }
+      }));
+    },
+    className: clsx(backdropSlotProps == null ? void 0 : backdropSlotProps.className, BackdropProps == null ? void 0 : BackdropProps.className, classes == null ? void 0 : classes.backdrop),
+    ownerState
+  });
+  if (!keepMounted && !open && (!hasTransition || exited)) {
+    return null;
+  }
+  return /*#__PURE__*/jsx(Portal, {
+    ref: portalRef,
+    container: container,
+    disablePortal: disablePortal,
+    children: /*#__PURE__*/jsxs(RootSlot, _extends$1({}, rootProps, {
+      children: [!hideBackdrop && BackdropComponent ? /*#__PURE__*/jsx(BackdropSlot, _extends$1({}, backdropProps)) : null, /*#__PURE__*/jsx(FocusTrap, {
+        disableEnforceFocus: disableEnforceFocus,
+        disableAutoFocus: disableAutoFocus,
+        disableRestoreFocus: disableRestoreFocus,
+        isEnabled: isTopModal,
+        open: open,
+        children: /*#__PURE__*/React.cloneElement(children, childProps)
+      })]
+    }))
+  });
+});
+process.env.NODE_ENV !== "production" ? Modal.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * A backdrop component. This prop enables custom backdrop rendering.
+   * @deprecated Use `slots.backdrop` instead. While this prop currently works, it will be removed in the next major version.
+   * Use the `slots.backdrop` prop to make your application ready for the next version of Material UI.
+   * @default styled(Backdrop, {
+   *   name: 'MuiModal',
+   *   slot: 'Backdrop',
+   *   overridesResolver: (props, styles) => {
+   *     return styles.backdrop;
+   *   },
+   * })({
+   *   zIndex: -1,
+   * })
+   */
+  BackdropComponent: PropTypes.elementType,
+  /**
+   * Props applied to the [`Backdrop`](/material-ui/api/backdrop/) element.
+   * @deprecated Use `slotProps.backdrop` instead.
+   */
+  BackdropProps: PropTypes.object,
+  /**
+   * A single child content element.
+   */
+  children: elementAcceptingRef$1.isRequired,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * When set to true the Modal waits until a nested Transition is completed before closing.
+   * @default false
+   */
+  closeAfterTransition: PropTypes.bool,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * The components used for each slot inside.
+   *
+   * This prop is an alias for the `slots` prop.
+   * It's recommended to use the `slots` prop instead.
+   *
+   * @default {}
+   */
+  components: PropTypes.shape({
+    Backdrop: PropTypes.elementType,
+    Root: PropTypes.elementType
+  }),
+  /**
+   * The extra props for the slot components.
+   * You can override the existing props or add new ones.
+   *
+   * This prop is an alias for the `slotProps` prop.
+   * It's recommended to use the `slotProps` prop instead, as `componentsProps` will be deprecated in the future.
+   *
+   * @default {}
+   */
+  componentsProps: PropTypes.shape({
+    backdrop: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  }),
+  /**
+   * An HTML element or function that returns one.
+   * The `container` will have the portal children appended to it.
+   *
+   * You can also provide a callback, which is called in a React layout effect.
+   * This lets you set the container from a ref, and also makes server-side rendering possible.
+   *
+   * By default, it uses the body of the top-level document object,
+   * so it's simply `document.body` most of the time.
+   */
+  container: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([HTMLElementType, PropTypes.func]),
+  /**
+   * If `true`, the modal will not automatically shift focus to itself when it opens, and
+   * replace it to the last focused element when it closes.
+   * This also works correctly with any modal children that have the `disableAutoFocus` prop.
+   *
+   * Generally this should never be set to `true` as it makes the modal less
+   * accessible to assistive technologies, like screen readers.
+   * @default false
+   */
+  disableAutoFocus: PropTypes.bool,
+  /**
+   * If `true`, the modal will not prevent focus from leaving the modal while open.
+   *
+   * Generally this should never be set to `true` as it makes the modal less
+   * accessible to assistive technologies, like screen readers.
+   * @default false
+   */
+  disableEnforceFocus: PropTypes.bool,
+  /**
+   * If `true`, hitting escape will not fire the `onClose` callback.
+   * @default false
+   */
+  disableEscapeKeyDown: PropTypes.bool,
+  /**
+   * The `children` will be under the DOM hierarchy of the parent component.
+   * @default false
+   */
+  disablePortal: PropTypes.bool,
+  /**
+   * If `true`, the modal will not restore focus to previously focused element once
+   * modal is hidden or unmounted.
+   * @default false
+   */
+  disableRestoreFocus: PropTypes.bool,
+  /**
+   * Disable the scroll lock behavior.
+   * @default false
+   */
+  disableScrollLock: PropTypes.bool,
+  /**
+   * If `true`, the backdrop is not rendered.
+   * @default false
+   */
+  hideBackdrop: PropTypes.bool,
+  /**
+   * Always keep the children in the DOM.
+   * This prop can be useful in SEO situation or
+   * when you want to maximize the responsiveness of the Modal.
+   * @default false
+   */
+  keepMounted: PropTypes.bool,
+  /**
+   * Callback fired when the backdrop is clicked.
+   * @deprecated Use the `onClose` prop with the `reason` argument to handle the `backdropClick` events.
+   */
+  onBackdropClick: PropTypes.func,
+  /**
+   * Callback fired when the component requests to be closed.
+   * The `reason` parameter can optionally be used to control the response to `onClose`.
+   *
+   * @param {object} event The event source of the callback.
+   * @param {string} reason Can be: `"escapeKeyDown"`, `"backdropClick"`.
+   */
+  onClose: PropTypes.func,
+  /**
+   * A function called when a transition enters.
+   */
+  onTransitionEnter: PropTypes.func,
+  /**
+   * A function called when a transition has exited.
+   */
+  onTransitionExited: PropTypes.func,
+  /**
+   * If `true`, the component is shown.
+   */
+  open: PropTypes.bool.isRequired,
+  /**
+   * The props used for each slot inside the Modal.
+   * @default {}
+   */
+  slotProps: PropTypes.shape({
+    backdrop: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  }),
+  /**
+   * The components used for each slot inside the Modal.
+   * Either a string to use a HTML element or a component.
+   * @default {}
+   */
+  slots: PropTypes.shape({
+    backdrop: PropTypes.elementType,
+    root: PropTypes.elementType
+  }),
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var Modal$1 = Modal;
+
+const dividerClasses = generateUtilityClasses('MuiDivider', ['root', 'absolute', 'fullWidth', 'inset', 'middle', 'flexItem', 'light', 'vertical', 'withChildren', 'withChildrenVertical', 'textAlignRight', 'textAlignLeft', 'wrapper', 'wrapperVertical']);
+var dividerClasses$1 = dividerClasses;
+
+const _excluded$5 = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
+function getScale(value) {
+  return `scale(${value}, ${value ** 2})`;
+}
+const styles = {
+  entering: {
+    opacity: 1,
+    transform: getScale(1)
+  },
+  entered: {
+    opacity: 1,
+    transform: 'none'
+  }
+};
+
+/*
+ TODO v6: remove
+ Conditionally apply a workaround for the CSS transition bug in Safari 15.4 / WebKit browsers.
+ */
+const isWebKit154 = typeof navigator !== 'undefined' && /^((?!chrome|android).)*(safari|mobile)/i.test(navigator.userAgent) && /(os |version\/)15(.|_)4/i.test(navigator.userAgent);
+
+/**
+ * The Grow transition is used by the [Tooltip](/material-ui/react-tooltip/) and
+ * [Popover](/material-ui/react-popover/) components.
+ * It uses [react-transition-group](https://github.com/reactjs/react-transition-group) internally.
+ */
+const Grow = /*#__PURE__*/React.forwardRef(function Grow(props, ref) {
+  const {
+      addEndListener,
+      appear = true,
+      children,
+      easing,
+      in: inProp,
+      onEnter,
+      onEntered,
+      onEntering,
+      onExit,
+      onExited,
+      onExiting,
+      style,
+      timeout = 'auto',
+      // eslint-disable-next-line react/prop-types
+      TransitionComponent = Transition$1
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$5);
+  const timer = useTimeout();
+  const autoTimeout = React.useRef();
+  const theme = useTheme();
+  const nodeRef = React.useRef(null);
+  const handleRef = useForkRef(nodeRef, children.ref, ref);
+  const normalizedTransitionCallback = callback => maybeIsAppearing => {
+    if (callback) {
+      const node = nodeRef.current;
+
+      // onEnterXxx and onExitXxx callbacks have a different arguments.length value.
+      if (maybeIsAppearing === undefined) {
+        callback(node);
+      } else {
+        callback(node, maybeIsAppearing);
+      }
+    }
+  };
+  const handleEntering = normalizedTransitionCallback(onEntering);
+  const handleEnter = normalizedTransitionCallback((node, isAppearing) => {
+    reflow(node); // So the animation always start from the start.
+
+    const {
+      duration: transitionDuration,
+      delay,
+      easing: transitionTimingFunction
+    } = getTransitionProps({
+      style,
+      timeout,
+      easing
+    }, {
+      mode: 'enter'
+    });
+    let duration;
+    if (timeout === 'auto') {
+      duration = theme.transitions.getAutoHeightDuration(node.clientHeight);
+      autoTimeout.current = duration;
+    } else {
+      duration = transitionDuration;
+    }
+    node.style.transition = [theme.transitions.create('opacity', {
+      duration,
+      delay
+    }), theme.transitions.create('transform', {
+      duration: isWebKit154 ? duration : duration * 0.666,
+      delay,
+      easing: transitionTimingFunction
+    })].join(',');
+    if (onEnter) {
+      onEnter(node, isAppearing);
+    }
+  });
+  const handleEntered = normalizedTransitionCallback(onEntered);
+  const handleExiting = normalizedTransitionCallback(onExiting);
+  const handleExit = normalizedTransitionCallback(node => {
+    const {
+      duration: transitionDuration,
+      delay,
+      easing: transitionTimingFunction
+    } = getTransitionProps({
+      style,
+      timeout,
+      easing
+    }, {
+      mode: 'exit'
+    });
+    let duration;
+    if (timeout === 'auto') {
+      duration = theme.transitions.getAutoHeightDuration(node.clientHeight);
+      autoTimeout.current = duration;
+    } else {
+      duration = transitionDuration;
+    }
+    node.style.transition = [theme.transitions.create('opacity', {
+      duration,
+      delay
+    }), theme.transitions.create('transform', {
+      duration: isWebKit154 ? duration : duration * 0.666,
+      delay: isWebKit154 ? delay : delay || duration * 0.333,
+      easing: transitionTimingFunction
+    })].join(',');
+    node.style.opacity = 0;
+    node.style.transform = getScale(0.75);
+    if (onExit) {
+      onExit(node);
+    }
+  });
+  const handleExited = normalizedTransitionCallback(onExited);
+  const handleAddEndListener = next => {
+    if (timeout === 'auto') {
+      timer.start(autoTimeout.current || 0, next);
+    }
+    if (addEndListener) {
+      // Old call signature before `react-transition-group` implemented `nodeRef`
+      addEndListener(nodeRef.current, next);
+    }
+  };
+  return /*#__PURE__*/jsx(TransitionComponent, _extends$1({
+    appear: appear,
+    in: inProp,
+    nodeRef: nodeRef,
+    onEnter: handleEnter,
+    onEntered: handleEntered,
+    onEntering: handleEntering,
+    onExit: handleExit,
+    onExited: handleExited,
+    onExiting: handleExiting,
+    addEndListener: handleAddEndListener,
+    timeout: timeout === 'auto' ? null : timeout
+  }, other, {
+    children: (state, childProps) => {
+      return /*#__PURE__*/React.cloneElement(children, _extends$1({
+        style: _extends$1({
+          opacity: 0,
+          transform: getScale(0.75),
+          visibility: state === 'exited' && !inProp ? 'hidden' : undefined
+        }, styles[state], style, children.props.style),
+        ref: handleRef
+      }, childProps));
+    }
+  }));
+});
+process.env.NODE_ENV !== "production" ? Grow.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * Add a custom transition end trigger. Called with the transitioning DOM
+   * node and a done callback. Allows for more fine grained transition end
+   * logic. Note: Timeouts are still used as a fallback if provided.
+   */
+  addEndListener: PropTypes.func,
+  /**
+   * Perform the enter transition when it first mounts if `in` is also `true`.
+   * Set this to `false` to disable this behavior.
+   * @default true
+   */
+  appear: PropTypes.bool,
+  /**
+   * A single child content element.
+   */
+  children: elementAcceptingRef$1.isRequired,
+  /**
+   * The transition timing function.
+   * You may specify a single easing or a object containing enter and exit values.
+   */
+  easing: PropTypes.oneOfType([PropTypes.shape({
+    enter: PropTypes.string,
+    exit: PropTypes.string
+  }), PropTypes.string]),
+  /**
+   * If `true`, the component will transition in.
+   */
+  in: PropTypes.bool,
+  /**
+   * @ignore
+   */
+  onEnter: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onEntered: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onEntering: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onExit: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onExited: PropTypes.func,
+  /**
+   * @ignore
+   */
+  onExiting: PropTypes.func,
+  /**
+   * @ignore
+   */
+  style: PropTypes.object,
+  /**
+   * The duration for the transition, in milliseconds.
+   * You may specify a single timeout for all transitions, or individually with an object.
+   *
+   * Set to 'auto' to automatically calculate transition time based on height.
+   * @default 'auto'
+   */
+  timeout: PropTypes.oneOfType([PropTypes.oneOf(['auto']), PropTypes.number, PropTypes.shape({
+    appear: PropTypes.number,
+    enter: PropTypes.number,
+    exit: PropTypes.number
+  })])
+} : void 0;
+Grow.muiSupportAuto = true;
+var Grow$1 = Grow;
+
+/**
+ * @ignore - internal component.
+ */
+const ListContext = /*#__PURE__*/React.createContext({});
+if (process.env.NODE_ENV !== 'production') {
+  ListContext.displayName = 'ListContext';
+}
+var ListContext$1 = ListContext;
+
+function getListUtilityClass(slot) {
+  return generateUtilityClass('MuiList', slot);
+}
+generateUtilityClasses('MuiList', ['root', 'padding', 'dense', 'subheader']);
+
+const _excluded$4 = ["children", "className", "component", "dense", "disablePadding", "subheader"];
+const useUtilityClasses$3 = ownerState => {
+  const {
+    classes,
+    disablePadding,
+    dense,
+    subheader
+  } = ownerState;
+  const slots = {
+    root: ['root', !disablePadding && 'padding', dense && 'dense', subheader && 'subheader']
+  };
+  return composeClasses(slots, getListUtilityClass, classes);
+};
+const ListRoot = styled$1('ul', {
+  name: 'MuiList',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, !ownerState.disablePadding && styles.padding, ownerState.dense && styles.dense, ownerState.subheader && styles.subheader];
+  }
+})(({
+  ownerState
+}) => _extends$1({
+  listStyle: 'none',
+  margin: 0,
+  padding: 0,
+  position: 'relative'
+}, !ownerState.disablePadding && {
+  paddingTop: 8,
+  paddingBottom: 8
+}, ownerState.subheader && {
+  paddingTop: 0
+}));
+const List = /*#__PURE__*/React.forwardRef(function List(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiList'
+  });
+  const {
+      children,
+      className,
+      component = 'ul',
+      dense = false,
+      disablePadding = false,
+      subheader
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$4);
+  const context = React.useMemo(() => ({
+    dense
+  }), [dense]);
+  const ownerState = _extends$1({}, props, {
+    component,
+    dense,
+    disablePadding
+  });
+  const classes = useUtilityClasses$3(ownerState);
+  return /*#__PURE__*/jsx(ListContext$1.Provider, {
+    value: context,
+    children: /*#__PURE__*/jsxs(ListRoot, _extends$1({
+      as: component,
+      className: clsx(classes.root, className),
+      ref: ref,
+      ownerState: ownerState
+    }, other, {
+      children: [subheader, children]
+    }))
+  });
+});
+process.env.NODE_ENV !== "production" ? List.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * If `true`, compact vertical padding designed for keyboard and mouse input is used for
+   * the list and list items.
+   * The prop is available to descendant components as the `dense` context.
+   * @default false
+   */
+  dense: PropTypes.bool,
+  /**
+   * If `true`, vertical padding is removed from the list.
+   * @default false
+   */
+  disablePadding: PropTypes.bool,
+  /**
+   * The content of the subheader, normally `ListSubheader`.
+   */
+  subheader: PropTypes.node,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var List$1 = List;
+
+const listItemIconClasses = generateUtilityClasses('MuiListItemIcon', ['root', 'alignItemsFlexStart']);
+var listItemIconClasses$1 = listItemIconClasses;
+
+const listItemTextClasses = generateUtilityClasses('MuiListItemText', ['root', 'multiline', 'dense', 'inset', 'primary', 'secondary']);
+var listItemTextClasses$1 = listItemTextClasses;
+
+const _excluded$3 = ["actions", "autoFocus", "autoFocusItem", "children", "className", "disabledItemsFocusable", "disableListWrap", "onKeyDown", "variant"];
+function nextItem(list, item, disableListWrap) {
+  if (list === item) {
+    return list.firstChild;
+  }
+  if (item && item.nextElementSibling) {
+    return item.nextElementSibling;
+  }
+  return disableListWrap ? null : list.firstChild;
+}
+function previousItem(list, item, disableListWrap) {
+  if (list === item) {
+    return disableListWrap ? list.firstChild : list.lastChild;
+  }
+  if (item && item.previousElementSibling) {
+    return item.previousElementSibling;
+  }
+  return disableListWrap ? null : list.lastChild;
+}
+function textCriteriaMatches(nextFocus, textCriteria) {
+  if (textCriteria === undefined) {
+    return true;
+  }
+  let text = nextFocus.innerText;
+  if (text === undefined) {
+    // jsdom doesn't support innerText
+    text = nextFocus.textContent;
+  }
+  text = text.trim().toLowerCase();
+  if (text.length === 0) {
+    return false;
+  }
+  if (textCriteria.repeating) {
+    return text[0] === textCriteria.keys[0];
+  }
+  return text.indexOf(textCriteria.keys.join('')) === 0;
+}
+function moveFocus(list, currentFocus, disableListWrap, disabledItemsFocusable, traversalFunction, textCriteria) {
+  let wrappedOnce = false;
+  let nextFocus = traversalFunction(list, currentFocus, currentFocus ? disableListWrap : false);
+  while (nextFocus) {
+    // Prevent infinite loop.
+    if (nextFocus === list.firstChild) {
+      if (wrappedOnce) {
+        return false;
+      }
+      wrappedOnce = true;
+    }
+
+    // Same logic as useAutocomplete.js
+    const nextFocusDisabled = disabledItemsFocusable ? false : nextFocus.disabled || nextFocus.getAttribute('aria-disabled') === 'true';
+    if (!nextFocus.hasAttribute('tabindex') || !textCriteriaMatches(nextFocus, textCriteria) || nextFocusDisabled) {
+      // Move to the next element.
+      nextFocus = traversalFunction(list, nextFocus, disableListWrap);
+    } else {
+      nextFocus.focus();
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * A permanently displayed menu following https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/.
+ * It's exposed to help customization of the [`Menu`](/material-ui/api/menu/) component if you
+ * use it separately you need to move focus into the component manually. Once
+ * the focus is placed inside the component it is fully keyboard accessible.
+ */
+const MenuList = /*#__PURE__*/React.forwardRef(function MenuList(props, ref) {
+  const {
+      // private
+      // eslint-disable-next-line react/prop-types
+      actions,
+      autoFocus = false,
+      autoFocusItem = false,
+      children,
+      className,
+      disabledItemsFocusable = false,
+      disableListWrap = false,
+      onKeyDown,
+      variant = 'selectedMenu'
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$3);
+  const listRef = React.useRef(null);
+  const textCriteriaRef = React.useRef({
+    keys: [],
+    repeating: true,
+    previousKeyMatched: true,
+    lastTime: null
+  });
+  useEnhancedEffect$1(() => {
+    if (autoFocus) {
+      listRef.current.focus();
+    }
+  }, [autoFocus]);
+  React.useImperativeHandle(actions, () => ({
+    adjustStyleForScrollbar: (containerElement, theme) => {
+      // Let's ignore that piece of logic if users are already overriding the width
+      // of the menu.
+      const noExplicitWidth = !listRef.current.style.width;
+      if (containerElement.clientHeight < listRef.current.clientHeight && noExplicitWidth) {
+        const scrollbarSize = `${getScrollbarSize(ownerDocument(containerElement))}px`;
+        listRef.current.style[theme.direction === 'rtl' ? 'paddingLeft' : 'paddingRight'] = scrollbarSize;
+        listRef.current.style.width = `calc(100% + ${scrollbarSize})`;
+      }
+      return listRef.current;
+    }
+  }), []);
+  const handleKeyDown = event => {
+    const list = listRef.current;
+    const key = event.key;
+    /**
+     * @type {Element} - will always be defined since we are in a keydown handler
+     * attached to an element. A keydown event is either dispatched to the activeElement
+     * or document.body or document.documentElement. Only the first case will
+     * trigger this specific handler.
+     */
+    const currentFocus = ownerDocument(list).activeElement;
+    if (key === 'ArrowDown') {
+      // Prevent scroll of the page
+      event.preventDefault();
+      moveFocus(list, currentFocus, disableListWrap, disabledItemsFocusable, nextItem);
+    } else if (key === 'ArrowUp') {
+      event.preventDefault();
+      moveFocus(list, currentFocus, disableListWrap, disabledItemsFocusable, previousItem);
+    } else if (key === 'Home') {
+      event.preventDefault();
+      moveFocus(list, null, disableListWrap, disabledItemsFocusable, nextItem);
+    } else if (key === 'End') {
+      event.preventDefault();
+      moveFocus(list, null, disableListWrap, disabledItemsFocusable, previousItem);
+    } else if (key.length === 1) {
+      const criteria = textCriteriaRef.current;
+      const lowerKey = key.toLowerCase();
+      const currTime = performance.now();
+      if (criteria.keys.length > 0) {
+        // Reset
+        if (currTime - criteria.lastTime > 500) {
+          criteria.keys = [];
+          criteria.repeating = true;
+          criteria.previousKeyMatched = true;
+        } else if (criteria.repeating && lowerKey !== criteria.keys[0]) {
+          criteria.repeating = false;
+        }
+      }
+      criteria.lastTime = currTime;
+      criteria.keys.push(lowerKey);
+      const keepFocusOnCurrent = currentFocus && !criteria.repeating && textCriteriaMatches(currentFocus, criteria);
+      if (criteria.previousKeyMatched && (keepFocusOnCurrent || moveFocus(list, currentFocus, false, disabledItemsFocusable, nextItem, criteria))) {
+        event.preventDefault();
+      } else {
+        criteria.previousKeyMatched = false;
+      }
+    }
+    if (onKeyDown) {
+      onKeyDown(event);
+    }
+  };
+  const handleRef = useForkRef(listRef, ref);
+
+  /**
+   * the index of the item should receive focus
+   * in a `variant="selectedMenu"` it's the first `selected` item
+   * otherwise it's the very first item.
+   */
+  let activeItemIndex = -1;
+  // since we inject focus related props into children we have to do a lookahead
+  // to check if there is a `selected` item. We're looking for the last `selected`
+  // item and use the first valid item as a fallback
+  React.Children.forEach(children, (child, index) => {
+    if (! /*#__PURE__*/React.isValidElement(child)) {
+      if (activeItemIndex === index) {
+        activeItemIndex += 1;
+        if (activeItemIndex >= children.length) {
+          // there are no focusable items within the list.
+          activeItemIndex = -1;
+        }
+      }
+      return;
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      if (reactIsExports.isFragment(child)) {
+        console.error(["MUI: The Menu component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n'));
+      }
+    }
+    if (!child.props.disabled) {
+      if (variant === 'selectedMenu' && child.props.selected) {
+        activeItemIndex = index;
+      } else if (activeItemIndex === -1) {
+        activeItemIndex = index;
+      }
+    }
+    if (activeItemIndex === index && (child.props.disabled || child.props.muiSkipListHighlight || child.type.muiSkipListHighlight)) {
+      activeItemIndex += 1;
+      if (activeItemIndex >= children.length) {
+        // there are no focusable items within the list.
+        activeItemIndex = -1;
+      }
+    }
+  });
+  const items = React.Children.map(children, (child, index) => {
+    if (index === activeItemIndex) {
+      const newChildProps = {};
+      if (autoFocusItem) {
+        newChildProps.autoFocus = true;
+      }
+      if (child.props.tabIndex === undefined && variant === 'selectedMenu') {
+        newChildProps.tabIndex = 0;
+      }
+      return /*#__PURE__*/React.cloneElement(child, newChildProps);
+    }
+    return child;
+  });
+  return /*#__PURE__*/jsx(List$1, _extends$1({
+    role: "menu",
+    ref: handleRef,
+    className: className,
+    onKeyDown: handleKeyDown,
+    tabIndex: autoFocus ? 0 : -1
+  }, other, {
+    children: items
+  }));
+});
+process.env.NODE_ENV !== "production" ? MenuList.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * If `true`, will focus the `[role="menu"]` container and move into tab order.
+   * @default false
+   */
+  autoFocus: PropTypes.bool,
+  /**
+   * If `true`, will focus the first menuitem if `variant="menu"` or selected item
+   * if `variant="selectedMenu"`.
+   * @default false
+   */
+  autoFocusItem: PropTypes.bool,
+  /**
+   * MenuList contents, normally `MenuItem`s.
+   */
+  children: PropTypes.node,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * If `true`, will allow focus on disabled items.
+   * @default false
+   */
+  disabledItemsFocusable: PropTypes.bool,
+  /**
+   * If `true`, the menu items will not wrap focus.
+   * @default false
+   */
+  disableListWrap: PropTypes.bool,
+  /**
+   * @ignore
+   */
+  onKeyDown: PropTypes.func,
+  /**
+   * The variant to use. Use `menu` to prevent selected items from impacting the initial focus
+   * and the vertical alignment relative to the anchor element.
+   * @default 'selectedMenu'
+   */
+  variant: PropTypes.oneOf(['menu', 'selectedMenu'])
+} : void 0;
+var MenuList$1 = MenuList;
+
+function getPopoverUtilityClass(slot) {
+  return generateUtilityClass('MuiPopover', slot);
+}
+generateUtilityClasses('MuiPopover', ['root', 'paper']);
+
+const _excluded$2 = ["onEntering"],
+  _excluded2$1 = ["action", "anchorEl", "anchorOrigin", "anchorPosition", "anchorReference", "children", "className", "container", "elevation", "marginThreshold", "open", "PaperProps", "slots", "slotProps", "transformOrigin", "TransitionComponent", "transitionDuration", "TransitionProps", "disableScrollLock"],
+  _excluded3 = ["slotProps"];
+function getOffsetTop(rect, vertical) {
+  let offset = 0;
+  if (typeof vertical === 'number') {
+    offset = vertical;
+  } else if (vertical === 'center') {
+    offset = rect.height / 2;
+  } else if (vertical === 'bottom') {
+    offset = rect.height;
+  }
+  return offset;
+}
+function getOffsetLeft(rect, horizontal) {
+  let offset = 0;
+  if (typeof horizontal === 'number') {
+    offset = horizontal;
+  } else if (horizontal === 'center') {
+    offset = rect.width / 2;
+  } else if (horizontal === 'right') {
+    offset = rect.width;
+  }
+  return offset;
+}
+function getTransformOriginValue(transformOrigin) {
+  return [transformOrigin.horizontal, transformOrigin.vertical].map(n => typeof n === 'number' ? `${n}px` : n).join(' ');
+}
+function resolveAnchorEl(anchorEl) {
+  return typeof anchorEl === 'function' ? anchorEl() : anchorEl;
+}
+const useUtilityClasses$2 = ownerState => {
+  const {
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root'],
+    paper: ['paper']
+  };
+  return composeClasses(slots, getPopoverUtilityClass, classes);
+};
+const PopoverRoot = styled$1(Modal$1, {
+  name: 'MuiPopover',
+  slot: 'Root',
+  overridesResolver: (props, styles) => styles.root
+})({});
+const PopoverPaper = styled$1(MuiPaper, {
+  name: 'MuiPopover',
+  slot: 'Paper',
+  overridesResolver: (props, styles) => styles.paper
+})({
+  position: 'absolute',
+  overflowY: 'auto',
+  overflowX: 'hidden',
+  // So we see the popover when it's empty.
+  // It's most likely on issue on userland.
+  minWidth: 16,
+  minHeight: 16,
+  maxWidth: 'calc(100% - 32px)',
+  maxHeight: 'calc(100% - 32px)',
+  // We disable the focus ring for mouse, touch and keyboard users.
+  outline: 0
+});
+const Popover = /*#__PURE__*/React.forwardRef(function Popover(inProps, ref) {
+  var _slotProps$paper, _slots$root, _slots$paper;
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiPopover'
+  });
+  const {
+      action,
+      anchorEl,
+      anchorOrigin = {
+        vertical: 'top',
+        horizontal: 'left'
+      },
+      anchorPosition,
+      anchorReference = 'anchorEl',
+      children,
+      className,
+      container: containerProp,
+      elevation = 8,
+      marginThreshold = 16,
+      open,
+      PaperProps: PaperPropsProp = {},
+      slots,
+      slotProps,
+      transformOrigin = {
+        vertical: 'top',
+        horizontal: 'left'
+      },
+      TransitionComponent = Grow$1,
+      transitionDuration: transitionDurationProp = 'auto',
+      TransitionProps: {
+        onEntering
+      } = {},
+      disableScrollLock = false
+    } = props,
+    TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$2),
+    other = _objectWithoutPropertiesLoose(props, _excluded2$1);
+  const externalPaperSlotProps = (_slotProps$paper = slotProps == null ? void 0 : slotProps.paper) != null ? _slotProps$paper : PaperPropsProp;
+  const paperRef = React.useRef();
+  const handlePaperRef = useForkRef(paperRef, externalPaperSlotProps.ref);
+  const ownerState = _extends$1({}, props, {
+    anchorOrigin,
+    anchorReference,
+    elevation,
+    marginThreshold,
+    externalPaperSlotProps,
+    transformOrigin,
+    TransitionComponent,
+    transitionDuration: transitionDurationProp,
+    TransitionProps
+  });
+  const classes = useUtilityClasses$2(ownerState);
+
+  // Returns the top/left offset of the position
+  // to attach to on the anchor element (or body if none is provided)
+  const getAnchorOffset = React.useCallback(() => {
+    if (anchorReference === 'anchorPosition') {
+      if (process.env.NODE_ENV !== 'production') {
+        if (!anchorPosition) {
+          console.error('MUI: You need to provide a `anchorPosition` prop when using ' + '<Popover anchorReference="anchorPosition" />.');
+        }
+      }
+      return anchorPosition;
+    }
+    const resolvedAnchorEl = resolveAnchorEl(anchorEl);
+
+    // If an anchor element wasn't provided, just use the parent body element of this Popover
+    const anchorElement = resolvedAnchorEl && resolvedAnchorEl.nodeType === 1 ? resolvedAnchorEl : ownerDocument(paperRef.current).body;
+    const anchorRect = anchorElement.getBoundingClientRect();
+    if (process.env.NODE_ENV !== 'production') {
+      const box = anchorElement.getBoundingClientRect();
+      if (process.env.NODE_ENV !== 'test' && box.top === 0 && box.left === 0 && box.right === 0 && box.bottom === 0) {
+        console.warn(['MUI: The `anchorEl` prop provided to the component is invalid.', 'The anchor element should be part of the document layout.', "Make sure the element is present in the document or that it's not display none."].join('\n'));
+      }
+    }
+    return {
+      top: anchorRect.top + getOffsetTop(anchorRect, anchorOrigin.vertical),
+      left: anchorRect.left + getOffsetLeft(anchorRect, anchorOrigin.horizontal)
+    };
+  }, [anchorEl, anchorOrigin.horizontal, anchorOrigin.vertical, anchorPosition, anchorReference]);
+
+  // Returns the base transform origin using the element
+  const getTransformOrigin = React.useCallback(elemRect => {
+    return {
+      vertical: getOffsetTop(elemRect, transformOrigin.vertical),
+      horizontal: getOffsetLeft(elemRect, transformOrigin.horizontal)
+    };
+  }, [transformOrigin.horizontal, transformOrigin.vertical]);
+  const getPositioningStyle = React.useCallback(element => {
+    const elemRect = {
+      width: element.offsetWidth,
+      height: element.offsetHeight
+    };
+
+    // Get the transform origin point on the element itself
+    const elemTransformOrigin = getTransformOrigin(elemRect);
+    if (anchorReference === 'none') {
+      return {
+        top: null,
+        left: null,
+        transformOrigin: getTransformOriginValue(elemTransformOrigin)
+      };
+    }
+
+    // Get the offset of the anchoring element
+    const anchorOffset = getAnchorOffset();
+
+    // Calculate element positioning
+    let top = anchorOffset.top - elemTransformOrigin.vertical;
+    let left = anchorOffset.left - elemTransformOrigin.horizontal;
+    const bottom = top + elemRect.height;
+    const right = left + elemRect.width;
+
+    // Use the parent window of the anchorEl if provided
+    const containerWindow = ownerWindow(resolveAnchorEl(anchorEl));
+
+    // Window thresholds taking required margin into account
+    const heightThreshold = containerWindow.innerHeight - marginThreshold;
+    const widthThreshold = containerWindow.innerWidth - marginThreshold;
+
+    // Check if the vertical axis needs shifting
+    if (marginThreshold !== null && top < marginThreshold) {
+      const diff = top - marginThreshold;
+      top -= diff;
+      elemTransformOrigin.vertical += diff;
+    } else if (marginThreshold !== null && bottom > heightThreshold) {
+      const diff = bottom - heightThreshold;
+      top -= diff;
+      elemTransformOrigin.vertical += diff;
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      if (elemRect.height > heightThreshold && elemRect.height && heightThreshold) {
+        console.error(['MUI: The popover component is too tall.', `Some part of it can not be seen on the screen (${elemRect.height - heightThreshold}px).`, 'Please consider adding a `max-height` to improve the user-experience.'].join('\n'));
+      }
+    }
+
+    // Check if the horizontal axis needs shifting
+    if (marginThreshold !== null && left < marginThreshold) {
+      const diff = left - marginThreshold;
+      left -= diff;
+      elemTransformOrigin.horizontal += diff;
+    } else if (right > widthThreshold) {
+      const diff = right - widthThreshold;
+      left -= diff;
+      elemTransformOrigin.horizontal += diff;
+    }
+    return {
+      top: `${Math.round(top)}px`,
+      left: `${Math.round(left)}px`,
+      transformOrigin: getTransformOriginValue(elemTransformOrigin)
+    };
+  }, [anchorEl, anchorReference, getAnchorOffset, getTransformOrigin, marginThreshold]);
+  const [isPositioned, setIsPositioned] = React.useState(open);
+  const setPositioningStyles = React.useCallback(() => {
+    const element = paperRef.current;
+    if (!element) {
+      return;
+    }
+    const positioning = getPositioningStyle(element);
+    if (positioning.top !== null) {
+      element.style.top = positioning.top;
+    }
+    if (positioning.left !== null) {
+      element.style.left = positioning.left;
+    }
+    element.style.transformOrigin = positioning.transformOrigin;
+    setIsPositioned(true);
+  }, [getPositioningStyle]);
+  React.useEffect(() => {
+    if (disableScrollLock) {
+      window.addEventListener('scroll', setPositioningStyles);
+    }
+    return () => window.removeEventListener('scroll', setPositioningStyles);
+  }, [anchorEl, disableScrollLock, setPositioningStyles]);
+  const handleEntering = (element, isAppearing) => {
+    if (onEntering) {
+      onEntering(element, isAppearing);
+    }
+    setPositioningStyles();
+  };
+  const handleExited = () => {
+    setIsPositioned(false);
+  };
+  React.useEffect(() => {
+    if (open) {
+      setPositioningStyles();
+    }
+  });
+  React.useImperativeHandle(action, () => open ? {
+    updatePosition: () => {
+      setPositioningStyles();
+    }
+  } : null, [open, setPositioningStyles]);
+  React.useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+    const handleResize = debounce(() => {
+      setPositioningStyles();
+    });
+    const containerWindow = ownerWindow(anchorEl);
+    containerWindow.addEventListener('resize', handleResize);
+    return () => {
+      handleResize.clear();
+      containerWindow.removeEventListener('resize', handleResize);
+    };
+  }, [anchorEl, open, setPositioningStyles]);
+  let transitionDuration = transitionDurationProp;
+  if (transitionDurationProp === 'auto' && !TransitionComponent.muiSupportAuto) {
+    transitionDuration = undefined;
+  }
+
+  // If the container prop is provided, use that
+  // If the anchorEl prop is provided, use its parent body element as the container
+  // If neither are provided let the Modal take care of choosing the container
+  const container = containerProp || (anchorEl ? ownerDocument(resolveAnchorEl(anchorEl)).body : undefined);
+  const RootSlot = (_slots$root = slots == null ? void 0 : slots.root) != null ? _slots$root : PopoverRoot;
+  const PaperSlot = (_slots$paper = slots == null ? void 0 : slots.paper) != null ? _slots$paper : PopoverPaper;
+  const paperProps = useSlotProps({
+    elementType: PaperSlot,
+    externalSlotProps: _extends$1({}, externalPaperSlotProps, {
+      style: isPositioned ? externalPaperSlotProps.style : _extends$1({}, externalPaperSlotProps.style, {
+        opacity: 0
+      })
+    }),
+    additionalProps: {
+      elevation,
+      ref: handlePaperRef
+    },
+    ownerState,
+    className: clsx(classes.paper, externalPaperSlotProps == null ? void 0 : externalPaperSlotProps.className)
+  });
+  const _useSlotProps = useSlotProps({
+      elementType: RootSlot,
+      externalSlotProps: (slotProps == null ? void 0 : slotProps.root) || {},
+      externalForwardedProps: other,
+      additionalProps: {
+        ref,
+        slotProps: {
+          backdrop: {
+            invisible: true
+          }
+        },
+        container,
+        open
+      },
+      ownerState,
+      className: clsx(classes.root, className)
+    }),
+    {
+      slotProps: rootSlotPropsProp
+    } = _useSlotProps,
+    rootProps = _objectWithoutPropertiesLoose(_useSlotProps, _excluded3);
+  return /*#__PURE__*/jsx(RootSlot, _extends$1({}, rootProps, !isHostComponent(RootSlot) && {
+    slotProps: rootSlotPropsProp,
+    disableScrollLock
+  }, {
+    children: /*#__PURE__*/jsx(TransitionComponent, _extends$1({
+      appear: true,
+      in: open,
+      onEntering: handleEntering,
+      onExited: handleExited,
+      timeout: transitionDuration
+    }, TransitionProps, {
+      children: /*#__PURE__*/jsx(PaperSlot, _extends$1({}, paperProps, {
+        children: children
+      }))
+    }))
+  }));
+});
+process.env.NODE_ENV !== "production" ? Popover.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * A ref for imperative actions.
+   * It currently only supports updatePosition() action.
+   */
+  action: refType$1,
+  /**
+   * An HTML element, [PopoverVirtualElement](/material-ui/react-popover/#virtual-element),
+   * or a function that returns either.
+   * It's used to set the position of the popover.
+   */
+  anchorEl: chainPropTypes(PropTypes.oneOfType([HTMLElementType, PropTypes.func]), props => {
+    if (props.open && (!props.anchorReference || props.anchorReference === 'anchorEl')) {
+      const resolvedAnchorEl = resolveAnchorEl(props.anchorEl);
+      if (resolvedAnchorEl && resolvedAnchorEl.nodeType === 1) {
+        const box = resolvedAnchorEl.getBoundingClientRect();
+        if (process.env.NODE_ENV !== 'test' && box.top === 0 && box.left === 0 && box.right === 0 && box.bottom === 0) {
+          return new Error(['MUI: The `anchorEl` prop provided to the component is invalid.', 'The anchor element should be part of the document layout.', "Make sure the element is present in the document or that it's not display none."].join('\n'));
+        }
+      } else {
+        return new Error(['MUI: The `anchorEl` prop provided to the component is invalid.', `It should be an Element or PopoverVirtualElement instance but it's \`${resolvedAnchorEl}\` instead.`].join('\n'));
+      }
+    }
+    return null;
+  }),
+  /**
+   * This is the point on the anchor where the popover's
+   * `anchorEl` will attach to. This is not used when the
+   * anchorReference is 'anchorPosition'.
+   *
+   * Options:
+   * vertical: [top, center, bottom];
+   * horizontal: [left, center, right].
+   * @default {
+   *   vertical: 'top',
+   *   horizontal: 'left',
+   * }
+   */
+  anchorOrigin: PropTypes.shape({
+    horizontal: PropTypes.oneOfType([PropTypes.oneOf(['center', 'left', 'right']), PropTypes.number]).isRequired,
+    vertical: PropTypes.oneOfType([PropTypes.oneOf(['bottom', 'center', 'top']), PropTypes.number]).isRequired
+  }),
+  /**
+   * This is the position that may be used to set the position of the popover.
+   * The coordinates are relative to the application's client area.
+   */
+  anchorPosition: PropTypes.shape({
+    left: PropTypes.number.isRequired,
+    top: PropTypes.number.isRequired
+  }),
+  /**
+   * This determines which anchor prop to refer to when setting
+   * the position of the popover.
+   * @default 'anchorEl'
+   */
+  anchorReference: PropTypes.oneOf(['anchorEl', 'anchorPosition', 'none']),
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * An HTML element, component instance, or function that returns either.
+   * The `container` will passed to the Modal component.
+   *
+   * By default, it uses the body of the anchorEl's top-level document object,
+   * so it's simply `document.body` most of the time.
+   */
+  container: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([HTMLElementType, PropTypes.func]),
+  /**
+   * Disable the scroll lock behavior.
+   * @default false
+   */
+  disableScrollLock: PropTypes.bool,
+  /**
+   * The elevation of the popover.
+   * @default 8
+   */
+  elevation: integerPropType,
+  /**
+   * Specifies how close to the edge of the window the popover can appear.
+   * If null, the popover will not be constrained by the window.
+   * @default 16
+   */
+  marginThreshold: PropTypes.number,
+  /**
+   * Callback fired when the component requests to be closed.
+   * The `reason` parameter can optionally be used to control the response to `onClose`.
+   */
+  onClose: PropTypes.func,
+  /**
+   * If `true`, the component is shown.
+   */
+  open: PropTypes.bool.isRequired,
+  /**
+   * Props applied to the [`Paper`](/material-ui/api/paper/) element.
+   *
+   * This prop is an alias for `slotProps.paper` and will be overriden by it if both are used.
+   * @deprecated Use `slotProps.paper` instead.
+   *
+   * @default {}
+   */
+  PaperProps: PropTypes /* @typescript-to-proptypes-ignore */.shape({
+    component: elementTypeAcceptingRef$1
+  }),
+  /**
+   * The extra props for the slot components.
+   * You can override the existing props or add new ones.
+   *
+   * @default {}
+   */
+  slotProps: PropTypes.shape({
+    paper: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  }),
+  /**
+   * The components used for each slot inside.
+   *
+   * @default {}
+   */
+  slots: PropTypes.shape({
+    paper: PropTypes.elementType,
+    root: PropTypes.elementType
+  }),
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
+  /**
+   * This is the point on the popover which
+   * will attach to the anchor's origin.
+   *
+   * Options:
+   * vertical: [top, center, bottom, x(px)];
+   * horizontal: [left, center, right, x(px)].
+   * @default {
+   *   vertical: 'top',
+   *   horizontal: 'left',
+   * }
+   */
+  transformOrigin: PropTypes.shape({
+    horizontal: PropTypes.oneOfType([PropTypes.oneOf(['center', 'left', 'right']), PropTypes.number]).isRequired,
+    vertical: PropTypes.oneOfType([PropTypes.oneOf(['bottom', 'center', 'top']), PropTypes.number]).isRequired
+  }),
+  /**
+   * The component used for the transition.
+   * [Follow this guide](/material-ui/transitions/#transitioncomponent-prop) to learn more about the requirements for this component.
+   * @default Grow
+   */
+  TransitionComponent: PropTypes.elementType,
+  /**
+   * Set to 'auto' to automatically calculate transition time based on height.
+   * @default 'auto'
+   */
+  transitionDuration: PropTypes.oneOfType([PropTypes.oneOf(['auto']), PropTypes.number, PropTypes.shape({
+    appear: PropTypes.number,
+    enter: PropTypes.number,
+    exit: PropTypes.number
+  })]),
+  /**
+   * Props applied to the transition element.
+   * By default, the element is based on this [`Transition`](https://reactcommunity.org/react-transition-group/transition/) component.
+   * @default {}
+   */
+  TransitionProps: PropTypes.object
+} : void 0;
+var Popover$1 = Popover;
+
+function getMenuUtilityClass(slot) {
+  return generateUtilityClass('MuiMenu', slot);
+}
+generateUtilityClasses('MuiMenu', ['root', 'paper', 'list']);
+
+const _excluded$1 = ["onEntering"],
+  _excluded2 = ["autoFocus", "children", "className", "disableAutoFocusItem", "MenuListProps", "onClose", "open", "PaperProps", "PopoverClasses", "transitionDuration", "TransitionProps", "variant", "slots", "slotProps"];
+const RTL_ORIGIN = {
+  vertical: 'top',
+  horizontal: 'right'
+};
+const LTR_ORIGIN = {
+  vertical: 'top',
+  horizontal: 'left'
+};
+const useUtilityClasses$1 = ownerState => {
+  const {
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root'],
+    paper: ['paper'],
+    list: ['list']
+  };
+  return composeClasses(slots, getMenuUtilityClass, classes);
+};
+const MenuRoot = styled$1(Popover$1, {
+  shouldForwardProp: prop => rootShouldForwardProp(prop) || prop === 'classes',
+  name: 'MuiMenu',
+  slot: 'Root',
+  overridesResolver: (props, styles) => styles.root
+})({});
+const MenuPaper = styled$1(PopoverPaper, {
+  name: 'MuiMenu',
+  slot: 'Paper',
+  overridesResolver: (props, styles) => styles.paper
+})({
+  // specZ: The maximum height of a simple menu should be one or more rows less than the view
+  // height. This ensures a tappable area outside of the simple menu with which to dismiss
+  // the menu.
+  maxHeight: 'calc(100% - 96px)',
+  // Add iOS momentum scrolling for iOS < 13.0
+  WebkitOverflowScrolling: 'touch'
+});
+const MenuMenuList = styled$1(MenuList$1, {
+  name: 'MuiMenu',
+  slot: 'List',
+  overridesResolver: (props, styles) => styles.list
+})({
+  // We disable the focus ring for mouse, touch and keyboard users.
+  outline: 0
+});
+const Menu = /*#__PURE__*/React.forwardRef(function Menu(inProps, ref) {
+  var _slots$paper, _slotProps$paper;
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiMenu'
+  });
+  const {
+      autoFocus = true,
+      children,
+      className,
+      disableAutoFocusItem = false,
+      MenuListProps = {},
+      onClose,
+      open,
+      PaperProps = {},
+      PopoverClasses,
+      transitionDuration = 'auto',
+      TransitionProps: {
+        onEntering
+      } = {},
+      variant = 'selectedMenu',
+      slots = {},
+      slotProps = {}
+    } = props,
+    TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$1),
+    other = _objectWithoutPropertiesLoose(props, _excluded2);
+  const theme = useTheme();
+  const isRtl = theme.direction === 'rtl';
+  const ownerState = _extends$1({}, props, {
+    autoFocus,
+    disableAutoFocusItem,
+    MenuListProps,
+    onEntering,
+    PaperProps,
+    transitionDuration,
+    TransitionProps,
+    variant
+  });
+  const classes = useUtilityClasses$1(ownerState);
+  const autoFocusItem = autoFocus && !disableAutoFocusItem && open;
+  const menuListActionsRef = React.useRef(null);
+  const handleEntering = (element, isAppearing) => {
+    if (menuListActionsRef.current) {
+      menuListActionsRef.current.adjustStyleForScrollbar(element, theme);
+    }
+    if (onEntering) {
+      onEntering(element, isAppearing);
+    }
+  };
+  const handleListKeyDown = event => {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      if (onClose) {
+        onClose(event, 'tabKeyDown');
+      }
+    }
+  };
+
+  /**
+   * the index of the item should receive focus
+   * in a `variant="selectedMenu"` it's the first `selected` item
+   * otherwise it's the very first item.
+   */
+  let activeItemIndex = -1;
+  // since we inject focus related props into children we have to do a lookahead
+  // to check if there is a `selected` item. We're looking for the last `selected`
+  // item and use the first valid item as a fallback
+  React.Children.map(children, (child, index) => {
+    if (! /*#__PURE__*/React.isValidElement(child)) {
+      return;
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      if (reactIsExports.isFragment(child)) {
+        console.error(["MUI: The Menu component doesn't accept a Fragment as a child.", 'Consider providing an array instead.'].join('\n'));
+      }
+    }
+    if (!child.props.disabled) {
+      if (variant === 'selectedMenu' && child.props.selected) {
+        activeItemIndex = index;
+      } else if (activeItemIndex === -1) {
+        activeItemIndex = index;
+      }
+    }
+  });
+  const PaperSlot = (_slots$paper = slots.paper) != null ? _slots$paper : MenuPaper;
+  const paperExternalSlotProps = (_slotProps$paper = slotProps.paper) != null ? _slotProps$paper : PaperProps;
+  const rootSlotProps = useSlotProps({
+    elementType: slots.root,
+    externalSlotProps: slotProps.root,
+    ownerState,
+    className: [classes.root, className]
+  });
+  const paperSlotProps = useSlotProps({
+    elementType: PaperSlot,
+    externalSlotProps: paperExternalSlotProps,
+    ownerState,
+    className: classes.paper
+  });
+  return /*#__PURE__*/jsx(MenuRoot, _extends$1({
+    onClose: onClose,
+    anchorOrigin: {
+      vertical: 'bottom',
+      horizontal: isRtl ? 'right' : 'left'
+    },
+    transformOrigin: isRtl ? RTL_ORIGIN : LTR_ORIGIN,
+    slots: {
+      paper: PaperSlot,
+      root: slots.root
+    },
+    slotProps: {
+      root: rootSlotProps,
+      paper: paperSlotProps
+    },
+    open: open,
+    ref: ref,
+    transitionDuration: transitionDuration,
+    TransitionProps: _extends$1({
+      onEntering: handleEntering
+    }, TransitionProps),
+    ownerState: ownerState
+  }, other, {
+    classes: PopoverClasses,
+    children: /*#__PURE__*/jsx(MenuMenuList, _extends$1({
+      onKeyDown: handleListKeyDown,
+      actions: menuListActionsRef,
+      autoFocus: autoFocus && (activeItemIndex === -1 || disableAutoFocusItem),
+      autoFocusItem: autoFocusItem,
+      variant: variant
+    }, MenuListProps, {
+      className: clsx(classes.list, MenuListProps.className),
+      children: children
+    }))
+  }));
+});
+process.env.NODE_ENV !== "production" ? Menu.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * An HTML element, or a function that returns one.
+   * It's used to set the position of the menu.
+   */
+  anchorEl: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([HTMLElementType, PropTypes.func]),
+  /**
+   * If `true` (Default) will focus the `[role="menu"]` if no focusable child is found. Disabled
+   * children are not focusable. If you set this prop to `false` focus will be placed
+   * on the parent modal container. This has severe accessibility implications
+   * and should only be considered if you manage focus otherwise.
+   * @default true
+   */
+  autoFocus: PropTypes.bool,
+  /**
+   * Menu contents, normally `MenuItem`s.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * When opening the menu will not focus the active item but the `[role="menu"]`
+   * unless `autoFocus` is also set to `false`. Not using the default means not
+   * following WAI-ARIA authoring practices. Please be considerate about possible
+   * accessibility implications.
+   * @default false
+   */
+  disableAutoFocusItem: PropTypes.bool,
+  /**
+   * Props applied to the [`MenuList`](/material-ui/api/menu-list/) element.
+   * @default {}
+   */
+  MenuListProps: PropTypes.object,
+  /**
+   * Callback fired when the component requests to be closed.
+   *
+   * @param {object} event The event source of the callback.
+   * @param {string} reason Can be: `"escapeKeyDown"`, `"backdropClick"`, `"tabKeyDown"`.
+   */
+  onClose: PropTypes.func,
+  /**
+   * If `true`, the component is shown.
+   */
+  open: PropTypes.bool.isRequired,
+  /**
+   * @ignore
+   */
+  PaperProps: PropTypes.object,
+  /**
+   * `classes` prop applied to the [`Popover`](/material-ui/api/popover/) element.
+   */
+  PopoverClasses: PropTypes.object,
+  /**
+   * The extra props for the slot components.
+   * You can override the existing props or add new ones.
+   *
+   * @default {}
+   */
+  slotProps: PropTypes.shape({
+    paper: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    root: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  }),
+  /**
+   * The components used for each slot inside.
+   *
+   * @default {}
+   */
+  slots: PropTypes.shape({
+    paper: PropTypes.elementType,
+    root: PropTypes.elementType
+  }),
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
+  /**
+   * The length of the transition in `ms`, or 'auto'
+   * @default 'auto'
+   */
+  transitionDuration: PropTypes.oneOfType([PropTypes.oneOf(['auto']), PropTypes.number, PropTypes.shape({
+    appear: PropTypes.number,
+    enter: PropTypes.number,
+    exit: PropTypes.number
+  })]),
+  /**
+   * Props applied to the transition element.
+   * By default, the element is based on this [`Transition`](https://reactcommunity.org/react-transition-group/transition/) component.
+   * @default {}
+   */
+  TransitionProps: PropTypes.object,
+  /**
+   * The variant to use. Use `menu` to prevent selected items from impacting the initial focus.
+   * @default 'selectedMenu'
+   */
+  variant: PropTypes.oneOf(['menu', 'selectedMenu'])
+} : void 0;
+var Menu$1 = Menu;
+
+function getMenuItemUtilityClass(slot) {
+  return generateUtilityClass('MuiMenuItem', slot);
+}
+const menuItemClasses = generateUtilityClasses('MuiMenuItem', ['root', 'focusVisible', 'dense', 'disabled', 'divider', 'gutters', 'selected']);
+var menuItemClasses$1 = menuItemClasses;
+
+const _excluded = ["autoFocus", "component", "dense", "divider", "disableGutters", "focusVisibleClassName", "role", "tabIndex", "className"];
+const overridesResolver = (props, styles) => {
+  const {
+    ownerState
+  } = props;
+  return [styles.root, ownerState.dense && styles.dense, ownerState.divider && styles.divider, !ownerState.disableGutters && styles.gutters];
+};
+const useUtilityClasses = ownerState => {
+  const {
+    disabled,
+    dense,
+    divider,
+    disableGutters,
+    selected,
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root', dense && 'dense', disabled && 'disabled', !disableGutters && 'gutters', divider && 'divider', selected && 'selected']
+  };
+  const composedClasses = composeClasses(slots, getMenuItemUtilityClass, classes);
+  return _extends$1({}, classes, composedClasses);
+};
+const MenuItemRoot = styled$1(ButtonBase$1, {
+  shouldForwardProp: prop => rootShouldForwardProp(prop) || prop === 'classes',
+  name: 'MuiMenuItem',
+  slot: 'Root',
+  overridesResolver
+})(({
+  theme,
+  ownerState
+}) => _extends$1({}, theme.typography.body1, {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  position: 'relative',
+  textDecoration: 'none',
+  minHeight: 48,
+  paddingTop: 6,
+  paddingBottom: 6,
+  boxSizing: 'border-box',
+  whiteSpace: 'nowrap'
+}, !ownerState.disableGutters && {
+  paddingLeft: 16,
+  paddingRight: 16
+}, ownerState.divider && {
+  borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
+  backgroundClip: 'padding-box'
+}, {
+  '&:hover': {
+    textDecoration: 'none',
+    backgroundColor: (theme.vars || theme).palette.action.hover,
+    // Reset on touch devices, it doesn't add specificity
+    '@media (hover: none)': {
+      backgroundColor: 'transparent'
+    }
+  },
+  [`&.${menuItemClasses$1.selected}`]: {
+    backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+    [`&.${menuItemClasses$1.focusVisible}`]: {
+      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.focusOpacity}))` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+    }
+  },
+  [`&.${menuItemClasses$1.selected}:hover`]: {
+    backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
+    // Reset on touch devices, it doesn't add specificity
+    '@media (hover: none)': {
+      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity)
+    }
+  },
+  [`&.${menuItemClasses$1.focusVisible}`]: {
+    backgroundColor: (theme.vars || theme).palette.action.focus
+  },
+  [`&.${menuItemClasses$1.disabled}`]: {
+    opacity: (theme.vars || theme).palette.action.disabledOpacity
+  },
+  [`& + .${dividerClasses$1.root}`]: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  },
+  [`& + .${dividerClasses$1.inset}`]: {
+    marginLeft: 52
+  },
+  [`& .${listItemTextClasses$1.root}`]: {
+    marginTop: 0,
+    marginBottom: 0
+  },
+  [`& .${listItemTextClasses$1.inset}`]: {
+    paddingLeft: 36
+  },
+  [`& .${listItemIconClasses$1.root}`]: {
+    minWidth: 36
+  }
+}, !ownerState.dense && {
+  [theme.breakpoints.up('sm')]: {
+    minHeight: 'auto'
+  }
+}, ownerState.dense && _extends$1({
+  minHeight: 32,
+  // https://m2.material.io/components/menus#specs > Dense
+  paddingTop: 4,
+  paddingBottom: 4
+}, theme.typography.body2, {
+  [`& .${listItemIconClasses$1.root} svg`]: {
+    fontSize: '1.25rem'
+  }
+})));
+const MenuItem = /*#__PURE__*/React.forwardRef(function MenuItem(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiMenuItem'
+  });
+  const {
+      autoFocus = false,
+      component = 'li',
+      dense = false,
+      divider = false,
+      disableGutters = false,
+      focusVisibleClassName,
+      role = 'menuitem',
+      tabIndex: tabIndexProp,
+      className
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded);
+  const context = React.useContext(ListContext$1);
+  const childContext = React.useMemo(() => ({
+    dense: dense || context.dense || false,
+    disableGutters
+  }), [context.dense, dense, disableGutters]);
+  const menuItemRef = React.useRef(null);
+  useEnhancedEffect$1(() => {
+    if (autoFocus) {
+      if (menuItemRef.current) {
+        menuItemRef.current.focus();
+      } else if (process.env.NODE_ENV !== 'production') {
+        console.error('MUI: Unable to set focus to a MenuItem whose component has not been rendered.');
+      }
+    }
+  }, [autoFocus]);
+  const ownerState = _extends$1({}, props, {
+    dense: childContext.dense,
+    divider,
+    disableGutters
+  });
+  const classes = useUtilityClasses(props);
+  const handleRef = useForkRef(menuItemRef, ref);
+  let tabIndex;
+  if (!props.disabled) {
+    tabIndex = tabIndexProp !== undefined ? tabIndexProp : -1;
+  }
+  return /*#__PURE__*/jsx(ListContext$1.Provider, {
+    value: childContext,
+    children: /*#__PURE__*/jsx(MenuItemRoot, _extends$1({
+      ref: handleRef,
+      role: role,
+      tabIndex: tabIndex,
+      component: component,
+      focusVisibleClassName: clsx(classes.focusVisible, focusVisibleClassName),
+      className: clsx(classes.root, className)
+    }, other, {
+      ownerState: ownerState,
+      classes: classes
+    }))
+  });
+});
+process.env.NODE_ENV !== "production" ? MenuItem.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * If `true`, the list item is focused during the first mount.
+   * Focus will also be triggered if the value changes from false to true.
+   * @default false
+   */
+  autoFocus: PropTypes.bool,
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * If `true`, compact vertical padding designed for keyboard and mouse input is used.
+   * The prop defaults to the value inherited from the parent Menu component.
+   * @default false
+   */
+  dense: PropTypes.bool,
+  /**
+   * @ignore
+   */
+  disabled: PropTypes.bool,
+  /**
+   * If `true`, the left and right padding is removed.
+   * @default false
+   */
+  disableGutters: PropTypes.bool,
+  /**
+   * If `true`, a 1px light border is added to the bottom of the menu item.
+   * @default false
+   */
+  divider: PropTypes.bool,
+  /**
+   * This prop can help identify which element has keyboard focus.
+   * The class name will be applied when the element gains the focus through keyboard interaction.
+   * It's a polyfill for the [CSS :focus-visible selector](https://drafts.csswg.org/selectors-4/#the-focus-visible-pseudo).
+   * The rationale for using this feature [is explained here](https://github.com/WICG/focus-visible/blob/HEAD/explainer.md).
+   * A [polyfill can be used](https://github.com/WICG/focus-visible) to apply a `focus-visible` class to other components
+   * if needed.
+   */
+  focusVisibleClassName: PropTypes.string,
+  /**
+   * @ignore
+   */
+  role: PropTypes /* @typescript-to-proptypes-ignore */.string,
+  /**
+   * If `true`, the component is selected.
+   * @default false
+   */
+  selected: PropTypes.bool,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
+  /**
+   * @default 0
+   */
+  tabIndex: PropTypes.number
+} : void 0;
+var MenuItem$1 = MenuItem;
+
+const ArrowDropDownIcon = createSvgIcon( /*#__PURE__*/jsx("path", {
   d: "M7 10l5 5 5-5z"
 }), 'ArrowDropDown');
 
@@ -15838,6 +20522,72 @@ moment.exports;
 
 moment.exports;
 
+function DurationPicker() {
+  var _useSchedulerContext = useSchedulerContext(),
+    durationOptions = _useSchedulerContext.durationOptions,
+    duration = _useSchedulerContext.duration,
+    onDurationChange = _useSchedulerContext.onDurationChange;
+  var _useState = useState(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    anchorEl = _useState2[0],
+    setAnchorEl = _useState2[1];
+  var optionValue = function optionValue(option) {
+    switch (true) {
+      case option === 60:
+        return "".concat(option / 60, " hour");
+      case option > 59:
+        return "".concat(option / 60, " hours");
+      case option === 15:
+        return "".concat(option, " minutes");
+      default:
+        return "".concat(option, " minutes");
+    }
+  };
+  var handleButtonClick = function handleButtonClick(event) {
+    setAnchorEl(event.currentTarget);
+  };
+  var handleMenuItemClick = function handleMenuItemClick(option) {
+    onDurationChange && onDurationChange(option);
+    setAnchorEl(null);
+  };
+  var handleClose = function handleClose() {
+    setAnchorEl(null);
+  };
+  var options = durationOptions === null || durationOptions === void 0 ? void 0 : durationOptions.map(function (option) {
+    return /*#__PURE__*/React__default.createElement(MenuItem$1, {
+      key: option,
+      onClick: function onClick() {
+        return handleMenuItemClick(option);
+      },
+      value: option
+    }, optionValue(option));
+  });
+  return /*#__PURE__*/React__default.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React__default.createElement(Typography$1, {
+    sx: {
+      marginRight: '8px'
+    }
+  }, "Default Duration:"), /*#__PURE__*/React__default.createElement(Button$1, {
+    "aria-controls": "duration-options-menu",
+    "aria-haspopup": "true",
+    endIcon: /*#__PURE__*/React__default.createElement(ArrowDropDownIcon, null),
+    onClick: handleButtonClick,
+    sx: {
+      border: 'none',
+      textTransform: 'lowercase'
+    }
+  }, /*#__PURE__*/React__default.createElement(Typography$1, null, optionValue(duration))), /*#__PURE__*/React__default.createElement(Menu$1, {
+    id: "duration-options-menu",
+    anchorEl: anchorEl,
+    open: Boolean(anchorEl),
+    onClose: handleClose
+  }, options));
+}
+
 function TodayButton() {
   var _useSchedulerContext = useSchedulerContext(),
     onDateChange = _useSchedulerContext.onDateChange;
@@ -15897,7 +20647,7 @@ function Header() {
       alignItems: 'center',
       justifyContent: 'space-between'
     }
-  }, /*#__PURE__*/React__default.createElement(NavigateDateAction, null));
+  }, /*#__PURE__*/React__default.createElement(NavigateDateAction, null), /*#__PURE__*/React__default.createElement(DurationPicker, null));
 }
 
 /**
