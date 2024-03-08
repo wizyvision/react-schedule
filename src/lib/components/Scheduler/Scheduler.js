@@ -31,9 +31,10 @@ import Header from '../Header';
 const Scheduler = (props) => {
   return (
     <SchedulerProvider {...props}>
-      <div>Hello world</div>
-      <Header />
-      <Calendar />
+      <div style={{ overflow: 'hidden'}} >
+        <Header />
+        <Calendar />
+      </div>
     </SchedulerProvider>
   );
 };

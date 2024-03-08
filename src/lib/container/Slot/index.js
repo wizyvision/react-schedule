@@ -5,8 +5,8 @@ import { useSchedulerContext } from '../../context/SchedulerProvider';
 import { styled } from '@mui/system';
 
 const Slot = styled(TableCell)((props) => {
-  const { color = "primary", SlotProps, } = useSchedulerContext()
   const { index, canDrop, isOver, width } = props;
+  const { color = "primary", SlotProps, } = useSchedulerContext()
   const { secondaryDuration = 30, style, slotBackground} = SlotProps || {};
   const theme = useTheme()
 

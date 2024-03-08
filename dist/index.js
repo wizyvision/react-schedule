@@ -14440,6 +14440,25 @@ function alpha$1(color, value) {
   return recomposeColor$1(color);
 }
 
+/**
+ * Darkens a color.
+ * @param {string} color - CSS color, i.e. one of: #nnn, #nnnnnn, rgb(), rgba(), hsl(), hsla(), color()
+ * @param {number} coefficient - multiplier in the range 0 - 1
+ * @returns {string} A CSS color string. Hex input values are returned as rgb
+ */
+function darken$1(color, coefficient) {
+  color = decomposeColor$1(color);
+  coefficient = clampWrapper$1(coefficient);
+  if (color.type.indexOf('hsl') !== -1) {
+    color.values[2] *= 1 - coefficient;
+  } else if (color.type.indexOf('rgb') !== -1 || color.type.indexOf('color') !== -1) {
+    for (let i = 0; i < 3; i += 1) {
+      color.values[i] *= 1 - coefficient;
+    }
+  }
+  return recomposeColor$1(color);
+}
+
 function chainPropTypes(propType1, propType2) {
   if (process.env.NODE_ENV === 'production') {
     return () => null;
@@ -14633,7 +14652,7 @@ function ownerWindow(node) {
  * while still using it inside the component.
  * @param ref A ref callback or ref object. If anything falsy, this is a no-op.
  */
-function setRef(ref, value) {
+function setRef$1(ref, value) {
   if (typeof ref === 'function') {
     ref(value);
   } else if (ref) {
@@ -14748,7 +14767,7 @@ function useForkRef(...refs) {
     }
     return instance => {
       refs.forEach(ref => {
-        setRef(ref, instance);
+        setRef$1(ref, instance);
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -22654,9 +22673,9 @@ const Portal = /*#__PURE__*/React__namespace.forwardRef(function Portal(props, f
   }, [container, disablePortal]);
   useEnhancedEffect$1(() => {
     if (mountNode && !disablePortal) {
-      setRef(forwardedRef, mountNode);
+      setRef$1(forwardedRef, mountNode);
       return () => {
-        setRef(forwardedRef, null);
+        setRef$1(forwardedRef, null);
       };
     }
     return undefined;
@@ -48047,8 +48066,1027 @@ function _nonIterableRest() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
+/**
+ * Create the React Context
+ */ const DndContext = React$1.createContext({
+    dragDropManager: undefined
+});
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */ function invariant(condition, format, ...args) {
+    if (isProduction()) {
+        if (format === undefined) {
+            throw new Error('invariant requires an error message argument');
+        }
+    }
+    if (!condition) {
+        let error;
+        if (format === undefined) {
+            error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+        } else {
+            let argIndex = 0;
+            error = new Error(format.replace(/%s/g, function() {
+                return args[argIndex++];
+            }));
+            error.name = 'Invariant Violation';
+        }
+        error.framesToPop = 1 // we don't care about invariant's own frame
+        ;
+        throw error;
+    }
+}
+function isProduction() {
+    return typeof process !== 'undefined' && process.env['NODE_ENV'] === 'production';
+}
+
+// do not edit .js files directly - edit src/index.jst
+
+
+
+var fastDeepEqual = function equal(a, b) {
+  if (a === b) return true;
+
+  if (a && b && typeof a == 'object' && typeof b == 'object') {
+    if (a.constructor !== b.constructor) return false;
+
+    var length, i, keys;
+    if (Array.isArray(a)) {
+      length = a.length;
+      if (length != b.length) return false;
+      for (i = length; i-- !== 0;)
+        if (!equal(a[i], b[i])) return false;
+      return true;
+    }
+
+
+
+    if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
+    if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
+    if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
+
+    keys = Object.keys(a);
+    length = keys.length;
+    if (length !== Object.keys(b).length) return false;
+
+    for (i = length; i-- !== 0;)
+      if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+
+    for (i = length; i-- !== 0;) {
+      var key = keys[i];
+
+      if (!equal(a[key], b[key])) return false;
+    }
+
+    return true;
+  }
+
+  // true if both NaN, false otherwise
+  return a!==a && b!==b;
+};
+
+var equal = /*@__PURE__*/getDefaultExportFromCjs(fastDeepEqual);
+
+// suppress the useLayoutEffect warning on server side.
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? React$1.useLayoutEffect : React$1.useEffect;
+
+/**
+ *
+ * @param monitor The monitor to collect state from
+ * @param collect The collecting function
+ * @param onUpdate A method to invoke when updates occur
+ */ function useCollector(monitor, collect, onUpdate) {
+    const [collected, setCollected] = React$1.useState(()=>collect(monitor)
+    );
+    const updateCollected = React$1.useCallback(()=>{
+        const nextValue = collect(monitor);
+        // This needs to be a deep-equality check because some monitor-collected values
+        // include XYCoord objects that may be equivalent, but do not have instance equality.
+        if (!equal(collected, nextValue)) {
+            setCollected(nextValue);
+            if (onUpdate) {
+                onUpdate();
+            }
+        }
+    }, [
+        collected,
+        monitor,
+        onUpdate
+    ]);
+    // update the collected properties after react renders.
+    // Note that the "Dustbin Stress Test" fails if this is not
+    // done when the component updates
+    useIsomorphicLayoutEffect(updateCollected);
+    return [
+        collected,
+        updateCollected
+    ];
+}
+
+function useMonitorOutput(monitor, collect, onCollect) {
+    const [collected, updateCollected] = useCollector(monitor, collect, onCollect);
+    useIsomorphicLayoutEffect(function subscribeToMonitorStateChange() {
+        const handlerId = monitor.getHandlerId();
+        if (handlerId == null) {
+            return;
+        }
+        return monitor.subscribeToStateChange(updateCollected, {
+            handlerIds: [
+                handlerId
+            ]
+        });
+    }, [
+        monitor,
+        updateCollected
+    ]);
+    return collected;
+}
+
+function useCollectedProps(collector, monitor, connector) {
+    return useMonitorOutput(monitor, collector || (()=>({})
+    ), ()=>connector.reconnect()
+    );
+}
+
+function useOptionalFactory(arg, deps) {
+    const memoDeps = [
+        ...deps || []
+    ];
+    if (deps == null && typeof arg !== 'function') {
+        memoDeps.push(arg);
+    }
+    return React$1.useMemo(()=>{
+        return typeof arg === 'function' ? arg() : arg;
+    }, memoDeps);
+}
+
+function useConnectDragSource(connector) {
+    return React$1.useMemo(()=>connector.hooks.dragSource()
+    , [
+        connector
+    ]);
+}
+function useConnectDragPreview(connector) {
+    return React$1.useMemo(()=>connector.hooks.dragPreview()
+    , [
+        connector
+    ]);
+}
+
+let isCallingCanDrag = false;
+let isCallingIsDragging = false;
+class DragSourceMonitorImpl {
+    receiveHandlerId(sourceId) {
+        this.sourceId = sourceId;
+    }
+    getHandlerId() {
+        return this.sourceId;
+    }
+    canDrag() {
+        invariant(!isCallingCanDrag, 'You may not call monitor.canDrag() inside your canDrag() implementation. ' + 'Read more: http://react-dnd.github.io/react-dnd/docs/api/drag-source-monitor');
+        try {
+            isCallingCanDrag = true;
+            return this.internalMonitor.canDragSource(this.sourceId);
+        } finally{
+            isCallingCanDrag = false;
+        }
+    }
+    isDragging() {
+        if (!this.sourceId) {
+            return false;
+        }
+        invariant(!isCallingIsDragging, 'You may not call monitor.isDragging() inside your isDragging() implementation. ' + 'Read more: http://react-dnd.github.io/react-dnd/docs/api/drag-source-monitor');
+        try {
+            isCallingIsDragging = true;
+            return this.internalMonitor.isDraggingSource(this.sourceId);
+        } finally{
+            isCallingIsDragging = false;
+        }
+    }
+    subscribeToStateChange(listener, options) {
+        return this.internalMonitor.subscribeToStateChange(listener, options);
+    }
+    isDraggingSource(sourceId) {
+        return this.internalMonitor.isDraggingSource(sourceId);
+    }
+    isOverTarget(targetId, options) {
+        return this.internalMonitor.isOverTarget(targetId, options);
+    }
+    getTargetIds() {
+        return this.internalMonitor.getTargetIds();
+    }
+    isSourcePublic() {
+        return this.internalMonitor.isSourcePublic();
+    }
+    getSourceId() {
+        return this.internalMonitor.getSourceId();
+    }
+    subscribeToOffsetChange(listener) {
+        return this.internalMonitor.subscribeToOffsetChange(listener);
+    }
+    canDragSource(sourceId) {
+        return this.internalMonitor.canDragSource(sourceId);
+    }
+    canDropOnTarget(targetId) {
+        return this.internalMonitor.canDropOnTarget(targetId);
+    }
+    getItemType() {
+        return this.internalMonitor.getItemType();
+    }
+    getItem() {
+        return this.internalMonitor.getItem();
+    }
+    getDropResult() {
+        return this.internalMonitor.getDropResult();
+    }
+    didDrop() {
+        return this.internalMonitor.didDrop();
+    }
+    getInitialClientOffset() {
+        return this.internalMonitor.getInitialClientOffset();
+    }
+    getInitialSourceClientOffset() {
+        return this.internalMonitor.getInitialSourceClientOffset();
+    }
+    getSourceClientOffset() {
+        return this.internalMonitor.getSourceClientOffset();
+    }
+    getClientOffset() {
+        return this.internalMonitor.getClientOffset();
+    }
+    getDifferenceFromInitialOffset() {
+        return this.internalMonitor.getDifferenceFromInitialOffset();
+    }
+    constructor(manager){
+        this.sourceId = null;
+        this.internalMonitor = manager.getMonitor();
+    }
+}
+
+let isCallingCanDrop = false;
+class DropTargetMonitorImpl {
+    receiveHandlerId(targetId) {
+        this.targetId = targetId;
+    }
+    getHandlerId() {
+        return this.targetId;
+    }
+    subscribeToStateChange(listener, options) {
+        return this.internalMonitor.subscribeToStateChange(listener, options);
+    }
+    canDrop() {
+        // Cut out early if the target id has not been set. This should prevent errors
+        // where the user has an older version of dnd-core like in
+        // https://github.com/react-dnd/react-dnd/issues/1310
+        if (!this.targetId) {
+            return false;
+        }
+        invariant(!isCallingCanDrop, 'You may not call monitor.canDrop() inside your canDrop() implementation. ' + 'Read more: http://react-dnd.github.io/react-dnd/docs/api/drop-target-monitor');
+        try {
+            isCallingCanDrop = true;
+            return this.internalMonitor.canDropOnTarget(this.targetId);
+        } finally{
+            isCallingCanDrop = false;
+        }
+    }
+    isOver(options) {
+        if (!this.targetId) {
+            return false;
+        }
+        return this.internalMonitor.isOverTarget(this.targetId, options);
+    }
+    getItemType() {
+        return this.internalMonitor.getItemType();
+    }
+    getItem() {
+        return this.internalMonitor.getItem();
+    }
+    getDropResult() {
+        return this.internalMonitor.getDropResult();
+    }
+    didDrop() {
+        return this.internalMonitor.didDrop();
+    }
+    getInitialClientOffset() {
+        return this.internalMonitor.getInitialClientOffset();
+    }
+    getInitialSourceClientOffset() {
+        return this.internalMonitor.getInitialSourceClientOffset();
+    }
+    getSourceClientOffset() {
+        return this.internalMonitor.getSourceClientOffset();
+    }
+    getClientOffset() {
+        return this.internalMonitor.getClientOffset();
+    }
+    getDifferenceFromInitialOffset() {
+        return this.internalMonitor.getDifferenceFromInitialOffset();
+    }
+    constructor(manager){
+        this.targetId = null;
+        this.internalMonitor = manager.getMonitor();
+    }
+}
+
+function registerTarget(type, target, manager) {
+    const registry = manager.getRegistry();
+    const targetId = registry.addTarget(type, target);
+    return [
+        targetId,
+        ()=>registry.removeTarget(targetId)
+    ];
+}
+function registerSource(type, source, manager) {
+    const registry = manager.getRegistry();
+    const sourceId = registry.addSource(type, source);
+    return [
+        sourceId,
+        ()=>registry.removeSource(sourceId)
+    ];
+}
+
+function shallowEqual(objA, objB, compare, compareContext) {
+    let compareResult = compare ? compare.call(compareContext, objA, objB) : void 0;
+    if (compareResult !== void 0) {
+        return !!compareResult;
+    }
+    if (objA === objB) {
+        return true;
+    }
+    if (typeof objA !== 'object' || !objA || typeof objB !== 'object' || !objB) {
+        return false;
+    }
+    const keysA = Object.keys(objA);
+    const keysB = Object.keys(objB);
+    if (keysA.length !== keysB.length) {
+        return false;
+    }
+    const bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
+    // Test for A's keys different from B.
+    for(let idx = 0; idx < keysA.length; idx++){
+        const key = keysA[idx];
+        if (!bHasOwnProperty(key)) {
+            return false;
+        }
+        const valueA = objA[key];
+        const valueB = objB[key];
+        compareResult = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
+        if (compareResult === false || compareResult === void 0 && valueA !== valueB) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function isRef(obj) {
+    return(// eslint-disable-next-line no-prototype-builtins
+    obj !== null && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, 'current'));
+}
+
+function throwIfCompositeComponentElement(element) {
+    // Custom components can no longer be wrapped directly in React DnD 2.0
+    // so that we don't need to depend on findDOMNode() from react-dom.
+    if (typeof element.type === 'string') {
+        return;
+    }
+    const displayName = element.type.displayName || element.type.name || 'the component';
+    throw new Error('Only native element nodes can now be passed to React DnD connectors.' + `You can either wrap ${displayName} into a <div>, or turn it into a ` + 'drag source or a drop target itself.');
+}
+function wrapHookToRecognizeElement(hook) {
+    return (elementOrNode = null, options = null)=>{
+        // When passed a node, call the hook straight away.
+        if (!React$1.isValidElement(elementOrNode)) {
+            const node = elementOrNode;
+            hook(node, options);
+            // return the node so it can be chained (e.g. when within callback refs
+            // <div ref={node => connectDragSource(connectDropTarget(node))}/>
+            return node;
+        }
+        // If passed a ReactElement, clone it and attach this function as a ref.
+        // This helps us achieve a neat API where user doesn't even know that refs
+        // are being used under the hood.
+        const element = elementOrNode;
+        throwIfCompositeComponentElement(element);
+        // When no options are passed, use the hook directly
+        const ref = options ? (node)=>hook(node, options)
+         : hook;
+        return cloneWithRef(element, ref);
+    };
+}
+function wrapConnectorHooks(hooks) {
+    const wrappedHooks = {};
+    Object.keys(hooks).forEach((key)=>{
+        const hook = hooks[key];
+        // ref objects should be passed straight through without wrapping
+        if (key.endsWith('Ref')) {
+            wrappedHooks[key] = hooks[key];
+        } else {
+            const wrappedHook = wrapHookToRecognizeElement(hook);
+            wrappedHooks[key] = ()=>wrappedHook
+            ;
+        }
+    });
+    return wrappedHooks;
+}
+function setRef(ref, node) {
+    if (typeof ref === 'function') {
+        ref(node);
+    } else {
+        ref.current = node;
+    }
+}
+function cloneWithRef(element, newRef) {
+    const previousRef = element.ref;
+    invariant(typeof previousRef !== 'string', 'Cannot connect React DnD to an element with an existing string ref. ' + 'Please convert it to use a callback ref instead, or wrap it into a <span> or <div>. ' + 'Read more: https://reactjs.org/docs/refs-and-the-dom.html#callback-refs');
+    if (!previousRef) {
+        // When there is no ref on the element, use the new ref directly
+        return React$1.cloneElement(element, {
+            ref: newRef
+        });
+    } else {
+        return React$1.cloneElement(element, {
+            ref: (node)=>{
+                setRef(previousRef, node);
+                setRef(newRef, node);
+            }
+        });
+    }
+}
+
+class SourceConnector {
+    receiveHandlerId(newHandlerId) {
+        if (this.handlerId === newHandlerId) {
+            return;
+        }
+        this.handlerId = newHandlerId;
+        this.reconnect();
+    }
+    get connectTarget() {
+        return this.dragSource;
+    }
+    get dragSourceOptions() {
+        return this.dragSourceOptionsInternal;
+    }
+    set dragSourceOptions(options) {
+        this.dragSourceOptionsInternal = options;
+    }
+    get dragPreviewOptions() {
+        return this.dragPreviewOptionsInternal;
+    }
+    set dragPreviewOptions(options) {
+        this.dragPreviewOptionsInternal = options;
+    }
+    reconnect() {
+        const didChange = this.reconnectDragSource();
+        this.reconnectDragPreview(didChange);
+    }
+    reconnectDragSource() {
+        const dragSource = this.dragSource;
+        // if nothing has changed then don't resubscribe
+        const didChange = this.didHandlerIdChange() || this.didConnectedDragSourceChange() || this.didDragSourceOptionsChange();
+        if (didChange) {
+            this.disconnectDragSource();
+        }
+        if (!this.handlerId) {
+            return didChange;
+        }
+        if (!dragSource) {
+            this.lastConnectedDragSource = dragSource;
+            return didChange;
+        }
+        if (didChange) {
+            this.lastConnectedHandlerId = this.handlerId;
+            this.lastConnectedDragSource = dragSource;
+            this.lastConnectedDragSourceOptions = this.dragSourceOptions;
+            this.dragSourceUnsubscribe = this.backend.connectDragSource(this.handlerId, dragSource, this.dragSourceOptions);
+        }
+        return didChange;
+    }
+    reconnectDragPreview(forceDidChange = false) {
+        const dragPreview = this.dragPreview;
+        // if nothing has changed then don't resubscribe
+        const didChange = forceDidChange || this.didHandlerIdChange() || this.didConnectedDragPreviewChange() || this.didDragPreviewOptionsChange();
+        if (didChange) {
+            this.disconnectDragPreview();
+        }
+        if (!this.handlerId) {
+            return;
+        }
+        if (!dragPreview) {
+            this.lastConnectedDragPreview = dragPreview;
+            return;
+        }
+        if (didChange) {
+            this.lastConnectedHandlerId = this.handlerId;
+            this.lastConnectedDragPreview = dragPreview;
+            this.lastConnectedDragPreviewOptions = this.dragPreviewOptions;
+            this.dragPreviewUnsubscribe = this.backend.connectDragPreview(this.handlerId, dragPreview, this.dragPreviewOptions);
+        }
+    }
+    didHandlerIdChange() {
+        return this.lastConnectedHandlerId !== this.handlerId;
+    }
+    didConnectedDragSourceChange() {
+        return this.lastConnectedDragSource !== this.dragSource;
+    }
+    didConnectedDragPreviewChange() {
+        return this.lastConnectedDragPreview !== this.dragPreview;
+    }
+    didDragSourceOptionsChange() {
+        return !shallowEqual(this.lastConnectedDragSourceOptions, this.dragSourceOptions);
+    }
+    didDragPreviewOptionsChange() {
+        return !shallowEqual(this.lastConnectedDragPreviewOptions, this.dragPreviewOptions);
+    }
+    disconnectDragSource() {
+        if (this.dragSourceUnsubscribe) {
+            this.dragSourceUnsubscribe();
+            this.dragSourceUnsubscribe = undefined;
+        }
+    }
+    disconnectDragPreview() {
+        if (this.dragPreviewUnsubscribe) {
+            this.dragPreviewUnsubscribe();
+            this.dragPreviewUnsubscribe = undefined;
+            this.dragPreviewNode = null;
+            this.dragPreviewRef = null;
+        }
+    }
+    get dragSource() {
+        return this.dragSourceNode || this.dragSourceRef && this.dragSourceRef.current;
+    }
+    get dragPreview() {
+        return this.dragPreviewNode || this.dragPreviewRef && this.dragPreviewRef.current;
+    }
+    clearDragSource() {
+        this.dragSourceNode = null;
+        this.dragSourceRef = null;
+    }
+    clearDragPreview() {
+        this.dragPreviewNode = null;
+        this.dragPreviewRef = null;
+    }
+    constructor(backend){
+        this.hooks = wrapConnectorHooks({
+            dragSource: (node, options)=>{
+                this.clearDragSource();
+                this.dragSourceOptions = options || null;
+                if (isRef(node)) {
+                    this.dragSourceRef = node;
+                } else {
+                    this.dragSourceNode = node;
+                }
+                this.reconnectDragSource();
+            },
+            dragPreview: (node, options)=>{
+                this.clearDragPreview();
+                this.dragPreviewOptions = options || null;
+                if (isRef(node)) {
+                    this.dragPreviewRef = node;
+                } else {
+                    this.dragPreviewNode = node;
+                }
+                this.reconnectDragPreview();
+            }
+        });
+        this.handlerId = null;
+        // The drop target may either be attached via ref or connect function
+        this.dragSourceRef = null;
+        this.dragSourceOptionsInternal = null;
+        // The drag preview may either be attached via ref or connect function
+        this.dragPreviewRef = null;
+        this.dragPreviewOptionsInternal = null;
+        this.lastConnectedHandlerId = null;
+        this.lastConnectedDragSource = null;
+        this.lastConnectedDragSourceOptions = null;
+        this.lastConnectedDragPreview = null;
+        this.lastConnectedDragPreviewOptions = null;
+        this.backend = backend;
+    }
+}
+
+class TargetConnector {
+    get connectTarget() {
+        return this.dropTarget;
+    }
+    reconnect() {
+        // if nothing has changed then don't resubscribe
+        const didChange = this.didHandlerIdChange() || this.didDropTargetChange() || this.didOptionsChange();
+        if (didChange) {
+            this.disconnectDropTarget();
+        }
+        const dropTarget = this.dropTarget;
+        if (!this.handlerId) {
+            return;
+        }
+        if (!dropTarget) {
+            this.lastConnectedDropTarget = dropTarget;
+            return;
+        }
+        if (didChange) {
+            this.lastConnectedHandlerId = this.handlerId;
+            this.lastConnectedDropTarget = dropTarget;
+            this.lastConnectedDropTargetOptions = this.dropTargetOptions;
+            this.unsubscribeDropTarget = this.backend.connectDropTarget(this.handlerId, dropTarget, this.dropTargetOptions);
+        }
+    }
+    receiveHandlerId(newHandlerId) {
+        if (newHandlerId === this.handlerId) {
+            return;
+        }
+        this.handlerId = newHandlerId;
+        this.reconnect();
+    }
+    get dropTargetOptions() {
+        return this.dropTargetOptionsInternal;
+    }
+    set dropTargetOptions(options) {
+        this.dropTargetOptionsInternal = options;
+    }
+    didHandlerIdChange() {
+        return this.lastConnectedHandlerId !== this.handlerId;
+    }
+    didDropTargetChange() {
+        return this.lastConnectedDropTarget !== this.dropTarget;
+    }
+    didOptionsChange() {
+        return !shallowEqual(this.lastConnectedDropTargetOptions, this.dropTargetOptions);
+    }
+    disconnectDropTarget() {
+        if (this.unsubscribeDropTarget) {
+            this.unsubscribeDropTarget();
+            this.unsubscribeDropTarget = undefined;
+        }
+    }
+    get dropTarget() {
+        return this.dropTargetNode || this.dropTargetRef && this.dropTargetRef.current;
+    }
+    clearDropTarget() {
+        this.dropTargetRef = null;
+        this.dropTargetNode = null;
+    }
+    constructor(backend){
+        this.hooks = wrapConnectorHooks({
+            dropTarget: (node, options)=>{
+                this.clearDropTarget();
+                this.dropTargetOptions = options;
+                if (isRef(node)) {
+                    this.dropTargetRef = node;
+                } else {
+                    this.dropTargetNode = node;
+                }
+                this.reconnect();
+            }
+        });
+        this.handlerId = null;
+        // The drop target may either be attached via ref or connect function
+        this.dropTargetRef = null;
+        this.dropTargetOptionsInternal = null;
+        this.lastConnectedHandlerId = null;
+        this.lastConnectedDropTarget = null;
+        this.lastConnectedDropTargetOptions = null;
+        this.backend = backend;
+    }
+}
+
+/**
+ * A hook to retrieve the DragDropManager from Context
+ */ function useDragDropManager() {
+    const { dragDropManager  } = React$1.useContext(DndContext);
+    invariant(dragDropManager != null, 'Expected drag drop context');
+    return dragDropManager;
+}
+
+function useDragSourceConnector(dragSourceOptions, dragPreviewOptions) {
+    const manager = useDragDropManager();
+    const connector = React$1.useMemo(()=>new SourceConnector(manager.getBackend())
+    , [
+        manager
+    ]);
+    useIsomorphicLayoutEffect(()=>{
+        connector.dragSourceOptions = dragSourceOptions || null;
+        connector.reconnect();
+        return ()=>connector.disconnectDragSource()
+        ;
+    }, [
+        connector,
+        dragSourceOptions
+    ]);
+    useIsomorphicLayoutEffect(()=>{
+        connector.dragPreviewOptions = dragPreviewOptions || null;
+        connector.reconnect();
+        return ()=>connector.disconnectDragPreview()
+        ;
+    }, [
+        connector,
+        dragPreviewOptions
+    ]);
+    return connector;
+}
+
+function useDragSourceMonitor() {
+    const manager = useDragDropManager();
+    return React$1.useMemo(()=>new DragSourceMonitorImpl(manager)
+    , [
+        manager
+    ]);
+}
+
+class DragSourceImpl {
+    beginDrag() {
+        const spec = this.spec;
+        const monitor = this.monitor;
+        let result = null;
+        if (typeof spec.item === 'object') {
+            result = spec.item;
+        } else if (typeof spec.item === 'function') {
+            result = spec.item(monitor);
+        } else {
+            result = {};
+        }
+        return result !== null && result !== void 0 ? result : null;
+    }
+    canDrag() {
+        const spec = this.spec;
+        const monitor = this.monitor;
+        if (typeof spec.canDrag === 'boolean') {
+            return spec.canDrag;
+        } else if (typeof spec.canDrag === 'function') {
+            return spec.canDrag(monitor);
+        } else {
+            return true;
+        }
+    }
+    isDragging(globalMonitor, target) {
+        const spec = this.spec;
+        const monitor = this.monitor;
+        const { isDragging  } = spec;
+        return isDragging ? isDragging(monitor) : target === globalMonitor.getSourceId();
+    }
+    endDrag() {
+        const spec = this.spec;
+        const monitor = this.monitor;
+        const connector = this.connector;
+        const { end  } = spec;
+        if (end) {
+            end(monitor.getItem(), monitor);
+        }
+        connector.reconnect();
+    }
+    constructor(spec, monitor, connector){
+        this.spec = spec;
+        this.monitor = monitor;
+        this.connector = connector;
+    }
+}
+
+function useDragSource(spec, monitor, connector) {
+    const handler = React$1.useMemo(()=>new DragSourceImpl(spec, monitor, connector)
+    , [
+        monitor,
+        connector
+    ]);
+    React$1.useEffect(()=>{
+        handler.spec = spec;
+    }, [
+        spec
+    ]);
+    return handler;
+}
+
+function useDragType(spec) {
+    return React$1.useMemo(()=>{
+        const result = spec.type;
+        invariant(result != null, 'spec.type must be defined');
+        return result;
+    }, [
+        spec
+    ]);
+}
+
+function useRegisteredDragSource(spec, monitor, connector) {
+    const manager = useDragDropManager();
+    const handler = useDragSource(spec, monitor, connector);
+    const itemType = useDragType(spec);
+    useIsomorphicLayoutEffect(function registerDragSource() {
+        if (itemType != null) {
+            const [handlerId, unregister] = registerSource(itemType, handler, manager);
+            monitor.receiveHandlerId(handlerId);
+            connector.receiveHandlerId(handlerId);
+            return unregister;
+        }
+        return;
+    }, [
+        manager,
+        monitor,
+        connector,
+        handler,
+        itemType
+    ]);
+}
+
+/**
+ * useDragSource hook
+ * @param sourceSpec The drag source specification (object or function, function preferred)
+ * @param deps The memoization deps array to use when evaluating spec changes
+ */ function useDrag(specArg, deps) {
+    const spec = useOptionalFactory(specArg, deps);
+    invariant(!spec.begin, `useDrag::spec.begin was deprecated in v14. Replace spec.begin() with spec.item(). (see more here - https://react-dnd.github.io/react-dnd/docs/api/use-drag)`);
+    const monitor = useDragSourceMonitor();
+    const connector = useDragSourceConnector(spec.options, spec.previewOptions);
+    useRegisteredDragSource(spec, monitor, connector);
+    return [
+        useCollectedProps(spec.collect, monitor, connector),
+        useConnectDragSource(connector),
+        useConnectDragPreview(connector), 
+    ];
+}
+
+function useConnectDropTarget(connector) {
+    return React$1.useMemo(()=>connector.hooks.dropTarget()
+    , [
+        connector
+    ]);
+}
+
+function useDropTargetConnector(options) {
+    const manager = useDragDropManager();
+    const connector = React$1.useMemo(()=>new TargetConnector(manager.getBackend())
+    , [
+        manager
+    ]);
+    useIsomorphicLayoutEffect(()=>{
+        connector.dropTargetOptions = options || null;
+        connector.reconnect();
+        return ()=>connector.disconnectDropTarget()
+        ;
+    }, [
+        options
+    ]);
+    return connector;
+}
+
+function useDropTargetMonitor() {
+    const manager = useDragDropManager();
+    return React$1.useMemo(()=>new DropTargetMonitorImpl(manager)
+    , [
+        manager
+    ]);
+}
+
+/**
+ * Internal utility hook to get an array-version of spec.accept.
+ * The main utility here is that we aren't creating a new array on every render if a non-array spec.accept is passed in.
+ * @param spec
+ */ function useAccept(spec) {
+    const { accept  } = spec;
+    return React$1.useMemo(()=>{
+        invariant(spec.accept != null, 'accept must be defined');
+        return Array.isArray(accept) ? accept : [
+            accept
+        ];
+    }, [
+        accept
+    ]);
+}
+
+class DropTargetImpl {
+    canDrop() {
+        const spec = this.spec;
+        const monitor = this.monitor;
+        return spec.canDrop ? spec.canDrop(monitor.getItem(), monitor) : true;
+    }
+    hover() {
+        const spec = this.spec;
+        const monitor = this.monitor;
+        if (spec.hover) {
+            spec.hover(monitor.getItem(), monitor);
+        }
+    }
+    drop() {
+        const spec = this.spec;
+        const monitor = this.monitor;
+        if (spec.drop) {
+            return spec.drop(monitor.getItem(), monitor);
+        }
+        return;
+    }
+    constructor(spec, monitor){
+        this.spec = spec;
+        this.monitor = monitor;
+    }
+}
+
+function useDropTarget(spec, monitor) {
+    const dropTarget = React$1.useMemo(()=>new DropTargetImpl(spec, monitor)
+    , [
+        monitor
+    ]);
+    React$1.useEffect(()=>{
+        dropTarget.spec = spec;
+    }, [
+        spec
+    ]);
+    return dropTarget;
+}
+
+function useRegisteredDropTarget(spec, monitor, connector) {
+    const manager = useDragDropManager();
+    const dropTarget = useDropTarget(spec, monitor);
+    const accept = useAccept(spec);
+    useIsomorphicLayoutEffect(function registerDropTarget() {
+        const [handlerId, unregister] = registerTarget(accept, dropTarget, manager);
+        monitor.receiveHandlerId(handlerId);
+        connector.receiveHandlerId(handlerId);
+        return unregister;
+    }, [
+        manager,
+        monitor,
+        dropTarget,
+        connector,
+        accept.map((a)=>a.toString()
+        ).join('|'), 
+    ]);
+}
+
+/**
+ * useDropTarget Hook
+ * @param spec The drop target specification (object or function, function preferred)
+ * @param deps The memoization deps array to use when evaluating spec changes
+ */ function useDrop(specArg, deps) {
+    const spec = useOptionalFactory(specArg, deps);
+    const monitor = useDropTargetMonitor();
+    const connector = useDropTargetConnector(spec.options);
+    useRegisteredDropTarget(spec, monitor, connector);
+    return [
+        useCollectedProps(spec.collect, monitor, connector),
+        useConnectDropTarget(connector), 
+    ];
+}
+
+function getSortAppointments(appointments, user) {
+  return appointments.filter(function (event) {
+    return user === event.user;
+  }).sort(function (a, b) {
+    var _a$schedule, _b$schedule;
+    return ((_a$schedule = a.schedule) === null || _a$schedule === void 0 ? void 0 : _a$schedule.startDate) - ((_b$schedule = b.schedule) === null || _b$schedule === void 0 ? void 0 : _b$schedule.startDate);
+  });
+}
+function getFilteredAppointments(appointmentList, user, timeSlot, date, duration, concurrentMapping) {
+  return appointmentList.filter(function (appointment) {
+    return appointment.user === user;
+  }).filter(function (appointment) {
+    var _appointment$schedule;
+    var startDate = moment((_appointment$schedule = appointment.schedule) === null || _appointment$schedule === void 0 ? void 0 : _appointment$schedule.startDate);
+    var currentDate = moment(date);
+    var slotStartTime = moment("".concat(currentDate.format('YYYY-MM-DD'), " ").concat(timeSlot), 'YYYY-MM-DD hh:mm a');
+    var slotEndTime = moment(slotStartTime).add(duration, 'minutes');
+    return startDate.isSame(currentDate, 'day') && (startDate.isAfter(slotStartTime) || slotStartTime.isSame(startDate)) && startDate.isBefore(slotEndTime);
+  }).map(function (appointment) {
+    var height = concurrentMapping[appointment.id];
+    return _objectSpread2(_objectSpread2({}, appointment), {}, {
+      height: height
+    });
+  });
+}
+var getUpdatedAppointments = function getUpdatedAppointments(appointments, appointment, date, timeSlot, duration, user) {
+  var slotDate = moment(date).format('YYYY-MM-DD') + ' ' + timeSlot;
+  var slotStartTime = moment(slotDate);
+  var existingIndex = appointments.findIndex(function (existingAppointment) {
+    return existingAppointment.id === appointment.id;
+  });
+  var updatedAppointments = _objectSpread2(_objectSpread2({}, appointment), {}, {
+    user: user,
+    schedule: {
+      startDate: slotStartTime.toDate(),
+      endDate: moment(slotStartTime).add(duration, 'minutes').toDate()
+    }
+  });
+  if (existingIndex !== -1) {
+    updatedAppointments = _objectSpread2(_objectSpread2({}, appointment), {}, {
+      user: user,
+      schedule: {
+        startDate: slotStartTime.toDate(),
+        endDate: moment(slotStartTime).add(moment(appointment.schedule.endDate).diff(moment(appointment.schedule.startDate), 'minutes'),
+        // Keep the original duration
+        'minutes').toDate()
+      }
+    });
+  }
+  return updatedAppointments;
+};
+
 var WIDTH = 100;
 var HEIGHT = 65;
+var MIN_HEIGHT = 35;
+var HEIGHT_REDUCTION_CONCURRENT = 5;
 
 var slotBackgroundColor = function slotBackgroundColor(theme) {
   return {
@@ -48068,15 +49106,22 @@ var dropBackgroundColor = function dropBackgroundColor(theme) {
     secondary: theme.palette.drop.lightTwo
   };
 };
+var dragBackgroundColor = function dragBackgroundColor(theme) {
+  return {
+    primary: theme.palette.drag.main,
+    secondary: theme.palette.drag.main
+  };
+};
 
-var slotBg = function slotBg(canDrop, isOver, slotBackground, theme, color) {
+var slotBg = function slotBg(canDrop, isOver, slotBackground, theme) {
+  var color = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'primary';
   var _ref = slotBackground || {},
     dropBg = _ref.dropBg,
     overBg = _ref.overBg;
   var slotColor = slotBackgroundColor(theme);
   var overColor = overBackgroundColor(theme);
   var dropColor = dropBackgroundColor(theme);
-  var backgroundColor = slotColor[color];
+  var backgroundColor = slotColor[color] || 'transparent';
   if (canDrop && isOver) {
     backgroundColor = dropBg || dropColor[color]; // Highlight color when canDrop and isOver
   } else if (canDrop) {
@@ -48092,16 +49137,32 @@ var getSlotWidth = function getSlotWidth(slotDuration) {
       return WIDTH;
   }
 };
+var getAppointmentWidth = function getAppointmentWidth(timeSlot, start, end, duration) {
+  var slotStart = moment(timeSlot, 'hh:mm a');
+  var slotEnd = moment(slotStart).add(duration, 'minutes');
+  var appointmentStart = moment(start);
+  var appointmentEnd = moment(end);
+  var totalMinutesInSlot = moment.duration(slotEnd.diff(slotStart)).asMinutes();
+  var appointmentDuration = moment.duration(appointmentEnd.diff(appointmentStart)).asMinutes();
+  var width = appointmentDuration / totalMinutesInSlot * getSlotWidth(duration);
+  return width + 'px';
+};
+var getAppointmentHeight = function getAppointmentHeight(concurrentCount) {
+  var height = HEIGHT;
+  var computedHeight = HEIGHT - HEIGHT_REDUCTION_CONCURRENT * concurrentCount;
+  height = Math.max(MIN_HEIGHT, computedHeight);
+  return height;
+};
 
 var Slot = styled$3(TableCell$1)(function (props) {
-  var _useSchedulerContext = useSchedulerContext(),
-    _useSchedulerContext$ = _useSchedulerContext.color,
-    color = _useSchedulerContext$ === void 0 ? "primary" : _useSchedulerContext$,
-    SlotProps = _useSchedulerContext.SlotProps;
   props.index;
     var canDrop = props.canDrop,
     isOver = props.isOver,
     width = props.width;
+  var _useSchedulerContext = useSchedulerContext(),
+    _useSchedulerContext$ = _useSchedulerContext.color,
+    color = _useSchedulerContext$ === void 0 ? "primary" : _useSchedulerContext$,
+    SlotProps = _useSchedulerContext.SlotProps;
   var _ref = SlotProps || {};
     _ref.secondaryDuration;
     var style = _ref.style,
@@ -48155,86 +49216,161 @@ var Slot = styled$3(TableCell$1)(function (props) {
   }, style);
 });
 
+var AppointmentContainer = styled$3('div')(function (props) {
+  var isDragging = props.isDragging,
+    height = props.height,
+    width = props.width,
+    appointmentColor = props.appointmentColor;
+  var _useSchedulerContext = useSchedulerContext(),
+    AppointmentProps = _useSchedulerContext.AppointmentProps,
+    _useSchedulerContext$ = _useSchedulerContext.color,
+    color = _useSchedulerContext$ === void 0 ? "primary" : _useSchedulerContext$;
+  var _ref = AppointmentProps || {},
+    dragBgColor = _ref.dragBgColor,
+    style = _ref.style;
+  var theme = useTheme$1();
+  var dragColor = dragBackgroundColor(theme);
+  var backgroundColor = isDragging ? dragBgColor || dragColor[color] : appointmentColor;
+  return _objectSpread2({
+    backgroundColor: backgroundColor,
+    zIndex: '2',
+    position: 'relative',
+    top: 0,
+    left: 0,
+    borderRadius: 4,
+    width: width,
+    cursor: 'move',
+    marginTop: '1px',
+    border: '1px solid ' + darken$1(appointmentColor, 0.25),
+    color: darken$1(appointmentColor, 0.7),
+    overflow: 'hidden',
+    whiteSpace: 'pre-wrap',
+    textOverflow: 'ellipsis',
+    height: height || HEIGHT + 'px'
+  }, style);
+});
+
+function AppointmentItem(props) {
+  var appointment = props.appointment,
+    width = props.width,
+    key = props.key,
+    height = props.height;
+  var _useDrag = useDrag({
+      type: 'APPOINTMENT',
+      item: {
+        appointment: appointment
+      },
+      collect: function collect(monitor) {
+        return {
+          isDragging: !!monitor.isDragging()
+        };
+      }
+    }),
+    _useDrag2 = _slicedToArray(_useDrag, 2),
+    isDragging = _useDrag2[0].isDragging,
+    drag = _useDrag2[1];
+  var color = appointment.user.color;
+  return /*#__PURE__*/React__default["default"].createElement(AppointmentContainer, {
+    key: key,
+    ref: drag,
+    isDragging: isDragging,
+    height: height,
+    width: width,
+    appointmentColor: color
+  }, /*#__PURE__*/React__default["default"].createElement("div", {
+    style: {
+      padding: 4
+    }
+  }, /*#__PURE__*/React__default["default"].createElement(Typography$1, {
+    sx: {
+      color: darken$1(color, 0.5)
+    }
+  }, appointment.title)));
+}
+
+function Appointments(props) {
+  var appointments = props.appointments,
+    timeSlot = props.timeSlot,
+    secondaryDuration = props.secondaryDuration;
+  return appointments && (appointments === null || appointments === void 0 ? void 0 : appointments.map(function (appointment) {
+    var startDate = moment(appointment.schedule.startDate);
+    var endDate = moment(appointment.schedule.endDate);
+    var height = getAppointmentHeight(appointment.height);
+    return /*#__PURE__*/React__default["default"].createElement(AppointmentItem, {
+      key: appointment.id,
+      appointment: appointment,
+      width: getAppointmentWidth(timeSlot, startDate, endDate, secondaryDuration),
+      height: height
+    });
+  }));
+}
+
 function UserTimeSlot(props) {
-  props.user;
-    props.timeSlot;
-    var index = props.index;
-  var _useSchedulerContext = useSchedulerContext();
-    _useSchedulerContext.appointmentList;
-    _useSchedulerContext.onAppointmentChange;
-    _useSchedulerContext.duration;
-    _useSchedulerContext.date;
-    var SlotProps = _useSchedulerContext.SlotProps;
+  var user = props.user,
+    timeSlot = props.timeSlot,
+    index = props.index;
+  var _useSchedulerContext = useSchedulerContext(),
+    appointmentList = _useSchedulerContext.appointmentList,
+    onAppointmentChange = _useSchedulerContext.onAppointmentChange,
+    duration = _useSchedulerContext.duration,
+    date = _useSchedulerContext.date,
+    SlotProps = _useSchedulerContext.SlotProps;
   var _ref = SlotProps || {},
     _ref$secondaryDuratio = _ref.secondaryDuration,
     secondaryDuration = _ref$secondaryDuratio === void 0 ? 30 : _ref$secondaryDuratio;
-
-  //   const [{ isOver, canDrop }, drop] = useDrop({
-  //     accept: 'APPOINTMENT',
-  //     drop: (appointment, monitor) => {
-  //       const droppedAppointment = appointment.appointment;
-  //       const updatedAppointments = getUpdatedAppointments(
-  //         appointmentList,
-  //         droppedAppointment,
-  //         date,
-  //         timeSlot,
-  //         duration,
-  //         user
-  //       );
-  //       onAppointmentChange(updatedAppointments);
-  //     },
-  //     collect: (monitor) => ({
-  //       isOver: monitor.isOver(),
-  //       canDrop: monitor.canDrop(),
-  //     }),
-  //   });
-
-  //   const sortedAppointments = getSortAppointments(appointmentList, user);
-  //   const concurrentAppointments = {};
-  //   let previousConcurrentCount = 0;
-  //   sortedAppointments.forEach((event, index) => {
-  //     const startDate = moment(event.schedule.startDate);
-  //     const count = sortedAppointments.reduce((acc, otherEvent, otherIndex) => {
-  //       if (
-  //         index !== otherIndex &&
-  //         moment(otherEvent.schedule.startDate).isBefore(startDate) &&
-  //         moment(otherEvent.schedule.endDate).isAfter(startDate)
-  //       ) {
-  //         return acc + 1;
-  //       }
-  //       return acc;
-  //     }, 0);
-  //     concurrentAppointments[event.id] =
-  //       count > 0 ? count + previousConcurrentCount : 0;
-  //     // Update previousConcurrentCount for the next event
-  //     previousConcurrentCount = count > 0 ? concurrentAppointments[event.id] : 0;
-  //   });
-
-  //   const filteredAppointments = getFilteredAppointments(
-  //     appointmentList,
-  //     user,
-  //     timeSlot,
-  //     date,
-  //     secondaryDuration,
-  //     concurrentAppointments
-  //   );
-
+  var _useDrop = useDrop({
+      accept: 'APPOINTMENT',
+      drop: function drop(appointment, monitor) {
+        var droppedAppointment = appointment.appointment;
+        var updatedAppointments = getUpdatedAppointments(appointmentList, droppedAppointment, date, timeSlot, duration, user);
+        onAppointmentChange(updatedAppointments);
+      },
+      collect: function collect(monitor) {
+        return {
+          isOver: monitor.isOver(),
+          canDrop: monitor.canDrop()
+        };
+      }
+    }),
+    _useDrop2 = _slicedToArray(_useDrop, 2),
+    _useDrop2$ = _useDrop2[0],
+    isOver = _useDrop2$.isOver,
+    canDrop = _useDrop2$.canDrop,
+    drop = _useDrop2[1];
+  var sortedAppointments = getSortAppointments(appointmentList, user);
+  var concurrentAppointments = {};
+  var previousConcurrentCount = 0;
+  sortedAppointments.forEach(function (event, index) {
+    var startDate = moment(event.schedule.startDate);
+    var count = sortedAppointments.reduce(function (acc, otherEvent, otherIndex) {
+      if (index !== otherIndex && moment(otherEvent.schedule.startDate).isBefore(startDate) && moment(otherEvent.schedule.endDate).isAfter(startDate)) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+    concurrentAppointments[event.id] = count > 0 ? count + previousConcurrentCount : 0;
+    // Update previousConcurrentCount for the next event
+    previousConcurrentCount = count > 0 ? concurrentAppointments[event.id] : 0;
+  });
+  var filteredAppointments = getFilteredAppointments(appointmentList, user, timeSlot, date, secondaryDuration, concurrentAppointments);
   var width = getSlotWidth(secondaryDuration);
   return /*#__PURE__*/React__default["default"].createElement(Slot, {
-    colSpan: 1
-    //   ref={drop}
-    ,
-    index: index
-    //   canDrop={canDrop}
-    //   isOver={isOver}
-    ,
+    colSpan: 1,
+    ref: drop,
+    index: index,
+    canDrop: canDrop,
+    isOver: isOver,
     width: width
   }, /*#__PURE__*/React__default["default"].createElement("div", {
     style: {
       overflow: 'visible',
       width: width
     }
-  }));
+  }, /*#__PURE__*/React__default["default"].createElement(Appointments, {
+    appointments: filteredAppointments,
+    secondaryDuration: secondaryDuration,
+    timeSlot: timeSlot
+  })));
 }
 
 function Calendar() {
@@ -48544,7 +49680,6 @@ function NavigateDateAction() {
 }
 
 function Header() {
-  console.log('error');
   return /*#__PURE__*/React__default["default"].createElement("div", {
     style: {
       display: 'flex',
@@ -48573,7 +49708,11 @@ function Header() {
  * </ul>
  *  */
 var Scheduler = function Scheduler(props) {
-  return /*#__PURE__*/React__default["default"].createElement(SchedulerProvider, props, /*#__PURE__*/React__default["default"].createElement("div", null, "Hello world"), /*#__PURE__*/React__default["default"].createElement(Header, null), /*#__PURE__*/React__default["default"].createElement(Calendar, null));
+  return /*#__PURE__*/React__default["default"].createElement(SchedulerProvider, props, /*#__PURE__*/React__default["default"].createElement("div", {
+    style: {
+      overflow: 'hidden'
+    }
+  }, /*#__PURE__*/React__default["default"].createElement(Header, null), /*#__PURE__*/React__default["default"].createElement(Calendar, null)));
 };
 Scheduler.propTypes = {
   /**
