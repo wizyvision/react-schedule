@@ -13,7 +13,7 @@ function TodayButton() {
     <Button 
         onClick={handleDateChange} 
         sx={{ textTransform: 'capitalize' }}
-    >
+        >
       Today
     </Button>
   );

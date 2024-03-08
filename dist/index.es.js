@@ -40353,9 +40353,12 @@ function ButtonField(props) {
   } = props;
   // Convert the timestamp to a Date object
   const date = new Date(value);
+  const handleOpen = () => {
+    setOpen?.(prev => !prev);
+  };
   return /*#__PURE__*/React__default.createElement(Button$1, {
     endIcon: /*#__PURE__*/React__default.createElement(ArrowDropDownIcon, null),
-    onClick: () => setOpen?.(prev => !prev),
+    onClick: handleOpen,
     id: id,
     disabled: disabled,
     ref: ref,
