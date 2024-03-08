@@ -39381,6 +39381,7 @@ function NavigateDateAction() {
 }
 
 function Header() {
+  console.log('error');
   return /*#__PURE__*/React__default.createElement("div", {
     style: {
       display: 'flex',
