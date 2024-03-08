@@ -35,7 +35,7 @@ function DurationPicker() {
   };
 
   const options = durationOptions?.map((option) => (
-    <MenuItem onClick={() => handleMenuItemClick(option)} value={option}>
+    <MenuItem key={option} onClick={() => handleMenuItemClick(option)} value={option}>
       {optionValue(option)}
     </MenuItem>
   ));
