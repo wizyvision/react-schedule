@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var jsxRuntime = require('react/jsx-runtime');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -59,9 +58,9 @@ function getAugmentedNamespace(n) {
 
 var propTypes = {exports: {}};
 
-var reactIs$3 = {exports: {}};
+var reactIs = {exports: {}};
 
-var reactIs_production_min$2 = {};
+var reactIs_production_min = {};
 
 /** @license React v16.13.1
  * react-is.production.min.js
@@ -72,21 +71,21 @@ var reactIs_production_min$2 = {};
  * LICENSE file in the root directory of this source tree.
  */
 
-var hasRequiredReactIs_production_min$2;
+var hasRequiredReactIs_production_min;
 
-function requireReactIs_production_min$2 () {
-	if (hasRequiredReactIs_production_min$2) return reactIs_production_min$2;
-	hasRequiredReactIs_production_min$2 = 1;
+function requireReactIs_production_min () {
+	if (hasRequiredReactIs_production_min) return reactIs_production_min;
+	hasRequiredReactIs_production_min = 1;
 var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
 	Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
-	function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}reactIs_production_min$2.AsyncMode=l;reactIs_production_min$2.ConcurrentMode=m;reactIs_production_min$2.ContextConsumer=k;reactIs_production_min$2.ContextProvider=h;reactIs_production_min$2.Element=c;reactIs_production_min$2.ForwardRef=n;reactIs_production_min$2.Fragment=e;reactIs_production_min$2.Lazy=t;reactIs_production_min$2.Memo=r;reactIs_production_min$2.Portal=d;
-	reactIs_production_min$2.Profiler=g;reactIs_production_min$2.StrictMode=f;reactIs_production_min$2.Suspense=p;reactIs_production_min$2.isAsyncMode=function(a){return A(a)||z(a)===l};reactIs_production_min$2.isConcurrentMode=A;reactIs_production_min$2.isContextConsumer=function(a){return z(a)===k};reactIs_production_min$2.isContextProvider=function(a){return z(a)===h};reactIs_production_min$2.isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};reactIs_production_min$2.isForwardRef=function(a){return z(a)===n};reactIs_production_min$2.isFragment=function(a){return z(a)===e};reactIs_production_min$2.isLazy=function(a){return z(a)===t};
-	reactIs_production_min$2.isMemo=function(a){return z(a)===r};reactIs_production_min$2.isPortal=function(a){return z(a)===d};reactIs_production_min$2.isProfiler=function(a){return z(a)===g};reactIs_production_min$2.isStrictMode=function(a){return z(a)===f};reactIs_production_min$2.isSuspense=function(a){return z(a)===p};
-	reactIs_production_min$2.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};reactIs_production_min$2.typeOf=z;
-	return reactIs_production_min$2;
+	function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}reactIs_production_min.AsyncMode=l;reactIs_production_min.ConcurrentMode=m;reactIs_production_min.ContextConsumer=k;reactIs_production_min.ContextProvider=h;reactIs_production_min.Element=c;reactIs_production_min.ForwardRef=n;reactIs_production_min.Fragment=e;reactIs_production_min.Lazy=t;reactIs_production_min.Memo=r;reactIs_production_min.Portal=d;
+	reactIs_production_min.Profiler=g;reactIs_production_min.StrictMode=f;reactIs_production_min.Suspense=p;reactIs_production_min.isAsyncMode=function(a){return A(a)||z(a)===l};reactIs_production_min.isConcurrentMode=A;reactIs_production_min.isContextConsumer=function(a){return z(a)===k};reactIs_production_min.isContextProvider=function(a){return z(a)===h};reactIs_production_min.isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};reactIs_production_min.isForwardRef=function(a){return z(a)===n};reactIs_production_min.isFragment=function(a){return z(a)===e};reactIs_production_min.isLazy=function(a){return z(a)===t};
+	reactIs_production_min.isMemo=function(a){return z(a)===r};reactIs_production_min.isPortal=function(a){return z(a)===d};reactIs_production_min.isProfiler=function(a){return z(a)===g};reactIs_production_min.isStrictMode=function(a){return z(a)===f};reactIs_production_min.isSuspense=function(a){return z(a)===p};
+	reactIs_production_min.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};reactIs_production_min.typeOf=z;
+	return reactIs_production_min;
 }
 
-var reactIs_development$2 = {};
+var reactIs_development = {};
 
 /** @license React v16.13.1
  * react-is.development.js
@@ -97,11 +96,11 @@ var reactIs_development$2 = {};
  * LICENSE file in the root directory of this source tree.
  */
 
-var hasRequiredReactIs_development$2;
+var hasRequiredReactIs_development;
 
-function requireReactIs_development$2 () {
-	if (hasRequiredReactIs_development$2) return reactIs_development$2;
-	hasRequiredReactIs_development$2 = 1;
+function requireReactIs_development () {
+	if (hasRequiredReactIs_development) return reactIs_development;
+	hasRequiredReactIs_development = 1;
 
 
 
@@ -242,51 +241,51 @@ function requireReactIs_development$2 () {
 	  return typeOf(object) === REACT_SUSPENSE_TYPE;
 	}
 
-	reactIs_development$2.AsyncMode = AsyncMode;
-	reactIs_development$2.ConcurrentMode = ConcurrentMode;
-	reactIs_development$2.ContextConsumer = ContextConsumer;
-	reactIs_development$2.ContextProvider = ContextProvider;
-	reactIs_development$2.Element = Element;
-	reactIs_development$2.ForwardRef = ForwardRef;
-	reactIs_development$2.Fragment = Fragment;
-	reactIs_development$2.Lazy = Lazy;
-	reactIs_development$2.Memo = Memo;
-	reactIs_development$2.Portal = Portal;
-	reactIs_development$2.Profiler = Profiler;
-	reactIs_development$2.StrictMode = StrictMode;
-	reactIs_development$2.Suspense = Suspense;
-	reactIs_development$2.isAsyncMode = isAsyncMode;
-	reactIs_development$2.isConcurrentMode = isConcurrentMode;
-	reactIs_development$2.isContextConsumer = isContextConsumer;
-	reactIs_development$2.isContextProvider = isContextProvider;
-	reactIs_development$2.isElement = isElement;
-	reactIs_development$2.isForwardRef = isForwardRef;
-	reactIs_development$2.isFragment = isFragment;
-	reactIs_development$2.isLazy = isLazy;
-	reactIs_development$2.isMemo = isMemo;
-	reactIs_development$2.isPortal = isPortal;
-	reactIs_development$2.isProfiler = isProfiler;
-	reactIs_development$2.isStrictMode = isStrictMode;
-	reactIs_development$2.isSuspense = isSuspense;
-	reactIs_development$2.isValidElementType = isValidElementType;
-	reactIs_development$2.typeOf = typeOf;
+	reactIs_development.AsyncMode = AsyncMode;
+	reactIs_development.ConcurrentMode = ConcurrentMode;
+	reactIs_development.ContextConsumer = ContextConsumer;
+	reactIs_development.ContextProvider = ContextProvider;
+	reactIs_development.Element = Element;
+	reactIs_development.ForwardRef = ForwardRef;
+	reactIs_development.Fragment = Fragment;
+	reactIs_development.Lazy = Lazy;
+	reactIs_development.Memo = Memo;
+	reactIs_development.Portal = Portal;
+	reactIs_development.Profiler = Profiler;
+	reactIs_development.StrictMode = StrictMode;
+	reactIs_development.Suspense = Suspense;
+	reactIs_development.isAsyncMode = isAsyncMode;
+	reactIs_development.isConcurrentMode = isConcurrentMode;
+	reactIs_development.isContextConsumer = isContextConsumer;
+	reactIs_development.isContextProvider = isContextProvider;
+	reactIs_development.isElement = isElement;
+	reactIs_development.isForwardRef = isForwardRef;
+	reactIs_development.isFragment = isFragment;
+	reactIs_development.isLazy = isLazy;
+	reactIs_development.isMemo = isMemo;
+	reactIs_development.isPortal = isPortal;
+	reactIs_development.isProfiler = isProfiler;
+	reactIs_development.isStrictMode = isStrictMode;
+	reactIs_development.isSuspense = isSuspense;
+	reactIs_development.isValidElementType = isValidElementType;
+	reactIs_development.typeOf = typeOf;
 	  })();
 	}
-	return reactIs_development$2;
+	return reactIs_development;
 }
 
 var hasRequiredReactIs;
 
 function requireReactIs () {
-	if (hasRequiredReactIs) return reactIs$3.exports;
+	if (hasRequiredReactIs) return reactIs.exports;
 	hasRequiredReactIs = 1;
 
 	if (process.env.NODE_ENV === 'production') {
-	  reactIs$3.exports = requireReactIs_production_min$2();
+	  reactIs.exports = requireReactIs_production_min();
 	} else {
-	  reactIs$3.exports = requireReactIs_development$2();
+	  reactIs.exports = requireReactIs_development();
 	}
-	return reactIs$3.exports;
+	return reactIs.exports;
 }
 
 /*
@@ -2459,8 +2458,8 @@ var prefixer = function prefixer(element, index, children, callback) {
   }
 };
 
-var isBrowser$5 = typeof document !== 'undefined';
-var getServerStylisCache = isBrowser$5 ? undefined : weakMemoize(function () {
+var isBrowser$3 = typeof document !== 'undefined';
+var getServerStylisCache = isBrowser$3 ? undefined : weakMemoize(function () {
   return memoize$1(function () {
     var cache = {};
     return function (name) {
@@ -2477,7 +2476,7 @@ var createCache = function createCache(options) {
     throw new Error("You have to configure `key` for your cache. Please make sure it's unique (and not equal to 'css') as it's used for linking styles to your cache.\n" + "If multiple caches share the same key they might \"fight\" for each other's style elements.");
   }
 
-  if (isBrowser$5 && key === 'css') {
+  if (isBrowser$3 && key === 'css') {
     var ssrStyles = document.querySelectorAll("style[data-emotion]:not([data-s])"); // get SSRed styles out of the way of React's hydration
     // document.head is a safe place to move them to(though note document.head is not necessarily the last place they will be)
     // note this very very intentionally targets all style elements regardless of the key to ensure
@@ -2513,7 +2512,7 @@ var createCache = function createCache(options) {
   var container;
   var nodesToHydrate = [];
 
-  if (isBrowser$5) {
+  if (isBrowser$3) {
     container = options.container || document.head;
     Array.prototype.forEach.call( // this means we will ignore elements which don't have a space in them which
     // means that the style elements we're looking at are only Emotion 11 server-rendered style elements
@@ -2541,7 +2540,7 @@ var createCache = function createCache(options) {
     }), incorrectImportAlarm);
   }
 
-  if (isBrowser$5) {
+  if (isBrowser$3) {
     var currentSheet;
     var finalizingPlugins = [stringify, process.env.NODE_ENV !== 'production' ? function (element) {
       if (!element.root) {
@@ -2656,8 +2655,8 @@ var createCache = function createCache(options) {
   return cache;
 };
 
-function _extends$1() {
-  _extends$1 = Object.assign ? Object.assign.bind() : function (target) {
+function _extends() {
+  _extends = Object.assign ? Object.assign.bind() : function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -2668,254 +2667,10 @@ function _extends$1() {
     }
     return target;
   };
-  return _extends$1.apply(this, arguments);
+  return _extends.apply(this, arguments);
 }
 
-var reactIs$2 = {exports: {}};
-
-var reactIs_production_min$1 = {};
-
-/** @license React v16.13.1
- * react-is.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var hasRequiredReactIs_production_min$1;
-
-function requireReactIs_production_min$1 () {
-	if (hasRequiredReactIs_production_min$1) return reactIs_production_min$1;
-	hasRequiredReactIs_production_min$1 = 1;
-var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
-	Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
-	function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}reactIs_production_min$1.AsyncMode=l;reactIs_production_min$1.ConcurrentMode=m;reactIs_production_min$1.ContextConsumer=k;reactIs_production_min$1.ContextProvider=h;reactIs_production_min$1.Element=c;reactIs_production_min$1.ForwardRef=n;reactIs_production_min$1.Fragment=e;reactIs_production_min$1.Lazy=t;reactIs_production_min$1.Memo=r;reactIs_production_min$1.Portal=d;
-	reactIs_production_min$1.Profiler=g;reactIs_production_min$1.StrictMode=f;reactIs_production_min$1.Suspense=p;reactIs_production_min$1.isAsyncMode=function(a){return A(a)||z(a)===l};reactIs_production_min$1.isConcurrentMode=A;reactIs_production_min$1.isContextConsumer=function(a){return z(a)===k};reactIs_production_min$1.isContextProvider=function(a){return z(a)===h};reactIs_production_min$1.isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};reactIs_production_min$1.isForwardRef=function(a){return z(a)===n};reactIs_production_min$1.isFragment=function(a){return z(a)===e};reactIs_production_min$1.isLazy=function(a){return z(a)===t};
-	reactIs_production_min$1.isMemo=function(a){return z(a)===r};reactIs_production_min$1.isPortal=function(a){return z(a)===d};reactIs_production_min$1.isProfiler=function(a){return z(a)===g};reactIs_production_min$1.isStrictMode=function(a){return z(a)===f};reactIs_production_min$1.isSuspense=function(a){return z(a)===p};
-	reactIs_production_min$1.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};reactIs_production_min$1.typeOf=z;
-	return reactIs_production_min$1;
-}
-
-var reactIs_development$1 = {};
-
-/** @license React v16.13.1
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var hasRequiredReactIs_development$1;
-
-function requireReactIs_development$1 () {
-	if (hasRequiredReactIs_development$1) return reactIs_development$1;
-	hasRequiredReactIs_development$1 = 1;
-
-
-
-	if (process.env.NODE_ENV !== "production") {
-	  (function() {
-
-	// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
-	// nor polyfill, then a plain number is used for performance.
-	var hasSymbol = typeof Symbol === 'function' && Symbol.for;
-	var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
-	var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
-	var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
-	var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
-	var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
-	var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
-	var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
-	// (unstable) APIs that have been removed. Can we remove the symbols?
-
-	var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
-	var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
-	var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
-	var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
-	var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
-	var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
-	var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
-	var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
-	var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
-	var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
-	var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
-
-	function isValidElementType(type) {
-	  return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-	  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
-	}
-
-	function typeOf(object) {
-	  if (typeof object === 'object' && object !== null) {
-	    var $$typeof = object.$$typeof;
-
-	    switch ($$typeof) {
-	      case REACT_ELEMENT_TYPE:
-	        var type = object.type;
-
-	        switch (type) {
-	          case REACT_ASYNC_MODE_TYPE:
-	          case REACT_CONCURRENT_MODE_TYPE:
-	          case REACT_FRAGMENT_TYPE:
-	          case REACT_PROFILER_TYPE:
-	          case REACT_STRICT_MODE_TYPE:
-	          case REACT_SUSPENSE_TYPE:
-	            return type;
-
-	          default:
-	            var $$typeofType = type && type.$$typeof;
-
-	            switch ($$typeofType) {
-	              case REACT_CONTEXT_TYPE:
-	              case REACT_FORWARD_REF_TYPE:
-	              case REACT_LAZY_TYPE:
-	              case REACT_MEMO_TYPE:
-	              case REACT_PROVIDER_TYPE:
-	                return $$typeofType;
-
-	              default:
-	                return $$typeof;
-	            }
-
-	        }
-
-	      case REACT_PORTAL_TYPE:
-	        return $$typeof;
-	    }
-	  }
-
-	  return undefined;
-	} // AsyncMode is deprecated along with isAsyncMode
-
-	var AsyncMode = REACT_ASYNC_MODE_TYPE;
-	var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
-	var ContextConsumer = REACT_CONTEXT_TYPE;
-	var ContextProvider = REACT_PROVIDER_TYPE;
-	var Element = REACT_ELEMENT_TYPE;
-	var ForwardRef = REACT_FORWARD_REF_TYPE;
-	var Fragment = REACT_FRAGMENT_TYPE;
-	var Lazy = REACT_LAZY_TYPE;
-	var Memo = REACT_MEMO_TYPE;
-	var Portal = REACT_PORTAL_TYPE;
-	var Profiler = REACT_PROFILER_TYPE;
-	var StrictMode = REACT_STRICT_MODE_TYPE;
-	var Suspense = REACT_SUSPENSE_TYPE;
-	var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
-
-	function isAsyncMode(object) {
-	  {
-	    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-	      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
-
-	      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
-	    }
-	  }
-
-	  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
-	}
-	function isConcurrentMode(object) {
-	  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
-	}
-	function isContextConsumer(object) {
-	  return typeOf(object) === REACT_CONTEXT_TYPE;
-	}
-	function isContextProvider(object) {
-	  return typeOf(object) === REACT_PROVIDER_TYPE;
-	}
-	function isElement(object) {
-	  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-	}
-	function isForwardRef(object) {
-	  return typeOf(object) === REACT_FORWARD_REF_TYPE;
-	}
-	function isFragment(object) {
-	  return typeOf(object) === REACT_FRAGMENT_TYPE;
-	}
-	function isLazy(object) {
-	  return typeOf(object) === REACT_LAZY_TYPE;
-	}
-	function isMemo(object) {
-	  return typeOf(object) === REACT_MEMO_TYPE;
-	}
-	function isPortal(object) {
-	  return typeOf(object) === REACT_PORTAL_TYPE;
-	}
-	function isProfiler(object) {
-	  return typeOf(object) === REACT_PROFILER_TYPE;
-	}
-	function isStrictMode(object) {
-	  return typeOf(object) === REACT_STRICT_MODE_TYPE;
-	}
-	function isSuspense(object) {
-	  return typeOf(object) === REACT_SUSPENSE_TYPE;
-	}
-
-	reactIs_development$1.AsyncMode = AsyncMode;
-	reactIs_development$1.ConcurrentMode = ConcurrentMode;
-	reactIs_development$1.ContextConsumer = ContextConsumer;
-	reactIs_development$1.ContextProvider = ContextProvider;
-	reactIs_development$1.Element = Element;
-	reactIs_development$1.ForwardRef = ForwardRef;
-	reactIs_development$1.Fragment = Fragment;
-	reactIs_development$1.Lazy = Lazy;
-	reactIs_development$1.Memo = Memo;
-	reactIs_development$1.Portal = Portal;
-	reactIs_development$1.Profiler = Profiler;
-	reactIs_development$1.StrictMode = StrictMode;
-	reactIs_development$1.Suspense = Suspense;
-	reactIs_development$1.isAsyncMode = isAsyncMode;
-	reactIs_development$1.isConcurrentMode = isConcurrentMode;
-	reactIs_development$1.isContextConsumer = isContextConsumer;
-	reactIs_development$1.isContextProvider = isContextProvider;
-	reactIs_development$1.isElement = isElement;
-	reactIs_development$1.isForwardRef = isForwardRef;
-	reactIs_development$1.isFragment = isFragment;
-	reactIs_development$1.isLazy = isLazy;
-	reactIs_development$1.isMemo = isMemo;
-	reactIs_development$1.isPortal = isPortal;
-	reactIs_development$1.isProfiler = isProfiler;
-	reactIs_development$1.isStrictMode = isStrictMode;
-	reactIs_development$1.isSuspense = isSuspense;
-	reactIs_development$1.isValidElementType = isValidElementType;
-	reactIs_development$1.typeOf = typeOf;
-	  })();
-	}
-	return reactIs_development$1;
-}
-
-if (process.env.NODE_ENV === 'production') {
-  reactIs$2.exports = requireReactIs_production_min$1();
-} else {
-  reactIs$2.exports = requireReactIs_development$1();
-}
-
-var reactIsExports$1 = reactIs$2.exports;
-
-var reactIs$1 = reactIsExports$1;
-var FORWARD_REF_STATICS = {
-  '$$typeof': true,
-  render: true,
-  defaultProps: true,
-  displayName: true,
-  propTypes: true
-};
-var MEMO_STATICS = {
-  '$$typeof': true,
-  compare: true,
-  defaultProps: true,
-  displayName: true,
-  propTypes: true,
-  type: true
-};
-var TYPE_STATICS = {};
-TYPE_STATICS[reactIs$1.ForwardRef] = FORWARD_REF_STATICS;
-TYPE_STATICS[reactIs$1.Memo] = MEMO_STATICS;
-
-var isBrowser$4 = typeof document !== 'undefined';
+var isBrowser$2 = typeof document !== 'undefined';
 function getRegisteredStyles(registered, registeredStyles, classNames) {
   var rawClassName = '';
   classNames.split(' ').forEach(function (className) {
@@ -2939,7 +2694,7 @@ var registerStyles = function registerStyles(cache, serialized, isStringTag) {
   // in node since emotion-server relies on whether a style is in
   // the registered cache to know whether a style is global or not
   // also, note that this check will be dead code eliminated in the browser
-  isBrowser$4 === false && cache.compat !== undefined) && cache.registered[className] === undefined) {
+  isBrowser$2 === false && cache.compat !== undefined) && cache.registered[className] === undefined) {
     cache.registered[className] = serialized.styles;
   }
 };
@@ -2954,14 +2709,14 @@ var insertStyles = function insertStyles(cache, serialized, isStringTag) {
     do {
       var maybeStyles = cache.insert(serialized === current ? "." + className : '', current, cache.sheet, true);
 
-      if (!isBrowser$4 && maybeStyles !== undefined) {
+      if (!isBrowser$2 && maybeStyles !== undefined) {
         stylesForSSR += maybeStyles;
       }
 
       current = current.next;
     } while (current !== undefined);
 
-    if (!isBrowser$4 && stylesForSSR.length !== 0) {
+    if (!isBrowser$2 && stylesForSSR.length !== 0) {
       return stylesForSSR;
     }
   }
@@ -3071,7 +2826,7 @@ var unitlessKeys = {
   strokeWidth: 1
 };
 
-var ILLEGAL_ESCAPE_SEQUENCE_ERROR$1 = "You have illegal escape sequence in your template literal, most likely inside content's property value.\nBecause you write your CSS inside a JavaScript string you actually have to do double escaping, so for example \"content: '\\00d7';\" should become \"content: '\\\\00d7';\".\nYou can read more about this here:\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences";
+var ILLEGAL_ESCAPE_SEQUENCE_ERROR = "You have illegal escape sequence in your template literal, most likely inside content's property value.\nBecause you write your CSS inside a JavaScript string you actually have to do double escaping, so for example \"content: '\\00d7';\" should become \"content: '\\\\00d7';\".\nYou can read more about this here:\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences";
 var UNDEFINED_AS_OBJECT_KEY_ERROR = "You have passed in falsy value as style object's key (can happen when in example you pass unexported component as computed key).";
 var hyphenateRegex = /[A-Z]|^ms/g;
 var animationRegex = /_EMO_([^_]+?)_([^]*?)_EMO_/g;
@@ -3322,7 +3077,7 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
     styles += handleInterpolation(mergedProps, registered, strings);
   } else {
     if (process.env.NODE_ENV !== 'production' && strings[0] === undefined) {
-      console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR$1);
+      console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
     }
 
     styles += strings[0];
@@ -3334,7 +3089,7 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
 
     if (stringMode) {
       if (process.env.NODE_ENV !== 'production' && strings[i] === undefined) {
-        console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR$1);
+        console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
       }
 
       styles += strings[i];
@@ -3382,17 +3137,16 @@ var serializeStyles = function serializeStyles(args, registered, mergedProps) {
   };
 };
 
-var isBrowser$3 = typeof document !== 'undefined';
+var isBrowser$1 = typeof document !== 'undefined';
 
 var syncFallback = function syncFallback(create) {
   return create();
 };
 
 var useInsertionEffect = React__namespace['useInsertion' + 'Effect'] ? React__namespace['useInsertion' + 'Effect'] : false;
-var useInsertionEffectAlwaysWithSyncFallback = !isBrowser$3 ? syncFallback : useInsertionEffect || syncFallback;
-var useInsertionEffectWithLayoutFallback = useInsertionEffect || React__namespace.useLayoutEffect;
+var useInsertionEffectAlwaysWithSyncFallback = !isBrowser$1 ? syncFallback : useInsertionEffect || syncFallback;
 
-var isBrowser$2 = typeof document !== 'undefined';
+var isBrowser = typeof document !== 'undefined';
 var hasOwn = {}.hasOwnProperty;
 
 var EmotionCacheContext = /* #__PURE__ */React__namespace.createContext( // we're doing this to avoid preconstruct's dead code elimination in this one case
@@ -3409,7 +3163,7 @@ if (process.env.NODE_ENV !== 'production') {
   EmotionCacheContext.displayName = 'EmotionCacheContext';
 }
 
-var CacheProvider = EmotionCacheContext.Provider;
+EmotionCacheContext.Provider;
 
 var withEmotionCache = function withEmotionCache(func) {
   // $FlowFixMe
@@ -3420,7 +3174,7 @@ var withEmotionCache = function withEmotionCache(func) {
   });
 };
 
-if (!isBrowser$2) {
+if (!isBrowser) {
   withEmotionCache = function withEmotionCache(func) {
     return function (props) {
       var cache = React.useContext(EmotionCacheContext);
@@ -3465,7 +3219,7 @@ var getTheme = function getTheme(outerTheme, theme) {
     throw new Error('[ThemeProvider] Please make your theme prop a plain object');
   }
 
-  return _extends$1({}, outerTheme, theme);
+  return _extends({}, outerTheme, theme);
 };
 
 var createCacheWithTheme = /* #__PURE__ */weakMemoize(function (outerTheme) {
@@ -3488,7 +3242,7 @@ var ThemeProvider = function ThemeProvider(props) {
 var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
 var labelPropName = '__EMOTION_LABEL_PLEASE_DO_NOT_USE__';
 
-var Insertion$2 = function Insertion(_ref) {
+var Insertion = function Insertion(_ref) {
   var cache = _ref.cache,
       serialized = _ref.serialized,
       isStringTag = _ref.isStringTag;
@@ -3497,7 +3251,7 @@ var Insertion$2 = function Insertion(_ref) {
     return insertStyles(cache, serialized, isStringTag);
   });
 
-  if (!isBrowser$2 && rules !== undefined) {
+  if (!isBrowser && rules !== undefined) {
     var _ref2;
 
     var serializedNames = serialized.name;
@@ -3556,7 +3310,7 @@ var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
 
   newProps.ref = ref;
   newProps.className = className;
-  return /*#__PURE__*/React__namespace.createElement(React__namespace.Fragment, null, /*#__PURE__*/React__namespace.createElement(Insertion$2, {
+  return /*#__PURE__*/React__namespace.createElement(React__namespace.Fragment, null, /*#__PURE__*/React__namespace.createElement(Insertion, {
     cache: cache,
     serialized: serialized,
     isStringTag: typeof WrappedComponent === 'string'
@@ -3565,433 +3319,6 @@ var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
 
 if (process.env.NODE_ENV !== 'production') {
   Emotion.displayName = 'EmotionCssPropInternal';
-}
-
-var pkg = {
-	name: "@emotion/react",
-	version: "11.11.4",
-	main: "dist/emotion-react.cjs.js",
-	module: "dist/emotion-react.esm.js",
-	browser: {
-		"./dist/emotion-react.esm.js": "./dist/emotion-react.browser.esm.js"
-	},
-	exports: {
-		".": {
-			module: {
-				worker: "./dist/emotion-react.worker.esm.js",
-				browser: "./dist/emotion-react.browser.esm.js",
-				"default": "./dist/emotion-react.esm.js"
-			},
-			"import": "./dist/emotion-react.cjs.mjs",
-			"default": "./dist/emotion-react.cjs.js"
-		},
-		"./jsx-runtime": {
-			module: {
-				worker: "./jsx-runtime/dist/emotion-react-jsx-runtime.worker.esm.js",
-				browser: "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js",
-				"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.esm.js"
-			},
-			"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.mjs",
-			"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.js"
-		},
-		"./_isolated-hnrs": {
-			module: {
-				worker: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.worker.esm.js",
-				browser: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js",
-				"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.esm.js"
-			},
-			"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.mjs",
-			"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.js"
-		},
-		"./jsx-dev-runtime": {
-			module: {
-				worker: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.worker.esm.js",
-				browser: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.esm.js",
-				"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.esm.js"
-			},
-			"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.mjs",
-			"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.js"
-		},
-		"./package.json": "./package.json",
-		"./types/css-prop": "./types/css-prop.d.ts",
-		"./macro": {
-			types: {
-				"import": "./macro.d.mts",
-				"default": "./macro.d.ts"
-			},
-			"default": "./macro.js"
-		}
-	},
-	types: "types/index.d.ts",
-	files: [
-		"src",
-		"dist",
-		"jsx-runtime",
-		"jsx-dev-runtime",
-		"_isolated-hnrs",
-		"types/*.d.ts",
-		"macro.*"
-	],
-	sideEffects: false,
-	author: "Emotion Contributors",
-	license: "MIT",
-	scripts: {
-		"test:typescript": "dtslint types"
-	},
-	dependencies: {
-		"@babel/runtime": "^7.18.3",
-		"@emotion/babel-plugin": "^11.11.0",
-		"@emotion/cache": "^11.11.0",
-		"@emotion/serialize": "^1.1.3",
-		"@emotion/use-insertion-effect-with-fallbacks": "^1.0.1",
-		"@emotion/utils": "^1.2.1",
-		"@emotion/weak-memoize": "^0.3.1",
-		"hoist-non-react-statics": "^3.3.1"
-	},
-	peerDependencies: {
-		react: ">=16.8.0"
-	},
-	peerDependenciesMeta: {
-		"@types/react": {
-			optional: true
-		}
-	},
-	devDependencies: {
-		"@definitelytyped/dtslint": "0.0.112",
-		"@emotion/css": "11.11.2",
-		"@emotion/css-prettifier": "1.1.3",
-		"@emotion/server": "11.11.0",
-		"@emotion/styled": "11.11.0",
-		"html-tag-names": "^1.1.2",
-		react: "16.14.0",
-		"svg-tag-names": "^1.1.1",
-		typescript: "^4.5.5"
-	},
-	repository: "https://github.com/emotion-js/emotion/tree/main/packages/react",
-	publishConfig: {
-		access: "public"
-	},
-	"umd:main": "dist/emotion-react.umd.min.js",
-	preconstruct: {
-		entrypoints: [
-			"./index.js",
-			"./jsx-runtime.js",
-			"./jsx-dev-runtime.js",
-			"./_isolated-hnrs.js"
-		],
-		umdName: "emotionReact",
-		exports: {
-			envConditions: [
-				"browser",
-				"worker"
-			],
-			extra: {
-				"./types/css-prop": "./types/css-prop.d.ts",
-				"./macro": {
-					types: {
-						"import": "./macro.d.mts",
-						"default": "./macro.d.ts"
-					},
-					"default": "./macro.js"
-				}
-			}
-		}
-	}
-};
-
-var warnedAboutCssPropForGlobal = false; // maintain place over rerenders.
-// initial render from browser, insertBefore context.sheet.tags[0] or if a style hasn't been inserted there yet, appendChild
-// initial client-side render from SSR, use place of hydrating tag
-
-var Global = /* #__PURE__ */withEmotionCache(function (props, cache) {
-  if (process.env.NODE_ENV !== 'production' && !warnedAboutCssPropForGlobal && ( // check for className as well since the user is
-  // probably using the custom createElement which
-  // means it will be turned into a className prop
-  // $FlowFixMe I don't really want to add it to the type since it shouldn't be used
-  props.className || props.css)) {
-    console.error("It looks like you're using the css prop on Global, did you mean to use the styles prop instead?");
-    warnedAboutCssPropForGlobal = true;
-  }
-
-  var styles = props.styles;
-  var serialized = serializeStyles([styles], undefined, React__namespace.useContext(ThemeContext));
-
-  if (!isBrowser$2) {
-    var _ref;
-
-    var serializedNames = serialized.name;
-    var serializedStyles = serialized.styles;
-    var next = serialized.next;
-
-    while (next !== undefined) {
-      serializedNames += ' ' + next.name;
-      serializedStyles += next.styles;
-      next = next.next;
-    }
-
-    var shouldCache = cache.compat === true;
-    var rules = cache.insert("", {
-      name: serializedNames,
-      styles: serializedStyles
-    }, cache.sheet, shouldCache);
-
-    if (shouldCache) {
-      return null;
-    }
-
-    return /*#__PURE__*/React__namespace.createElement("style", (_ref = {}, _ref["data-emotion"] = cache.key + "-global " + serializedNames, _ref.dangerouslySetInnerHTML = {
-      __html: rules
-    }, _ref.nonce = cache.sheet.nonce, _ref));
-  } // yes, i know these hooks are used conditionally
-  // but it is based on a constant that will never change at runtime
-  // it's effectively like having two implementations and switching them out
-  // so it's not actually breaking anything
-
-
-  var sheetRef = React__namespace.useRef();
-  useInsertionEffectWithLayoutFallback(function () {
-    var key = cache.key + "-global"; // use case of https://github.com/emotion-js/emotion/issues/2675
-
-    var sheet = new cache.sheet.constructor({
-      key: key,
-      nonce: cache.sheet.nonce,
-      container: cache.sheet.container,
-      speedy: cache.sheet.isSpeedy
-    });
-    var rehydrating = false; // $FlowFixMe
-
-    var node = document.querySelector("style[data-emotion=\"" + key + " " + serialized.name + "\"]");
-
-    if (cache.sheet.tags.length) {
-      sheet.before = cache.sheet.tags[0];
-    }
-
-    if (node !== null) {
-      rehydrating = true; // clear the hash so this node won't be recognizable as rehydratable by other <Global/>s
-
-      node.setAttribute('data-emotion', key);
-      sheet.hydrate([node]);
-    }
-
-    sheetRef.current = [sheet, rehydrating];
-    return function () {
-      sheet.flush();
-    };
-  }, [cache]);
-  useInsertionEffectWithLayoutFallback(function () {
-    var sheetRefCurrent = sheetRef.current;
-    var sheet = sheetRefCurrent[0],
-        rehydrating = sheetRefCurrent[1];
-
-    if (rehydrating) {
-      sheetRefCurrent[1] = false;
-      return;
-    }
-
-    if (serialized.next !== undefined) {
-      // insert keyframes
-      insertStyles(cache, serialized.next, true);
-    }
-
-    if (sheet.tags.length) {
-      // if this doesn't exist then it will be null so the style element will be appended
-      var element = sheet.tags[sheet.tags.length - 1].nextElementSibling;
-      sheet.before = element;
-      sheet.flush();
-    }
-
-    cache.insert("", serialized, sheet, false);
-  }, [cache, serialized.name]);
-  return null;
-});
-
-if (process.env.NODE_ENV !== 'production') {
-  Global.displayName = 'EmotionGlobal';
-}
-
-function css() {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
-  return serializeStyles(args);
-}
-
-var keyframes = function keyframes() {
-  var insertable = css.apply(void 0, arguments);
-  var name = "animation-" + insertable.name; // $FlowFixMe
-
-  return {
-    name: name,
-    styles: "@keyframes " + name + "{" + insertable.styles + "}",
-    anim: 1,
-    toString: function toString() {
-      return "_EMO_" + this.name + "_" + this.styles + "_EMO_";
-    }
-  };
-};
-
-var classnames = function classnames(args) {
-  var len = args.length;
-  var i = 0;
-  var cls = '';
-
-  for (; i < len; i++) {
-    var arg = args[i];
-    if (arg == null) continue;
-    var toAdd = void 0;
-
-    switch (typeof arg) {
-      case 'boolean':
-        break;
-
-      case 'object':
-        {
-          if (Array.isArray(arg)) {
-            toAdd = classnames(arg);
-          } else {
-            if (process.env.NODE_ENV !== 'production' && arg.styles !== undefined && arg.name !== undefined) {
-              console.error('You have passed styles created with `css` from `@emotion/react` package to the `cx`.\n' + '`cx` is meant to compose class names (strings) so you should convert those styles to a class name by passing them to the `css` received from <ClassNames/> component.');
-            }
-
-            toAdd = '';
-
-            for (var k in arg) {
-              if (arg[k] && k) {
-                toAdd && (toAdd += ' ');
-                toAdd += k;
-              }
-            }
-          }
-
-          break;
-        }
-
-      default:
-        {
-          toAdd = arg;
-        }
-    }
-
-    if (toAdd) {
-      cls && (cls += ' ');
-      cls += toAdd;
-    }
-  }
-
-  return cls;
-};
-
-function merge$1(registered, css, className) {
-  var registeredStyles = [];
-  var rawClassName = getRegisteredStyles(registered, registeredStyles, className);
-
-  if (registeredStyles.length < 2) {
-    return className;
-  }
-
-  return rawClassName + css(registeredStyles);
-}
-
-var Insertion$1 = function Insertion(_ref) {
-  var cache = _ref.cache,
-      serializedArr = _ref.serializedArr;
-  var rules = useInsertionEffectAlwaysWithSyncFallback(function () {
-    var rules = '';
-
-    for (var i = 0; i < serializedArr.length; i++) {
-      var res = insertStyles(cache, serializedArr[i], false);
-
-      if (!isBrowser$2 && res !== undefined) {
-        rules += res;
-      }
-    }
-
-    if (!isBrowser$2) {
-      return rules;
-    }
-  });
-
-  if (!isBrowser$2 && rules.length !== 0) {
-    var _ref2;
-
-    return /*#__PURE__*/React__namespace.createElement("style", (_ref2 = {}, _ref2["data-emotion"] = cache.key + " " + serializedArr.map(function (serialized) {
-      return serialized.name;
-    }).join(' '), _ref2.dangerouslySetInnerHTML = {
-      __html: rules
-    }, _ref2.nonce = cache.sheet.nonce, _ref2));
-  }
-
-  return null;
-};
-
-var ClassNames = /* #__PURE__ */withEmotionCache(function (props, cache) {
-  var hasRendered = false;
-  var serializedArr = [];
-
-  var css = function css() {
-    if (hasRendered && process.env.NODE_ENV !== 'production') {
-      throw new Error('css can only be used during render');
-    }
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    var serialized = serializeStyles(args, cache.registered);
-    serializedArr.push(serialized); // registration has to happen here as the result of this might get consumed by `cx`
-
-    registerStyles(cache, serialized, false);
-    return cache.key + "-" + serialized.name;
-  };
-
-  var cx = function cx() {
-    if (hasRendered && process.env.NODE_ENV !== 'production') {
-      throw new Error('cx can only be used during render');
-    }
-
-    for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      args[_key2] = arguments[_key2];
-    }
-
-    return merge$1(cache.registered, css, classnames(args));
-  };
-
-  var content = {
-    css: css,
-    cx: cx,
-    theme: React__namespace.useContext(ThemeContext)
-  };
-  var ele = props.children(content);
-  hasRendered = true;
-  return /*#__PURE__*/React__namespace.createElement(React__namespace.Fragment, null, /*#__PURE__*/React__namespace.createElement(Insertion$1, {
-    cache: cache,
-    serializedArr: serializedArr
-  }), ele);
-});
-
-if (process.env.NODE_ENV !== 'production') {
-  ClassNames.displayName = 'EmotionClassNames';
-}
-
-if (process.env.NODE_ENV !== 'production') {
-  var isBrowser$1 = typeof document !== 'undefined'; // #1727, #2905 for some reason Jest and Vitest evaluate modules twice if some consuming module gets mocked
-
-  var isTestEnv = typeof jest !== 'undefined' || typeof vi !== 'undefined';
-
-  if (isBrowser$1 && !isTestEnv) {
-    // globalThis has wide browser support - https://caniuse.com/?search=globalThis, Node.js 12 and later
-    var globalContext = // $FlowIgnore
-    typeof globalThis !== 'undefined' ? globalThis // eslint-disable-line no-undef
-    : isBrowser$1 ? window : global;
-    var globalKey = "__EMOTION_REACT_" + pkg.version.split('.')[0] + "__";
-
-    if (globalContext[globalKey]) {
-      console.warn('You are loading @emotion/react when it is already loaded. Running ' + 'multiple instances may cause problems. This can happen if multiple ' + 'versions are used, or if multiple builds of the same version are ' + 'used.');
-    }
-
-    globalContext[globalKey] = true;
-  }
 }
 
 /**
@@ -4019,8 +3346,6 @@ var formatMuiErrorMessage = /*#__PURE__*/Object.freeze({
 	'default': formatMuiErrorMessage$1
 });
 
-var THEME_ID = '$$material';
-
 function _objectWithoutPropertiesLoose(source, excluded) {
   if (source == null) return {};
   var target = {};
@@ -4033,303 +3358,6 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   }
   return target;
 }
-
-var reactPropsRegex = /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|disableRemotePlayback|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/; // https://esbench.com/bench/5bfee68a4cd7e6009ef61d23
-
-var isPropValid = /* #__PURE__ */memoize$1(function (prop) {
-  return reactPropsRegex.test(prop) || prop.charCodeAt(0) === 111
-  /* o */
-  && prop.charCodeAt(1) === 110
-  /* n */
-  && prop.charCodeAt(2) < 91;
-}
-/* Z+1 */
-);
-
-var testOmitPropsOnStringTag = isPropValid;
-
-var testOmitPropsOnComponent = function testOmitPropsOnComponent(key) {
-  return key !== 'theme';
-};
-
-var getDefaultShouldForwardProp = function getDefaultShouldForwardProp(tag) {
-  return typeof tag === 'string' && // 96 is one less than the char code
-  // for "a" so this is checking that
-  // it's a lowercase character
-  tag.charCodeAt(0) > 96 ? testOmitPropsOnStringTag : testOmitPropsOnComponent;
-};
-var composeShouldForwardProps = function composeShouldForwardProps(tag, options, isReal) {
-  var shouldForwardProp;
-
-  if (options) {
-    var optionsShouldForwardProp = options.shouldForwardProp;
-    shouldForwardProp = tag.__emotion_forwardProp && optionsShouldForwardProp ? function (propName) {
-      return tag.__emotion_forwardProp(propName) && optionsShouldForwardProp(propName);
-    } : optionsShouldForwardProp;
-  }
-
-  if (typeof shouldForwardProp !== 'function' && isReal) {
-    shouldForwardProp = tag.__emotion_forwardProp;
-  }
-
-  return shouldForwardProp;
-};
-
-var ILLEGAL_ESCAPE_SEQUENCE_ERROR = "You have illegal escape sequence in your template literal, most likely inside content's property value.\nBecause you write your CSS inside a JavaScript string you actually have to do double escaping, so for example \"content: '\\00d7';\" should become \"content: '\\\\00d7';\".\nYou can read more about this here:\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences";
-var isBrowser = typeof document !== 'undefined';
-
-var Insertion = function Insertion(_ref) {
-  var cache = _ref.cache,
-      serialized = _ref.serialized,
-      isStringTag = _ref.isStringTag;
-  registerStyles(cache, serialized, isStringTag);
-  var rules = useInsertionEffectAlwaysWithSyncFallback(function () {
-    return insertStyles(cache, serialized, isStringTag);
-  });
-
-  if (!isBrowser && rules !== undefined) {
-    var _ref2;
-
-    var serializedNames = serialized.name;
-    var next = serialized.next;
-
-    while (next !== undefined) {
-      serializedNames += ' ' + next.name;
-      next = next.next;
-    }
-
-    return /*#__PURE__*/React__namespace.createElement("style", (_ref2 = {}, _ref2["data-emotion"] = cache.key + " " + serializedNames, _ref2.dangerouslySetInnerHTML = {
-      __html: rules
-    }, _ref2.nonce = cache.sheet.nonce, _ref2));
-  }
-
-  return null;
-};
-
-var createStyled$3 = function createStyled(tag, options) {
-  if (process.env.NODE_ENV !== 'production') {
-    if (tag === undefined) {
-      throw new Error('You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.');
-    }
-  }
-
-  var isReal = tag.__emotion_real === tag;
-  var baseTag = isReal && tag.__emotion_base || tag;
-  var identifierName;
-  var targetClassName;
-
-  if (options !== undefined) {
-    identifierName = options.label;
-    targetClassName = options.target;
-  }
-
-  var shouldForwardProp = composeShouldForwardProps(tag, options, isReal);
-  var defaultShouldForwardProp = shouldForwardProp || getDefaultShouldForwardProp(baseTag);
-  var shouldUseAs = !defaultShouldForwardProp('as');
-  return function () {
-    var args = arguments;
-    var styles = isReal && tag.__emotion_styles !== undefined ? tag.__emotion_styles.slice(0) : [];
-
-    if (identifierName !== undefined) {
-      styles.push("label:" + identifierName + ";");
-    }
-
-    if (args[0] == null || args[0].raw === undefined) {
-      styles.push.apply(styles, args);
-    } else {
-      if (process.env.NODE_ENV !== 'production' && args[0][0] === undefined) {
-        console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
-      }
-
-      styles.push(args[0][0]);
-      var len = args.length;
-      var i = 1;
-
-      for (; i < len; i++) {
-        if (process.env.NODE_ENV !== 'production' && args[0][i] === undefined) {
-          console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
-        }
-
-        styles.push(args[i], args[0][i]);
-      }
-    } // $FlowFixMe: we need to cast StatelessFunctionalComponent to our PrivateStyledComponent class
-
-
-    var Styled = withEmotionCache(function (props, cache, ref) {
-      var FinalTag = shouldUseAs && props.as || baseTag;
-      var className = '';
-      var classInterpolations = [];
-      var mergedProps = props;
-
-      if (props.theme == null) {
-        mergedProps = {};
-
-        for (var key in props) {
-          mergedProps[key] = props[key];
-        }
-
-        mergedProps.theme = React__namespace.useContext(ThemeContext);
-      }
-
-      if (typeof props.className === 'string') {
-        className = getRegisteredStyles(cache.registered, classInterpolations, props.className);
-      } else if (props.className != null) {
-        className = props.className + " ";
-      }
-
-      var serialized = serializeStyles(styles.concat(classInterpolations), cache.registered, mergedProps);
-      className += cache.key + "-" + serialized.name;
-
-      if (targetClassName !== undefined) {
-        className += " " + targetClassName;
-      }
-
-      var finalShouldForwardProp = shouldUseAs && shouldForwardProp === undefined ? getDefaultShouldForwardProp(FinalTag) : defaultShouldForwardProp;
-      var newProps = {};
-
-      for (var _key in props) {
-        if (shouldUseAs && _key === 'as') continue;
-
-        if ( // $FlowFixMe
-        finalShouldForwardProp(_key)) {
-          newProps[_key] = props[_key];
-        }
-      }
-
-      newProps.className = className;
-      newProps.ref = ref;
-      return /*#__PURE__*/React__namespace.createElement(React__namespace.Fragment, null, /*#__PURE__*/React__namespace.createElement(Insertion, {
-        cache: cache,
-        serialized: serialized,
-        isStringTag: typeof FinalTag === 'string'
-      }), /*#__PURE__*/React__namespace.createElement(FinalTag, newProps));
-    });
-    Styled.displayName = identifierName !== undefined ? identifierName : "Styled(" + (typeof baseTag === 'string' ? baseTag : baseTag.displayName || baseTag.name || 'Component') + ")";
-    Styled.defaultProps = tag.defaultProps;
-    Styled.__emotion_real = Styled;
-    Styled.__emotion_base = baseTag;
-    Styled.__emotion_styles = styles;
-    Styled.__emotion_forwardProp = shouldForwardProp;
-    Object.defineProperty(Styled, 'toString', {
-      value: function value() {
-        if (targetClassName === undefined && process.env.NODE_ENV !== 'production') {
-          return 'NO_COMPONENT_SELECTOR';
-        } // $FlowFixMe: coerce undefined to string
-
-
-        return "." + targetClassName;
-      }
-    });
-
-    Styled.withComponent = function (nextTag, nextOptions) {
-      return createStyled(nextTag, _extends$1({}, options, nextOptions, {
-        shouldForwardProp: composeShouldForwardProps(Styled, nextOptions, true)
-      })).apply(void 0, styles);
-    };
-
-    return Styled;
-  };
-};
-
-var tags = ['a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b', 'base', 'bdi', 'bdo', 'big', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del', 'details', 'dfn', 'dialog', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'keygen', 'label', 'legend', 'li', 'link', 'main', 'map', 'mark', 'marquee', 'menu', 'menuitem', 'meta', 'meter', 'nav', 'noscript', 'object', 'ol', 'optgroup', 'option', 'output', 'p', 'param', 'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'script', 'section', 'select', 'small', 'source', 'span', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'time', 'title', 'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr', // SVG
-'circle', 'clipPath', 'defs', 'ellipse', 'foreignObject', 'g', 'image', 'line', 'linearGradient', 'mask', 'path', 'pattern', 'polygon', 'polyline', 'radialGradient', 'rect', 'stop', 'svg', 'text', 'tspan'];
-
-var newStyled = createStyled$3.bind();
-tags.forEach(function (tagName) {
-  // $FlowFixMe: we can ignore this because its exposed type is defined by the CreateStyled type
-  newStyled[tagName] = newStyled(tagName);
-});
-
-let cache;
-if (typeof document === 'object') {
-  cache = createCache({
-    key: 'css',
-    prepend: true
-  });
-}
-function StyledEngineProvider(props) {
-  const {
-    injectFirst,
-    children
-  } = props;
-  return injectFirst && cache ? /*#__PURE__*/jsxRuntime.jsx(CacheProvider, {
-    value: cache,
-    children: children
-  }) : children;
-}
-process.env.NODE_ENV !== "production" ? StyledEngineProvider.propTypes = {
-  /**
-   * Your component tree.
-   */
-  children: PropTypes.node,
-  /**
-   * By default, the styles are injected last in the <head> element of the page.
-   * As a result, they gain more specificity than any other style sheet.
-   * If you want to override MUI's styles, set this prop.
-   */
-  injectFirst: PropTypes.bool
-} : void 0;
-
-function isEmpty$2(obj) {
-  return obj === undefined || obj === null || Object.keys(obj).length === 0;
-}
-function GlobalStyles(props) {
-  const {
-    styles,
-    defaultTheme = {}
-  } = props;
-  const globalStyles = typeof styles === 'function' ? themeInput => styles(isEmpty$2(themeInput) ? defaultTheme : themeInput) : styles;
-  return /*#__PURE__*/jsxRuntime.jsx(Global, {
-    styles: globalStyles
-  });
-}
-process.env.NODE_ENV !== "production" ? GlobalStyles.propTypes = {
-  defaultTheme: PropTypes.object,
-  styles: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object, PropTypes.func])
-} : void 0;
-
-/**
- * @mui/styled-engine v5.15.11
- *
- * @license MIT
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-function styled$4(tag, options) {
-  const stylesFactory = newStyled(tag, options);
-  if (process.env.NODE_ENV !== 'production') {
-    return (...styles) => {
-      const component = typeof tag === 'string' ? `"${tag}"` : 'component';
-      if (styles.length === 0) {
-        console.error([`MUI: Seems like you called \`styled(${component})()\` without a \`style\` argument.`, 'You must provide a `styles` argument: `styled("div")(styleYouForgotToPass)`.'].join('\n'));
-      } else if (styles.some(style => style === undefined)) {
-        console.error(`MUI: the styled(${component})(...args) API requires all its args to be defined.`);
-      }
-      return stylesFactory(...styles);
-    };
-  }
-  return stylesFactory;
-}
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-const internal_processStyles = (tag, processor) => {
-  // Emotion attaches all the styles as `__emotion_styles`.
-  // Ref: https://github.com/emotion-js/emotion/blob/16d971d0da229596d6bcc39d282ba9753c9ee7cf/packages/styled/src/base.js#L186
-  if (Array.isArray(tag.__emotion_styles)) {
-    tag.__emotion_styles = processor(tag.__emotion_styles);
-  }
-};
-
-var styledEngine = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	'default': styled$4,
-	internal_processStyles: internal_processStyles,
-	ThemeContext: ThemeContext,
-	keyframes: keyframes,
-	css: css,
-	StyledEngineProvider: StyledEngineProvider,
-	GlobalStyles: GlobalStyles
-});
 
 // https://github.com/sindresorhus/is-plain-obj/blob/main/index.js
 function isPlainObject(item) {
@@ -4349,10 +3377,10 @@ function deepClone(source) {
   });
   return output;
 }
-function deepmerge$1(target, source, options = {
+function deepmerge(target, source, options = {
   clone: true
 }) {
-  const output = options.clone ? _extends$1({}, target) : target;
+  const output = options.clone ? _extends({}, target) : target;
   if (isPlainObject(target) && isPlainObject(source)) {
     Object.keys(source).forEach(key => {
       // Avoid prototype pollution
@@ -4361,7 +3389,7 @@ function deepmerge$1(target, source, options = {
       }
       if (isPlainObject(source[key]) && key in target && isPlainObject(target[key])) {
         // Since `output` is a clone of `target` and we have narrowed `target` in this block we can cast to the same type.
-        output[key] = deepmerge$1(target[key], source[key], options);
+        output[key] = deepmerge(target[key], source[key], options);
       } else if (options.clone) {
         output[key] = isPlainObject(source[key]) ? deepClone(source[key]) : source[key];
       } else {
@@ -4372,13 +3400,7 @@ function deepmerge$1(target, source, options = {
   return output;
 }
 
-var deepmerge = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	'default': deepmerge$1,
-	isPlainObject: isPlainObject
-});
-
-const _excluded$f = ["values", "unit", "step"];
+const _excluded$5 = ["values", "unit", "step"];
 const sortBreakpointsValues = values => {
   const breakpointsAsArray = Object.keys(values).map(key => ({
     key,
@@ -4387,7 +3409,7 @@ const sortBreakpointsValues = values => {
   // Sort in ascending order
   breakpointsAsArray.sort((breakpoint1, breakpoint2) => breakpoint1.val - breakpoint2.val);
   return breakpointsAsArray.reduce((acc, obj) => {
-    return _extends$1({}, acc, {
+    return _extends({}, acc, {
       [obj.key]: obj.val
     });
   }, {});
@@ -4412,7 +3434,7 @@ function createBreakpoints(breakpoints) {
       unit = 'px',
       step = 5
     } = breakpoints,
-    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$f);
+    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$5);
   const sortedValues = sortBreakpointsValues(values);
   const keys = Object.keys(sortedValues);
   function up(key) {
@@ -4444,7 +3466,7 @@ function createBreakpoints(breakpoints) {
     }
     return between(key, keys[keys.indexOf(key) + 1]).replace('@media', '@media not all and');
   }
-  return _extends$1({
+  return _extends({
     keys,
     values: sortedValues,
     up,
@@ -4468,7 +3490,7 @@ function merge(acc, item) {
   if (!item) {
     return acc;
   }
-  return deepmerge$1(acc, item, {
+  return deepmerge(acc, item, {
     clone: false // No need to clone deep, it's way faster.
   });
 }
@@ -4542,17 +3564,12 @@ function removeUnusedBreakpoints(breakpointKeys, style) {
 //
 // A strict capitalization should uppercase the first letter of each word in the sentence.
 // We only handle the first word.
-function capitalize$1(string) {
+function capitalize(string) {
   if (typeof string !== 'string') {
     throw new Error(process.env.NODE_ENV !== "production" ? `MUI: \`capitalize(string)\` expects a string argument.` : formatMuiErrorMessage$1(7));
   }
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-var capitalize = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	'default': capitalize$1
-});
 
 function getPath(obj, path, checkVars = true) {
   if (!path || typeof path !== 'string') {
@@ -4608,7 +3625,7 @@ function style$1(options) {
       let value = getStyleValue(themeMapping, transform, propValueFinal);
       if (propValueFinal === value && typeof propValueFinal === 'string') {
         // Haven't found value
-        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize$1(propValueFinal)}`, propValueFinal);
+        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize(propValueFinal)}`, propValueFinal);
       }
       if (cssProperty === false) {
         return value;
@@ -5369,7 +4386,7 @@ function unstable_createStyleFunctionSx() {
       let value = getStyleValue(themeMapping, transform, propValueFinal);
       if (propValueFinal === value && typeof propValueFinal === 'string') {
         // Haven't found value
-        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize$1(propValueFinal)}`, propValueFinal);
+        value = getStyleValue(themeMapping, transform, `${prop}${propValueFinal === 'default' ? '' : capitalize(propValueFinal)}`, propValueFinal);
       }
       if (cssProperty === false) {
         return value;
@@ -5442,9 +4459,9 @@ function unstable_createStyleFunctionSx() {
   }
   return styleFunctionSx;
 }
-const styleFunctionSx$1 = unstable_createStyleFunctionSx();
-styleFunctionSx$1.filterProps = ['sx'];
-var styleFunctionSx$2 = styleFunctionSx$1;
+const styleFunctionSx = unstable_createStyleFunctionSx();
+styleFunctionSx.filterProps = ['sx'];
+var styleFunctionSx$1 = styleFunctionSx;
 
 /**
  * A universal utility to style components with multiple color modes. Always use it from the theme object.
@@ -5521,112 +4538,39 @@ function applyStyles(key, styles) {
   return {};
 }
 
-const _excluded$e = ["breakpoints", "palette", "spacing", "shape"];
-function createTheme$2(options = {}, ...args) {
+const _excluded$4 = ["breakpoints", "palette", "spacing", "shape"];
+function createTheme$1(options = {}, ...args) {
   const {
       breakpoints: breakpointsInput = {},
       palette: paletteInput = {},
       spacing: spacingInput,
       shape: shapeInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$e);
+    other = _objectWithoutPropertiesLoose(options, _excluded$4);
   const breakpoints = createBreakpoints(breakpointsInput);
   const spacing = createSpacing(spacingInput);
-  let muiTheme = deepmerge$1({
+  let muiTheme = deepmerge({
     breakpoints,
     direction: 'ltr',
     components: {},
     // Inject component definitions.
-    palette: _extends$1({
+    palette: _extends({
       mode: 'light'
     }, paletteInput),
     spacing,
-    shape: _extends$1({}, shape$1, shapeInput)
+    shape: _extends({}, shape$1, shapeInput)
   }, other);
   muiTheme.applyStyles = applyStyles;
-  muiTheme = args.reduce((acc, argument) => deepmerge$1(acc, argument), muiTheme);
-  muiTheme.unstable_sxConfig = _extends$1({}, defaultSxConfig$1, other == null ? void 0 : other.unstable_sxConfig);
+  muiTheme = args.reduce((acc, argument) => deepmerge(acc, argument), muiTheme);
+  muiTheme.unstable_sxConfig = _extends({}, defaultSxConfig$1, other == null ? void 0 : other.unstable_sxConfig);
   muiTheme.unstable_sx = function sx(props) {
-    return styleFunctionSx$2({
+    return styleFunctionSx$1({
       sx: props,
       theme: this
     });
   };
   return muiTheme;
 }
-
-var createTheme$1 = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	'default': createTheme$2,
-	private_createBreakpoints: createBreakpoints,
-	unstable_applyStyles: applyStyles
-});
-
-function isObjectEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
-function useTheme$2(defaultTheme = null) {
-  const contextTheme = React__namespace.useContext(ThemeContext);
-  return !contextTheme || isObjectEmpty(contextTheme) ? defaultTheme : contextTheme;
-}
-
-const systemDefaultTheme$2 = createTheme$2();
-function useTheme$1(defaultTheme = systemDefaultTheme$2) {
-  return useTheme$2(defaultTheme);
-}
-
-const _excluded$d = ["sx"];
-const splitProps = props => {
-  var _props$theme$unstable, _props$theme;
-  const result = {
-    systemProps: {},
-    otherProps: {}
-  };
-  const config = (_props$theme$unstable = props == null || (_props$theme = props.theme) == null ? void 0 : _props$theme.unstable_sxConfig) != null ? _props$theme$unstable : defaultSxConfig$1;
-  Object.keys(props).forEach(prop => {
-    if (config[prop]) {
-      result.systemProps[prop] = props[prop];
-    } else {
-      result.otherProps[prop] = props[prop];
-    }
-  });
-  return result;
-};
-function extendSxProp(props) {
-  const {
-      sx: inSx
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$d);
-  const {
-    systemProps,
-    otherProps
-  } = splitProps(other);
-  let finalSx;
-  if (Array.isArray(inSx)) {
-    finalSx = [systemProps, ...inSx];
-  } else if (typeof inSx === 'function') {
-    finalSx = (...args) => {
-      const result = inSx(...args);
-      if (!isPlainObject(result)) {
-        return systemProps;
-      }
-      return _extends$1({}, systemProps, result);
-    };
-  } else {
-    finalSx = _extends$1({}, systemProps, inSx);
-  }
-  return _extends$1({}, otherProps, {
-    sx: finalSx
-  });
-}
-
-var styleFunctionSx = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	'default': styleFunctionSx$2,
-	unstable_createStyleFunctionSx: unstable_createStyleFunctionSx,
-	extendSxProp: extendSxProp,
-	unstable_defaultSxConfig: defaultSxConfig$1
-});
 
 const defaultGenerator = componentName => componentName;
 const createClassNameGenerator = () => {
@@ -5646,8 +4590,6 @@ const createClassNameGenerator = () => {
 const ClassNameGenerator = createClassNameGenerator();
 var ClassNameGenerator$1 = ClassNameGenerator;
 
-function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e)){var o=e.length;for(t=0;t<o;t++)e[t]&&(f=r(e[t]))&&(n&&(n+=" "),n+=f);}else for(f in e)e[f]&&(n&&(n+=" "),n+=f);return n}function clsx(){for(var e,t,f=0,n="",o=arguments.length;f<o;f++)(e=arguments[f])&&(t=r(e))&&(n&&(n+=" "),n+=t);return n}
-
 const globalStateClasses = {
   active: 'active',
   checked: 'checked',
@@ -5665,629 +4607,6 @@ const globalStateClasses = {
 function generateUtilityClass(componentName, slot, globalStatePrefix = 'Mui') {
   const globalStateClass = globalStateClasses[slot];
   return globalStateClass ? `${globalStatePrefix}-${globalStateClass}` : `${ClassNameGenerator$1.generate(componentName)}-${slot}`;
-}
-
-function generateUtilityClasses(componentName, slots, globalStatePrefix = 'Mui') {
-  const result = {};
-  slots.forEach(slot => {
-    result[slot] = generateUtilityClass(componentName, slot, globalStatePrefix);
-  });
-  return result;
-}
-
-var reactIs = {exports: {}};
-
-var reactIs_production_min = {};
-
-/**
- * @license React
- * react-is.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var hasRequiredReactIs_production_min;
-
-function requireReactIs_production_min () {
-	if (hasRequiredReactIs_production_min) return reactIs_production_min;
-	hasRequiredReactIs_production_min = 1;
-var b=Symbol.for("react.element"),c=Symbol.for("react.portal"),d=Symbol.for("react.fragment"),e=Symbol.for("react.strict_mode"),f=Symbol.for("react.profiler"),g=Symbol.for("react.provider"),h=Symbol.for("react.context"),k=Symbol.for("react.server_context"),l=Symbol.for("react.forward_ref"),m=Symbol.for("react.suspense"),n=Symbol.for("react.suspense_list"),p=Symbol.for("react.memo"),q=Symbol.for("react.lazy"),t=Symbol.for("react.offscreen"),u;u=Symbol.for("react.module.reference");
-	function v(a){if("object"===typeof a&&null!==a){var r=a.$$typeof;switch(r){case b:switch(a=a.type,a){case d:case f:case e:case m:case n:return a;default:switch(a=a&&a.$$typeof,a){case k:case h:case l:case q:case p:case g:return a;default:return r}}case c:return r}}}reactIs_production_min.ContextConsumer=h;reactIs_production_min.ContextProvider=g;reactIs_production_min.Element=b;reactIs_production_min.ForwardRef=l;reactIs_production_min.Fragment=d;reactIs_production_min.Lazy=q;reactIs_production_min.Memo=p;reactIs_production_min.Portal=c;reactIs_production_min.Profiler=f;reactIs_production_min.StrictMode=e;reactIs_production_min.Suspense=m;
-	reactIs_production_min.SuspenseList=n;reactIs_production_min.isAsyncMode=function(){return !1};reactIs_production_min.isConcurrentMode=function(){return !1};reactIs_production_min.isContextConsumer=function(a){return v(a)===h};reactIs_production_min.isContextProvider=function(a){return v(a)===g};reactIs_production_min.isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===b};reactIs_production_min.isForwardRef=function(a){return v(a)===l};reactIs_production_min.isFragment=function(a){return v(a)===d};reactIs_production_min.isLazy=function(a){return v(a)===q};reactIs_production_min.isMemo=function(a){return v(a)===p};
-	reactIs_production_min.isPortal=function(a){return v(a)===c};reactIs_production_min.isProfiler=function(a){return v(a)===f};reactIs_production_min.isStrictMode=function(a){return v(a)===e};reactIs_production_min.isSuspense=function(a){return v(a)===m};reactIs_production_min.isSuspenseList=function(a){return v(a)===n};
-	reactIs_production_min.isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===d||a===f||a===e||a===m||a===n||a===t||"object"===typeof a&&null!==a&&(a.$$typeof===q||a.$$typeof===p||a.$$typeof===g||a.$$typeof===h||a.$$typeof===l||a.$$typeof===u||void 0!==a.getModuleId)?!0:!1};reactIs_production_min.typeOf=v;
-	return reactIs_production_min;
-}
-
-var reactIs_development = {};
-
-/**
- * @license React
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-var hasRequiredReactIs_development;
-
-function requireReactIs_development () {
-	if (hasRequiredReactIs_development) return reactIs_development;
-	hasRequiredReactIs_development = 1;
-
-	if (process.env.NODE_ENV !== "production") {
-	  (function() {
-
-	// ATTENTION
-	// When adding new symbols to this file,
-	// Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
-	// The Symbol used to tag the ReactElement-like types.
-	var REACT_ELEMENT_TYPE = Symbol.for('react.element');
-	var REACT_PORTAL_TYPE = Symbol.for('react.portal');
-	var REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
-	var REACT_STRICT_MODE_TYPE = Symbol.for('react.strict_mode');
-	var REACT_PROFILER_TYPE = Symbol.for('react.profiler');
-	var REACT_PROVIDER_TYPE = Symbol.for('react.provider');
-	var REACT_CONTEXT_TYPE = Symbol.for('react.context');
-	var REACT_SERVER_CONTEXT_TYPE = Symbol.for('react.server_context');
-	var REACT_FORWARD_REF_TYPE = Symbol.for('react.forward_ref');
-	var REACT_SUSPENSE_TYPE = Symbol.for('react.suspense');
-	var REACT_SUSPENSE_LIST_TYPE = Symbol.for('react.suspense_list');
-	var REACT_MEMO_TYPE = Symbol.for('react.memo');
-	var REACT_LAZY_TYPE = Symbol.for('react.lazy');
-	var REACT_OFFSCREEN_TYPE = Symbol.for('react.offscreen');
-
-	// -----------------------------------------------------------------------------
-
-	var enableScopeAPI = false; // Experimental Create Event Handle API.
-	var enableCacheElement = false;
-	var enableTransitionTracing = false; // No known bugs, but needs performance testing
-
-	var enableLegacyHidden = false; // Enables unstable_avoidThisFallback feature in Fiber
-	// stuff. Intended to enable React core members to more easily debug scheduling
-	// issues in DEV builds.
-
-	var enableDebugTracing = false; // Track which Fiber(s) schedule render work.
-
-	var REACT_MODULE_REFERENCE;
-
-	{
-	  REACT_MODULE_REFERENCE = Symbol.for('react.module.reference');
-	}
-
-	function isValidElementType(type) {
-	  if (typeof type === 'string' || typeof type === 'function') {
-	    return true;
-	  } // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
-
-
-	  if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || enableDebugTracing  || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || enableLegacyHidden  || type === REACT_OFFSCREEN_TYPE || enableScopeAPI  || enableCacheElement  || enableTransitionTracing ) {
-	    return true;
-	  }
-
-	  if (typeof type === 'object' && type !== null) {
-	    if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || // This needs to include all possible module reference object
-	    // types supported by any Flight configuration anywhere since
-	    // we don't know which Flight build this will end up being used
-	    // with.
-	    type.$$typeof === REACT_MODULE_REFERENCE || type.getModuleId !== undefined) {
-	      return true;
-	    }
-	  }
-
-	  return false;
-	}
-
-	function typeOf(object) {
-	  if (typeof object === 'object' && object !== null) {
-	    var $$typeof = object.$$typeof;
-
-	    switch ($$typeof) {
-	      case REACT_ELEMENT_TYPE:
-	        var type = object.type;
-
-	        switch (type) {
-	          case REACT_FRAGMENT_TYPE:
-	          case REACT_PROFILER_TYPE:
-	          case REACT_STRICT_MODE_TYPE:
-	          case REACT_SUSPENSE_TYPE:
-	          case REACT_SUSPENSE_LIST_TYPE:
-	            return type;
-
-	          default:
-	            var $$typeofType = type && type.$$typeof;
-
-	            switch ($$typeofType) {
-	              case REACT_SERVER_CONTEXT_TYPE:
-	              case REACT_CONTEXT_TYPE:
-	              case REACT_FORWARD_REF_TYPE:
-	              case REACT_LAZY_TYPE:
-	              case REACT_MEMO_TYPE:
-	              case REACT_PROVIDER_TYPE:
-	                return $$typeofType;
-
-	              default:
-	                return $$typeof;
-	            }
-
-	        }
-
-	      case REACT_PORTAL_TYPE:
-	        return $$typeof;
-	    }
-	  }
-
-	  return undefined;
-	}
-	var ContextConsumer = REACT_CONTEXT_TYPE;
-	var ContextProvider = REACT_PROVIDER_TYPE;
-	var Element = REACT_ELEMENT_TYPE;
-	var ForwardRef = REACT_FORWARD_REF_TYPE;
-	var Fragment = REACT_FRAGMENT_TYPE;
-	var Lazy = REACT_LAZY_TYPE;
-	var Memo = REACT_MEMO_TYPE;
-	var Portal = REACT_PORTAL_TYPE;
-	var Profiler = REACT_PROFILER_TYPE;
-	var StrictMode = REACT_STRICT_MODE_TYPE;
-	var Suspense = REACT_SUSPENSE_TYPE;
-	var SuspenseList = REACT_SUSPENSE_LIST_TYPE;
-	var hasWarnedAboutDeprecatedIsAsyncMode = false;
-	var hasWarnedAboutDeprecatedIsConcurrentMode = false; // AsyncMode should be deprecated
-
-	function isAsyncMode(object) {
-	  {
-	    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-	      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
-
-	      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
-	    }
-	  }
-
-	  return false;
-	}
-	function isConcurrentMode(object) {
-	  {
-	    if (!hasWarnedAboutDeprecatedIsConcurrentMode) {
-	      hasWarnedAboutDeprecatedIsConcurrentMode = true; // Using console['warn'] to evade Babel and ESLint
-
-	      console['warn']('The ReactIs.isConcurrentMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
-	    }
-	  }
-
-	  return false;
-	}
-	function isContextConsumer(object) {
-	  return typeOf(object) === REACT_CONTEXT_TYPE;
-	}
-	function isContextProvider(object) {
-	  return typeOf(object) === REACT_PROVIDER_TYPE;
-	}
-	function isElement(object) {
-	  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-	}
-	function isForwardRef(object) {
-	  return typeOf(object) === REACT_FORWARD_REF_TYPE;
-	}
-	function isFragment(object) {
-	  return typeOf(object) === REACT_FRAGMENT_TYPE;
-	}
-	function isLazy(object) {
-	  return typeOf(object) === REACT_LAZY_TYPE;
-	}
-	function isMemo(object) {
-	  return typeOf(object) === REACT_MEMO_TYPE;
-	}
-	function isPortal(object) {
-	  return typeOf(object) === REACT_PORTAL_TYPE;
-	}
-	function isProfiler(object) {
-	  return typeOf(object) === REACT_PROFILER_TYPE;
-	}
-	function isStrictMode(object) {
-	  return typeOf(object) === REACT_STRICT_MODE_TYPE;
-	}
-	function isSuspense(object) {
-	  return typeOf(object) === REACT_SUSPENSE_TYPE;
-	}
-	function isSuspenseList(object) {
-	  return typeOf(object) === REACT_SUSPENSE_LIST_TYPE;
-	}
-
-	reactIs_development.ContextConsumer = ContextConsumer;
-	reactIs_development.ContextProvider = ContextProvider;
-	reactIs_development.Element = Element;
-	reactIs_development.ForwardRef = ForwardRef;
-	reactIs_development.Fragment = Fragment;
-	reactIs_development.Lazy = Lazy;
-	reactIs_development.Memo = Memo;
-	reactIs_development.Portal = Portal;
-	reactIs_development.Profiler = Profiler;
-	reactIs_development.StrictMode = StrictMode;
-	reactIs_development.Suspense = Suspense;
-	reactIs_development.SuspenseList = SuspenseList;
-	reactIs_development.isAsyncMode = isAsyncMode;
-	reactIs_development.isConcurrentMode = isConcurrentMode;
-	reactIs_development.isContextConsumer = isContextConsumer;
-	reactIs_development.isContextProvider = isContextProvider;
-	reactIs_development.isElement = isElement;
-	reactIs_development.isForwardRef = isForwardRef;
-	reactIs_development.isFragment = isFragment;
-	reactIs_development.isLazy = isLazy;
-	reactIs_development.isMemo = isMemo;
-	reactIs_development.isPortal = isPortal;
-	reactIs_development.isProfiler = isProfiler;
-	reactIs_development.isStrictMode = isStrictMode;
-	reactIs_development.isSuspense = isSuspense;
-	reactIs_development.isSuspenseList = isSuspenseList;
-	reactIs_development.isValidElementType = isValidElementType;
-	reactIs_development.typeOf = typeOf;
-	  })();
-	}
-	return reactIs_development;
-}
-
-if (process.env.NODE_ENV === 'production') {
-  reactIs.exports = requireReactIs_production_min();
-} else {
-  reactIs.exports = requireReactIs_development();
-}
-
-var reactIsExports = reactIs.exports;
-
-// Simplified polyfill for IE11 support
-// https://github.com/JamesMGreene/Function.name/blob/58b314d4a983110c3682f1228f845d39ccca1817/Function.name.js#L3
-const fnNameMatchRegex = /^\s*function(?:\s|\s*\/\*.*\*\/\s*)+([^(\s/]*)\s*/;
-function getFunctionName(fn) {
-  const match = `${fn}`.match(fnNameMatchRegex);
-  const name = match && match[1];
-  return name || '';
-}
-function getFunctionComponentName(Component, fallback = '') {
-  return Component.displayName || Component.name || getFunctionName(Component) || fallback;
-}
-function getWrappedName(outerType, innerType, wrapperName) {
-  const functionName = getFunctionComponentName(innerType);
-  return outerType.displayName || (functionName !== '' ? `${wrapperName}(${functionName})` : wrapperName);
-}
-
-/**
- * cherry-pick from
- * https://github.com/facebook/react/blob/769b1f270e1251d9dbdce0fcbd9e92e502d059b8/packages/shared/getComponentName.js
- * originally forked from recompose/getDisplayName with added IE11 support
- */
-function getDisplayName$1(Component) {
-  if (Component == null) {
-    return undefined;
-  }
-  if (typeof Component === 'string') {
-    return Component;
-  }
-  if (typeof Component === 'function') {
-    return getFunctionComponentName(Component, 'Component');
-  }
-
-  // TypeScript can't have components as objects but they exist in the form of `memo` or `Suspense`
-  if (typeof Component === 'object') {
-    switch (Component.$$typeof) {
-      case reactIsExports.ForwardRef:
-        return getWrappedName(Component, Component.render, 'ForwardRef');
-      case reactIsExports.Memo:
-        return getWrappedName(Component, Component.type, 'memo');
-      default:
-        return undefined;
-    }
-  }
-  return undefined;
-}
-
-var getDisplayName = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	'default': getDisplayName$1,
-	getFunctionName: getFunctionName
-});
-
-const _excluded$c = ["ownerState"],
-  _excluded2$1 = ["variants"],
-  _excluded3$1 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
-function isEmpty$1(obj) {
-  return Object.keys(obj).length === 0;
-}
-
-// https://github.com/emotion-js/emotion/blob/26ded6109fcd8ca9875cc2ce4564fee678a3f3c5/packages/styled/src/utils.js#L40
-function isStringTag$1(tag) {
-  return typeof tag === 'string' &&
-  // 96 is one less than the char code
-  // for "a" so this is checking that
-  // it's a lowercase character
-  tag.charCodeAt(0) > 96;
-}
-
-// Update /system/styled/#api in case if this changes
-function shouldForwardProp$1(prop) {
-  return prop !== 'ownerState' && prop !== 'theme' && prop !== 'sx' && prop !== 'as';
-}
-const systemDefaultTheme$1 = createTheme$2();
-const lowercaseFirstLetter$1 = string => {
-  if (!string) {
-    return string;
-  }
-  return string.charAt(0).toLowerCase() + string.slice(1);
-};
-function resolveTheme$1({
-  defaultTheme,
-  theme,
-  themeId
-}) {
-  return isEmpty$1(theme) ? defaultTheme : theme[themeId] || theme;
-}
-function defaultOverridesResolver$1(slot) {
-  if (!slot) {
-    return null;
-  }
-  return (props, styles) => styles[slot];
-}
-function processStyleArg$1(callableStyle, _ref) {
-  let {
-      ownerState
-    } = _ref,
-    props = _objectWithoutPropertiesLoose(_ref, _excluded$c);
-  const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle(_extends$1({
-    ownerState
-  }, props)) : callableStyle;
-  if (Array.isArray(resolvedStylesArg)) {
-    return resolvedStylesArg.flatMap(resolvedStyle => processStyleArg$1(resolvedStyle, _extends$1({
-      ownerState
-    }, props)));
-  }
-  if (!!resolvedStylesArg && typeof resolvedStylesArg === 'object' && Array.isArray(resolvedStylesArg.variants)) {
-    const {
-        variants = []
-      } = resolvedStylesArg,
-      otherStyles = _objectWithoutPropertiesLoose(resolvedStylesArg, _excluded2$1);
-    let result = otherStyles;
-    variants.forEach(variant => {
-      let isMatch = true;
-      if (typeof variant.props === 'function') {
-        isMatch = variant.props(_extends$1({
-          ownerState
-        }, props, ownerState));
-      } else {
-        Object.keys(variant.props).forEach(key => {
-          if ((ownerState == null ? void 0 : ownerState[key]) !== variant.props[key] && props[key] !== variant.props[key]) {
-            isMatch = false;
-          }
-        });
-      }
-      if (isMatch) {
-        if (!Array.isArray(result)) {
-          result = [result];
-        }
-        result.push(typeof variant.style === 'function' ? variant.style(_extends$1({
-          ownerState
-        }, props, ownerState)) : variant.style);
-      }
-    });
-    return result;
-  }
-  return resolvedStylesArg;
-}
-function createStyled$2(input = {}) {
-  const {
-    themeId,
-    defaultTheme = systemDefaultTheme$1,
-    rootShouldForwardProp = shouldForwardProp$1,
-    slotShouldForwardProp = shouldForwardProp$1
-  } = input;
-  const systemSx = props => {
-    return styleFunctionSx$2(_extends$1({}, props, {
-      theme: resolveTheme$1(_extends$1({}, props, {
-        defaultTheme,
-        themeId
-      }))
-    }));
-  };
-  systemSx.__mui_systemSx = true;
-  return (tag, inputOptions = {}) => {
-    // Filter out the `sx` style function from the previous styled component to prevent unnecessary styles generated by the composite components.
-    internal_processStyles(tag, styles => styles.filter(style => !(style != null && style.__mui_systemSx)));
-    const {
-        name: componentName,
-        slot: componentSlot,
-        skipVariantsResolver: inputSkipVariantsResolver,
-        skipSx: inputSkipSx,
-        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
-        // For more details: https://github.com/mui/material-ui/pull/37908
-        overridesResolver = defaultOverridesResolver$1(lowercaseFirstLetter$1(componentSlot))
-      } = inputOptions,
-      options = _objectWithoutPropertiesLoose(inputOptions, _excluded3$1);
-
-    // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
-    const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver :
-    // TODO v6: remove `Root` in the next major release
-    // For more details: https://github.com/mui/material-ui/pull/37908
-    componentSlot && componentSlot !== 'Root' && componentSlot !== 'root' || false;
-    const skipSx = inputSkipSx || false;
-    let label;
-    if (process.env.NODE_ENV !== 'production') {
-      if (componentName) {
-        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
-        // For more details: https://github.com/mui/material-ui/pull/37908
-        label = `${componentName}-${lowercaseFirstLetter$1(componentSlot || 'Root')}`;
-      }
-    }
-    let shouldForwardPropOption = shouldForwardProp$1;
-
-    // TODO v6: remove `Root` in the next major release
-    // For more details: https://github.com/mui/material-ui/pull/37908
-    if (componentSlot === 'Root' || componentSlot === 'root') {
-      shouldForwardPropOption = rootShouldForwardProp;
-    } else if (componentSlot) {
-      // any other slot specified
-      shouldForwardPropOption = slotShouldForwardProp;
-    } else if (isStringTag$1(tag)) {
-      // for string (html) tag, preserve the behavior in emotion & styled-components.
-      shouldForwardPropOption = undefined;
-    }
-    const defaultStyledResolver = styled$4(tag, _extends$1({
-      shouldForwardProp: shouldForwardPropOption,
-      label
-    }, options));
-    const transformStyleArg = stylesArg => {
-      // On the server Emotion doesn't use React.forwardRef for creating components, so the created
-      // component stays as a function. This condition makes sure that we do not interpolate functions
-      // which are basically components used as a selectors.
-      if (typeof stylesArg === 'function' && stylesArg.__emotion_real !== stylesArg || isPlainObject(stylesArg)) {
-        return props => processStyleArg$1(stylesArg, _extends$1({}, props, {
-          theme: resolveTheme$1({
-            theme: props.theme,
-            defaultTheme,
-            themeId
-          })
-        }));
-      }
-      return stylesArg;
-    };
-    const muiStyledResolver = (styleArg, ...expressions) => {
-      let transformedStyleArg = transformStyleArg(styleArg);
-      const expressionsWithDefaultTheme = expressions ? expressions.map(transformStyleArg) : [];
-      if (componentName && overridesResolver) {
-        expressionsWithDefaultTheme.push(props => {
-          const theme = resolveTheme$1(_extends$1({}, props, {
-            defaultTheme,
-            themeId
-          }));
-          if (!theme.components || !theme.components[componentName] || !theme.components[componentName].styleOverrides) {
-            return null;
-          }
-          const styleOverrides = theme.components[componentName].styleOverrides;
-          const resolvedStyleOverrides = {};
-          // TODO: v7 remove iteration and use `resolveStyleArg(styleOverrides[slot])` directly
-          Object.entries(styleOverrides).forEach(([slotKey, slotStyle]) => {
-            resolvedStyleOverrides[slotKey] = processStyleArg$1(slotStyle, _extends$1({}, props, {
-              theme
-            }));
-          });
-          return overridesResolver(props, resolvedStyleOverrides);
-        });
-      }
-      if (componentName && !skipVariantsResolver) {
-        expressionsWithDefaultTheme.push(props => {
-          var _theme$components;
-          const theme = resolveTheme$1(_extends$1({}, props, {
-            defaultTheme,
-            themeId
-          }));
-          const themeVariants = theme == null || (_theme$components = theme.components) == null || (_theme$components = _theme$components[componentName]) == null ? void 0 : _theme$components.variants;
-          return processStyleArg$1({
-            variants: themeVariants
-          }, _extends$1({}, props, {
-            theme
-          }));
-        });
-      }
-      if (!skipSx) {
-        expressionsWithDefaultTheme.push(systemSx);
-      }
-      const numOfCustomFnsApplied = expressionsWithDefaultTheme.length - expressions.length;
-      if (Array.isArray(styleArg) && numOfCustomFnsApplied > 0) {
-        const placeholders = new Array(numOfCustomFnsApplied).fill('');
-        // If the type is array, than we need to add placeholders in the template for the overrides, variants and the sx styles.
-        transformedStyleArg = [...styleArg, ...placeholders];
-        transformedStyleArg.raw = [...styleArg.raw, ...placeholders];
-      }
-      const Component = defaultStyledResolver(transformedStyleArg, ...expressionsWithDefaultTheme);
-      if (process.env.NODE_ENV !== 'production') {
-        let displayName;
-        if (componentName) {
-          displayName = `${componentName}${capitalize$1(componentSlot || '')}`;
-        }
-        if (displayName === undefined) {
-          displayName = `Styled(${getDisplayName$1(tag)})`;
-        }
-        Component.displayName = displayName;
-      }
-      if (tag.muiName) {
-        Component.muiName = tag.muiName;
-      }
-      return Component;
-    };
-    if (defaultStyledResolver.withConfig) {
-      muiStyledResolver.withConfig = defaultStyledResolver.withConfig;
-    }
-    return muiStyledResolver;
-  };
-}
-
-const styled$2 = createStyled$2();
-var styled$3 = styled$2;
-
-/**
- * Add keys, values of `defaultProps` that does not exist in `props`
- * @param {object} defaultProps
- * @param {object} props
- * @returns {object} resolved props
- */
-function resolveProps(defaultProps, props) {
-  const output = _extends$1({}, props);
-  Object.keys(defaultProps).forEach(propName => {
-    if (propName.toString().match(/^(components|slots)$/)) {
-      output[propName] = _extends$1({}, defaultProps[propName], output[propName]);
-    } else if (propName.toString().match(/^(componentsProps|slotProps)$/)) {
-      const defaultSlotProps = defaultProps[propName] || {};
-      const slotProps = props[propName];
-      output[propName] = {};
-      if (!slotProps || !Object.keys(slotProps)) {
-        // Reduce the iteration if the slot props is empty
-        output[propName] = defaultSlotProps;
-      } else if (!defaultSlotProps || !Object.keys(defaultSlotProps)) {
-        // Reduce the iteration if the default slot props is empty
-        output[propName] = slotProps;
-      } else {
-        output[propName] = _extends$1({}, slotProps);
-        Object.keys(defaultSlotProps).forEach(slotPropName => {
-          output[propName][slotPropName] = resolveProps(defaultSlotProps[slotPropName], slotProps[slotPropName]);
-        });
-      }
-    } else if (output[propName] === undefined) {
-      output[propName] = defaultProps[propName];
-    }
-  });
-  return output;
-}
-
-function getThemeProps(params) {
-  const {
-    theme,
-    name,
-    props
-  } = params;
-  if (!theme || !theme.components || !theme.components[name] || !theme.components[name].defaultProps) {
-    return props;
-  }
-  return resolveProps(theme.components[name].defaultProps, props);
-}
-
-function useThemeProps$1({
-  props,
-  name,
-  defaultTheme,
-  themeId
-}) {
-  let theme = useTheme$1(defaultTheme);
-  if (themeId) {
-    theme = theme[themeId] || theme;
-  }
-  const mergedProps = getThemeProps({
-    theme,
-    name,
-    props
-  });
-  return mergedProps;
 }
 
 function clamp$1(val, min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SAFE_INTEGER) {
@@ -6427,91 +4746,8 @@ function alpha$1(color, value) {
   return recomposeColor$1(color);
 }
 
-function chainPropTypes(propType1, propType2) {
-  if (process.env.NODE_ENV === 'production') {
-    return () => null;
-  }
-  return function validate(...args) {
-    return propType1(...args) || propType2(...args);
-  };
-}
-
-function getTypeByValue(value) {
-  const valueType = typeof value;
-  switch (valueType) {
-    case 'number':
-      if (Number.isNaN(value)) {
-        return 'NaN';
-      }
-      if (!Number.isFinite(value)) {
-        return 'Infinity';
-      }
-      if (value !== Math.floor(value)) {
-        return 'float';
-      }
-      return 'number';
-    case 'object':
-      if (value === null) {
-        return 'null';
-      }
-      return value.constructor.name;
-    default:
-      return valueType;
-  }
-}
-
-// IE 11 support
-function ponyfillIsInteger(x) {
-  // eslint-disable-next-line no-restricted-globals
-  return typeof x === 'number' && isFinite(x) && Math.floor(x) === x;
-}
-const isInteger = Number.isInteger || ponyfillIsInteger;
-function requiredInteger(props, propName, componentName, location) {
-  const propValue = props[propName];
-  if (propValue == null || !isInteger(propValue)) {
-    const propType = getTypeByValue(propValue);
-    return new RangeError(`Invalid ${location} \`${propName}\` of type \`${propType}\` supplied to \`${componentName}\`, expected \`integer\`.`);
-  }
-  return null;
-}
-function validator(props, propName, ...other) {
-  const propValue = props[propName];
-  if (propValue === undefined) {
-    return null;
-  }
-  return requiredInteger(props, propName, ...other);
-}
-function validatorNoop() {
-  return null;
-}
-validator.isRequired = requiredInteger;
-validatorNoop.isRequired = validatorNoop;
-var integerPropType = process.env.NODE_ENV === 'production' ? validatorNoop : validator;
-
-function composeClasses(slots, getUtilityClass, classes = undefined) {
-  const output = {};
-  Object.keys(slots).forEach(
-  // `Object.keys(slots)` can't be wider than `T` because we infer `T` from `slots`.
-  // @ts-expect-error https://github.com/microsoft/TypeScript/pull/12253#issuecomment-263132208
-  slot => {
-    output[slot] = slots[slot].reduce((acc, key) => {
-      if (key) {
-        const utilityClass = getUtilityClass(key);
-        if (utilityClass !== '') {
-          acc.push(utilityClass);
-        }
-        if (classes && classes[key]) {
-          acc.push(classes[key]);
-        }
-      }
-      return acc;
-    }, []).join(' ');
-  });
-  return output;
-}
-
 function createMixins(breakpoints, mixins) {
-  return _extends$1({
+  return _extends({
     toolbar: {
       minHeight: 56,
       [breakpoints.up('xs')]: {
@@ -6543,15 +4779,15 @@ interopRequireDefault.exports;
 
 var interopRequireDefaultExports = interopRequireDefault.exports;
 
-var require$$1$1 = /*@__PURE__*/getAugmentedNamespace(formatMuiErrorMessage);
+var require$$1 = /*@__PURE__*/getAugmentedNamespace(formatMuiErrorMessage);
 
 var require$$2 = /*@__PURE__*/getAugmentedNamespace(clamp);
 
-var _interopRequireDefault$1 = interopRequireDefaultExports;
+var _interopRequireDefault = interopRequireDefaultExports;
 Object.defineProperty(colorManipulator, "__esModule", {
   value: true
 });
-var alpha_1 = colorManipulator.alpha = alpha;
+colorManipulator.alpha = alpha;
 colorManipulator.blend = blend;
 colorManipulator.colorChannel = void 0;
 var darken_1 = colorManipulator.darken = darken;
@@ -6569,8 +4805,8 @@ colorManipulator.private_safeEmphasize = private_safeEmphasize;
 colorManipulator.private_safeLighten = private_safeLighten;
 colorManipulator.recomposeColor = recomposeColor;
 colorManipulator.rgbToHex = rgbToHex;
-var _formatMuiErrorMessage2 = _interopRequireDefault$1(require$$1$1);
-var _clamp = _interopRequireDefault$1(require$$2);
+var _formatMuiErrorMessage2 = _interopRequireDefault(require$$1);
+var _clamp = _interopRequireDefault(require$$2);
 /* eslint-disable @typescript-eslint/naming-convention */
 
 /**
@@ -7050,7 +5286,7 @@ const green = {
 };
 var green$1 = green;
 
-const _excluded$b = ["mode", "contrastThreshold", "tonalOffset"];
+const _excluded$3 = ["mode", "contrastThreshold", "tonalOffset"];
 const light = {
   // The colors used to style the text.
   text: {
@@ -7219,7 +5455,7 @@ function createPalette(palette) {
       contrastThreshold = 3,
       tonalOffset = 0.2
     } = palette,
-    other = _objectWithoutPropertiesLoose(palette, _excluded$b);
+    other = _objectWithoutPropertiesLoose(palette, _excluded$3);
   const primary = palette.primary || getDefaultPrimary(mode);
   const secondary = palette.secondary || getDefaultSecondary(mode);
   const error = palette.error || getDefaultError(mode);
@@ -7247,7 +5483,7 @@ function createPalette(palette) {
     lightShade = 300,
     darkShade = 700
   }) => {
-    color = _extends$1({}, color);
+    color = _extends({}, color);
     if (!color.main && color[mainShade]) {
       color.main = color[mainShade];
     }
@@ -7287,9 +5523,9 @@ const theme2 = createTheme({ palette: {
       console.error(`MUI: The palette mode \`${mode}\` is not supported.`);
     }
   }
-  const paletteOutput = deepmerge$1(_extends$1({
+  const paletteOutput = deepmerge(_extends({
     // A collection of common colors.
-    common: _extends$1({}, common$1),
+    common: _extends({}, common$1),
     // prevent mutable object.
     // The palette mode, can be light or dark.
     mode,
@@ -7343,7 +5579,7 @@ const theme2 = createTheme({ palette: {
   return paletteOutput;
 }
 
-const _excluded$a = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
+const _excluded$2 = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
 function round(value) {
   return Math.round(value * 1e5) / 1e5;
 }
@@ -7374,7 +5610,7 @@ function createTypography(palette, typography) {
       allVariants,
       pxToRem: pxToRem2
     } = _ref,
-    other = _objectWithoutPropertiesLoose(_ref, _excluded$a);
+    other = _objectWithoutPropertiesLoose(_ref, _excluded$2);
   if (process.env.NODE_ENV !== 'production') {
     if (typeof fontSize !== 'number') {
       console.error('MUI: `fontSize` is required to be a number.');
@@ -7385,7 +5621,7 @@ function createTypography(palette, typography) {
   }
   const coef = fontSize / 14;
   const pxToRem = pxToRem2 || (size => `${size / htmlFontSize * coef}rem`);
-  const buildVariant = (fontWeight, size, lineHeight, letterSpacing, casing) => _extends$1({
+  const buildVariant = (fontWeight, size, lineHeight, letterSpacing, casing) => _extends({
     fontFamily,
     fontWeight,
     fontSize: pxToRem(size),
@@ -7417,7 +5653,7 @@ function createTypography(palette, typography) {
       letterSpacing: 'inherit'
     }
   };
-  return deepmerge$1(_extends$1({
+  return deepmerge(_extends({
     htmlFontSize,
     pxToRem,
     fontFamily,
@@ -7442,7 +5678,7 @@ function createShadow(...px) {
 const shadows = ['none', createShadow(0, 2, 1, -1, 0, 1, 1, 0, 0, 1, 3, 0), createShadow(0, 3, 1, -2, 0, 2, 2, 0, 0, 1, 5, 0), createShadow(0, 3, 3, -2, 0, 3, 4, 0, 0, 1, 8, 0), createShadow(0, 2, 4, -1, 0, 4, 5, 0, 0, 1, 10, 0), createShadow(0, 3, 5, -1, 0, 5, 8, 0, 0, 1, 14, 0), createShadow(0, 3, 5, -1, 0, 6, 10, 0, 0, 1, 18, 0), createShadow(0, 4, 5, -2, 0, 7, 10, 1, 0, 2, 16, 1), createShadow(0, 5, 5, -3, 0, 8, 10, 1, 0, 3, 14, 2), createShadow(0, 5, 6, -3, 0, 9, 12, 1, 0, 3, 16, 2), createShadow(0, 6, 6, -3, 0, 10, 14, 1, 0, 4, 18, 3), createShadow(0, 6, 7, -4, 0, 11, 15, 1, 0, 4, 20, 3), createShadow(0, 7, 8, -4, 0, 12, 17, 2, 0, 5, 22, 4), createShadow(0, 7, 8, -4, 0, 13, 19, 2, 0, 5, 24, 4), createShadow(0, 7, 9, -4, 0, 14, 21, 2, 0, 5, 26, 4), createShadow(0, 8, 9, -5, 0, 15, 22, 2, 0, 6, 28, 5), createShadow(0, 8, 10, -5, 0, 16, 24, 2, 0, 6, 30, 5), createShadow(0, 8, 11, -5, 0, 17, 26, 2, 0, 6, 32, 5), createShadow(0, 9, 11, -5, 0, 18, 28, 2, 0, 7, 34, 6), createShadow(0, 9, 12, -6, 0, 19, 29, 2, 0, 7, 36, 6), createShadow(0, 10, 13, -6, 0, 20, 31, 3, 0, 8, 38, 7), createShadow(0, 10, 13, -6, 0, 21, 33, 3, 0, 8, 40, 7), createShadow(0, 10, 14, -6, 0, 22, 35, 3, 0, 8, 42, 7), createShadow(0, 11, 14, -7, 0, 23, 36, 3, 0, 9, 44, 8), createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8)];
 var shadows$1 = shadows;
 
-const _excluded$9 = ["duration", "easing", "delay"];
+const _excluded$1 = ["duration", "easing", "delay"];
 // Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
 // to learn the context in which each easing should be used.
 const easing = {
@@ -7485,15 +5721,15 @@ function getAutoHeightDuration(height) {
   return Math.round((4 + 15 * constant ** 0.25 + constant / 5) * 10);
 }
 function createTransitions(inputTransitions) {
-  const mergedEasing = _extends$1({}, easing, inputTransitions.easing);
-  const mergedDuration = _extends$1({}, duration, inputTransitions.duration);
+  const mergedEasing = _extends({}, easing, inputTransitions.easing);
+  const mergedDuration = _extends({}, duration, inputTransitions.duration);
   const create = (props = ['all'], options = {}) => {
     const {
         duration: durationOption = mergedDuration.standard,
         easing: easingOption = mergedEasing.easeInOut,
         delay = 0
       } = options,
-      other = _objectWithoutPropertiesLoose(options, _excluded$9);
+      other = _objectWithoutPropertiesLoose(options, _excluded$1);
     if (process.env.NODE_ENV !== 'production') {
       const isString = value => typeof value === 'string';
       // IE11 support, replace with Number.isNaN
@@ -7520,7 +5756,7 @@ function createTransitions(inputTransitions) {
     }
     return (Array.isArray(props) ? props : [props]).map(animatedProp => `${animatedProp} ${typeof durationOption === 'string' ? durationOption : formatMs(durationOption)} ${easingOption} ${typeof delay === 'string' ? delay : formatMs(delay)}`).join(',');
   };
-  return _extends$1({
+  return _extends({
     getAutoHeightDuration,
     create
   }, inputTransitions, {
@@ -7543,7 +5779,7 @@ const zIndex = {
 };
 var zIndex$1 = zIndex;
 
-const _excluded$8 = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
+const _excluded = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
 function createTheme(options = {}, ...args) {
   const {
       mixins: mixinsInput = {},
@@ -7551,24 +5787,24 @@ function createTheme(options = {}, ...args) {
       transitions: transitionsInput = {},
       typography: typographyInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$8);
+    other = _objectWithoutPropertiesLoose(options, _excluded);
   if (options.vars) {
     throw new Error(process.env.NODE_ENV !== "production" ? `MUI: \`vars\` is a private field used for CSS variables support.
 Please use another name.` : formatMuiErrorMessage$1(18));
   }
   const palette = createPalette(paletteInput);
-  const systemTheme = createTheme$2(options);
-  let muiTheme = deepmerge$1(systemTheme, {
+  const systemTheme = createTheme$1(options);
+  let muiTheme = deepmerge(systemTheme, {
     mixins: createMixins(systemTheme.breakpoints, mixinsInput),
     palette,
     // Don't use [...shadows] until you've verified its transpiled code is not invoking the iterator protocol.
     shadows: shadows$1.slice(),
     typography: createTypography(palette, typographyInput),
     transitions: createTransitions(transitionsInput),
-    zIndex: _extends$1({}, zIndex$1)
+    zIndex: _extends({}, zIndex$1)
   });
-  muiTheme = deepmerge$1(muiTheme, other);
-  muiTheme = args.reduce((acc, argument) => deepmerge$1(acc, argument), muiTheme);
+  muiTheme = deepmerge(muiTheme, other);
+  muiTheme = args.reduce((acc, argument) => deepmerge(acc, argument), muiTheme);
   if (process.env.NODE_ENV !== 'production') {
     // TODO v6: Refactor to use globalStateClassesMapping from @mui/utils once `readOnly` state class is used in Rating component.
     const stateClasses = ['active', 'checked', 'completed', 'disabled', 'error', 'expanded', 'focused', 'focusVisible', 'required', 'selected'];
@@ -7599,379 +5835,15 @@ Please use another name.` : formatMuiErrorMessage$1(18));
       }
     });
   }
-  muiTheme.unstable_sxConfig = _extends$1({}, defaultSxConfig$1, other == null ? void 0 : other.unstable_sxConfig);
+  muiTheme.unstable_sxConfig = _extends({}, defaultSxConfig$1, other == null ? void 0 : other.unstable_sxConfig);
   muiTheme.unstable_sx = function sx(props) {
-    return styleFunctionSx$2({
+    return styleFunctionSx$1({
       sx: props,
       theme: this
     });
   };
   return muiTheme;
 }
-
-const defaultTheme = createTheme();
-var defaultTheme$1 = defaultTheme;
-
-function useTheme() {
-  const theme = useTheme$1(defaultTheme$1);
-  if (process.env.NODE_ENV !== 'production') {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    React__namespace.useDebugValue(theme);
-  }
-  return theme[THEME_ID] || theme;
-}
-
-function useThemeProps({
-  props,
-  name
-}) {
-  return useThemeProps$1({
-    props,
-    name,
-    defaultTheme: defaultTheme$1,
-    themeId: THEME_ID
-  });
-}
-
-var createStyled$1 = {};
-
-var _extends = {exports: {}};
-
-_extends.exports;
-
-var hasRequired_extends;
-
-function require_extends () {
-	if (hasRequired_extends) return _extends.exports;
-	hasRequired_extends = 1;
-	(function (module) {
-		function _extends() {
-		  module.exports = _extends = Object.assign ? Object.assign.bind() : function (target) {
-		    for (var i = 1; i < arguments.length; i++) {
-		      var source = arguments[i];
-		      for (var key in source) {
-		        if (Object.prototype.hasOwnProperty.call(source, key)) {
-		          target[key] = source[key];
-		        }
-		      }
-		    }
-		    return target;
-		  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-		  return _extends.apply(this, arguments);
-		}
-		module.exports = _extends, module.exports.__esModule = true, module.exports["default"] = module.exports; 
-	} (_extends));
-	return _extends.exports;
-}
-
-var objectWithoutPropertiesLoose = {exports: {}};
-
-objectWithoutPropertiesLoose.exports;
-
-var hasRequiredObjectWithoutPropertiesLoose;
-
-function requireObjectWithoutPropertiesLoose () {
-	if (hasRequiredObjectWithoutPropertiesLoose) return objectWithoutPropertiesLoose.exports;
-	hasRequiredObjectWithoutPropertiesLoose = 1;
-	(function (module) {
-		function _objectWithoutPropertiesLoose(source, excluded) {
-		  if (source == null) return {};
-		  var target = {};
-		  var sourceKeys = Object.keys(source);
-		  var key, i;
-		  for (i = 0; i < sourceKeys.length; i++) {
-		    key = sourceKeys[i];
-		    if (excluded.indexOf(key) >= 0) continue;
-		    target[key] = source[key];
-		  }
-		  return target;
-		}
-		module.exports = _objectWithoutPropertiesLoose, module.exports.__esModule = true, module.exports["default"] = module.exports; 
-	} (objectWithoutPropertiesLoose));
-	return objectWithoutPropertiesLoose.exports;
-}
-
-var require$$1 = /*@__PURE__*/getAugmentedNamespace(styledEngine);
-
-var require$$4 = /*@__PURE__*/getAugmentedNamespace(deepmerge);
-
-var require$$5 = /*@__PURE__*/getAugmentedNamespace(capitalize);
-
-var require$$6 = /*@__PURE__*/getAugmentedNamespace(getDisplayName);
-
-var require$$7 = /*@__PURE__*/getAugmentedNamespace(createTheme$1);
-
-var require$$8 = /*@__PURE__*/getAugmentedNamespace(styleFunctionSx);
-
-var _interopRequireDefault = interopRequireDefaultExports;
-Object.defineProperty(createStyled$1, "__esModule", {
-  value: true
-});
-var _default = createStyled$1.default = createStyled;
-var shouldForwardProp_1 = createStyled$1.shouldForwardProp = shouldForwardProp;
-createStyled$1.systemDefaultTheme = void 0;
-var _extends2 = _interopRequireDefault(require_extends());
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(requireObjectWithoutPropertiesLoose());
-var _styledEngine = _interopRequireWildcard(require$$1);
-var _deepmerge = require$$4;
-var _capitalize = _interopRequireDefault(require$$5);
-var _getDisplayName = _interopRequireDefault(require$$6);
-var _createTheme = _interopRequireDefault(require$$7);
-var _styleFunctionSx = _interopRequireDefault(require$$8);
-const _excluded$7 = ["ownerState"],
-  _excluded2 = ["variants"],
-  _excluded3 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
-/* eslint-disable no-underscore-dangle */
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
-
-// https://github.com/emotion-js/emotion/blob/26ded6109fcd8ca9875cc2ce4564fee678a3f3c5/packages/styled/src/utils.js#L40
-function isStringTag(tag) {
-  return typeof tag === 'string' &&
-  // 96 is one less than the char code
-  // for "a" so this is checking that
-  // it's a lowercase character
-  tag.charCodeAt(0) > 96;
-}
-
-// Update /system/styled/#api in case if this changes
-function shouldForwardProp(prop) {
-  return prop !== 'ownerState' && prop !== 'theme' && prop !== 'sx' && prop !== 'as';
-}
-const systemDefaultTheme = createStyled$1.systemDefaultTheme = (0, _createTheme.default)();
-const lowercaseFirstLetter = string => {
-  if (!string) {
-    return string;
-  }
-  return string.charAt(0).toLowerCase() + string.slice(1);
-};
-function resolveTheme({
-  defaultTheme,
-  theme,
-  themeId
-}) {
-  return isEmpty(theme) ? defaultTheme : theme[themeId] || theme;
-}
-function defaultOverridesResolver(slot) {
-  if (!slot) {
-    return null;
-  }
-  return (props, styles) => styles[slot];
-}
-function processStyleArg(callableStyle, _ref) {
-  let {
-      ownerState
-    } = _ref,
-    props = (0, _objectWithoutPropertiesLoose2.default)(_ref, _excluded$7);
-  const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle((0, _extends2.default)({
-    ownerState
-  }, props)) : callableStyle;
-  if (Array.isArray(resolvedStylesArg)) {
-    return resolvedStylesArg.flatMap(resolvedStyle => processStyleArg(resolvedStyle, (0, _extends2.default)({
-      ownerState
-    }, props)));
-  }
-  if (!!resolvedStylesArg && typeof resolvedStylesArg === 'object' && Array.isArray(resolvedStylesArg.variants)) {
-    const {
-        variants = []
-      } = resolvedStylesArg,
-      otherStyles = (0, _objectWithoutPropertiesLoose2.default)(resolvedStylesArg, _excluded2);
-    let result = otherStyles;
-    variants.forEach(variant => {
-      let isMatch = true;
-      if (typeof variant.props === 'function') {
-        isMatch = variant.props((0, _extends2.default)({
-          ownerState
-        }, props, ownerState));
-      } else {
-        Object.keys(variant.props).forEach(key => {
-          if ((ownerState == null ? void 0 : ownerState[key]) !== variant.props[key] && props[key] !== variant.props[key]) {
-            isMatch = false;
-          }
-        });
-      }
-      if (isMatch) {
-        if (!Array.isArray(result)) {
-          result = [result];
-        }
-        result.push(typeof variant.style === 'function' ? variant.style((0, _extends2.default)({
-          ownerState
-        }, props, ownerState)) : variant.style);
-      }
-    });
-    return result;
-  }
-  return resolvedStylesArg;
-}
-function createStyled(input = {}) {
-  const {
-    themeId,
-    defaultTheme = systemDefaultTheme,
-    rootShouldForwardProp = shouldForwardProp,
-    slotShouldForwardProp = shouldForwardProp
-  } = input;
-  const systemSx = props => {
-    return (0, _styleFunctionSx.default)((0, _extends2.default)({}, props, {
-      theme: resolveTheme((0, _extends2.default)({}, props, {
-        defaultTheme,
-        themeId
-      }))
-    }));
-  };
-  systemSx.__mui_systemSx = true;
-  return (tag, inputOptions = {}) => {
-    // Filter out the `sx` style function from the previous styled component to prevent unnecessary styles generated by the composite components.
-    (0, _styledEngine.internal_processStyles)(tag, styles => styles.filter(style => !(style != null && style.__mui_systemSx)));
-    const {
-        name: componentName,
-        slot: componentSlot,
-        skipVariantsResolver: inputSkipVariantsResolver,
-        skipSx: inputSkipSx,
-        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
-        // For more details: https://github.com/mui/material-ui/pull/37908
-        overridesResolver = defaultOverridesResolver(lowercaseFirstLetter(componentSlot))
-      } = inputOptions,
-      options = (0, _objectWithoutPropertiesLoose2.default)(inputOptions, _excluded3);
-
-    // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
-    const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver :
-    // TODO v6: remove `Root` in the next major release
-    // For more details: https://github.com/mui/material-ui/pull/37908
-    componentSlot && componentSlot !== 'Root' && componentSlot !== 'root' || false;
-    const skipSx = inputSkipSx || false;
-    let label;
-    if (process.env.NODE_ENV !== 'production') {
-      if (componentName) {
-        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
-        // For more details: https://github.com/mui/material-ui/pull/37908
-        label = `${componentName}-${lowercaseFirstLetter(componentSlot || 'Root')}`;
-      }
-    }
-    let shouldForwardPropOption = shouldForwardProp;
-
-    // TODO v6: remove `Root` in the next major release
-    // For more details: https://github.com/mui/material-ui/pull/37908
-    if (componentSlot === 'Root' || componentSlot === 'root') {
-      shouldForwardPropOption = rootShouldForwardProp;
-    } else if (componentSlot) {
-      // any other slot specified
-      shouldForwardPropOption = slotShouldForwardProp;
-    } else if (isStringTag(tag)) {
-      // for string (html) tag, preserve the behavior in emotion & styled-components.
-      shouldForwardPropOption = undefined;
-    }
-    const defaultStyledResolver = (0, _styledEngine.default)(tag, (0, _extends2.default)({
-      shouldForwardProp: shouldForwardPropOption,
-      label
-    }, options));
-    const transformStyleArg = stylesArg => {
-      // On the server Emotion doesn't use React.forwardRef for creating components, so the created
-      // component stays as a function. This condition makes sure that we do not interpolate functions
-      // which are basically components used as a selectors.
-      if (typeof stylesArg === 'function' && stylesArg.__emotion_real !== stylesArg || (0, _deepmerge.isPlainObject)(stylesArg)) {
-        return props => processStyleArg(stylesArg, (0, _extends2.default)({}, props, {
-          theme: resolveTheme({
-            theme: props.theme,
-            defaultTheme,
-            themeId
-          })
-        }));
-      }
-      return stylesArg;
-    };
-    const muiStyledResolver = (styleArg, ...expressions) => {
-      let transformedStyleArg = transformStyleArg(styleArg);
-      const expressionsWithDefaultTheme = expressions ? expressions.map(transformStyleArg) : [];
-      if (componentName && overridesResolver) {
-        expressionsWithDefaultTheme.push(props => {
-          const theme = resolveTheme((0, _extends2.default)({}, props, {
-            defaultTheme,
-            themeId
-          }));
-          if (!theme.components || !theme.components[componentName] || !theme.components[componentName].styleOverrides) {
-            return null;
-          }
-          const styleOverrides = theme.components[componentName].styleOverrides;
-          const resolvedStyleOverrides = {};
-          // TODO: v7 remove iteration and use `resolveStyleArg(styleOverrides[slot])` directly
-          Object.entries(styleOverrides).forEach(([slotKey, slotStyle]) => {
-            resolvedStyleOverrides[slotKey] = processStyleArg(slotStyle, (0, _extends2.default)({}, props, {
-              theme
-            }));
-          });
-          return overridesResolver(props, resolvedStyleOverrides);
-        });
-      }
-      if (componentName && !skipVariantsResolver) {
-        expressionsWithDefaultTheme.push(props => {
-          var _theme$components;
-          const theme = resolveTheme((0, _extends2.default)({}, props, {
-            defaultTheme,
-            themeId
-          }));
-          const themeVariants = theme == null || (_theme$components = theme.components) == null || (_theme$components = _theme$components[componentName]) == null ? void 0 : _theme$components.variants;
-          return processStyleArg({
-            variants: themeVariants
-          }, (0, _extends2.default)({}, props, {
-            theme
-          }));
-        });
-      }
-      if (!skipSx) {
-        expressionsWithDefaultTheme.push(systemSx);
-      }
-      const numOfCustomFnsApplied = expressionsWithDefaultTheme.length - expressions.length;
-      if (Array.isArray(styleArg) && numOfCustomFnsApplied > 0) {
-        const placeholders = new Array(numOfCustomFnsApplied).fill('');
-        // If the type is array, than we need to add placeholders in the template for the overrides, variants and the sx styles.
-        transformedStyleArg = [...styleArg, ...placeholders];
-        transformedStyleArg.raw = [...styleArg.raw, ...placeholders];
-      }
-      const Component = defaultStyledResolver(transformedStyleArg, ...expressionsWithDefaultTheme);
-      if (process.env.NODE_ENV !== 'production') {
-        let displayName;
-        if (componentName) {
-          displayName = `${componentName}${(0, _capitalize.default)(componentSlot || '')}`;
-        }
-        if (displayName === undefined) {
-          displayName = `Styled(${(0, _getDisplayName.default)(tag)})`;
-        }
-        Component.displayName = displayName;
-      }
-      if (tag.muiName) {
-        Component.muiName = tag.muiName;
-      }
-      return Component;
-    };
-    if (defaultStyledResolver.withConfig) {
-      muiStyledResolver.withConfig = defaultStyledResolver.withConfig;
-    }
-    return muiStyledResolver;
-  };
-}
-
-const rootShouldForwardProp = prop => shouldForwardProp_1(prop) && prop !== 'classes';
-const styled = _default({
-  themeId: THEME_ID,
-  defaultTheme: defaultTheme$1,
-  rootShouldForwardProp
-});
-var styled$1 = styled;
-
-// Inspired by https://github.com/material-components/material-components-ios/blob/bca36107405594d5b7b16265a5b0ed698f85a5ee/components/Elevation/src/UIColor%2BMaterialElevation.m#L61
-const getOverlayAlpha = elevation => {
-  let alphaValue;
-  if (elevation < 1) {
-    alphaValue = 5.11916 * elevation ** 2;
-  } else {
-    alphaValue = 4.5 * Math.log(elevation + 1) + 2;
-  }
-  return (alphaValue / 100).toFixed(2);
-};
-var getOverlayAlpha$1 = getOverlayAlpha;
 
 var theme = createTheme({
   palette: {
@@ -8040,854 +5912,80 @@ var SchedulerProvider = function SchedulerProvider(props) {
     theme: theme
   }, children));
 };
-var useSchedulerContext = function useSchedulerContext() {
-  return React.useContext(SchedulerContext);
+
+var AppointmentPropTypes = PropTypes.shape({
+  /**
+   * Set the background color for the appointment when it is being dragged
+   */
+  dragBgColor: PropTypes.string,
+  /**
+  * You can override the styles
+  */
+  style: PropTypes.object
+});
+var AppointmentDefaultValue = {
+  dragBgColor: '#E0E0E0',
+  style: {}
 };
 
-function getPaperUtilityClass(slot) {
-  return generateUtilityClass('MuiPaper', slot);
-}
-generateUtilityClasses('MuiPaper', ['root', 'rounded', 'outlined', 'elevation', 'elevation0', 'elevation1', 'elevation2', 'elevation3', 'elevation4', 'elevation5', 'elevation6', 'elevation7', 'elevation8', 'elevation9', 'elevation10', 'elevation11', 'elevation12', 'elevation13', 'elevation14', 'elevation15', 'elevation16', 'elevation17', 'elevation18', 'elevation19', 'elevation20', 'elevation21', 'elevation22', 'elevation23', 'elevation24']);
-
-const _excluded$6 = ["className", "component", "elevation", "square", "variant"];
-const useUtilityClasses$6 = ownerState => {
-  const {
-    square,
-    elevation,
-    variant,
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root', variant, !square && 'rounded', variant === 'elevation' && `elevation${elevation}`]
-  };
-  return composeClasses(slots, getPaperUtilityClass, classes);
+var SlotBackgroundPropTypes = PropTypes.shape({
+  /**
+  * set background of drop, when the appointment can be drop in the slot
+  */
+  dropBg: PropTypes.string,
+  /**
+  * set background of drop, when the appointment is over the slot
+  */
+  overBg: PropTypes.string
+});
+var SlotPropTypes = PropTypes.shape({
+  /**
+  * Set the primary duration - Primary Duration is the duration in header of the scheduler
+  * @default 60
+  */
+  primaryDuration: PropTypes.number,
+  /**
+  * Set the secondary duration, Secondary Duration is the duration inside each Primary Duration
+  * @default 30
+  */
+  secondaryDuration: PropTypes.number,
+  /**
+  * colSpan should be set accordingly to secondaryDuration
+  * @default 2
+  */
+  colSpan: PropTypes.number,
+  /**
+  * component is used to wrapped the whole scheduler
+  */
+  component: PropTypes.node,
+  /**
+  * Override the style
+  */
+  style: PropTypes.object,
+  /**
+  * Override the slot background when it is to be dropped or its just over the slot
+  */
+  slotBackground: SlotBackgroundPropTypes
+});
+var SlotDefaultValues = {
+  primaryDuration: 60,
+  secondaryDuration: 30,
+  colSpan: 2,
+  component: /*#__PURE__*/React__default["default"].createElement("div", null),
+  style: PropTypes.object,
+  slotBackground: {
+    dropBg: undefined,
+    overBg: undefined
+  }
 };
-const PaperRoot = styled$1('div', {
-  name: 'MuiPaper',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.root, styles[ownerState.variant], !ownerState.square && styles.rounded, ownerState.variant === 'elevation' && styles[`elevation${ownerState.elevation}`]];
-  }
-})(({
-  theme,
-  ownerState
-}) => {
-  var _theme$vars$overlays;
-  return _extends$1({
-    backgroundColor: (theme.vars || theme).palette.background.paper,
-    color: (theme.vars || theme).palette.text.primary,
-    transition: theme.transitions.create('box-shadow')
-  }, !ownerState.square && {
-    borderRadius: theme.shape.borderRadius
-  }, ownerState.variant === 'outlined' && {
-    border: `1px solid ${(theme.vars || theme).palette.divider}`
-  }, ownerState.variant === 'elevation' && _extends$1({
-    boxShadow: (theme.vars || theme).shadows[ownerState.elevation]
-  }, !theme.vars && theme.palette.mode === 'dark' && {
-    backgroundImage: `linear-gradient(${alpha_1('#fff', getOverlayAlpha$1(ownerState.elevation))}, ${alpha_1('#fff', getOverlayAlpha$1(ownerState.elevation))})`
-  }, theme.vars && {
-    backgroundImage: (_theme$vars$overlays = theme.vars.overlays) == null ? void 0 : _theme$vars$overlays[ownerState.elevation]
-  }));
-});
-const Paper = /*#__PURE__*/React__namespace.forwardRef(function Paper(inProps, ref) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiPaper'
-  });
-  const {
-      className,
-      component = 'div',
-      elevation = 1,
-      square = false,
-      variant = 'elevation'
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$6);
-  const ownerState = _extends$1({}, props, {
-    component,
-    elevation,
-    square,
-    variant
-  });
-  const classes = useUtilityClasses$6(ownerState);
-  if (process.env.NODE_ENV !== 'production') {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const theme = useTheme();
-    if (theme.shadows[elevation] === undefined) {
-      console.error([`MUI: The elevation provided <Paper elevation={${elevation}}> is not available in the theme.`, `Please make sure that \`theme.shadows[${elevation}]\` is defined.`].join('\n'));
-    }
-  }
-  return /*#__PURE__*/jsxRuntime.jsx(PaperRoot, _extends$1({
-    as: component,
-    ownerState: ownerState,
-    className: clsx(classes.root, className),
-    ref: ref
-  }, other));
-});
-process.env.NODE_ENV !== "production" ? Paper.propTypes /* remove-proptypes */ = {
-  // ┌────────────────────────────── Warning ──────────────────────────────┐
-  // │ These PropTypes are generated from the TypeScript type definitions. │
-  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-  // └─────────────────────────────────────────────────────────────────────┘
-  /**
-   * The content of the component.
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */
-  component: PropTypes.elementType,
-  /**
-   * Shadow depth, corresponds to `dp` in the spec.
-   * It accepts values between 0 and 24 inclusive.
-   * @default 1
-   */
-  elevation: chainPropTypes(integerPropType, props => {
-    const {
-      elevation,
-      variant
-    } = props;
-    if (elevation > 0 && variant === 'outlined') {
-      return new Error(`MUI: Combining \`elevation={${elevation}}\` with \`variant="${variant}"\` has no effect. Either use \`elevation={0}\` or use a different \`variant\`.`);
-    }
-    return null;
-  }),
-  /**
-   * If `true`, rounded corners are disabled.
-   * @default false
-   */
-  square: PropTypes.bool,
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
-  /**
-   * The variant to use.
-   * @default 'elevation'
-   */
-  variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['elevation', 'outlined']), PropTypes.string])
-} : void 0;
-var MuiPaper = Paper;
-
-/**
- * @ignore - internal component.
- */
-const TableContext = /*#__PURE__*/React__namespace.createContext();
-if (process.env.NODE_ENV !== 'production') {
-  TableContext.displayName = 'TableContext';
-}
-var TableContext$1 = TableContext;
-
-function getTableUtilityClass(slot) {
-  return generateUtilityClass('MuiTable', slot);
-}
-generateUtilityClasses('MuiTable', ['root', 'stickyHeader']);
-
-const _excluded$5 = ["className", "component", "padding", "size", "stickyHeader"];
-const useUtilityClasses$5 = ownerState => {
-  const {
-    classes,
-    stickyHeader
-  } = ownerState;
-  const slots = {
-    root: ['root', stickyHeader && 'stickyHeader']
-  };
-  return composeClasses(slots, getTableUtilityClass, classes);
-};
-const TableRoot = styled$1('table', {
-  name: 'MuiTable',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.root, ownerState.stickyHeader && styles.stickyHeader];
-  }
-})(({
-  theme,
-  ownerState
-}) => _extends$1({
-  display: 'table',
-  width: '100%',
-  borderCollapse: 'collapse',
-  borderSpacing: 0,
-  '& caption': _extends$1({}, theme.typography.body2, {
-    padding: theme.spacing(2),
-    color: (theme.vars || theme).palette.text.secondary,
-    textAlign: 'left',
-    captionSide: 'bottom'
-  })
-}, ownerState.stickyHeader && {
-  borderCollapse: 'separate'
-}));
-const defaultComponent$3 = 'table';
-const Table = /*#__PURE__*/React__namespace.forwardRef(function Table(inProps, ref) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiTable'
-  });
-  const {
-      className,
-      component = defaultComponent$3,
-      padding = 'normal',
-      size = 'medium',
-      stickyHeader = false
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$5);
-  const ownerState = _extends$1({}, props, {
-    component,
-    padding,
-    size,
-    stickyHeader
-  });
-  const classes = useUtilityClasses$5(ownerState);
-  const table = React__namespace.useMemo(() => ({
-    padding,
-    size,
-    stickyHeader
-  }), [padding, size, stickyHeader]);
-  return /*#__PURE__*/jsxRuntime.jsx(TableContext$1.Provider, {
-    value: table,
-    children: /*#__PURE__*/jsxRuntime.jsx(TableRoot, _extends$1({
-      as: component,
-      role: component === defaultComponent$3 ? null : 'table',
-      ref: ref,
-      className: clsx(classes.root, className),
-      ownerState: ownerState
-    }, other))
-  });
-});
-process.env.NODE_ENV !== "production" ? Table.propTypes /* remove-proptypes */ = {
-  // ┌────────────────────────────── Warning ──────────────────────────────┐
-  // │ These PropTypes are generated from the TypeScript type definitions. │
-  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-  // └─────────────────────────────────────────────────────────────────────┘
-  /**
-   * The content of the table, normally `TableHead` and `TableBody`.
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */
-  component: PropTypes.elementType,
-  /**
-   * Allows TableCells to inherit padding of the Table.
-   * @default 'normal'
-   */
-  padding: PropTypes.oneOf(['checkbox', 'none', 'normal']),
-  /**
-   * Allows TableCells to inherit size of the Table.
-   * @default 'medium'
-   */
-  size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['medium', 'small']), PropTypes.string]),
-  /**
-   * Set the header sticky.
-   *
-   * ⚠️ It doesn't work with IE11.
-   * @default false
-   */
-  stickyHeader: PropTypes.bool,
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
-} : void 0;
-var Table$1 = Table;
-
-/**
- * @ignore - internal component.
- */
-const Tablelvl2Context = /*#__PURE__*/React__namespace.createContext();
-if (process.env.NODE_ENV !== 'production') {
-  Tablelvl2Context.displayName = 'Tablelvl2Context';
-}
-var Tablelvl2Context$1 = Tablelvl2Context;
-
-function getTableBodyUtilityClass(slot) {
-  return generateUtilityClass('MuiTableBody', slot);
-}
-generateUtilityClasses('MuiTableBody', ['root']);
-
-const _excluded$4 = ["className", "component"];
-const useUtilityClasses$4 = ownerState => {
-  const {
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root']
-  };
-  return composeClasses(slots, getTableBodyUtilityClass, classes);
-};
-const TableBodyRoot = styled$1('tbody', {
-  name: 'MuiTableBody',
-  slot: 'Root',
-  overridesResolver: (props, styles) => styles.root
-})({
-  display: 'table-row-group'
-});
-const tablelvl2$1 = {
-  variant: 'body'
-};
-const defaultComponent$2 = 'tbody';
-const TableBody = /*#__PURE__*/React__namespace.forwardRef(function TableBody(inProps, ref) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiTableBody'
-  });
-  const {
-      className,
-      component = defaultComponent$2
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$4);
-  const ownerState = _extends$1({}, props, {
-    component
-  });
-  const classes = useUtilityClasses$4(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(Tablelvl2Context$1.Provider, {
-    value: tablelvl2$1,
-    children: /*#__PURE__*/jsxRuntime.jsx(TableBodyRoot, _extends$1({
-      className: clsx(classes.root, className),
-      as: component,
-      ref: ref,
-      role: component === defaultComponent$2 ? null : 'rowgroup',
-      ownerState: ownerState
-    }, other))
-  });
-});
-process.env.NODE_ENV !== "production" ? TableBody.propTypes /* remove-proptypes */ = {
-  // ┌────────────────────────────── Warning ──────────────────────────────┐
-  // │ These PropTypes are generated from the TypeScript type definitions. │
-  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-  // └─────────────────────────────────────────────────────────────────────┘
-  /**
-   * The content of the component, normally `TableRow`.
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */
-  component: PropTypes.elementType,
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
-} : void 0;
-var TableBody$1 = TableBody;
-
-function getTableCellUtilityClass(slot) {
-  return generateUtilityClass('MuiTableCell', slot);
-}
-const tableCellClasses = generateUtilityClasses('MuiTableCell', ['root', 'head', 'body', 'footer', 'sizeSmall', 'sizeMedium', 'paddingCheckbox', 'paddingNone', 'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'stickyHeader']);
-var tableCellClasses$1 = tableCellClasses;
-
-const _excluded$3 = ["align", "className", "component", "padding", "scope", "size", "sortDirection", "variant"];
-const useUtilityClasses$3 = ownerState => {
-  const {
-    classes,
-    variant,
-    align,
-    padding,
-    size,
-    stickyHeader
-  } = ownerState;
-  const slots = {
-    root: ['root', variant, stickyHeader && 'stickyHeader', align !== 'inherit' && `align${capitalize$1(align)}`, padding !== 'normal' && `padding${capitalize$1(padding)}`, `size${capitalize$1(size)}`]
-  };
-  return composeClasses(slots, getTableCellUtilityClass, classes);
-};
-const TableCellRoot = styled$1('td', {
-  name: 'MuiTableCell',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.root, styles[ownerState.variant], styles[`size${capitalize$1(ownerState.size)}`], ownerState.padding !== 'normal' && styles[`padding${capitalize$1(ownerState.padding)}`], ownerState.align !== 'inherit' && styles[`align${capitalize$1(ownerState.align)}`], ownerState.stickyHeader && styles.stickyHeader];
-  }
-})(({
-  theme,
-  ownerState
-}) => _extends$1({}, theme.typography.body2, {
-  display: 'table-cell',
-  verticalAlign: 'inherit',
-  // Workaround for a rendering bug with spanned columns in Chrome 62.0.
-  // Removes the alpha (sets it to 1), and lightens or darkens the theme color.
-  borderBottom: theme.vars ? `1px solid ${theme.vars.palette.TableCell.border}` : `1px solid
-    ${theme.palette.mode === 'light' ? lighten_1(alpha_1(theme.palette.divider, 1), 0.88) : darken_1(alpha_1(theme.palette.divider, 1), 0.68)}`,
-  textAlign: 'left',
-  padding: 16
-}, ownerState.variant === 'head' && {
-  color: (theme.vars || theme).palette.text.primary,
-  lineHeight: theme.typography.pxToRem(24),
-  fontWeight: theme.typography.fontWeightMedium
-}, ownerState.variant === 'body' && {
-  color: (theme.vars || theme).palette.text.primary
-}, ownerState.variant === 'footer' && {
-  color: (theme.vars || theme).palette.text.secondary,
-  lineHeight: theme.typography.pxToRem(21),
-  fontSize: theme.typography.pxToRem(12)
-}, ownerState.size === 'small' && {
-  padding: '6px 16px',
-  [`&.${tableCellClasses$1.paddingCheckbox}`]: {
-    width: 24,
-    // prevent the checkbox column from growing
-    padding: '0 12px 0 16px',
-    '& > *': {
-      padding: 0
-    }
-  }
-}, ownerState.padding === 'checkbox' && {
-  width: 48,
-  // prevent the checkbox column from growing
-  padding: '0 0 0 4px'
-}, ownerState.padding === 'none' && {
-  padding: 0
-}, ownerState.align === 'left' && {
-  textAlign: 'left'
-}, ownerState.align === 'center' && {
-  textAlign: 'center'
-}, ownerState.align === 'right' && {
-  textAlign: 'right',
-  flexDirection: 'row-reverse'
-}, ownerState.align === 'justify' && {
-  textAlign: 'justify'
-}, ownerState.stickyHeader && {
-  position: 'sticky',
-  top: 0,
-  zIndex: 2,
-  backgroundColor: (theme.vars || theme).palette.background.default
-}));
-
-/**
- * The component renders a `<th>` element when the parent context is a header
- * or otherwise a `<td>` element.
- */
-const TableCell = /*#__PURE__*/React__namespace.forwardRef(function TableCell(inProps, ref) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiTableCell'
-  });
-  const {
-      align = 'inherit',
-      className,
-      component: componentProp,
-      padding: paddingProp,
-      scope: scopeProp,
-      size: sizeProp,
-      sortDirection,
-      variant: variantProp
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$3);
-  const table = React__namespace.useContext(TableContext$1);
-  const tablelvl2 = React__namespace.useContext(Tablelvl2Context$1);
-  const isHeadCell = tablelvl2 && tablelvl2.variant === 'head';
-  let component;
-  if (componentProp) {
-    component = componentProp;
-  } else {
-    component = isHeadCell ? 'th' : 'td';
-  }
-  let scope = scopeProp;
-  // scope is not a valid attribute for <td/> elements.
-  // source: https://html.spec.whatwg.org/multipage/tables.html#the-td-element
-  if (component === 'td') {
-    scope = undefined;
-  } else if (!scope && isHeadCell) {
-    scope = 'col';
-  }
-  const variant = variantProp || tablelvl2 && tablelvl2.variant;
-  const ownerState = _extends$1({}, props, {
-    align,
-    component,
-    padding: paddingProp || (table && table.padding ? table.padding : 'normal'),
-    size: sizeProp || (table && table.size ? table.size : 'medium'),
-    sortDirection,
-    stickyHeader: variant === 'head' && table && table.stickyHeader,
-    variant
-  });
-  const classes = useUtilityClasses$3(ownerState);
-  let ariaSort = null;
-  if (sortDirection) {
-    ariaSort = sortDirection === 'asc' ? 'ascending' : 'descending';
-  }
-  return /*#__PURE__*/jsxRuntime.jsx(TableCellRoot, _extends$1({
-    as: component,
-    ref: ref,
-    className: clsx(classes.root, className),
-    "aria-sort": ariaSort,
-    scope: scope,
-    ownerState: ownerState
-  }, other));
-});
-process.env.NODE_ENV !== "production" ? TableCell.propTypes /* remove-proptypes */ = {
-  // ┌────────────────────────────── Warning ──────────────────────────────┐
-  // │ These PropTypes are generated from the TypeScript type definitions. │
-  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-  // └─────────────────────────────────────────────────────────────────────┘
-  /**
-   * Set the text-align on the table cell content.
-   *
-   * Monetary or generally number fields **should be right aligned** as that allows
-   * you to add them up quickly in your head without having to worry about decimals.
-   * @default 'inherit'
-   */
-  align: PropTypes.oneOf(['center', 'inherit', 'justify', 'left', 'right']),
-  /**
-   * The content of the component.
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */
-  component: PropTypes.elementType,
-  /**
-   * Sets the padding applied to the cell.
-   * The prop defaults to the value (`'default'`) inherited from the parent Table component.
-   */
-  padding: PropTypes.oneOf(['checkbox', 'none', 'normal']),
-  /**
-   * Set scope attribute.
-   */
-  scope: PropTypes.string,
-  /**
-   * Specify the size of the cell.
-   * The prop defaults to the value (`'medium'`) inherited from the parent Table component.
-   */
-  size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['medium', 'small']), PropTypes.string]),
-  /**
-   * Set aria-sort direction.
-   */
-  sortDirection: PropTypes.oneOf(['asc', 'desc', false]),
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
-  /**
-   * Specify the cell type.
-   * The prop defaults to the value inherited from the parent TableHead, TableBody, or TableFooter components.
-   */
-  variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['body', 'footer', 'head']), PropTypes.string])
-} : void 0;
-var TableCell$1 = TableCell;
-
-function getTableContainerUtilityClass(slot) {
-  return generateUtilityClass('MuiTableContainer', slot);
-}
-generateUtilityClasses('MuiTableContainer', ['root']);
-
-const _excluded$2 = ["className", "component"];
-const useUtilityClasses$2 = ownerState => {
-  const {
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root']
-  };
-  return composeClasses(slots, getTableContainerUtilityClass, classes);
-};
-const TableContainerRoot = styled$1('div', {
-  name: 'MuiTableContainer',
-  slot: 'Root',
-  overridesResolver: (props, styles) => styles.root
-})({
-  width: '100%',
-  overflowX: 'auto'
-});
-const TableContainer = /*#__PURE__*/React__namespace.forwardRef(function TableContainer(inProps, ref) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiTableContainer'
-  });
-  const {
-      className,
-      component = 'div'
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$2);
-  const ownerState = _extends$1({}, props, {
-    component
-  });
-  const classes = useUtilityClasses$2(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(TableContainerRoot, _extends$1({
-    ref: ref,
-    as: component,
-    className: clsx(classes.root, className),
-    ownerState: ownerState
-  }, other));
-});
-process.env.NODE_ENV !== "production" ? TableContainer.propTypes /* remove-proptypes */ = {
-  // ┌────────────────────────────── Warning ──────────────────────────────┐
-  // │ These PropTypes are generated from the TypeScript type definitions. │
-  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-  // └─────────────────────────────────────────────────────────────────────┘
-  /**
-   * The content of the component, normally `Table`.
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */
-  component: PropTypes.elementType,
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
-} : void 0;
-var TableContainer$1 = TableContainer;
-
-function getTableHeadUtilityClass(slot) {
-  return generateUtilityClass('MuiTableHead', slot);
-}
-generateUtilityClasses('MuiTableHead', ['root']);
-
-const _excluded$1 = ["className", "component"];
-const useUtilityClasses$1 = ownerState => {
-  const {
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root']
-  };
-  return composeClasses(slots, getTableHeadUtilityClass, classes);
-};
-const TableHeadRoot = styled$1('thead', {
-  name: 'MuiTableHead',
-  slot: 'Root',
-  overridesResolver: (props, styles) => styles.root
-})({
-  display: 'table-header-group'
-});
-const tablelvl2 = {
-  variant: 'head'
-};
-const defaultComponent$1 = 'thead';
-const TableHead = /*#__PURE__*/React__namespace.forwardRef(function TableHead(inProps, ref) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiTableHead'
-  });
-  const {
-      className,
-      component = defaultComponent$1
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$1);
-  const ownerState = _extends$1({}, props, {
-    component
-  });
-  const classes = useUtilityClasses$1(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(Tablelvl2Context$1.Provider, {
-    value: tablelvl2,
-    children: /*#__PURE__*/jsxRuntime.jsx(TableHeadRoot, _extends$1({
-      as: component,
-      className: clsx(classes.root, className),
-      ref: ref,
-      role: component === defaultComponent$1 ? null : 'rowgroup',
-      ownerState: ownerState
-    }, other))
-  });
-});
-process.env.NODE_ENV !== "production" ? TableHead.propTypes /* remove-proptypes */ = {
-  // ┌────────────────────────────── Warning ──────────────────────────────┐
-  // │ These PropTypes are generated from the TypeScript type definitions. │
-  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-  // └─────────────────────────────────────────────────────────────────────┘
-  /**
-   * The content of the component, normally `TableRow`.
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */
-  component: PropTypes.elementType,
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
-} : void 0;
-var TableHead$1 = TableHead;
-
-function getTableRowUtilityClass(slot) {
-  return generateUtilityClass('MuiTableRow', slot);
-}
-const tableRowClasses = generateUtilityClasses('MuiTableRow', ['root', 'selected', 'hover', 'head', 'footer']);
-var tableRowClasses$1 = tableRowClasses;
-
-const _excluded = ["className", "component", "hover", "selected"];
-const useUtilityClasses = ownerState => {
-  const {
-    classes,
-    selected,
-    hover,
-    head,
-    footer
-  } = ownerState;
-  const slots = {
-    root: ['root', selected && 'selected', hover && 'hover', head && 'head', footer && 'footer']
-  };
-  return composeClasses(slots, getTableRowUtilityClass, classes);
-};
-const TableRowRoot = styled$1('tr', {
-  name: 'MuiTableRow',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.root, ownerState.head && styles.head, ownerState.footer && styles.footer];
-  }
-})(({
-  theme
-}) => ({
-  color: 'inherit',
-  display: 'table-row',
-  verticalAlign: 'middle',
-  // We disable the focus ring for mouse, touch and keyboard users.
-  outline: 0,
-  [`&.${tableRowClasses$1.hover}:hover`]: {
-    backgroundColor: (theme.vars || theme).palette.action.hover
-  },
-  [`&.${tableRowClasses$1.selected}`]: {
-    backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity),
-    '&:hover': {
-      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity)
-    }
-  }
-}));
-const defaultComponent = 'tr';
-/**
- * Will automatically set dynamic row height
- * based on the material table element parent (head, body, etc).
- */
-const TableRow = /*#__PURE__*/React__namespace.forwardRef(function TableRow(inProps, ref) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiTableRow'
-  });
-  const {
-      className,
-      component = defaultComponent,
-      hover = false,
-      selected = false
-    } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded);
-  const tablelvl2 = React__namespace.useContext(Tablelvl2Context$1);
-  const ownerState = _extends$1({}, props, {
-    component,
-    hover,
-    selected,
-    head: tablelvl2 && tablelvl2.variant === 'head',
-    footer: tablelvl2 && tablelvl2.variant === 'footer'
-  });
-  const classes = useUtilityClasses(ownerState);
-  return /*#__PURE__*/jsxRuntime.jsx(TableRowRoot, _extends$1({
-    as: component,
-    ref: ref,
-    className: clsx(classes.root, className),
-    role: component === defaultComponent ? null : 'row',
-    ownerState: ownerState
-  }, other));
-});
-process.env.NODE_ENV !== "production" ? TableRow.propTypes /* remove-proptypes */ = {
-  // ┌────────────────────────────── Warning ──────────────────────────────┐
-  // │ These PropTypes are generated from the TypeScript type definitions. │
-  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
-  // └─────────────────────────────────────────────────────────────────────┘
-  /**
-   * Should be valid `<tr>` children such as `TableCell`.
-   */
-  children: PropTypes.node,
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: PropTypes.object,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * The component used for the root node.
-   * Either a string to use a HTML element or a component.
-   */
-  component: PropTypes.elementType,
-  /**
-   * If `true`, the table row will shade on hover.
-   * @default false
-   */
-  hover: PropTypes.bool,
-  /**
-   * If `true`, the table row will have the selected shading.
-   * @default false
-   */
-  selected: PropTypes.bool,
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
-} : void 0;
-var TableRow$1 = TableRow;
 
 function commonjsRequire(path) {
 	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }
 
-var moment$1 = {exports: {}};
+var moment = {exports: {}};
 
-moment$1.exports;
+moment.exports;
 
 (function (module, exports) {
 (function (global, factory) {
@@ -14569,435 +11667,9 @@ moment$1.exports;
 	    return hooks;
 
 	}))); 
-} (moment$1, moment$1.exports));
+} (moment, moment.exports));
 
-var momentExports = moment$1.exports;
-var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);
-
-var shiftStartTime = function shiftStartTime(date) {
-  return moment(date).set({
-    hours: 8,
-    minutes: 0,
-    seconds: 0,
-    milliseconds: 0
-  });
-};
-var shiftEndTime = function shiftEndTime(date) {
-  return moment(date).set({
-    hours: 23,
-    minutes: 59,
-    seconds: 59,
-    milliseconds: 999
-  });
-};
-function generateTimeSlotsForShift(date, intervalInMinutes) {
-  var startOfDay = moment(shiftStartTime(date));
-  var endOfDay = moment(shiftEndTime(date));
-  var timeSlots = [];
-  var currentTimeSlot = moment(startOfDay);
-  while (currentTimeSlot <= endOfDay) {
-    timeSlots.push(currentTimeSlot.format('hh:mm a'));
-    currentTimeSlot.add(intervalInMinutes, 'minutes');
-    if (currentTimeSlot.hours() > 23) {
-      currentTimeSlot = moment(shiftStartTime(currentTimeSlot)).add(1, 'days');
-    }
-  }
-  return timeSlots;
-}
-
-var CalendarContainer = styled$3(TableContainer$1)({
-  scrollbarWidth: 'none',
-  '&::-webkit-scrollbar': {
-    display: 'none'
-  },
-  marginTop: '8px',
-  height: 500,
-  maxHeight: 600,
-  overflowY: 'auto',
-  position: 'relative'
-});
-var Divider = styled$3(TableCell$1)({
-  border: 'none'
-});
-var Resources = styled$3(TableCell$1)({
-  left: 0,
-  position: 'sticky',
-  zIndex: 900,
-  backgroundColor: 'white',
-  minWidth: 200,
-  padding: 0,
-  borderRight: '1px solid grey'
-});
-var Resource = styled$3(TableCell$1)({
-  border: 'none',
-  width: 200
-});
-var Slots = styled$3(TableCell$1)({
-  textAlign: 'center'
-});
-
-function ownKeys(e, r) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r && (o = o.filter(function (r) {
-      return Object.getOwnPropertyDescriptor(e, r).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread2(e) {
-  for (var r = 1; r < arguments.length; r++) {
-    var t = null != arguments[r] ? arguments[r] : {};
-    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
-      _defineProperty(e, r, t[r]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
-      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-    });
-  }
-  return e;
-}
-function _toPrimitive(t, r) {
-  if ("object" != typeof t || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r || "default");
-    if ("object" != typeof i) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r ? String : Number)(t);
-}
-function _toPropertyKey(t) {
-  var i = _toPrimitive(t, "string");
-  return "symbol" == typeof i ? i : String(i);
-}
-function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-
-var WIDTH = 100;
-var HEIGHT = 65;
-
-var slotBackgroundColor = function slotBackgroundColor(theme) {
-  return {
-    primary: theme.palette.slotBg.main,
-    secondary: theme.palette.slotBg.main
-  };
-};
-var overBackgroundColor = function overBackgroundColor(theme) {
-  return {
-    primary: theme.palette.drop.main,
-    secondary: theme.palette.drop.mainTwo
-  };
-};
-var dropBackgroundColor = function dropBackgroundColor(theme) {
-  return {
-    primary: theme.palette.drop.light,
-    secondary: theme.palette.drop.lightTwo
-  };
-};
-
-var slotBg = function slotBg(canDrop, isOver, slotBackground, theme, color) {
-  var _ref = slotBackground || {},
-    dropBg = _ref.dropBg,
-    overBg = _ref.overBg;
-  var slotColor = slotBackgroundColor(theme);
-  var overColor = overBackgroundColor(theme);
-  var dropColor = dropBackgroundColor(theme);
-  var backgroundColor = slotColor[color];
-  if (canDrop && isOver) {
-    backgroundColor = dropBg || dropColor[color]; // Highlight color when canDrop and isOver
-  } else if (canDrop) {
-    backgroundColor = overBg || overColor[color]; // Color when only canDrop is true
-  }
-  return backgroundColor;
-};
-var getSlotWidth = function getSlotWidth(slotDuration) {
-  switch (slotDuration) {
-    case 15:
-      return WIDTH / 2;
-    default:
-      return WIDTH;
-  }
-};
-
-var Slot = styled$3(TableCell$1)(function (props) {
-  var _useSchedulerContext = useSchedulerContext(),
-    _useSchedulerContext$ = _useSchedulerContext.color,
-    color = _useSchedulerContext$ === void 0 ? "primary" : _useSchedulerContext$,
-    SlotProps = _useSchedulerContext.SlotProps;
-  props.index;
-    var canDrop = props.canDrop,
-    isOver = props.isOver,
-    width = props.width;
-  var _ref = SlotProps || {};
-    _ref.secondaryDuration;
-    var style = _ref.style,
-    slotBackground = _ref.slotBackground;
-  var theme = useTheme();
-  var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
-
-  // const borderRightColor = () => {
-  //   let color = theme.palette.borderRightColor.light
-  //   switch (secondaryDuration) {
-  //     case 15:
-  //       color = index % 4 !== 3 ? 
-  //       theme.palette.borderRightColor.light
-  //       : theme.palette.borderRightColor.main; 
-  //       break;
-  //     default:
-  //       color = index % 2 !== 1 ? 
-  //       theme.palette.borderRightColor.light
-  //       : theme.palette.borderRightColor.main; 
-  //       break;
-  //   }
-  //   return color;
-  // };
-
-  // const borderRightStyle = () => {
-  //   switch (secondaryDuration) {
-  //     case 15:
-  //       if (index % 2 !== 1) {
-  //         return 'none';
-  //       }
-  //       return 'solid';
-  //     default:
-  //       return 'solid';
-  //   }
-  // };
-
-  return _objectSpread2({
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    paddingLeft: 0,
-    paddingRight: 0,
-    position: 'relative',
-    backgroundColor: bg,
-    width: width,
-    height: HEIGHT,
-    overflow: 'visible',
-    verticalAlign: 'top',
-    borderRightWidth: '1px',
-    borderRightStyle: 'solid',
-    borderRightColor: theme.palette.borderRightColor.light
-  }, style);
-});
-
-function UserTimeSlot(props) {
-  props.user;
-    props.timeSlot;
-    var index = props.index;
-  var _useSchedulerContext = useSchedulerContext();
-    _useSchedulerContext.appointmentList;
-    _useSchedulerContext.onAppointmentChange;
-    _useSchedulerContext.duration;
-    _useSchedulerContext.date;
-    var SlotProps = _useSchedulerContext.SlotProps;
-  var _ref = SlotProps || {},
-    _ref$secondaryDuratio = _ref.secondaryDuration,
-    secondaryDuration = _ref$secondaryDuratio === void 0 ? 30 : _ref$secondaryDuratio;
-
-  //   const [{ isOver, canDrop }, drop] = useDrop({
-  //     accept: 'APPOINTMENT',
-  //     drop: (appointment, monitor) => {
-  //       const droppedAppointment = appointment.appointment;
-  //       const updatedAppointments = getUpdatedAppointments(
-  //         appointmentList,
-  //         droppedAppointment,
-  //         date,
-  //         timeSlot,
-  //         duration,
-  //         user
-  //       );
-  //       onAppointmentChange(updatedAppointments);
-  //     },
-  //     collect: (monitor) => ({
-  //       isOver: monitor.isOver(),
-  //       canDrop: monitor.canDrop(),
-  //     }),
-  //   });
-
-  //   const sortedAppointments = getSortAppointments(appointmentList, user);
-  //   const concurrentAppointments = {};
-  //   let previousConcurrentCount = 0;
-  //   sortedAppointments.forEach((event, index) => {
-  //     const startDate = moment(event.schedule.startDate);
-  //     const count = sortedAppointments.reduce((acc, otherEvent, otherIndex) => {
-  //       if (
-  //         index !== otherIndex &&
-  //         moment(otherEvent.schedule.startDate).isBefore(startDate) &&
-  //         moment(otherEvent.schedule.endDate).isAfter(startDate)
-  //       ) {
-  //         return acc + 1;
-  //       }
-  //       return acc;
-  //     }, 0);
-  //     concurrentAppointments[event.id] =
-  //       count > 0 ? count + previousConcurrentCount : 0;
-  //     // Update previousConcurrentCount for the next event
-  //     previousConcurrentCount = count > 0 ? concurrentAppointments[event.id] : 0;
-  //   });
-
-  //   const filteredAppointments = getFilteredAppointments(
-  //     appointmentList,
-  //     user,
-  //     timeSlot,
-  //     date,
-  //     secondaryDuration,
-  //     concurrentAppointments
-  //   );
-
-  var width = getSlotWidth(secondaryDuration);
-  return /*#__PURE__*/React__default["default"].createElement(Slot, {
-    colSpan: 1
-    //   ref={drop}
-    ,
-    index: index
-    //   canDrop={canDrop}
-    //   isOver={isOver}
-    ,
-    width: width
-  }, /*#__PURE__*/React__default["default"].createElement("div", {
-    style: {
-      overflow: 'visible',
-      width: width
-    }
-  }));
-}
-
-function Calendar() {
-  var _useSchedulerContext = useSchedulerContext(),
-    date = _useSchedulerContext.date,
-    users = _useSchedulerContext.users,
-    SlotProps = _useSchedulerContext.SlotProps;
-  var _ref = SlotProps || {},
-    _ref$primaryDuration = _ref.primaryDuration,
-    primaryDuration = _ref$primaryDuration === void 0 ? 60 : _ref$primaryDuration,
-    secondaryDuration = _ref.secondaryDuration,
-    colSpan = _ref.colSpan;
-  var classes = useStyles();
-  var timeSlotsHead = generateTimeSlotsForShift(date, primaryDuration);
-  var timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
-  return /*#__PURE__*/React__default["default"].createElement(CalendarContainer, {
-    component: MuiPaper
-  }, /*#__PURE__*/React__default["default"].createElement(Table$1, {
-    sx: classes.table,
-    stickyHeader: true
-  }, /*#__PURE__*/React__default["default"].createElement(TableHead$1, null, /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
-    sx: {
-      overflowY: 'hidden',
-      backgroundColor: 'white',
-      position: 'sticky',
-      top: 0,
-      zIndex: 1000
-    }
-  }, /*#__PURE__*/React__default["default"].createElement(Resources, {
-    align: "left"
-  }, /*#__PURE__*/React__default["default"].createElement(Resource, null, "Users"), /*#__PURE__*/React__default["default"].createElement(Divider, null)), timeSlotsHead.map(function (slot) {
-    return /*#__PURE__*/React__default["default"].createElement(Slots, {
-      key: slot,
-      colSpan: colSpan
-    }, slot);
-  }))), /*#__PURE__*/React__default["default"].createElement(TableBody$1, null, users.map(function (user) {
-    return /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
-      key: user.name
-    }, /*#__PURE__*/React__default["default"].createElement(Resources, {
-      align: "left"
-    }, /*#__PURE__*/React__default["default"].createElement(Resource, null, user.name), /*#__PURE__*/React__default["default"].createElement(Divider, null)), timeSlotsBody.map(function (slot, index) {
-      return /*#__PURE__*/React__default["default"].createElement(UserTimeSlot, {
-        key: "".concat(user.name, "-").concat(slot),
-        index: index,
-        user: user,
-        timeSlot: slot
-      });
-    }));
-  }))));
-}
-var useStyles = function useStyles() {
-  return {
-    table: {
-      width: 900,
-      overflowX: 'auto'
-    }
-  };
-};
-
-var AppointmentPropTypes = PropTypes.shape({
-  /**
-   * Set the background color for the appointment when it is being dragged
-   */
-  dragBgColor: PropTypes.string,
-  /**
-  * You can override the styles
-  */
-  style: PropTypes.object
-});
-var AppointmentDefaultValue = {
-  dragBgColor: '#E0E0E0',
-  style: {}
-};
-
-var SlotBackgroundPropTypes = PropTypes.shape({
-  /**
-  * set background of drop, when the appointment can be drop in the slot
-  */
-  dropBg: PropTypes.string,
-  /**
-  * set background of drop, when the appointment is over the slot
-  */
-  overBg: PropTypes.string
-});
-var SlotPropTypes = PropTypes.shape({
-  /**
-  * Set the primary duration - Primary Duration is the duration in header of the scheduler
-  * @default 60
-  */
-  primaryDuration: PropTypes.number,
-  /**
-  * Set the secondary duration, Secondary Duration is the duration inside each Primary Duration
-  * @default 30
-  */
-  secondaryDuration: PropTypes.number,
-  /**
-  * colSpan should be set accordingly to secondaryDuration
-  * @default 2
-  */
-  colSpan: PropTypes.number,
-  /**
-  * component is used to wrapped the whole scheduler
-  */
-  component: PropTypes.node,
-  /**
-  * Override the style
-  */
-  style: PropTypes.object,
-  /**
-  * Override the slot background when it is to be dropped or its just over the slot
-  */
-  slotBackground: SlotBackgroundPropTypes
-});
-var SlotDefaultValues = {
-  primaryDuration: 60,
-  secondaryDuration: 30,
-  colSpan: 2,
-  component: /*#__PURE__*/React__default["default"].createElement("div", null),
-  style: PropTypes.object,
-  slotBackground: {
-    dropBg: undefined,
-    overBg: undefined
-  }
-};
+moment.exports;
 
 /**
  * <p>Scheduler is composed of different libraries such as React-DND, moment, and MUI.</p>
@@ -15018,7 +11690,7 @@ var SlotDefaultValues = {
  * </ul>
  *  */
 var Scheduler = function Scheduler(props) {
-  return /*#__PURE__*/React__default["default"].createElement(SchedulerProvider, props, /*#__PURE__*/React__default["default"].createElement("div", null, "Hello world"), /*#__PURE__*/React__default["default"].createElement(Calendar, null));
+  return /*#__PURE__*/React__default["default"].createElement(SchedulerProvider, props, /*#__PURE__*/React__default["default"].createElement("div", null, "Hello world"));
 };
 Scheduler.propTypes = {
   /**

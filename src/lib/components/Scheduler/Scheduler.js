@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { SchedulerProvider } from '../../context/SchedulerProvider';
-import Calendar from '../Calendar';
+// import Calendar from '../Calendar';
 import {
   AppointmentPropTypes,
   AppointmentDefaultValue,
@@ -33,7 +33,7 @@ const Scheduler = (props) => {
     <SchedulerProvider {...props}>
       <div>Hello world</div>
       {/* <Header /> */}
-      <Calendar />
+      {/* <Calendar /> */}
     </SchedulerProvider>
   );
 };
