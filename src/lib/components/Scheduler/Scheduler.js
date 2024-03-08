@@ -32,7 +32,7 @@ const Scheduler = (props) => {
   return (
     <SchedulerProvider {...props}>
       <div>Hello world</div>
-      {/* <Header /> */}
+      <Header />
       {/* <Calendar /> */}
     </SchedulerProvider>
   );
