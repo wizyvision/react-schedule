@@ -3,6 +3,8 @@ import React, { useContext, createContext } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { enUS } from 'date-fns/locale';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import theme from '../constants/theme';
 
 const SchedulerContext = createContext();
@@ -47,16 +49,18 @@ const SchedulerProvider = (props) => {
   };
 
   return (
-    <SchedulerContext.Provider value={value}>
-      <ThemeProvider theme={theme}>
-        <LocalizationProvider
-          dateAdapter={AdapterDateFns}
-          adapterLocale={locales['en']}
-        >
-          {children}
-        </LocalizationProvider>
-      </ThemeProvider>
-    </SchedulerContext.Provider>
+    <DndProvider backend={HTML5Backend}>
+      <SchedulerContext.Provider value={value}>
+        <ThemeProvider theme={theme}>
+          <LocalizationProvider
+            dateAdapter={AdapterDateFns}
+            adapterLocale={locales['en']}
+          >
+            {children}
+          </LocalizationProvider>
+        </ThemeProvider>
+      </SchedulerContext.Provider>
+    </DndProvider>
   );
 };
 
