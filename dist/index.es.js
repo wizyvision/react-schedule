@@ -39296,6 +39296,7 @@ function DurationPicker() {
   };
   var options = durationOptions === null || durationOptions === void 0 ? void 0 : durationOptions.map(function (option) {
     return /*#__PURE__*/React__default.createElement(MenuItem$1, {
+      key: option,
       onClick: function onClick() {
         return handleMenuItemClick(option);
       },
@@ -39345,8 +39346,10 @@ function TodayButton() {
 
 function ActionButton(props) {
   var icon = props.icon,
-    onClick = props.onClick;
+    onClick = props.onClick,
+    name = props.name;
   return /*#__PURE__*/React__default.createElement(IconButton$1, {
+    key: name,
     onClick: onClick
   }, icon);
 }
@@ -39355,9 +39358,13 @@ function DateNavigation() {
     onPrevDate = _useSchedulerContext.onPrevDate,
     onNextDate = _useSchedulerContext.onNextDate;
   var actions = [/*#__PURE__*/React__default.createElement(ActionButton, {
+    key: "nextDate",
+    name: "nextDate",
     icon: /*#__PURE__*/React__default.createElement(ArrowLeftIcon, null),
     onClick: onNextDate
   }), /*#__PURE__*/React__default.createElement(ActionButton, {
+    key: "prevDate",
+    name: "prevDate",
     icon: /*#__PURE__*/React__default.createElement(ArrowRightIcon, null),
     onClick: onPrevDate
   })];
