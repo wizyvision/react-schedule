@@ -41,7 +41,7 @@ const Template = (args) => {
 
   return (
    <>
-      <LocalizationProvider
+      {/* <LocalizationProvider
         dateAdapter={AdapterDateFns}
         adapterLocale={locales['en']}
       >
@@ -61,7 +61,7 @@ const Template = (args) => {
             </div>
           </DndProvider>
         </div>
-      </LocalizationProvider>
+      </LocalizationProvider> */}
    </>
   );
 };
