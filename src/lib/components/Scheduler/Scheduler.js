@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { SchedulerProvider } from '../../context/SchedulerProvider';
-// import Calendar from '../Calendar';
+import Calendar from '../Calendar';
 import {
   AppointmentPropTypes,
   AppointmentDefaultValue,

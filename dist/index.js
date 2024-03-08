@@ -4109,7 +4109,7 @@ var Insertion = function Insertion(_ref) {
   return null;
 };
 
-var createStyled$2 = function createStyled(tag, options) {
+var createStyled$3 = function createStyled(tag, options) {
   if (process.env.NODE_ENV !== 'production') {
     if (tag === undefined) {
       throw new Error('You are trying to create a styled element with an undefined component.\nYou may have forgotten to import it.');
@@ -4237,7 +4237,7 @@ var createStyled$2 = function createStyled(tag, options) {
 var tags = ['a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b', 'base', 'bdi', 'bdo', 'big', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'cite', 'code', 'col', 'colgroup', 'data', 'datalist', 'dd', 'del', 'details', 'dfn', 'dialog', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hgroup', 'hr', 'html', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'keygen', 'label', 'legend', 'li', 'link', 'main', 'map', 'mark', 'marquee', 'menu', 'menuitem', 'meta', 'meter', 'nav', 'noscript', 'object', 'ol', 'optgroup', 'option', 'output', 'p', 'param', 'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'script', 'section', 'select', 'small', 'source', 'span', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'textarea', 'tfoot', 'th', 'thead', 'time', 'title', 'tr', 'track', 'u', 'ul', 'var', 'video', 'wbr', // SVG
 'circle', 'clipPath', 'defs', 'ellipse', 'foreignObject', 'g', 'image', 'line', 'linearGradient', 'mask', 'path', 'pattern', 'polygon', 'polyline', 'radialGradient', 'rect', 'stop', 'svg', 'text', 'tspan'];
 
-var newStyled = createStyled$2.bind();
+var newStyled = createStyled$3.bind();
 tags.forEach(function (tagName) {
   // $FlowFixMe: we can ignore this because its exposed type is defined by the CreateStyled type
   newStyled[tagName] = newStyled(tagName);
@@ -4273,7 +4273,7 @@ process.env.NODE_ENV !== "production" ? StyledEngineProvider.propTypes = {
   injectFirst: PropTypes.bool
 } : void 0;
 
-function isEmpty$1(obj) {
+function isEmpty$2(obj) {
   return obj === undefined || obj === null || Object.keys(obj).length === 0;
 }
 function GlobalStyles(props) {
@@ -4281,7 +4281,7 @@ function GlobalStyles(props) {
     styles,
     defaultTheme = {}
   } = props;
-  const globalStyles = typeof styles === 'function' ? themeInput => styles(isEmpty$1(themeInput) ? defaultTheme : themeInput) : styles;
+  const globalStyles = typeof styles === 'function' ? themeInput => styles(isEmpty$2(themeInput) ? defaultTheme : themeInput) : styles;
   return /*#__PURE__*/jsxRuntime.jsx(Global, {
     styles: globalStyles
   });
@@ -4298,7 +4298,7 @@ process.env.NODE_ENV !== "production" ? GlobalStyles.propTypes = {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-function styled$2(tag, options) {
+function styled$4(tag, options) {
   const stylesFactory = newStyled(tag, options);
   if (process.env.NODE_ENV !== 'production') {
     return (...styles) => {
@@ -4325,7 +4325,7 @@ const internal_processStyles = (tag, processor) => {
 
 var styledEngine = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': styled$2,
+	'default': styled$4,
 	internal_processStyles: internal_processStyles,
 	ThemeContext: ThemeContext,
 	keyframes: keyframes,
@@ -4381,7 +4381,7 @@ var deepmerge = /*#__PURE__*/Object.freeze({
 	isPlainObject: isPlainObject
 });
 
-const _excluded$o = ["values", "unit", "step"];
+const _excluded$v = ["values", "unit", "step"];
 const sortBreakpointsValues = values => {
   const breakpointsAsArray = Object.keys(values).map(key => ({
     key,
@@ -4415,7 +4415,7 @@ function createBreakpoints(breakpoints) {
       unit = 'px',
       step = 5
     } = breakpoints,
-    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$o);
+    other = _objectWithoutPropertiesLoose(breakpoints, _excluded$v);
   const sortedValues = sortBreakpointsValues(values);
   const keys = Object.keys(sortedValues);
   function up(key) {
@@ -5524,7 +5524,7 @@ function applyStyles(key, styles) {
   return {};
 }
 
-const _excluded$n = ["breakpoints", "palette", "spacing", "shape"];
+const _excluded$u = ["breakpoints", "palette", "spacing", "shape"];
 function createTheme$2(options = {}, ...args) {
   const {
       breakpoints: breakpointsInput = {},
@@ -5532,7 +5532,7 @@ function createTheme$2(options = {}, ...args) {
       spacing: spacingInput,
       shape: shapeInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$n);
+    other = _objectWithoutPropertiesLoose(options, _excluded$u);
   const breakpoints = createBreakpoints(breakpointsInput);
   const spacing = createSpacing(spacingInput);
   let muiTheme = deepmerge$1({
@@ -5573,12 +5573,12 @@ function useTheme$2(defaultTheme = null) {
   return !contextTheme || isObjectEmpty(contextTheme) ? defaultTheme : contextTheme;
 }
 
-const systemDefaultTheme$1 = createTheme$2();
-function useTheme$1(defaultTheme = systemDefaultTheme$1) {
+const systemDefaultTheme$2 = createTheme$2();
+function useTheme$1(defaultTheme = systemDefaultTheme$2) {
   return useTheme$2(defaultTheme);
 }
 
-const _excluded$m = ["sx"];
+const _excluded$t = ["sx"];
 const splitProps = props => {
   var _props$theme$unstable, _props$theme;
   const result = {
@@ -5599,7 +5599,7 @@ function extendSxProp(props) {
   const {
       sx: inSx
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$m);
+    other = _objectWithoutPropertiesLoose(props, _excluded$t);
   const {
     systemProps,
     otherProps
@@ -5993,6 +5993,241 @@ var getDisplayName = /*#__PURE__*/Object.freeze({
 	'default': getDisplayName$1,
 	getFunctionName: getFunctionName
 });
+
+const _excluded$s = ["ownerState"],
+  _excluded2$3 = ["variants"],
+  _excluded3$2 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
+function isEmpty$1(obj) {
+  return Object.keys(obj).length === 0;
+}
+
+// https://github.com/emotion-js/emotion/blob/26ded6109fcd8ca9875cc2ce4564fee678a3f3c5/packages/styled/src/utils.js#L40
+function isStringTag$1(tag) {
+  return typeof tag === 'string' &&
+  // 96 is one less than the char code
+  // for "a" so this is checking that
+  // it's a lowercase character
+  tag.charCodeAt(0) > 96;
+}
+
+// Update /system/styled/#api in case if this changes
+function shouldForwardProp$1(prop) {
+  return prop !== 'ownerState' && prop !== 'theme' && prop !== 'sx' && prop !== 'as';
+}
+const systemDefaultTheme$1 = createTheme$2();
+const lowercaseFirstLetter$1 = string => {
+  if (!string) {
+    return string;
+  }
+  return string.charAt(0).toLowerCase() + string.slice(1);
+};
+function resolveTheme$1({
+  defaultTheme,
+  theme,
+  themeId
+}) {
+  return isEmpty$1(theme) ? defaultTheme : theme[themeId] || theme;
+}
+function defaultOverridesResolver$1(slot) {
+  if (!slot) {
+    return null;
+  }
+  return (props, styles) => styles[slot];
+}
+function processStyleArg$1(callableStyle, _ref) {
+  let {
+      ownerState
+    } = _ref,
+    props = _objectWithoutPropertiesLoose(_ref, _excluded$s);
+  const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle(_extends$1({
+    ownerState
+  }, props)) : callableStyle;
+  if (Array.isArray(resolvedStylesArg)) {
+    return resolvedStylesArg.flatMap(resolvedStyle => processStyleArg$1(resolvedStyle, _extends$1({
+      ownerState
+    }, props)));
+  }
+  if (!!resolvedStylesArg && typeof resolvedStylesArg === 'object' && Array.isArray(resolvedStylesArg.variants)) {
+    const {
+        variants = []
+      } = resolvedStylesArg,
+      otherStyles = _objectWithoutPropertiesLoose(resolvedStylesArg, _excluded2$3);
+    let result = otherStyles;
+    variants.forEach(variant => {
+      let isMatch = true;
+      if (typeof variant.props === 'function') {
+        isMatch = variant.props(_extends$1({
+          ownerState
+        }, props, ownerState));
+      } else {
+        Object.keys(variant.props).forEach(key => {
+          if ((ownerState == null ? void 0 : ownerState[key]) !== variant.props[key] && props[key] !== variant.props[key]) {
+            isMatch = false;
+          }
+        });
+      }
+      if (isMatch) {
+        if (!Array.isArray(result)) {
+          result = [result];
+        }
+        result.push(typeof variant.style === 'function' ? variant.style(_extends$1({
+          ownerState
+        }, props, ownerState)) : variant.style);
+      }
+    });
+    return result;
+  }
+  return resolvedStylesArg;
+}
+function createStyled$2(input = {}) {
+  const {
+    themeId,
+    defaultTheme = systemDefaultTheme$1,
+    rootShouldForwardProp = shouldForwardProp$1,
+    slotShouldForwardProp = shouldForwardProp$1
+  } = input;
+  const systemSx = props => {
+    return styleFunctionSx$2(_extends$1({}, props, {
+      theme: resolveTheme$1(_extends$1({}, props, {
+        defaultTheme,
+        themeId
+      }))
+    }));
+  };
+  systemSx.__mui_systemSx = true;
+  return (tag, inputOptions = {}) => {
+    // Filter out the `sx` style function from the previous styled component to prevent unnecessary styles generated by the composite components.
+    internal_processStyles(tag, styles => styles.filter(style => !(style != null && style.__mui_systemSx)));
+    const {
+        name: componentName,
+        slot: componentSlot,
+        skipVariantsResolver: inputSkipVariantsResolver,
+        skipSx: inputSkipSx,
+        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
+        // For more details: https://github.com/mui/material-ui/pull/37908
+        overridesResolver = defaultOverridesResolver$1(lowercaseFirstLetter$1(componentSlot))
+      } = inputOptions,
+      options = _objectWithoutPropertiesLoose(inputOptions, _excluded3$2);
+
+    // if skipVariantsResolver option is defined, take the value, otherwise, true for root and false for other slots.
+    const skipVariantsResolver = inputSkipVariantsResolver !== undefined ? inputSkipVariantsResolver :
+    // TODO v6: remove `Root` in the next major release
+    // For more details: https://github.com/mui/material-ui/pull/37908
+    componentSlot && componentSlot !== 'Root' && componentSlot !== 'root' || false;
+    const skipSx = inputSkipSx || false;
+    let label;
+    if (process.env.NODE_ENV !== 'production') {
+      if (componentName) {
+        // TODO v6: remove `lowercaseFirstLetter()` in the next major release
+        // For more details: https://github.com/mui/material-ui/pull/37908
+        label = `${componentName}-${lowercaseFirstLetter$1(componentSlot || 'Root')}`;
+      }
+    }
+    let shouldForwardPropOption = shouldForwardProp$1;
+
+    // TODO v6: remove `Root` in the next major release
+    // For more details: https://github.com/mui/material-ui/pull/37908
+    if (componentSlot === 'Root' || componentSlot === 'root') {
+      shouldForwardPropOption = rootShouldForwardProp;
+    } else if (componentSlot) {
+      // any other slot specified
+      shouldForwardPropOption = slotShouldForwardProp;
+    } else if (isStringTag$1(tag)) {
+      // for string (html) tag, preserve the behavior in emotion & styled-components.
+      shouldForwardPropOption = undefined;
+    }
+    const defaultStyledResolver = styled$4(tag, _extends$1({
+      shouldForwardProp: shouldForwardPropOption,
+      label
+    }, options));
+    const transformStyleArg = stylesArg => {
+      // On the server Emotion doesn't use React.forwardRef for creating components, so the created
+      // component stays as a function. This condition makes sure that we do not interpolate functions
+      // which are basically components used as a selectors.
+      if (typeof stylesArg === 'function' && stylesArg.__emotion_real !== stylesArg || isPlainObject(stylesArg)) {
+        return props => processStyleArg$1(stylesArg, _extends$1({}, props, {
+          theme: resolveTheme$1({
+            theme: props.theme,
+            defaultTheme,
+            themeId
+          })
+        }));
+      }
+      return stylesArg;
+    };
+    const muiStyledResolver = (styleArg, ...expressions) => {
+      let transformedStyleArg = transformStyleArg(styleArg);
+      const expressionsWithDefaultTheme = expressions ? expressions.map(transformStyleArg) : [];
+      if (componentName && overridesResolver) {
+        expressionsWithDefaultTheme.push(props => {
+          const theme = resolveTheme$1(_extends$1({}, props, {
+            defaultTheme,
+            themeId
+          }));
+          if (!theme.components || !theme.components[componentName] || !theme.components[componentName].styleOverrides) {
+            return null;
+          }
+          const styleOverrides = theme.components[componentName].styleOverrides;
+          const resolvedStyleOverrides = {};
+          // TODO: v7 remove iteration and use `resolveStyleArg(styleOverrides[slot])` directly
+          Object.entries(styleOverrides).forEach(([slotKey, slotStyle]) => {
+            resolvedStyleOverrides[slotKey] = processStyleArg$1(slotStyle, _extends$1({}, props, {
+              theme
+            }));
+          });
+          return overridesResolver(props, resolvedStyleOverrides);
+        });
+      }
+      if (componentName && !skipVariantsResolver) {
+        expressionsWithDefaultTheme.push(props => {
+          var _theme$components;
+          const theme = resolveTheme$1(_extends$1({}, props, {
+            defaultTheme,
+            themeId
+          }));
+          const themeVariants = theme == null || (_theme$components = theme.components) == null || (_theme$components = _theme$components[componentName]) == null ? void 0 : _theme$components.variants;
+          return processStyleArg$1({
+            variants: themeVariants
+          }, _extends$1({}, props, {
+            theme
+          }));
+        });
+      }
+      if (!skipSx) {
+        expressionsWithDefaultTheme.push(systemSx);
+      }
+      const numOfCustomFnsApplied = expressionsWithDefaultTheme.length - expressions.length;
+      if (Array.isArray(styleArg) && numOfCustomFnsApplied > 0) {
+        const placeholders = new Array(numOfCustomFnsApplied).fill('');
+        // If the type is array, than we need to add placeholders in the template for the overrides, variants and the sx styles.
+        transformedStyleArg = [...styleArg, ...placeholders];
+        transformedStyleArg.raw = [...styleArg.raw, ...placeholders];
+      }
+      const Component = defaultStyledResolver(transformedStyleArg, ...expressionsWithDefaultTheme);
+      if (process.env.NODE_ENV !== 'production') {
+        let displayName;
+        if (componentName) {
+          displayName = `${componentName}${capitalize$1(componentSlot || '')}`;
+        }
+        if (displayName === undefined) {
+          displayName = `Styled(${getDisplayName$1(tag)})`;
+        }
+        Component.displayName = displayName;
+      }
+      if (tag.muiName) {
+        Component.muiName = tag.muiName;
+      }
+      return Component;
+    };
+    if (defaultStyledResolver.withConfig) {
+      muiStyledResolver.withConfig = defaultStyledResolver.withConfig;
+    }
+    return muiStyledResolver;
+  };
+}
+
+const styled$2 = createStyled$2();
+var styled$3 = styled$2;
 
 /**
  * Add keys, values of `defaultProps` that does not exist in `props`
@@ -7267,7 +7502,7 @@ const green = {
 };
 var green$1 = green;
 
-const _excluded$l = ["mode", "contrastThreshold", "tonalOffset"];
+const _excluded$r = ["mode", "contrastThreshold", "tonalOffset"];
 const light = {
   // The colors used to style the text.
   text: {
@@ -7436,7 +7671,7 @@ function createPalette(palette) {
       contrastThreshold = 3,
       tonalOffset = 0.2
     } = palette,
-    other = _objectWithoutPropertiesLoose(palette, _excluded$l);
+    other = _objectWithoutPropertiesLoose(palette, _excluded$r);
   const primary = palette.primary || getDefaultPrimary(mode);
   const secondary = palette.secondary || getDefaultSecondary(mode);
   const error = palette.error || getDefaultError(mode);
@@ -7560,7 +7795,7 @@ const theme2 = createTheme({ palette: {
   return paletteOutput;
 }
 
-const _excluded$k = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
+const _excluded$q = ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"];
 function round(value) {
   return Math.round(value * 1e5) / 1e5;
 }
@@ -7591,7 +7826,7 @@ function createTypography(palette, typography) {
       allVariants,
       pxToRem: pxToRem2
     } = _ref,
-    other = _objectWithoutPropertiesLoose(_ref, _excluded$k);
+    other = _objectWithoutPropertiesLoose(_ref, _excluded$q);
   if (process.env.NODE_ENV !== 'production') {
     if (typeof fontSize !== 'number') {
       console.error('MUI: `fontSize` is required to be a number.');
@@ -7659,7 +7894,7 @@ function createShadow(...px) {
 const shadows = ['none', createShadow(0, 2, 1, -1, 0, 1, 1, 0, 0, 1, 3, 0), createShadow(0, 3, 1, -2, 0, 2, 2, 0, 0, 1, 5, 0), createShadow(0, 3, 3, -2, 0, 3, 4, 0, 0, 1, 8, 0), createShadow(0, 2, 4, -1, 0, 4, 5, 0, 0, 1, 10, 0), createShadow(0, 3, 5, -1, 0, 5, 8, 0, 0, 1, 14, 0), createShadow(0, 3, 5, -1, 0, 6, 10, 0, 0, 1, 18, 0), createShadow(0, 4, 5, -2, 0, 7, 10, 1, 0, 2, 16, 1), createShadow(0, 5, 5, -3, 0, 8, 10, 1, 0, 3, 14, 2), createShadow(0, 5, 6, -3, 0, 9, 12, 1, 0, 3, 16, 2), createShadow(0, 6, 6, -3, 0, 10, 14, 1, 0, 4, 18, 3), createShadow(0, 6, 7, -4, 0, 11, 15, 1, 0, 4, 20, 3), createShadow(0, 7, 8, -4, 0, 12, 17, 2, 0, 5, 22, 4), createShadow(0, 7, 8, -4, 0, 13, 19, 2, 0, 5, 24, 4), createShadow(0, 7, 9, -4, 0, 14, 21, 2, 0, 5, 26, 4), createShadow(0, 8, 9, -5, 0, 15, 22, 2, 0, 6, 28, 5), createShadow(0, 8, 10, -5, 0, 16, 24, 2, 0, 6, 30, 5), createShadow(0, 8, 11, -5, 0, 17, 26, 2, 0, 6, 32, 5), createShadow(0, 9, 11, -5, 0, 18, 28, 2, 0, 7, 34, 6), createShadow(0, 9, 12, -6, 0, 19, 29, 2, 0, 7, 36, 6), createShadow(0, 10, 13, -6, 0, 20, 31, 3, 0, 8, 38, 7), createShadow(0, 10, 13, -6, 0, 21, 33, 3, 0, 8, 40, 7), createShadow(0, 10, 14, -6, 0, 22, 35, 3, 0, 8, 42, 7), createShadow(0, 11, 14, -7, 0, 23, 36, 3, 0, 9, 44, 8), createShadow(0, 11, 15, -7, 0, 24, 38, 3, 0, 9, 46, 8)];
 var shadows$1 = shadows;
 
-const _excluded$j = ["duration", "easing", "delay"];
+const _excluded$p = ["duration", "easing", "delay"];
 // Follow https://material.google.com/motion/duration-easing.html#duration-easing-natural-easing-curves
 // to learn the context in which each easing should be used.
 const easing = {
@@ -7710,7 +7945,7 @@ function createTransitions(inputTransitions) {
         easing: easingOption = mergedEasing.easeInOut,
         delay = 0
       } = options,
-      other = _objectWithoutPropertiesLoose(options, _excluded$j);
+      other = _objectWithoutPropertiesLoose(options, _excluded$p);
     if (process.env.NODE_ENV !== 'production') {
       const isString = value => typeof value === 'string';
       // IE11 support, replace with Number.isNaN
@@ -7760,7 +7995,7 @@ const zIndex = {
 };
 var zIndex$1 = zIndex;
 
-const _excluded$i = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
+const _excluded$o = ["breakpoints", "mixins", "spacing", "palette", "transitions", "typography", "shape"];
 function createTheme(options = {}, ...args) {
   const {
       mixins: mixinsInput = {},
@@ -7768,7 +8003,7 @@ function createTheme(options = {}, ...args) {
       transitions: transitionsInput = {},
       typography: typographyInput = {}
     } = options,
-    other = _objectWithoutPropertiesLoose(options, _excluded$i);
+    other = _objectWithoutPropertiesLoose(options, _excluded$o);
   if (options.vars) {
     throw new Error(process.env.NODE_ENV !== "production" ? `MUI: \`vars\` is a private field used for CSS variables support.
 Please use another name.` : formatMuiErrorMessage$1(18));
@@ -7935,7 +8170,7 @@ var _capitalize = _interopRequireDefault(require$$5);
 var _getDisplayName = _interopRequireDefault(require$$6);
 var _createTheme = _interopRequireDefault(require$$7);
 var _styleFunctionSx = _interopRequireDefault(require$$8);
-const _excluded$h = ["ownerState"],
+const _excluded$n = ["ownerState"],
   _excluded2$2 = ["variants"],
   _excluded3$1 = ["name", "slot", "skipVariantsResolver", "skipSx", "overridesResolver"];
 /* eslint-disable no-underscore-dangle */
@@ -7982,7 +8217,7 @@ function processStyleArg(callableStyle, _ref) {
   let {
       ownerState
     } = _ref,
-    props = (0, _objectWithoutPropertiesLoose2.default)(_ref, _excluded$h);
+    props = (0, _objectWithoutPropertiesLoose2.default)(_ref, _excluded$n);
   const resolvedStylesArg = typeof callableStyle === 'function' ? callableStyle((0, _extends2.default)({
     ownerState
   }, props)) : callableStyle;
@@ -8261,129 +8496,13 @@ var useSchedulerContext = function useSchedulerContext() {
   return React.useContext(SchedulerContext);
 };
 
-var AppointmentPropTypes = PropTypes.shape({
-  /**
-   * Set the background color for the appointment when it is being dragged
-   */
-  dragBgColor: PropTypes.string,
-  /**
-  * You can override the styles
-  */
-  style: PropTypes.object
-});
-var AppointmentDefaultValue = {
-  dragBgColor: '#E0E0E0',
-  style: {}
-};
-
-var SlotBackgroundPropTypes = PropTypes.shape({
-  /**
-  * set background of drop, when the appointment can be drop in the slot
-  */
-  dropBg: PropTypes.string,
-  /**
-  * set background of drop, when the appointment is over the slot
-  */
-  overBg: PropTypes.string
-});
-var SlotPropTypes = PropTypes.shape({
-  /**
-  * Set the primary duration - Primary Duration is the duration in header of the scheduler
-  * @default 60
-  */
-  primaryDuration: PropTypes.number,
-  /**
-  * Set the secondary duration, Secondary Duration is the duration inside each Primary Duration
-  * @default 30
-  */
-  secondaryDuration: PropTypes.number,
-  /**
-  * colSpan should be set accordingly to secondaryDuration
-  * @default 2
-  */
-  colSpan: PropTypes.number,
-  /**
-  * component is used to wrapped the whole scheduler
-  */
-  component: PropTypes.node,
-  /**
-  * Override the style
-  */
-  style: PropTypes.object,
-  /**
-  * Override the slot background when it is to be dropped or its just over the slot
-  */
-  slotBackground: SlotBackgroundPropTypes
-});
-var SlotDefaultValues = {
-  primaryDuration: 60,
-  secondaryDuration: 30,
-  colSpan: 2,
-  component: /*#__PURE__*/React__default["default"].createElement("div", null),
-  style: PropTypes.object,
-  slotBackground: {
-    dropBg: undefined,
-    overBg: undefined
-  }
-};
-
-function _iterableToArrayLimit(r, l) {
-  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (null != t) {
-    var e,
-      n,
-      i,
-      u,
-      a = [],
-      f = !0,
-      o = !1;
-    try {
-      if (i = (t = t.call(r)).next, 0 === l) {
-        if (Object(t) !== t) return;
-        f = !1;
-      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
-    } catch (r) {
-      o = !0, n = r;
-    } finally {
-      try {
-        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
-      } finally {
-        if (o) throw n;
-      }
-    }
-    return a;
-  }
-}
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
 function getSvgIconUtilityClass(slot) {
   return generateUtilityClass('MuiSvgIcon', slot);
 }
 generateUtilityClasses('MuiSvgIcon', ['root', 'colorPrimary', 'colorSecondary', 'colorAction', 'colorError', 'colorDisabled', 'fontSizeInherit', 'fontSizeSmall', 'fontSizeMedium', 'fontSizeLarge']);
 
-const _excluded$g = ["children", "className", "color", "component", "fontSize", "htmlColor", "inheritViewBox", "titleAccess", "viewBox"];
-const useUtilityClasses$b = ownerState => {
+const _excluded$m = ["children", "className", "color", "component", "fontSize", "htmlColor", "inheritViewBox", "titleAccess", "viewBox"];
+const useUtilityClasses$h = ownerState => {
   const {
     color,
     fontSize,
@@ -8450,7 +8569,7 @@ const SvgIcon = /*#__PURE__*/React__namespace.forwardRef(function SvgIcon(inProp
       titleAccess,
       viewBox = '0 0 24 24'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$g);
+    other = _objectWithoutPropertiesLoose(props, _excluded$m);
   const hasSvgAsChild = /*#__PURE__*/React__namespace.isValidElement(children) && children.type === 'svg';
   const ownerState = _extends$1({}, props, {
     color,
@@ -8465,7 +8584,7 @@ const SvgIcon = /*#__PURE__*/React__namespace.forwardRef(function SvgIcon(inProp
   if (!inheritViewBox) {
     more.viewBox = viewBox;
   }
-  const classes = useUtilityClasses$b(ownerState);
+  const classes = useUtilityClasses$h(ownerState);
   return /*#__PURE__*/jsxRuntime.jsxs(SvgIconRoot, _extends$1({
     as: component,
     className: clsx(classes.root, className),
@@ -9581,8 +9700,8 @@ function getPaperUtilityClass(slot) {
 }
 generateUtilityClasses('MuiPaper', ['root', 'rounded', 'outlined', 'elevation', 'elevation0', 'elevation1', 'elevation2', 'elevation3', 'elevation4', 'elevation5', 'elevation6', 'elevation7', 'elevation8', 'elevation9', 'elevation10', 'elevation11', 'elevation12', 'elevation13', 'elevation14', 'elevation15', 'elevation16', 'elevation17', 'elevation18', 'elevation19', 'elevation20', 'elevation21', 'elevation22', 'elevation23', 'elevation24']);
 
-const _excluded$f = ["className", "component", "elevation", "square", "variant"];
-const useUtilityClasses$a = ownerState => {
+const _excluded$l = ["className", "component", "elevation", "square", "variant"];
+const useUtilityClasses$g = ownerState => {
   const {
     square,
     elevation,
@@ -9636,14 +9755,14 @@ const Paper = /*#__PURE__*/React__namespace.forwardRef(function Paper(inProps, r
       square = false,
       variant = 'elevation'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$f);
+    other = _objectWithoutPropertiesLoose(props, _excluded$l);
   const ownerState = _extends$1({}, props, {
     component,
     elevation,
     square,
     variant
   });
-  const classes = useUtilityClasses$a(ownerState);
+  const classes = useUtilityClasses$g(ownerState);
   if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const theme = useTheme();
@@ -9854,7 +9973,7 @@ function mergeSlotProps(parameters) {
   };
 }
 
-const _excluded$e = ["elementType", "externalSlotProps", "ownerState", "skipResolvingSlotProps"];
+const _excluded$k = ["elementType", "externalSlotProps", "ownerState", "skipResolvingSlotProps"];
 /**
  * @ignore - do not document.
  * Builds the props to be passed into the slot of an unstyled component.
@@ -9871,7 +9990,7 @@ function useSlotProps(parameters) {
       ownerState,
       skipResolvingSlotProps = false
     } = parameters,
-    rest = _objectWithoutPropertiesLoose(parameters, _excluded$e);
+    rest = _objectWithoutPropertiesLoose(parameters, _excluded$k);
   const resolvedComponentsProps = skipResolvingSlotProps ? {} : resolveComponentProps(externalSlotProps, ownerState);
   const {
     props: mergedProps,
@@ -9967,7 +10086,7 @@ process.env.NODE_ENV !== "production" ? Ripple.propTypes = {
 const touchRippleClasses = generateUtilityClasses('MuiTouchRipple', ['root', 'ripple', 'rippleVisible', 'ripplePulsate', 'child', 'childLeaving', 'childPulsate']);
 var touchRippleClasses$1 = touchRippleClasses;
 
-const _excluded$d = ["center", "classes", "className"];
+const _excluded$j = ["center", "classes", "className"];
 let _ = t => t,
   _t,
   _t2,
@@ -10096,7 +10215,7 @@ const TouchRipple = /*#__PURE__*/React__namespace.forwardRef(function TouchRippl
       classes = {},
       className
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$d);
+    other = _objectWithoutPropertiesLoose(props, _excluded$j);
   const [ripples, setRipples] = React__namespace.useState([]);
   const nextKey = React__namespace.useRef(0);
   const rippleCallback = React__namespace.useRef(null);
@@ -10292,8 +10411,8 @@ function getButtonBaseUtilityClass(slot) {
 const buttonBaseClasses = generateUtilityClasses('MuiButtonBase', ['root', 'disabled', 'focusVisible']);
 var buttonBaseClasses$1 = buttonBaseClasses;
 
-const _excluded$c = ["action", "centerRipple", "children", "className", "component", "disabled", "disableRipple", "disableTouchRipple", "focusRipple", "focusVisibleClassName", "LinkComponent", "onBlur", "onClick", "onContextMenu", "onDragLeave", "onFocus", "onFocusVisible", "onKeyDown", "onKeyUp", "onMouseDown", "onMouseLeave", "onMouseUp", "onTouchEnd", "onTouchMove", "onTouchStart", "tabIndex", "TouchRippleProps", "touchRippleRef", "type"];
-const useUtilityClasses$9 = ownerState => {
+const _excluded$i = ["action", "centerRipple", "children", "className", "component", "disabled", "disableRipple", "disableTouchRipple", "focusRipple", "focusVisibleClassName", "LinkComponent", "onBlur", "onClick", "onContextMenu", "onDragLeave", "onFocus", "onFocusVisible", "onKeyDown", "onKeyUp", "onMouseDown", "onMouseLeave", "onMouseUp", "onTouchEnd", "onTouchMove", "onTouchStart", "tabIndex", "TouchRippleProps", "touchRippleRef", "type"];
+const useUtilityClasses$f = ownerState => {
   const {
     disabled,
     focusVisible,
@@ -10393,7 +10512,7 @@ const ButtonBase = /*#__PURE__*/React__namespace.forwardRef(function ButtonBase(
       touchRippleRef,
       type
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$c);
+    other = _objectWithoutPropertiesLoose(props, _excluded$i);
   const buttonRef = React__namespace.useRef(null);
   const rippleRef = React__namespace.useRef(null);
   const handleRippleRef = useForkRef(rippleRef, touchRippleRef);
@@ -10560,7 +10679,7 @@ const ButtonBase = /*#__PURE__*/React__namespace.forwardRef(function ButtonBase(
     tabIndex,
     focusVisible
   });
-  const classes = useUtilityClasses$9(ownerState);
+  const classes = useUtilityClasses$f(ownerState);
   return /*#__PURE__*/jsxRuntime.jsxs(ButtonBaseRoot, _extends$1({
     as: ComponentProp,
     className: clsx(classes.root, className),
@@ -10757,8 +10876,8 @@ function getIconButtonUtilityClass(slot) {
 const iconButtonClasses = generateUtilityClasses('MuiIconButton', ['root', 'disabled', 'colorInherit', 'colorPrimary', 'colorSecondary', 'colorError', 'colorInfo', 'colorSuccess', 'colorWarning', 'edgeStart', 'edgeEnd', 'sizeSmall', 'sizeMedium', 'sizeLarge']);
 var iconButtonClasses$1 = iconButtonClasses;
 
-const _excluded$b = ["edge", "children", "className", "color", "disabled", "disableFocusRipple", "size"];
-const useUtilityClasses$8 = ownerState => {
+const _excluded$h = ["edge", "children", "className", "color", "disabled", "disableFocusRipple", "size"];
+const useUtilityClasses$e = ownerState => {
   const {
     classes,
     disabled,
@@ -10858,7 +10977,7 @@ const IconButton = /*#__PURE__*/React__namespace.forwardRef(function IconButton(
       disableFocusRipple = false,
       size = 'medium'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$b);
+    other = _objectWithoutPropertiesLoose(props, _excluded$h);
   const ownerState = _extends$1({}, props, {
     edge,
     color,
@@ -10866,7 +10985,7 @@ const IconButton = /*#__PURE__*/React__namespace.forwardRef(function IconButton(
     disableFocusRipple,
     size
   });
-  const classes = useUtilityClasses$8(ownerState);
+  const classes = useUtilityClasses$e(ownerState);
   return /*#__PURE__*/jsxRuntime.jsx(IconButtonRoot, _extends$1({
     className: clsx(classes.root, className),
     centerRipple: true,
@@ -10952,8 +11071,8 @@ function getTypographyUtilityClass(slot) {
 }
 generateUtilityClasses('MuiTypography', ['root', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'inherit', 'button', 'caption', 'overline', 'alignLeft', 'alignRight', 'alignCenter', 'alignJustify', 'noWrap', 'gutterBottom', 'paragraph']);
 
-const _excluded$a = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
-const useUtilityClasses$7 = ownerState => {
+const _excluded$g = ["align", "className", "component", "gutterBottom", "noWrap", "paragraph", "variant", "variantMapping"];
+const useUtilityClasses$d = ownerState => {
   const {
     align,
     gutterBottom,
@@ -11039,7 +11158,7 @@ const Typography = /*#__PURE__*/React__namespace.forwardRef(function Typography(
       variant = 'body1',
       variantMapping = defaultVariantMapping
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$a);
+    other = _objectWithoutPropertiesLoose(props, _excluded$g);
   const ownerState = _extends$1({}, props, {
     align,
     color,
@@ -11052,7 +11171,7 @@ const Typography = /*#__PURE__*/React__namespace.forwardRef(function Typography(
     variantMapping
   });
   const Component = component || (paragraph ? 'p' : variantMapping[variant] || defaultVariantMapping[variant]) || 'span';
-  const classes = useUtilityClasses$7(ownerState);
+  const classes = useUtilityClasses$d(ownerState);
   return /*#__PURE__*/jsxRuntime.jsx(TypographyRoot, _extends$1({
     as: Component,
     ref: ref,
@@ -11955,7 +12074,7 @@ function useModal(parameters) {
   };
 }
 
-const _excluded$9 = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
+const _excluded$f = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
 const styles$1 = {
   entering: {
     opacity: 1
@@ -11992,7 +12111,7 @@ const Fade = /*#__PURE__*/React__namespace.forwardRef(function Fade(props, ref) 
       // eslint-disable-next-line react/prop-types
       TransitionComponent = Transition$1
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$9);
+    other = _objectWithoutPropertiesLoose(props, _excluded$f);
   const nodeRef = React__namespace.useRef(null);
   const handleRef = useForkRef(nodeRef, children.ref, ref);
   const normalizedTransitionCallback = callback => maybeIsAppearing => {
@@ -12153,8 +12272,8 @@ function getBackdropUtilityClass(slot) {
 }
 generateUtilityClasses('MuiBackdrop', ['root', 'invisible']);
 
-const _excluded$8 = ["children", "className", "component", "components", "componentsProps", "invisible", "open", "slotProps", "slots", "TransitionComponent", "transitionDuration"];
-const useUtilityClasses$6 = ownerState => {
+const _excluded$e = ["children", "className", "component", "components", "componentsProps", "invisible", "open", "slotProps", "slots", "TransitionComponent", "transitionDuration"];
+const useUtilityClasses$c = ownerState => {
   const {
     classes,
     invisible
@@ -12208,12 +12327,12 @@ const Backdrop = /*#__PURE__*/React__namespace.forwardRef(function Backdrop(inPr
       TransitionComponent = Fade$1,
       transitionDuration
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$8);
+    other = _objectWithoutPropertiesLoose(props, _excluded$e);
   const ownerState = _extends$1({}, props, {
     component,
     invisible
   });
-  const classes = useUtilityClasses$6(ownerState);
+  const classes = useUtilityClasses$c(ownerState);
   const rootSlotProps = (_slotProps$root = slotProps.root) != null ? _slotProps$root : componentsProps.root;
   return /*#__PURE__*/jsxRuntime.jsx(TransitionComponent, _extends$1({
     in: open,
@@ -12353,8 +12472,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 var ButtonGroupButtonContext$1 = ButtonGroupButtonContext;
 
-const _excluded$7 = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
-const useUtilityClasses$5 = ownerState => {
+const _excluded$d = ["children", "color", "component", "className", "disabled", "disableElevation", "disableFocusRipple", "endIcon", "focusVisibleClassName", "fullWidth", "size", "startIcon", "type", "variant"];
+const useUtilityClasses$b = ownerState => {
   const {
     color,
     disableElevation,
@@ -12580,7 +12699,7 @@ const Button = /*#__PURE__*/React__namespace.forwardRef(function Button(inProps,
       type,
       variant = 'text'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$7);
+    other = _objectWithoutPropertiesLoose(props, _excluded$d);
   const ownerState = _extends$1({}, props, {
     color,
     component,
@@ -12592,7 +12711,7 @@ const Button = /*#__PURE__*/React__namespace.forwardRef(function Button(inProps,
     type,
     variant
   });
-  const classes = useUtilityClasses$5(ownerState);
+  const classes = useUtilityClasses$b(ownerState);
   const startIcon = startIconProp && /*#__PURE__*/jsxRuntime.jsx(ButtonStartIcon, {
     className: classes.startIcon,
     ownerState: ownerState,
@@ -12719,8 +12838,8 @@ function getModalUtilityClass(slot) {
 }
 generateUtilityClasses('MuiModal', ['root', 'hidden', 'backdrop']);
 
-const _excluded$6 = ["BackdropComponent", "BackdropProps", "classes", "className", "closeAfterTransition", "children", "container", "component", "components", "componentsProps", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "onBackdropClick", "onClose", "onTransitionEnter", "onTransitionExited", "open", "slotProps", "slots", "theme"];
-const useUtilityClasses$4 = ownerState => {
+const _excluded$c = ["BackdropComponent", "BackdropProps", "classes", "className", "closeAfterTransition", "children", "container", "component", "components", "componentsProps", "disableAutoFocus", "disableEnforceFocus", "disableEscapeKeyDown", "disablePortal", "disableRestoreFocus", "disableScrollLock", "hideBackdrop", "keepMounted", "onBackdropClick", "onClose", "onTransitionEnter", "onTransitionExited", "open", "slotProps", "slots", "theme"];
+const useUtilityClasses$a = ownerState => {
   const {
     open,
     exited,
@@ -12807,7 +12926,7 @@ const Modal = /*#__PURE__*/React__namespace.forwardRef(function Modal(inProps, r
       slots
       // eslint-disable-next-line react/prop-types
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$6);
+    other = _objectWithoutPropertiesLoose(props, _excluded$c);
   const propsWithDefaults = _extends$1({}, props, {
     closeAfterTransition,
     disableAutoFocus,
@@ -12833,7 +12952,7 @@ const Modal = /*#__PURE__*/React__namespace.forwardRef(function Modal(inProps, r
   const ownerState = _extends$1({}, propsWithDefaults, {
     exited
   });
-  const classes = useUtilityClasses$4(ownerState);
+  const classes = useUtilityClasses$a(ownerState);
   const childProps = {};
   if (children.props.tabIndex === undefined) {
     childProps.tabIndex = '-1';
@@ -13088,7 +13207,7 @@ var Modal$1 = Modal;
 const dividerClasses = generateUtilityClasses('MuiDivider', ['root', 'absolute', 'fullWidth', 'inset', 'middle', 'flexItem', 'light', 'vertical', 'withChildren', 'withChildrenVertical', 'textAlignRight', 'textAlignLeft', 'wrapper', 'wrapperVertical']);
 var dividerClasses$1 = dividerClasses;
 
-const _excluded$5 = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
+const _excluded$b = ["addEndListener", "appear", "children", "easing", "in", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting", "style", "timeout", "TransitionComponent"];
 function getScale(value) {
   return `scale(${value}, ${value ** 2})`;
 }
@@ -13132,7 +13251,7 @@ const Grow = /*#__PURE__*/React__namespace.forwardRef(function Grow(props, ref) 
       // eslint-disable-next-line react/prop-types
       TransitionComponent = Transition$1
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$5);
+    other = _objectWithoutPropertiesLoose(props, _excluded$b);
   const timer = useTimeout();
   const autoTimeout = React__namespace.useRef();
   const theme = useTheme();
@@ -13345,8 +13464,8 @@ function getListUtilityClass(slot) {
 }
 generateUtilityClasses('MuiList', ['root', 'padding', 'dense', 'subheader']);
 
-const _excluded$4 = ["children", "className", "component", "dense", "disablePadding", "subheader"];
-const useUtilityClasses$3 = ownerState => {
+const _excluded$a = ["children", "className", "component", "dense", "disablePadding", "subheader"];
+const useUtilityClasses$9 = ownerState => {
   const {
     classes,
     disablePadding,
@@ -13393,7 +13512,7 @@ const List = /*#__PURE__*/React__namespace.forwardRef(function List(inProps, ref
       disablePadding = false,
       subheader
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$4);
+    other = _objectWithoutPropertiesLoose(props, _excluded$a);
   const context = React__namespace.useMemo(() => ({
     dense
   }), [dense]);
@@ -13402,7 +13521,7 @@ const List = /*#__PURE__*/React__namespace.forwardRef(function List(inProps, ref
     dense,
     disablePadding
   });
-  const classes = useUtilityClasses$3(ownerState);
+  const classes = useUtilityClasses$9(ownerState);
   return /*#__PURE__*/jsxRuntime.jsx(ListContext$1.Provider, {
     value: context,
     children: /*#__PURE__*/jsxRuntime.jsxs(ListRoot, _extends$1({
@@ -13466,7 +13585,7 @@ var listItemIconClasses$1 = listItemIconClasses;
 const listItemTextClasses = generateUtilityClasses('MuiListItemText', ['root', 'multiline', 'dense', 'inset', 'primary', 'secondary']);
 var listItemTextClasses$1 = listItemTextClasses;
 
-const _excluded$3 = ["actions", "autoFocus", "autoFocusItem", "children", "className", "disabledItemsFocusable", "disableListWrap", "onKeyDown", "variant"];
+const _excluded$9 = ["actions", "autoFocus", "autoFocusItem", "children", "className", "disabledItemsFocusable", "disableListWrap", "onKeyDown", "variant"];
 function nextItem(list, item, disableListWrap) {
   if (list === item) {
     return list.firstChild;
@@ -13548,7 +13667,7 @@ const MenuList = /*#__PURE__*/React__namespace.forwardRef(function MenuList(prop
       onKeyDown,
       variant = 'selectedMenu'
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded$3);
+    other = _objectWithoutPropertiesLoose(props, _excluded$9);
   const listRef = React__namespace.useRef(null);
   const textCriteriaRef = React__namespace.useRef({
     keys: [],
@@ -13741,7 +13860,7 @@ function getPopoverUtilityClass(slot) {
 }
 generateUtilityClasses('MuiPopover', ['root', 'paper']);
 
-const _excluded$2 = ["onEntering"],
+const _excluded$8 = ["onEntering"],
   _excluded2$1 = ["action", "anchorEl", "anchorOrigin", "anchorPosition", "anchorReference", "children", "className", "container", "elevation", "marginThreshold", "open", "PaperProps", "slots", "slotProps", "transformOrigin", "TransitionComponent", "transitionDuration", "TransitionProps", "disableScrollLock"],
   _excluded3 = ["slotProps"];
 function getOffsetTop(rect, vertical) {
@@ -13772,7 +13891,7 @@ function getTransformOriginValue(transformOrigin) {
 function resolveAnchorEl(anchorEl) {
   return typeof anchorEl === 'function' ? anchorEl() : anchorEl;
 }
-const useUtilityClasses$2 = ownerState => {
+const useUtilityClasses$8 = ownerState => {
   const {
     classes
   } = ownerState;
@@ -13839,7 +13958,7 @@ const Popover = /*#__PURE__*/React__namespace.forwardRef(function Popover(inProp
       } = {},
       disableScrollLock = false
     } = props,
-    TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$2),
+    TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$8),
     other = _objectWithoutPropertiesLoose(props, _excluded2$1);
   const externalPaperSlotProps = (_slotProps$paper = slotProps == null ? void 0 : slotProps.paper) != null ? _slotProps$paper : PaperPropsProp;
   const paperRef = React__namespace.useRef();
@@ -13855,7 +13974,7 @@ const Popover = /*#__PURE__*/React__namespace.forwardRef(function Popover(inProp
     transitionDuration: transitionDurationProp,
     TransitionProps
   });
-  const classes = useUtilityClasses$2(ownerState);
+  const classes = useUtilityClasses$8(ownerState);
 
   // Returns the top/left offset of the position
   // to attach to on the anchor element (or body if none is provided)
@@ -14258,7 +14377,7 @@ function getMenuUtilityClass(slot) {
 }
 generateUtilityClasses('MuiMenu', ['root', 'paper', 'list']);
 
-const _excluded$1 = ["onEntering"],
+const _excluded$7 = ["onEntering"],
   _excluded2 = ["autoFocus", "children", "className", "disableAutoFocusItem", "MenuListProps", "onClose", "open", "PaperProps", "PopoverClasses", "transitionDuration", "TransitionProps", "variant", "slots", "slotProps"];
 const RTL_ORIGIN = {
   vertical: 'top',
@@ -14268,7 +14387,7 @@ const LTR_ORIGIN = {
   vertical: 'top',
   horizontal: 'left'
 };
-const useUtilityClasses$1 = ownerState => {
+const useUtilityClasses$7 = ownerState => {
   const {
     classes
   } = ownerState;
@@ -14329,7 +14448,7 @@ const Menu = /*#__PURE__*/React__namespace.forwardRef(function Menu(inProps, ref
       slots = {},
       slotProps = {}
     } = props,
-    TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$1),
+    TransitionProps = _objectWithoutPropertiesLoose(props.TransitionProps, _excluded$7),
     other = _objectWithoutPropertiesLoose(props, _excluded2);
   const theme = useTheme();
   const isRtl = theme.direction === 'rtl';
@@ -14343,7 +14462,7 @@ const Menu = /*#__PURE__*/React__namespace.forwardRef(function Menu(inProps, ref
     TransitionProps,
     variant
   });
-  const classes = useUtilityClasses$1(ownerState);
+  const classes = useUtilityClasses$7(ownerState);
   const autoFocusItem = autoFocus && !disableAutoFocusItem && open;
   const menuListActionsRef = React__namespace.useRef(null);
   const handleEntering = (element, isAppearing) => {
@@ -14553,14 +14672,14 @@ function getMenuItemUtilityClass(slot) {
 const menuItemClasses = generateUtilityClasses('MuiMenuItem', ['root', 'focusVisible', 'dense', 'disabled', 'divider', 'gutters', 'selected']);
 var menuItemClasses$1 = menuItemClasses;
 
-const _excluded = ["autoFocus", "component", "dense", "divider", "disableGutters", "focusVisibleClassName", "role", "tabIndex", "className"];
+const _excluded$6 = ["autoFocus", "component", "dense", "divider", "disableGutters", "focusVisibleClassName", "role", "tabIndex", "className"];
 const overridesResolver = (props, styles) => {
   const {
     ownerState
   } = props;
   return [styles.root, ownerState.dense && styles.dense, ownerState.divider && styles.divider, !ownerState.disableGutters && styles.gutters];
 };
-const useUtilityClasses = ownerState => {
+const useUtilityClasses$6 = ownerState => {
   const {
     disabled,
     dense,
@@ -14675,7 +14794,7 @@ const MenuItem = /*#__PURE__*/React__namespace.forwardRef(function MenuItem(inPr
       tabIndex: tabIndexProp,
       className
     } = props,
-    other = _objectWithoutPropertiesLoose(props, _excluded);
+    other = _objectWithoutPropertiesLoose(props, _excluded$6);
   const context = React__namespace.useContext(ListContext$1);
   const childContext = React__namespace.useMemo(() => ({
     dense: dense || context.dense || false,
@@ -14696,7 +14815,7 @@ const MenuItem = /*#__PURE__*/React__namespace.forwardRef(function MenuItem(inPr
     divider,
     disableGutters
   });
-  const classes = useUtilityClasses(props);
+  const classes = useUtilityClasses$6(props);
   const handleRef = useForkRef(menuItemRef, ref);
   let tabIndex;
   if (!props.disabled) {
@@ -14794,74 +14913,714 @@ process.env.NODE_ENV !== "production" ? MenuItem.propTypes /* remove-proptypes *
 } : void 0;
 var MenuItem$1 = MenuItem;
 
-const ArrowDropDownIcon = createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
-  d: "M7 10l5 5 5-5z"
-}), 'ArrowDropDown');
+/**
+ * @ignore - internal component.
+ */
+const TableContext = /*#__PURE__*/React__namespace.createContext();
+if (process.env.NODE_ENV !== 'production') {
+  TableContext.displayName = 'TableContext';
+}
+var TableContext$1 = TableContext;
+
+function getTableUtilityClass(slot) {
+  return generateUtilityClass('MuiTable', slot);
+}
+generateUtilityClasses('MuiTable', ['root', 'stickyHeader']);
+
+const _excluded$5 = ["className", "component", "padding", "size", "stickyHeader"];
+const useUtilityClasses$5 = ownerState => {
+  const {
+    classes,
+    stickyHeader
+  } = ownerState;
+  const slots = {
+    root: ['root', stickyHeader && 'stickyHeader']
+  };
+  return composeClasses(slots, getTableUtilityClass, classes);
+};
+const TableRoot = styled$1('table', {
+  name: 'MuiTable',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, ownerState.stickyHeader && styles.stickyHeader];
+  }
+})(({
+  theme,
+  ownerState
+}) => _extends$1({
+  display: 'table',
+  width: '100%',
+  borderCollapse: 'collapse',
+  borderSpacing: 0,
+  '& caption': _extends$1({}, theme.typography.body2, {
+    padding: theme.spacing(2),
+    color: (theme.vars || theme).palette.text.secondary,
+    textAlign: 'left',
+    captionSide: 'bottom'
+  })
+}, ownerState.stickyHeader && {
+  borderCollapse: 'separate'
+}));
+const defaultComponent$3 = 'table';
+const Table = /*#__PURE__*/React__namespace.forwardRef(function Table(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTable'
+  });
+  const {
+      className,
+      component = defaultComponent$3,
+      padding = 'normal',
+      size = 'medium',
+      stickyHeader = false
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$5);
+  const ownerState = _extends$1({}, props, {
+    component,
+    padding,
+    size,
+    stickyHeader
+  });
+  const classes = useUtilityClasses$5(ownerState);
+  const table = React__namespace.useMemo(() => ({
+    padding,
+    size,
+    stickyHeader
+  }), [padding, size, stickyHeader]);
+  return /*#__PURE__*/jsxRuntime.jsx(TableContext$1.Provider, {
+    value: table,
+    children: /*#__PURE__*/jsxRuntime.jsx(TableRoot, _extends$1({
+      as: component,
+      role: component === defaultComponent$3 ? null : 'table',
+      ref: ref,
+      className: clsx(classes.root, className),
+      ownerState: ownerState
+    }, other))
+  });
+});
+process.env.NODE_ENV !== "production" ? Table.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the table, normally `TableHead` and `TableBody`.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * Allows TableCells to inherit padding of the Table.
+   * @default 'normal'
+   */
+  padding: PropTypes.oneOf(['checkbox', 'none', 'normal']),
+  /**
+   * Allows TableCells to inherit size of the Table.
+   * @default 'medium'
+   */
+  size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['medium', 'small']), PropTypes.string]),
+  /**
+   * Set the header sticky.
+   *
+   * ⚠️ It doesn't work with IE11.
+   * @default false
+   */
+  stickyHeader: PropTypes.bool,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var Table$1 = Table;
 
 /**
  * @ignore - internal component.
  */
-const ArrowLeftIcon = createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
-  d: "M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-}), 'ArrowLeft');
+const Tablelvl2Context = /*#__PURE__*/React__namespace.createContext();
+if (process.env.NODE_ENV !== 'production') {
+  Tablelvl2Context.displayName = 'Tablelvl2Context';
+}
+var Tablelvl2Context$1 = Tablelvl2Context;
+
+function getTableBodyUtilityClass(slot) {
+  return generateUtilityClass('MuiTableBody', slot);
+}
+generateUtilityClasses('MuiTableBody', ['root']);
+
+const _excluded$4 = ["className", "component"];
+const useUtilityClasses$4 = ownerState => {
+  const {
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root']
+  };
+  return composeClasses(slots, getTableBodyUtilityClass, classes);
+};
+const TableBodyRoot = styled$1('tbody', {
+  name: 'MuiTableBody',
+  slot: 'Root',
+  overridesResolver: (props, styles) => styles.root
+})({
+  display: 'table-row-group'
+});
+const tablelvl2$1 = {
+  variant: 'body'
+};
+const defaultComponent$2 = 'tbody';
+const TableBody = /*#__PURE__*/React__namespace.forwardRef(function TableBody(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTableBody'
+  });
+  const {
+      className,
+      component = defaultComponent$2
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$4);
+  const ownerState = _extends$1({}, props, {
+    component
+  });
+  const classes = useUtilityClasses$4(ownerState);
+  return /*#__PURE__*/jsxRuntime.jsx(Tablelvl2Context$1.Provider, {
+    value: tablelvl2$1,
+    children: /*#__PURE__*/jsxRuntime.jsx(TableBodyRoot, _extends$1({
+      className: clsx(classes.root, className),
+      as: component,
+      ref: ref,
+      role: component === defaultComponent$2 ? null : 'rowgroup',
+      ownerState: ownerState
+    }, other))
+  });
+});
+process.env.NODE_ENV !== "production" ? TableBody.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the component, normally `TableRow`.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var TableBody$1 = TableBody;
+
+function getTableCellUtilityClass(slot) {
+  return generateUtilityClass('MuiTableCell', slot);
+}
+const tableCellClasses = generateUtilityClasses('MuiTableCell', ['root', 'head', 'body', 'footer', 'sizeSmall', 'sizeMedium', 'paddingCheckbox', 'paddingNone', 'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'stickyHeader']);
+var tableCellClasses$1 = tableCellClasses;
+
+const _excluded$3 = ["align", "className", "component", "padding", "scope", "size", "sortDirection", "variant"];
+const useUtilityClasses$3 = ownerState => {
+  const {
+    classes,
+    variant,
+    align,
+    padding,
+    size,
+    stickyHeader
+  } = ownerState;
+  const slots = {
+    root: ['root', variant, stickyHeader && 'stickyHeader', align !== 'inherit' && `align${capitalize$1(align)}`, padding !== 'normal' && `padding${capitalize$1(padding)}`, `size${capitalize$1(size)}`]
+  };
+  return composeClasses(slots, getTableCellUtilityClass, classes);
+};
+const TableCellRoot = styled$1('td', {
+  name: 'MuiTableCell',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, styles[ownerState.variant], styles[`size${capitalize$1(ownerState.size)}`], ownerState.padding !== 'normal' && styles[`padding${capitalize$1(ownerState.padding)}`], ownerState.align !== 'inherit' && styles[`align${capitalize$1(ownerState.align)}`], ownerState.stickyHeader && styles.stickyHeader];
+  }
+})(({
+  theme,
+  ownerState
+}) => _extends$1({}, theme.typography.body2, {
+  display: 'table-cell',
+  verticalAlign: 'inherit',
+  // Workaround for a rendering bug with spanned columns in Chrome 62.0.
+  // Removes the alpha (sets it to 1), and lightens or darkens the theme color.
+  borderBottom: theme.vars ? `1px solid ${theme.vars.palette.TableCell.border}` : `1px solid
+    ${theme.palette.mode === 'light' ? lighten_1(alpha_1(theme.palette.divider, 1), 0.88) : darken_1(alpha_1(theme.palette.divider, 1), 0.68)}`,
+  textAlign: 'left',
+  padding: 16
+}, ownerState.variant === 'head' && {
+  color: (theme.vars || theme).palette.text.primary,
+  lineHeight: theme.typography.pxToRem(24),
+  fontWeight: theme.typography.fontWeightMedium
+}, ownerState.variant === 'body' && {
+  color: (theme.vars || theme).palette.text.primary
+}, ownerState.variant === 'footer' && {
+  color: (theme.vars || theme).palette.text.secondary,
+  lineHeight: theme.typography.pxToRem(21),
+  fontSize: theme.typography.pxToRem(12)
+}, ownerState.size === 'small' && {
+  padding: '6px 16px',
+  [`&.${tableCellClasses$1.paddingCheckbox}`]: {
+    width: 24,
+    // prevent the checkbox column from growing
+    padding: '0 12px 0 16px',
+    '& > *': {
+      padding: 0
+    }
+  }
+}, ownerState.padding === 'checkbox' && {
+  width: 48,
+  // prevent the checkbox column from growing
+  padding: '0 0 0 4px'
+}, ownerState.padding === 'none' && {
+  padding: 0
+}, ownerState.align === 'left' && {
+  textAlign: 'left'
+}, ownerState.align === 'center' && {
+  textAlign: 'center'
+}, ownerState.align === 'right' && {
+  textAlign: 'right',
+  flexDirection: 'row-reverse'
+}, ownerState.align === 'justify' && {
+  textAlign: 'justify'
+}, ownerState.stickyHeader && {
+  position: 'sticky',
+  top: 0,
+  zIndex: 2,
+  backgroundColor: (theme.vars || theme).palette.background.default
+}));
 
 /**
- * @ignore - internal component.
+ * The component renders a `<th>` element when the parent context is a header
+ * or otherwise a `<td>` element.
  */
-const ArrowRightIcon = createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
-  d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-}), 'ArrowRight');
+const TableCell = /*#__PURE__*/React__namespace.forwardRef(function TableCell(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTableCell'
+  });
+  const {
+      align = 'inherit',
+      className,
+      component: componentProp,
+      padding: paddingProp,
+      scope: scopeProp,
+      size: sizeProp,
+      sortDirection,
+      variant: variantProp
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$3);
+  const table = React__namespace.useContext(TableContext$1);
+  const tablelvl2 = React__namespace.useContext(Tablelvl2Context$1);
+  const isHeadCell = tablelvl2 && tablelvl2.variant === 'head';
+  let component;
+  if (componentProp) {
+    component = componentProp;
+  } else {
+    component = isHeadCell ? 'th' : 'td';
+  }
+  let scope = scopeProp;
+  // scope is not a valid attribute for <td/> elements.
+  // source: https://html.spec.whatwg.org/multipage/tables.html#the-td-element
+  if (component === 'td') {
+    scope = undefined;
+  } else if (!scope && isHeadCell) {
+    scope = 'col';
+  }
+  const variant = variantProp || tablelvl2 && tablelvl2.variant;
+  const ownerState = _extends$1({}, props, {
+    align,
+    component,
+    padding: paddingProp || (table && table.padding ? table.padding : 'normal'),
+    size: sizeProp || (table && table.size ? table.size : 'medium'),
+    sortDirection,
+    stickyHeader: variant === 'head' && table && table.stickyHeader,
+    variant
+  });
+  const classes = useUtilityClasses$3(ownerState);
+  let ariaSort = null;
+  if (sortDirection) {
+    ariaSort = sortDirection === 'asc' ? 'ascending' : 'descending';
+  }
+  return /*#__PURE__*/jsxRuntime.jsx(TableCellRoot, _extends$1({
+    as: component,
+    ref: ref,
+    className: clsx(classes.root, className),
+    "aria-sort": ariaSort,
+    scope: scope,
+    ownerState: ownerState
+  }, other));
+});
+process.env.NODE_ENV !== "production" ? TableCell.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * Set the text-align on the table cell content.
+   *
+   * Monetary or generally number fields **should be right aligned** as that allows
+   * you to add them up quickly in your head without having to worry about decimals.
+   * @default 'inherit'
+   */
+  align: PropTypes.oneOf(['center', 'inherit', 'justify', 'left', 'right']),
+  /**
+   * The content of the component.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * Sets the padding applied to the cell.
+   * The prop defaults to the value (`'default'`) inherited from the parent Table component.
+   */
+  padding: PropTypes.oneOf(['checkbox', 'none', 'normal']),
+  /**
+   * Set scope attribute.
+   */
+  scope: PropTypes.string,
+  /**
+   * Specify the size of the cell.
+   * The prop defaults to the value (`'medium'`) inherited from the parent Table component.
+   */
+  size: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['medium', 'small']), PropTypes.string]),
+  /**
+   * Set aria-sort direction.
+   */
+  sortDirection: PropTypes.oneOf(['asc', 'desc', false]),
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object]),
+  /**
+   * Specify the cell type.
+   * The prop defaults to the value inherited from the parent TableHead, TableBody, or TableFooter components.
+   */
+  variant: PropTypes /* @typescript-to-proptypes-ignore */.oneOfType([PropTypes.oneOf(['body', 'footer', 'head']), PropTypes.string])
+} : void 0;
+var TableCell$1 = TableCell;
 
-/**
- * @ignore - internal component.
- */
-createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
-  d: "M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
-}), 'Calendar');
+function getTableContainerUtilityClass(slot) {
+  return generateUtilityClass('MuiTableContainer', slot);
+}
+generateUtilityClasses('MuiTableContainer', ['root']);
 
-/**
- * @ignore - internal component.
- */
-createSvgIcon( /*#__PURE__*/jsxRuntime.jsxs(React__namespace.Fragment, {
-  children: [/*#__PURE__*/jsxRuntime.jsx("path", {
-    d: "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
-  }), /*#__PURE__*/jsxRuntime.jsx("path", {
-    d: "M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
-  })]
-}), 'Clock');
+const _excluded$2 = ["className", "component"];
+const useUtilityClasses$2 = ownerState => {
+  const {
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root']
+  };
+  return composeClasses(slots, getTableContainerUtilityClass, classes);
+};
+const TableContainerRoot = styled$1('div', {
+  name: 'MuiTableContainer',
+  slot: 'Root',
+  overridesResolver: (props, styles) => styles.root
+})({
+  width: '100%',
+  overflowX: 'auto'
+});
+const TableContainer = /*#__PURE__*/React__namespace.forwardRef(function TableContainer(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTableContainer'
+  });
+  const {
+      className,
+      component = 'div'
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$2);
+  const ownerState = _extends$1({}, props, {
+    component
+  });
+  const classes = useUtilityClasses$2(ownerState);
+  return /*#__PURE__*/jsxRuntime.jsx(TableContainerRoot, _extends$1({
+    ref: ref,
+    as: component,
+    className: clsx(classes.root, className),
+    ownerState: ownerState
+  }, other));
+});
+process.env.NODE_ENV !== "production" ? TableContainer.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the component, normally `Table`.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var TableContainer$1 = TableContainer;
 
-/**
- * @ignore - internal component.
- */
-createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
-  d: "M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"
-}), 'DateRange');
+function getTableHeadUtilityClass(slot) {
+  return generateUtilityClass('MuiTableHead', slot);
+}
+generateUtilityClasses('MuiTableHead', ['root']);
 
-/**
- * @ignore - internal component.
- */
-createSvgIcon( /*#__PURE__*/jsxRuntime.jsxs(React__namespace.Fragment, {
-  children: [/*#__PURE__*/jsxRuntime.jsx("path", {
-    d: "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
-  }), /*#__PURE__*/jsxRuntime.jsx("path", {
-    d: "M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
-  })]
-}), 'Time');
+const _excluded$1 = ["className", "component"];
+const useUtilityClasses$1 = ownerState => {
+  const {
+    classes
+  } = ownerState;
+  const slots = {
+    root: ['root']
+  };
+  return composeClasses(slots, getTableHeadUtilityClass, classes);
+};
+const TableHeadRoot = styled$1('thead', {
+  name: 'MuiTableHead',
+  slot: 'Root',
+  overridesResolver: (props, styles) => styles.root
+})({
+  display: 'table-header-group'
+});
+const tablelvl2 = {
+  variant: 'head'
+};
+const defaultComponent$1 = 'thead';
+const TableHead = /*#__PURE__*/React__namespace.forwardRef(function TableHead(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTableHead'
+  });
+  const {
+      className,
+      component = defaultComponent$1
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded$1);
+  const ownerState = _extends$1({}, props, {
+    component
+  });
+  const classes = useUtilityClasses$1(ownerState);
+  return /*#__PURE__*/jsxRuntime.jsx(Tablelvl2Context$1.Provider, {
+    value: tablelvl2,
+    children: /*#__PURE__*/jsxRuntime.jsx(TableHeadRoot, _extends$1({
+      as: component,
+      className: clsx(classes.root, className),
+      ref: ref,
+      role: component === defaultComponent$1 ? null : 'rowgroup',
+      ownerState: ownerState
+    }, other))
+  });
+});
+process.env.NODE_ENV !== "production" ? TableHead.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * The content of the component, normally `TableRow`.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var TableHead$1 = TableHead;
 
+function getTableRowUtilityClass(slot) {
+  return generateUtilityClass('MuiTableRow', slot);
+}
+const tableRowClasses = generateUtilityClasses('MuiTableRow', ['root', 'selected', 'hover', 'head', 'footer']);
+var tableRowClasses$1 = tableRowClasses;
+
+const _excluded = ["className", "component", "hover", "selected"];
+const useUtilityClasses = ownerState => {
+  const {
+    classes,
+    selected,
+    hover,
+    head,
+    footer
+  } = ownerState;
+  const slots = {
+    root: ['root', selected && 'selected', hover && 'hover', head && 'head', footer && 'footer']
+  };
+  return composeClasses(slots, getTableRowUtilityClass, classes);
+};
+const TableRowRoot = styled$1('tr', {
+  name: 'MuiTableRow',
+  slot: 'Root',
+  overridesResolver: (props, styles) => {
+    const {
+      ownerState
+    } = props;
+    return [styles.root, ownerState.head && styles.head, ownerState.footer && styles.footer];
+  }
+})(({
+  theme
+}) => ({
+  color: 'inherit',
+  display: 'table-row',
+  verticalAlign: 'middle',
+  // We disable the focus ring for mouse, touch and keyboard users.
+  outline: 0,
+  [`&.${tableRowClasses$1.hover}:hover`]: {
+    backgroundColor: (theme.vars || theme).palette.action.hover
+  },
+  [`&.${tableRowClasses$1.selected}`]: {
+    backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+    '&:hover': {
+      backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : alpha_1(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity)
+    }
+  }
+}));
+const defaultComponent = 'tr';
 /**
- * @ignore - internal component.
+ * Will automatically set dynamic row height
+ * based on the material table element parent (head, body, etc).
  */
-createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
-  d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-}), 'Clear');
+const TableRow = /*#__PURE__*/React__namespace.forwardRef(function TableRow(inProps, ref) {
+  const props = useThemeProps({
+    props: inProps,
+    name: 'MuiTableRow'
+  });
+  const {
+      className,
+      component = defaultComponent,
+      hover = false,
+      selected = false
+    } = props,
+    other = _objectWithoutPropertiesLoose(props, _excluded);
+  const tablelvl2 = React__namespace.useContext(Tablelvl2Context$1);
+  const ownerState = _extends$1({}, props, {
+    component,
+    hover,
+    selected,
+    head: tablelvl2 && tablelvl2.variant === 'head',
+    footer: tablelvl2 && tablelvl2.variant === 'footer'
+  });
+  const classes = useUtilityClasses(ownerState);
+  return /*#__PURE__*/jsxRuntime.jsx(TableRowRoot, _extends$1({
+    as: component,
+    ref: ref,
+    className: clsx(classes.root, className),
+    role: component === defaultComponent ? null : 'row',
+    ownerState: ownerState
+  }, other));
+});
+process.env.NODE_ENV !== "production" ? TableRow.propTypes /* remove-proptypes */ = {
+  // ┌────────────────────────────── Warning ──────────────────────────────┐
+  // │ These PropTypes are generated from the TypeScript type definitions. │
+  // │    To update them, edit the d.ts file and run `pnpm proptypes`.     │
+  // └─────────────────────────────────────────────────────────────────────┘
+  /**
+   * Should be valid `<tr>` children such as `TableCell`.
+   */
+  children: PropTypes.node,
+  /**
+   * Override or extend the styles applied to the component.
+   */
+  classes: PropTypes.object,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * The component used for the root node.
+   * Either a string to use a HTML element or a component.
+   */
+  component: PropTypes.elementType,
+  /**
+   * If `true`, the table row will shade on hover.
+   * @default false
+   */
+  hover: PropTypes.bool,
+  /**
+   * If `true`, the table row will have the selected shading.
+   * @default false
+   */
+  selected: PropTypes.bool,
+  /**
+   * The system prop that allows defining system overrides as well as additional CSS styles.
+   */
+  sx: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object, PropTypes.bool])), PropTypes.func, PropTypes.object])
+} : void 0;
+var TableRow$1 = TableRow;
 
 function commonjsRequire(path) {
 	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
 }
 
-var moment = {exports: {}};
+var moment$1 = {exports: {}};
 
-moment.exports;
+moment$1.exports;
 
 (function (module, exports) {
 (function (global, factory) {
@@ -20543,9 +21302,545 @@ moment.exports;
 	    return hooks;
 
 	}))); 
-} (moment, moment.exports));
+} (moment$1, moment$1.exports));
 
-moment.exports;
+var momentExports = moment$1.exports;
+var moment = /*@__PURE__*/getDefaultExportFromCjs(momentExports);
+
+var shiftStartTime = function shiftStartTime(date) {
+  return moment(date).set({
+    hours: 8,
+    minutes: 0,
+    seconds: 0,
+    milliseconds: 0
+  });
+};
+var shiftEndTime = function shiftEndTime(date) {
+  return moment(date).set({
+    hours: 23,
+    minutes: 59,
+    seconds: 59,
+    milliseconds: 999
+  });
+};
+function generateTimeSlotsForShift(date, intervalInMinutes) {
+  var startOfDay = moment(shiftStartTime(date));
+  var endOfDay = moment(shiftEndTime(date));
+  var timeSlots = [];
+  var currentTimeSlot = moment(startOfDay);
+  while (currentTimeSlot <= endOfDay) {
+    timeSlots.push(currentTimeSlot.format('hh:mm a'));
+    currentTimeSlot.add(intervalInMinutes, 'minutes');
+    if (currentTimeSlot.hours() > 23) {
+      currentTimeSlot = moment(shiftStartTime(currentTimeSlot)).add(1, 'days');
+    }
+  }
+  return timeSlots;
+}
+
+var CalendarContainer = styled$3(TableContainer$1)({
+  scrollbarWidth: 'none',
+  '&::-webkit-scrollbar': {
+    display: 'none'
+  },
+  marginTop: '8px',
+  height: 500,
+  maxHeight: 600,
+  overflowY: 'auto',
+  position: 'relative'
+});
+var Divider = styled$3(TableCell$1)({
+  border: 'none'
+});
+var Resources = styled$3(TableCell$1)({
+  left: 0,
+  position: 'sticky',
+  zIndex: 900,
+  backgroundColor: 'white',
+  minWidth: 200,
+  padding: 0,
+  borderRight: '1px solid grey'
+});
+var Resource = styled$3(TableCell$1)({
+  border: 'none',
+  width: 200
+});
+var Slots = styled$3(TableCell$1)({
+  textAlign: 'center'
+});
+
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+function ownKeys(e, r) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r && (o = o.filter(function (r) {
+      return Object.getOwnPropertyDescriptor(e, r).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread2(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+      _defineProperty(e, r, t[r]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+    });
+  }
+  return e;
+}
+function _toPrimitive(t, r) {
+  if ("object" != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != typeof i) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, "string");
+  return "symbol" == typeof i ? i : String(i);
+}
+function _defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+var WIDTH = 100;
+var HEIGHT = 65;
+
+var slotBackgroundColor = function slotBackgroundColor(theme) {
+  return {
+    primary: theme.palette.slotBg.main,
+    secondary: theme.palette.slotBg.main
+  };
+};
+var overBackgroundColor = function overBackgroundColor(theme) {
+  return {
+    primary: theme.palette.drop.main,
+    secondary: theme.palette.drop.mainTwo
+  };
+};
+var dropBackgroundColor = function dropBackgroundColor(theme) {
+  return {
+    primary: theme.palette.drop.light,
+    secondary: theme.palette.drop.lightTwo
+  };
+};
+
+var slotBg = function slotBg(canDrop, isOver, slotBackground, theme, color) {
+  var _ref = slotBackground || {},
+    dropBg = _ref.dropBg,
+    overBg = _ref.overBg;
+  var slotColor = slotBackgroundColor(theme);
+  var overColor = overBackgroundColor(theme);
+  var dropColor = dropBackgroundColor(theme);
+  var backgroundColor = slotColor[color];
+  if (canDrop && isOver) {
+    backgroundColor = dropBg || dropColor[color]; // Highlight color when canDrop and isOver
+  } else if (canDrop) {
+    backgroundColor = overBg || overColor[color]; // Color when only canDrop is true
+  }
+  return backgroundColor;
+};
+var getSlotWidth = function getSlotWidth(slotDuration) {
+  switch (slotDuration) {
+    case 15:
+      return WIDTH / 2;
+    default:
+      return WIDTH;
+  }
+};
+
+var Slot = styled$3(TableCell$1)(function (props) {
+  var _useSchedulerContext = useSchedulerContext(),
+    _useSchedulerContext$ = _useSchedulerContext.color,
+    color = _useSchedulerContext$ === void 0 ? "primary" : _useSchedulerContext$,
+    SlotProps = _useSchedulerContext.SlotProps;
+  props.index;
+    var canDrop = props.canDrop,
+    isOver = props.isOver,
+    width = props.width;
+  var _ref = SlotProps || {};
+    _ref.secondaryDuration;
+    var style = _ref.style,
+    slotBackground = _ref.slotBackground;
+  var theme = useTheme();
+  var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
+
+  // const borderRightColor = () => {
+  //   let color = theme.palette.borderRightColor.light
+  //   switch (secondaryDuration) {
+  //     case 15:
+  //       color = index % 4 !== 3 ? 
+  //       theme.palette.borderRightColor.light
+  //       : theme.palette.borderRightColor.main; 
+  //       break;
+  //     default:
+  //       color = index % 2 !== 1 ? 
+  //       theme.palette.borderRightColor.light
+  //       : theme.palette.borderRightColor.main; 
+  //       break;
+  //   }
+  //   return color;
+  // };
+
+  // const borderRightStyle = () => {
+  //   switch (secondaryDuration) {
+  //     case 15:
+  //       if (index % 2 !== 1) {
+  //         return 'none';
+  //       }
+  //       return 'solid';
+  //     default:
+  //       return 'solid';
+  //   }
+  // };
+
+  return _objectSpread2({
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+    paddingLeft: 0,
+    paddingRight: 0,
+    position: 'relative',
+    backgroundColor: bg,
+    width: width,
+    height: HEIGHT,
+    overflow: 'visible',
+    verticalAlign: 'top',
+    borderRightWidth: '1px',
+    borderRightStyle: 'solid',
+    borderRightColor: theme.palette.borderRightColor.light
+  }, style);
+});
+
+function UserTimeSlot(props) {
+  props.user;
+    props.timeSlot;
+    var index = props.index;
+  var _useSchedulerContext = useSchedulerContext();
+    _useSchedulerContext.appointmentList;
+    _useSchedulerContext.onAppointmentChange;
+    _useSchedulerContext.duration;
+    _useSchedulerContext.date;
+    var SlotProps = _useSchedulerContext.SlotProps;
+  var _ref = SlotProps || {},
+    _ref$secondaryDuratio = _ref.secondaryDuration,
+    secondaryDuration = _ref$secondaryDuratio === void 0 ? 30 : _ref$secondaryDuratio;
+
+  //   const [{ isOver, canDrop }, drop] = useDrop({
+  //     accept: 'APPOINTMENT',
+  //     drop: (appointment, monitor) => {
+  //       const droppedAppointment = appointment.appointment;
+  //       const updatedAppointments = getUpdatedAppointments(
+  //         appointmentList,
+  //         droppedAppointment,
+  //         date,
+  //         timeSlot,
+  //         duration,
+  //         user
+  //       );
+  //       onAppointmentChange(updatedAppointments);
+  //     },
+  //     collect: (monitor) => ({
+  //       isOver: monitor.isOver(),
+  //       canDrop: monitor.canDrop(),
+  //     }),
+  //   });
+
+  //   const sortedAppointments = getSortAppointments(appointmentList, user);
+  //   const concurrentAppointments = {};
+  //   let previousConcurrentCount = 0;
+  //   sortedAppointments.forEach((event, index) => {
+  //     const startDate = moment(event.schedule.startDate);
+  //     const count = sortedAppointments.reduce((acc, otherEvent, otherIndex) => {
+  //       if (
+  //         index !== otherIndex &&
+  //         moment(otherEvent.schedule.startDate).isBefore(startDate) &&
+  //         moment(otherEvent.schedule.endDate).isAfter(startDate)
+  //       ) {
+  //         return acc + 1;
+  //       }
+  //       return acc;
+  //     }, 0);
+  //     concurrentAppointments[event.id] =
+  //       count > 0 ? count + previousConcurrentCount : 0;
+  //     // Update previousConcurrentCount for the next event
+  //     previousConcurrentCount = count > 0 ? concurrentAppointments[event.id] : 0;
+  //   });
+
+  //   const filteredAppointments = getFilteredAppointments(
+  //     appointmentList,
+  //     user,
+  //     timeSlot,
+  //     date,
+  //     secondaryDuration,
+  //     concurrentAppointments
+  //   );
+
+  var width = getSlotWidth(secondaryDuration);
+  return /*#__PURE__*/React__default["default"].createElement(Slot, {
+    colSpan: 1
+    //   ref={drop}
+    ,
+    index: index
+    //   canDrop={canDrop}
+    //   isOver={isOver}
+    ,
+    width: width
+  }, /*#__PURE__*/React__default["default"].createElement("div", {
+    style: {
+      overflow: 'visible',
+      width: width
+    }
+  }));
+}
+
+function Calendar() {
+  var _useSchedulerContext = useSchedulerContext(),
+    date = _useSchedulerContext.date,
+    users = _useSchedulerContext.users,
+    SlotProps = _useSchedulerContext.SlotProps;
+  var _ref = SlotProps || {},
+    _ref$primaryDuration = _ref.primaryDuration,
+    primaryDuration = _ref$primaryDuration === void 0 ? 60 : _ref$primaryDuration,
+    secondaryDuration = _ref.secondaryDuration,
+    colSpan = _ref.colSpan;
+  var classes = useStyles();
+  var timeSlotsHead = generateTimeSlotsForShift(date, primaryDuration);
+  var timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
+  return /*#__PURE__*/React__default["default"].createElement(CalendarContainer, {
+    component: MuiPaper
+  }, /*#__PURE__*/React__default["default"].createElement(Table$1, {
+    sx: classes.table,
+    stickyHeader: true
+  }, /*#__PURE__*/React__default["default"].createElement(TableHead$1, null, /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
+    sx: {
+      overflowY: 'hidden',
+      backgroundColor: 'white',
+      position: 'sticky',
+      top: 0,
+      zIndex: 1000
+    }
+  }, /*#__PURE__*/React__default["default"].createElement(Resources, {
+    align: "left"
+  }, /*#__PURE__*/React__default["default"].createElement(Resource, null, "Users"), /*#__PURE__*/React__default["default"].createElement(Divider, null)), timeSlotsHead.map(function (slot) {
+    return /*#__PURE__*/React__default["default"].createElement(Slots, {
+      key: slot,
+      colSpan: colSpan
+    }, slot);
+  }))), /*#__PURE__*/React__default["default"].createElement(TableBody$1, null, users.map(function (user) {
+    return /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
+      key: user.name
+    }, /*#__PURE__*/React__default["default"].createElement(Resources, {
+      align: "left"
+    }, /*#__PURE__*/React__default["default"].createElement(Resource, null, user.name), /*#__PURE__*/React__default["default"].createElement(Divider, null)), timeSlotsBody.map(function (slot, index) {
+      return /*#__PURE__*/React__default["default"].createElement(UserTimeSlot, {
+        key: "".concat(user.name, "-").concat(slot),
+        index: index,
+        user: user,
+        timeSlot: slot
+      });
+    }));
+  }))));
+}
+var useStyles = function useStyles() {
+  return {
+    table: {
+      width: 900,
+      overflowX: 'auto'
+    }
+  };
+};
+
+var AppointmentPropTypes = PropTypes.shape({
+  /**
+   * Set the background color for the appointment when it is being dragged
+   */
+  dragBgColor: PropTypes.string,
+  /**
+  * You can override the styles
+  */
+  style: PropTypes.object
+});
+var AppointmentDefaultValue = {
+  dragBgColor: '#E0E0E0',
+  style: {}
+};
+
+var SlotBackgroundPropTypes = PropTypes.shape({
+  /**
+  * set background of drop, when the appointment can be drop in the slot
+  */
+  dropBg: PropTypes.string,
+  /**
+  * set background of drop, when the appointment is over the slot
+  */
+  overBg: PropTypes.string
+});
+var SlotPropTypes = PropTypes.shape({
+  /**
+  * Set the primary duration - Primary Duration is the duration in header of the scheduler
+  * @default 60
+  */
+  primaryDuration: PropTypes.number,
+  /**
+  * Set the secondary duration, Secondary Duration is the duration inside each Primary Duration
+  * @default 30
+  */
+  secondaryDuration: PropTypes.number,
+  /**
+  * colSpan should be set accordingly to secondaryDuration
+  * @default 2
+  */
+  colSpan: PropTypes.number,
+  /**
+  * component is used to wrapped the whole scheduler
+  */
+  component: PropTypes.node,
+  /**
+  * Override the style
+  */
+  style: PropTypes.object,
+  /**
+  * Override the slot background when it is to be dropped or its just over the slot
+  */
+  slotBackground: SlotBackgroundPropTypes
+});
+var SlotDefaultValues = {
+  primaryDuration: 60,
+  secondaryDuration: 30,
+  colSpan: 2,
+  component: /*#__PURE__*/React__default["default"].createElement("div", null),
+  style: PropTypes.object,
+  slotBackground: {
+    dropBg: undefined,
+    overBg: undefined
+  }
+};
+
+const ArrowDropDownIcon = createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
+  d: "M7 10l5 5 5-5z"
+}), 'ArrowDropDown');
+
+/**
+ * @ignore - internal component.
+ */
+const ArrowLeftIcon = createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
+  d: "M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
+}), 'ArrowLeft');
+
+/**
+ * @ignore - internal component.
+ */
+const ArrowRightIcon = createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
+  d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+}), 'ArrowRight');
+
+/**
+ * @ignore - internal component.
+ */
+createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
+  d: "M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"
+}), 'Calendar');
+
+/**
+ * @ignore - internal component.
+ */
+createSvgIcon( /*#__PURE__*/jsxRuntime.jsxs(React__namespace.Fragment, {
+  children: [/*#__PURE__*/jsxRuntime.jsx("path", {
+    d: "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+  }), /*#__PURE__*/jsxRuntime.jsx("path", {
+    d: "M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+  })]
+}), 'Clock');
+
+/**
+ * @ignore - internal component.
+ */
+createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
+  d: "M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"
+}), 'DateRange');
+
+/**
+ * @ignore - internal component.
+ */
+createSvgIcon( /*#__PURE__*/jsxRuntime.jsxs(React__namespace.Fragment, {
+  children: [/*#__PURE__*/jsxRuntime.jsx("path", {
+    d: "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+  }), /*#__PURE__*/jsxRuntime.jsx("path", {
+    d: "M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+  })]
+}), 'Time');
+
+/**
+ * @ignore - internal component.
+ */
+createSvgIcon( /*#__PURE__*/jsxRuntime.jsx("path", {
+  d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+}), 'Clear');
 
 function DurationPicker() {
   var _useSchedulerContext = useSchedulerContext(),
