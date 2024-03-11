@@ -82,7 +82,7 @@ const Template = (args) => {
 export const ResourceTimeline = Template.bind({});
 ResourceTimeline.args = {
   color: 'primary',
-  durationOption: [30, 60, 120],
+  durationOptions: [30, 60, 120],
   SlotProps: {
     secondaryDuration: 30,
     colSpan: 2,
