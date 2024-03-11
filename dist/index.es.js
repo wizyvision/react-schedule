@@ -51802,7 +51802,7 @@ function getFilteredAppointments(appointmentList, user, timeSlot, date, duration
   });
 }
 var getUpdatedAppointments = function getUpdatedAppointments(appointments, appointment, date, timeSlot, duration, user) {
-  var slotDate = moment(date).format('YYYY-MM-DD') + ' ' + timeSlot;
+  var slotDate = moment(date, 'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ').format('YYYY-MM-DD') + ' ' + timeSlot;
   var slotStartTime = moment(slotDate);
   var existingIndex = appointments.findIndex(function (existingAppointment) {
     return existingAppointment.id === appointment.id;
@@ -51901,19 +51901,13 @@ var getAppointmentHeight = function getAppointmentHeight(concurrentCount) {
 
 var Slot = styled$3(TableCell$1)(function (props) {
   props.index;
-    var canDrop = props.canDrop,
-    isOver = props.isOver,
+    var bg = props.bg,
     width = props.width;
   var _useSchedulerContext = useSchedulerContext(),
-    _useSchedulerContext$ = _useSchedulerContext.color,
-    color = _useSchedulerContext$ === void 0 ? "primary" : _useSchedulerContext$,
     SlotProps = _useSchedulerContext.SlotProps;
-  var _ref = SlotProps || {};
-    _ref.secondaryDuration;
-    var style = _ref.style,
-    slotBackground = _ref.slotBackground;
+  var _ref = SlotProps || {},
+    style = _ref.style;
   var theme = useTheme$1();
-  var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
   // const borderRightColor = () => {
   //   let color = theme.palette.borderRightColor.light
@@ -51998,7 +51992,6 @@ var AppointmentContainer = styled$3('div')(function (props) {
 function AppointmentItem(props) {
   var appointment = props.appointment,
     width = props.width,
-    key = props.key,
     height = props.height;
   var _useDrag = useDrag({
       type: 'APPOINTMENT',
@@ -52016,7 +52009,7 @@ function AppointmentItem(props) {
     drag = _useDrag2[1];
   var color = appointment.user.color;
   return /*#__PURE__*/React__default.createElement(AppointmentContainer, {
-    key: key,
+    key: appointment.id,
     ref: drag,
     isDragging: isDragging,
     height: height,
@@ -52059,10 +52052,13 @@ function UserTimeSlot(props) {
     onAppointmentChange = _useSchedulerContext.onAppointmentChange,
     duration = _useSchedulerContext.duration,
     date = _useSchedulerContext.date,
-    SlotProps = _useSchedulerContext.SlotProps;
+    SlotProps = _useSchedulerContext.SlotProps,
+    color = _useSchedulerContext.color;
   var _ref = SlotProps || {},
     _ref$secondaryDuratio = _ref.secondaryDuration,
-    secondaryDuration = _ref$secondaryDuratio === void 0 ? 30 : _ref$secondaryDuratio;
+    secondaryDuration = _ref$secondaryDuratio === void 0 ? 30 : _ref$secondaryDuratio,
+    slotBackground = _ref.slotBackground;
+  var theme = useTheme$1();
   var _useDrop = useDrop({
       accept: 'APPOINTMENT',
       drop: function drop(appointment, monitor) {
@@ -52099,12 +52095,12 @@ function UserTimeSlot(props) {
   });
   var filteredAppointments = getFilteredAppointments(appointmentList, user, timeSlot, date, secondaryDuration, concurrentAppointments);
   var width = getSlotWidth(secondaryDuration);
+  var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
   return /*#__PURE__*/React__default.createElement(Slot, {
     colSpan: 1,
     ref: drop,
     index: index,
-    canDrop: canDrop,
-    isOver: isOver,
+    bg: bg,
     width: width
   }, /*#__PURE__*/React__default.createElement("div", {
     style: {
