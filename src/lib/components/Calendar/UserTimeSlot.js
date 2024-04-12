@@ -43,7 +43,7 @@ function UserTimeSlot(props) {
       onAppointmentChange(updatedAppointments);
     },
     collect: (monitor) => ({
-      isOver: monitor.isOver(),
+      isOver: monitor.isOver({shallow: true}),
       canDrop: monitor.canDrop(),
     }),
   });
@@ -82,7 +82,13 @@ function UserTimeSlot(props) {
   const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
   return (
-    <Slot colSpan={1} ref={drop} index={index} bg={bg} width={width}>
+    <Slot
+      colSpan={1}
+      ref={drop}
+      index={index}
+      bg={bg}
+      width={width}
+    >
       <div style={{ overflow: 'visible', width: width }}>
         <Appointments
           appointments={filteredAppointments}

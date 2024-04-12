@@ -1,6 +1,5 @@
-import { TableCell, useTheme, lighten } from '@mui/material';
+import { TableCell, useTheme } from '@mui/material';
 import { HEIGHT } from '../../constants/appointment';
-import { slotBg } from '../../utils/getAppointmentStyle';
 import { useSchedulerContext } from '../../context/SchedulerProvider';
 import { styled } from '@mui/system';
 
@@ -46,6 +45,7 @@ const Slot = styled(TableCell)((props) => {
     paddingRight: 0,
     position: 'relative',
     backgroundColor: bg,
+    transition: bg + '0.3s ease',
     width: width,
     height: HEIGHT,
     overflow: 'visible',

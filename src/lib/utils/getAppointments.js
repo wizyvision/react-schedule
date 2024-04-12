@@ -84,3 +84,15 @@ export const getUpdatedAppointments = (
   }
   return updatedAppointments;
 };
+
+export const getAppointmentDuration = (schedule) => {
+  const startDate = moment(schedule.startDate)
+  const endDate = moment(schedule.endDate)
+  const duration = moment.duration(endDate.diff(startDate));
+  
+  if (duration.asHours() < 1) {
+    return duration.asMinutes() + ' minutes';
+  } else {
+    return duration.asHours() + ' hours';
+  }
+}
