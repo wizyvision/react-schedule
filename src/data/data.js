@@ -76,51 +76,92 @@ export const users = [
     {
         id: 0,
         name: 'John Smith',
-        color: '#b3e5fc'
+        color: '#b3e5fc',
+        groups: [1, 2]
     }, 
     {
         id: 1,
         name: 'Ferb Perry',
-        color: '#80deea'
+        color: '#80deea',
+        groups: [4, 7]
     }, 
     {
         id: 2,
         name: 'John Dela Cruz',
-        color: '#b2dfdb'
+        color: '#b2dfdb',
+        groups: [4]
     }, 
     {
         id: 3,
         name: 'Josh Cullen',
-        color: '#fff9c4'
+        color: '#fff9c4',
+        groups: [1, 7]
     }, 
     {
         id: 4,
         name: 'Maki Doe',
-        color: '#ffccbc'
+        color: '#ffccbc',
+        groups: [5]
     }, 
     {
         id: 5,
         name: 'Andre Curtis',
-        color: '#b3e5fc'
+        color: '#b3e5fc',
+        groups: [3, 6]
     }, 
     {
         id: 6,
         name: 'Vice Ganda',
-        color: '#80deea'
+        color: '#80deea',
+        groups: [2]
     }, 
     {
         id: 7,
         name: 'Kathryn Bernardo',
-        color: '#b2dfdb'
+        color: '#b2dfdb',
+        groups: [1, 7]
     }, 
     {
         id: 8,
         name: 'Sofia Andres',
-        color: '#fff9c4'
+        color: '#fff9c4',
+        groups: [4, 6]
     }, 
     {
         id: 9,
         name: 'Jericho Rosales',
-        color: '#ffccbc'
+        color: '#ffccbc',
+        groups: [3]
     }, 
+]
+
+export const groups = [
+    {
+        id: 1,
+        name: 'Quezon City'
+    },
+    {
+        id: 2,
+        name: 'Caloocan City'
+    },
+    {
+        id: 3,
+        name: 'Cavite City'
+    },
+    {
+        id: 4,
+        name: 'Mandaluyong City'
+    },
+    {
+        id: 5,
+        name: 'Paranaque City'
+    },
+    {
+        id: 6,
+        name: 'Pasig City'
+    },
+    {
+        id: 7,
+        name: 'Muntinlupa City'
+    },
 ]

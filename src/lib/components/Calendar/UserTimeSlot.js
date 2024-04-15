@@ -27,6 +27,7 @@ function UserTimeSlot(props) {
   const { secondaryDuration = 30, slotBackground } = SlotProps || {};
 
   const theme = useTheme();
+  console.log(duration)
 
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: 'APPOINTMENT',
@@ -42,11 +43,21 @@ function UserTimeSlot(props) {
       );
       onAppointmentChange(updatedAppointments);
     },
+    canDrop: () => {
+      const slotStart = moment(timeSlot, 'hh:mm a');
+      if (duration >= 60 && slotStart.isSameOrAfter(moment('11:30 pm', 'hh:mm a'))) {
+        return false; // Disallow drop
+      }
+      // Allow drop for other appointments
+      return true;
+    },
     collect: (monitor) => ({
-      isOver: monitor.isOver({shallow: true}),
+      isOver: monitor.isOver({ shallow: true }),
       canDrop: monitor.canDrop(),
     }),
   });
+
+  console.log(canDrop);
 
   const sortedAppointments = getSortAppointments(appointmentList, user);
   const concurrentAppointments = {};
@@ -82,13 +93,7 @@ function UserTimeSlot(props) {
   const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
   return (
-    <Slot
-      colSpan={1}
-      ref={drop}
-      index={index}
-      bg={bg}
-      width={width}
-    >
+    <Slot colSpan={1} ref={drop} index={index} bg={bg} width={width}>
       <div style={{ overflow: 'visible', width: width }}>
         <Appointments
           appointments={filteredAppointments}

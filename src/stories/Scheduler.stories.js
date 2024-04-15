@@ -3,7 +3,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import moment from 'moment';
 
-import { users, cases } from '../data/data';
+import { users, cases, groups } from '../data/data';
 
 import Scheduler from '../lib/components/Scheduler';
 import Events from '../components/Events';
@@ -15,6 +15,7 @@ export default {
 };
 
 const Template = (args) => {
+  const [selectedGroup, setGroup] = useState(null)
   const [appointments, setAppointments] = useState( cases.filter(
     (appointment) => appointment.user && appointment.schedule
   ))
@@ -54,6 +55,10 @@ const Template = (args) => {
     }
   };
 
+  const handleGroupChange = (event) => {
+    setGroup(event.target.value)
+  }
+
   return (
     <>
       <div>
@@ -62,6 +67,9 @@ const Template = (args) => {
             <Events unscheduledList={cases} appointmentList={appointments} />
             <Scheduler
               {...args}
+              groupId={selectedGroup}
+              groups={groups}
+              onGroupChange={handleGroupChange}
               appointmentList={appointments}
               onAppointmentChange={handleAppointmentChange}
               date={date}

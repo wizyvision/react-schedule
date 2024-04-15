@@ -6,11 +6,13 @@ const CalendarContainer = styled(TableContainer)({
   '&::-webkit-scrollbar': {
     display: 'none',
   },
-  marginTop: '8px',
+  margin: '8px',
   height: 500,
   maxHeight: 600,
+  maxWidth: 900,
   overflowY: 'auto',
   position: 'relative',
+  border: 'solid 1px rgba(0,0,0,0.5)',
 });
 
 const Divider = styled(Box)({
