@@ -28,6 +28,7 @@ const SchedulerProvider = (props) => {
     onPrevDate,
     onNextDate,
     color,
+    resourceLabel
   } = props;
 
   const locales = { en: enUS };
@@ -48,6 +49,7 @@ const SchedulerProvider = (props) => {
     SlotProps,
     AppointmentProps,
     color,
+    resourceLabel
   };
 
   return (

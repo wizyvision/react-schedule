@@ -10,6 +10,8 @@ import {
   InputLabel,
   FormControl,
   Typography,
+  Avatar,
+  darken,
 } from '@mui/material';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
@@ -26,7 +28,7 @@ import {
 import UserTimeSlot from './UserTimeSlot';
 
 function Calendar() {
-  const { date, users, SlotProps, groups, onGroupChange, groupId } =
+  const { date, users, SlotProps, groups, onGroupChange, groupId, resourceLabel } =
     useSchedulerContext();
   const { primaryDuration = 60, secondaryDuration, colSpan } = SlotProps || {};
 
@@ -36,20 +38,12 @@ function Calendar() {
   const timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
 
   const tableHead = (
-    <TableRow
-      sx={{
-        overflowY: 'hidden',
-        backgroundColor: 'white',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
-      }}
-    >
-      <Resources sx={{ paddingTop: 2, paddingBottom: 2, paddingRight: 2 }} align='left'>
+    <TableRow sx={classes.tableRow}>
+      <Resources sx={classes.resourceHead} align='left'>
         <Wrapper>
           <Resource>
-            <Typography sx={{ fontSize: '16px', fontWeight: 'bold' }}>
-              Users
+            <Typography sx={classes.resourceLabelText}>
+              {resourceLabel}
             </Typography>
           </Resource>
           <Divider></Divider>
@@ -93,7 +87,12 @@ function Calendar() {
         <TableRow key={user.name}>
           <Resources align='left'>
             <Wrapper>
-              <Resource sx={{ fontSize: '14px' }}>{user.name}</Resource>
+              <Resource sx={classes.resourceBody}>
+                <Avatar sx={classes.avatar(user.color)} variant='square'>
+                  {Array.from(user.name)[0]}
+                </Avatar>
+                {user.name}
+              </Resource>
               <Divider></Divider>
             </Wrapper>
           </Resources>
@@ -124,6 +123,33 @@ const useStyles = () => ({
     width: 900,
     overflowX: 'auto',
   },
+  resourceLabelText:{
+    fontSize: '16px', 
+    fontWeight: 'bold' 
+  },
+  tableRow: {
+    overflowY: 'hidden',
+    backgroundColor: 'white',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000,
+  },
+  resourceHead: {
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingRight: 2,
+  },
+  resourceBody: {
+    fontSize: '14px',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  avatar: (color) => ({
+    bgcolor: color,
+    marginRight: 2,
+    borderColor: darken(color, 0.25),
+    color: darken(color, 0.5),
+  }),
 });
 
 export default Calendar;

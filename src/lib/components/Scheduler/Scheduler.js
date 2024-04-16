@@ -107,6 +107,11 @@ Scheduler.propTypes = {
    * @default `primary`
    */
   color: PropTypes.string,
+   /**
+   * Color is used to change the theme of the scheduler: `primary` | `secondary`
+   * @default `"Users"`
+   */
+  resourceLabel: PropTypes.string
 };
 
 Scheduler.defaultProps = {
@@ -119,7 +124,8 @@ Scheduler.defaultProps = {
   date: Date.now(),
   color: 'primary',
   SlotProps: SlotDefaultValues,
-  AppointmentProps: AppointmentDefaultValue
+  AppointmentProps: AppointmentDefaultValue,
+  resourceLabel: 'Userss'
 };
 
 export default Scheduler;
