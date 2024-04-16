@@ -91,22 +91,23 @@ function UserTimeSlot(props) {
   );
 
   const [clickedIndex, setClickedIndex] = useState(null);
-  const handleClick = (clickedIndex) => {
-    setClickedIndex((prevIndex) => (prevIndex === 0? null : 0));
+  const handleClick = (_index) => {
+    setClickedIndex(_index);
   };
+
+  console.log(clickedIndex === index)
+  console.log(index)
 
 
   const width = getSlotWidth(secondaryDuration);
   const durationWidth = getDurationWidth(timeSlot, duration, width)
   const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
-  console.log(clickedIndex)
-
   drop(dropRef);
   return (
     <Slot colSpan={1} ref={dropRef} index={index} bg={bg} width={width}  onClick={() => handleClick(index)}>
       <div style={{ overflow: 'visible', width: width, height: '100%',}} >
-        {clickedIndex === 0 && <div style={{width: durationWidth,
+        {clickedIndex === index && <div style={{width: durationWidth,
               height: '100%',
               backgroundColor: 'red',
               position: 'absolute',
