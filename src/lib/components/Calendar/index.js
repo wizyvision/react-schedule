@@ -54,12 +54,12 @@ function Calendar() {
             <Select
               labelId='groups'
               id='groups'
-              value={groupId || 0}
+              value={groupId}
               label='Groups'
               onChange={onGroupChange}
               size='small'
             >
-              <MenuItem value={0}>All</MenuItem>
+              <MenuItem value={null}>None</MenuItem>
               {groups.map((group) => (
                 <MenuItem value={group.id}>{group.name}</MenuItem>
               ))}
