@@ -15,12 +15,22 @@ export default {
 };
 
 const Template = (args) => {
-  const [selectedGroup, setGroup] = useState(null)
-  const [appointments, setAppointments] = useState( cases.filter(
-    (appointment) => appointment.user && appointment.schedule
-  ))
+  const [selectedGroup, setGroup] = useState(null);
+  const [appointments, setAppointments] = useState(
+    cases.filter((appointment) => appointment.user && appointment.schedule)
+  );
   const [date, setDate] = useState(new Date());
   const [duration, setDuration] = useState(60);
+
+  const colors = ['red', 'blue', 'yellow', 'green', 'orange'];
+  const colorMap = {
+    red: '#ff0000',
+    blue: '#0000ff',
+    yellow: '#ffff00',
+    green: '#008000',
+    orange: '#ffa500'
+};
+
 
   const handleChangeDate = (newDate) => {
     setDate(newDate);
@@ -56,14 +66,20 @@ const Template = (args) => {
   };
 
   const handleGroupChange = (event) => {
-    setGroup(event.target.value)
-  }
+    setGroup(event.target.value);
+  };
+
+  users.forEach((user, index) => {
+    const colorIndex = index % colors.length;
+    const color = colors[colorIndex];
+    user.color = colorMap[color];
+  })
 
   return (
     <>
       <div>
         <DndProvider backend={HTML5Backend}>
-          <div style={{ display: 'flex', alignItems: 'center'}} >
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <Events unscheduledList={cases} appointmentList={appointments} />
             <Scheduler
               {...args}

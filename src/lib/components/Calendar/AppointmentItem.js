@@ -18,6 +18,7 @@ function AppointmentItem(props) {
   });
 
   const color = appointment.user.color;
+  const textColor = darken(color, 0.5)
   const duration = getAppointmentDuration(appointment.schedule);
 
   const apptItems = [
@@ -29,17 +30,17 @@ function AppointmentItem(props) {
   const tooltipMessage = <div style={classes.tooltip}>{tip}</div>;
 
   const primaryText = (
-    <div style={classes.name}>
+    <div style={{color: textColor, ...classes.name}}>
       {appointment.user.name}
-      <span style={{ color: darken(color, 0.5) }}> | </span>
+      <span style={{ color: textColor }}> | </span>
       Duration: {duration}
     </div>
   );
 
   const secondaryText = (
     <div style={classes.titleContainer}>
-      <Typography sx={classes.id}>{appointment.id}:</Typography>
-      <Typography variant='body2' sx={classes.title}>
+      <Typography sx={{color: textColor, ...classes.id}}>{appointment.id}:</Typography>
+      <Typography variant='body2'sx={{color: textColor, ...classes.title}}>
         {appointment.title}
       </Typography>
     </div>

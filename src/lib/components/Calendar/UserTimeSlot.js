@@ -27,37 +27,37 @@ function UserTimeSlot(props) {
   const { secondaryDuration = 30, slotBackground } = SlotProps || {};
 
   const theme = useTheme();
-  console.log(duration)
 
+  const dropRef = React.useRef(null);
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: 'APPOINTMENT',
     drop: (appointment, monitor) => {
-      const droppedAppointment = appointment.appointment;
-      const updatedAppointments = getUpdatedAppointments(
-        appointmentList,
-        droppedAppointment,
-        date,
-        timeSlot,
-        duration,
-        user
-      );
-      onAppointmentChange(updatedAppointments);
-    },
-    canDrop: () => {
-      const slotStart = moment(timeSlot, 'hh:mm a');
-      if (duration >= 60 && slotStart.isSameOrAfter(moment('11:30 pm', 'hh:mm a'))) {
-        return false; // Disallow drop
+      const dropTargetRect = dropRef.current.getBoundingClientRect();
+      // Get the cursor offset
+      const clientOffset = monitor.getClientOffset();
+      if (
+        clientOffset.x >= dropTargetRect.left &&
+        clientOffset.x <= dropTargetRect.right &&
+        clientOffset.y >= dropTargetRect.top &&
+        clientOffset.y <= dropTargetRect.bottom
+      ) {
+        const droppedAppointment = appointment.appointment;
+        const updatedAppointments = getUpdatedAppointments(
+          appointmentList,
+          droppedAppointment,
+          date,
+          timeSlot,
+          duration,
+          user
+        );
+        onAppointmentChange(updatedAppointments);
       }
-      // Allow drop for other appointments
-      return true;
     },
     collect: (monitor) => ({
       isOver: monitor.isOver({ shallow: true }),
       canDrop: monitor.canDrop(),
     }),
   });
-
-  console.log(canDrop);
 
   const sortedAppointments = getSortAppointments(appointmentList, user);
   const concurrentAppointments = {};
@@ -92,8 +92,9 @@ function UserTimeSlot(props) {
   const width = getSlotWidth(secondaryDuration);
   const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
+  drop(dropRef);
   return (
-    <Slot colSpan={1} ref={drop} index={index} bg={bg} width={width}>
+    <Slot colSpan={1} ref={dropRef} index={index} bg={bg} width={width}>
       <div style={{ overflow: 'visible', width: width }}>
         <Appointments
           appointments={filteredAppointments}
