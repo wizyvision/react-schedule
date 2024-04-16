@@ -7,12 +7,12 @@ const CalendarContainer = styled(TableContainer)({
     display: 'none',
   },
   margin: '8px',
+  width: '100%',
   height: 500,
   maxHeight: 600,
-  maxWidth: 900,
+  maxWidth: '-webkit-fill-available',
   overflowY: 'auto',
   position: 'relative',
-  border: 'solid 1px rgba(0,0,0,0.5)',
 });
 
 const Divider = styled(Box)({

@@ -77,9 +77,9 @@ const Template = (args) => {
 
   return (
     <>
-      <div>
+      <div >
         <DndProvider backend={HTML5Backend}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', width: '100%', overflow: 'hidden' }}>
             <Events unscheduledList={cases} appointmentList={appointments} />
             <Scheduler
               {...args}

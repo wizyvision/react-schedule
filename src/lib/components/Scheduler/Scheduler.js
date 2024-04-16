@@ -31,7 +31,7 @@ import Header from '../Header';
 const Scheduler = (props) => {
   return (
     <SchedulerProvider {...props}>
-      <div style={{ overflow: 'hidden'}} >
+      <div style={{ overflow: 'hidden', width: '100%'}} >
         <Header />
         <Calendar />
       </div>
