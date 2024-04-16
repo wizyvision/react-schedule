@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDrop } from 'react-dnd';
 import moment from 'moment';
 import { useTheme } from '@mui/material';
@@ -8,11 +8,12 @@ import {
   getSortAppointments,
   getUpdatedAppointments,
 } from '../../utils/getAppointments';
-import { getSlotWidth, slotBg } from '../../utils/getAppointmentStyle';
+import { getDurationWidth, getSlotWidth, slotBg } from '../../utils/getAppointmentStyle';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
 import Slot from '../../container/Slot';
 import Appointments from './Appointments';
+import { WIDTH } from '../../constants/appointment';
 
 function UserTimeSlot(props) {
   const { user, timeSlot, index } = props;
@@ -89,13 +90,28 @@ function UserTimeSlot(props) {
     concurrentAppointments
   );
 
+  const [clickedIndex, setClickedIndex] = useState(null);
+  const handleClick = (clickedIndex) => {
+    setClickedIndex((prevIndex) => (prevIndex === 0? null : 0));
+  };
+
+
   const width = getSlotWidth(secondaryDuration);
+  const durationWidth = getDurationWidth(timeSlot, duration, width)
   const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
+
+  console.log(clickedIndex)
 
   drop(dropRef);
   return (
-    <Slot colSpan={1} ref={dropRef} index={index} bg={bg} width={width}>
-      <div style={{ overflow: 'visible', width: width }}>
+    <Slot colSpan={1} ref={dropRef} index={index} bg={bg} width={width}  onClick={() => handleClick(index)}>
+      <div style={{ overflow: 'visible', width: width, height: '100%',}} >
+        {clickedIndex === 0 && <div style={{width: durationWidth,
+              height: '100%',
+              backgroundColor: 'red',
+              position: 'absolute',
+              top: 0,
+              left: 0,}} ></div>}
         <Appointments
           appointments={filteredAppointments}
           secondaryDuration={secondaryDuration}

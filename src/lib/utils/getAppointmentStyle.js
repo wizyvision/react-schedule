@@ -56,6 +56,19 @@ export const getAppointmentWidth = (timeSlot, start, end, duration) => {
   return width + 'px';
 };
 
+export const getDurationWidth = (timeSlot, duration, slotWidth) => {
+   // Parse the timeSlot to a moment object
+   const slotStart = moment(timeSlot, 'hh:mm a' ); // Assuming timeSlot is in 24-hour format
+
+   // Calculate the end time of the time slot based on the duration
+   const slotEnd = moment(slotStart).add(duration, 'minutes');
+ 
+   // Calculate the width based on the difference between slotStart and slotEnd
+   const totalMinutesInSlot = slotEnd.diff(slotStart, 'minutes');
+   const width = (totalMinutesInSlot / 30) * slotWidth; // Assuming slotWidth is in pixels
+   return width;
+}
+
 export const getAppointmentHeight = (concurrentCount) => {
   let height = HEIGHT;
   const computedHeight = HEIGHT - (HEIGHT_REDUCTION_CONCURRENT * concurrentCount);
