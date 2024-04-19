@@ -53326,7 +53326,7 @@ function AppointmentItem(props) {
   var color = appointment.user.color;
   var textColor = darken$1(color, 0.5);
   var duration = getAppointmentDuration(appointment.schedule);
-  var apptItems = ["".concat(appointment.id, ": ").concat(appointment.title), "".concat(appointment.user.name, " | Duration: ").concat(duration)];
+  var apptItems = ["".concat(appointment.title), "".concat(appointment.user.name, " | Duration: ").concat(duration)];
   var tip = apptItems.join('\n');
   var tooltipMessage = /*#__PURE__*/React__default.createElement("div", {
     style: classes.tooltip

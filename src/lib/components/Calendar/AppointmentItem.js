@@ -22,7 +22,7 @@ function AppointmentItem(props) {
   const duration = getAppointmentDuration(appointment.schedule);
 
   const apptItems = [
-    `${appointment.id}: ${appointment.title}`,
+    `${appointment.title}`,
     `${appointment.user.name} | Duration: ${duration}`,
   ];
   const tip = apptItems.join('\n');
