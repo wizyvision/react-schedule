@@ -53473,14 +53473,16 @@ function UserTimeSlot(props) {
   });
   var filteredAppointments = getFilteredAppointments(appointmentList, user, timeSlot, date, secondaryDuration, concurrentAppointments);
   var _useState = useState(null),
-    _useState2 = _slicedToArray(_useState, 2),
-    clickedIndex = _useState2[0],
-    setClickedIndex = _useState2[1];
+    _useState2 = _slicedToArray(_useState, 2);
+    _useState2[0];
+    var setClickedIndex = _useState2[1];
   var handleClick = function handleClick(_index) {
     setClickedIndex(_index);
   };
-  console.log(clickedIndex === index);
-  console.log(index);
+
+  // console.log(clickedIndex === index)
+  // console.log(index)
+
   var width = getSlotWidth(secondaryDuration);
   getDurationWidth(timeSlot, duration, width);
   var bg = slotBg(canDrop, isOver, slotBackground, theme, color);

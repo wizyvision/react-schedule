@@ -95,8 +95,8 @@ function UserTimeSlot(props) {
     setClickedIndex(_index);
   };
 
-  console.log(clickedIndex === index)
-  console.log(index)
+  // console.log(clickedIndex === index)
+  // console.log(index)
 
 
   const width = getSlotWidth(secondaryDuration);
