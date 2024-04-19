@@ -53224,6 +53224,18 @@ var getAppointmentWidth = function getAppointmentWidth(timeSlot, start, end, dur
   var width = appointmentDuration / totalMinutesInSlot * getSlotWidth(duration);
   return width + 'px';
 };
+var getDurationWidth = function getDurationWidth(timeSlot, duration, slotWidth) {
+  // Parse the timeSlot to a moment object
+  var slotStart = moment(timeSlot, 'hh:mm a'); // Assuming timeSlot is in 24-hour format
+
+  // Calculate the end time of the time slot based on the duration
+  var slotEnd = moment(slotStart).add(duration, 'minutes');
+
+  // Calculate the width based on the difference between slotStart and slotEnd
+  var totalMinutesInSlot = slotEnd.diff(slotStart, 'minutes');
+  var width = totalMinutesInSlot / 30 * slotWidth; // Assuming slotWidth is in pixels
+  return width;
+};
 var getAppointmentHeight = function getAppointmentHeight(concurrentCount) {
   var height = HEIGHT;
   var computedHeight = HEIGHT - HEIGHT_REDUCTION_CONCURRENT * concurrentCount;
@@ -53356,10 +53368,6 @@ function AppointmentItem(props) {
   var secondaryText = /*#__PURE__*/React__default["default"].createElement("div", {
     style: classes.titleContainer
   }, /*#__PURE__*/React__default["default"].createElement(Typography$1, {
-    sx: _objectSpread2({
-      color: textColor
-    }, classes.id)
-  }, appointment.id, ":"), /*#__PURE__*/React__default["default"].createElement(Typography$1, {
     variant: "body2",
     sx: _objectSpread2({
       color: textColor
@@ -53392,7 +53400,6 @@ var useStyles$1 = function useStyles() {
     },
     title: {
       fontWeight: 'bold',
-      marginLeft: 0.5,
       fontSize: '16px',
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',
@@ -53490,7 +53497,17 @@ function UserTimeSlot(props) {
     previousConcurrentCount = count > 0 ? concurrentAppointments[event.id] : 0;
   });
   var filteredAppointments = getFilteredAppointments(appointmentList, user, timeSlot, date, secondaryDuration, concurrentAppointments);
+  var _useState = React$1.useState(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    clickedIndex = _useState2[0],
+    setClickedIndex = _useState2[1];
+  var handleClick = function handleClick(_index) {
+    setClickedIndex(_index);
+  };
+  console.log(clickedIndex === index);
+  console.log(index);
   var width = getSlotWidth(secondaryDuration);
+  getDurationWidth(timeSlot, duration, width);
   var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
   drop(dropRef);
   return /*#__PURE__*/React__default["default"].createElement(Slot, {
@@ -53498,11 +53515,15 @@ function UserTimeSlot(props) {
     ref: dropRef,
     index: index,
     bg: bg,
-    width: width
+    width: width,
+    onClick: function onClick() {
+      return handleClick(index);
+    }
   }, /*#__PURE__*/React__default["default"].createElement("div", {
     style: {
       overflow: 'visible',
-      width: width
+      width: width,
+      height: '100%'
     }
   }, /*#__PURE__*/React__default["default"].createElement(Appointments, {
     appointments: filteredAppointments,
