@@ -39,7 +39,6 @@ function AppointmentItem(props) {
 
   const secondaryText = (
     <div style={classes.titleContainer}>
-      <Typography sx={{color: textColor, ...classes.id}}>{appointment.id}:</Typography>
       <Typography variant='body2'sx={{color: textColor, ...classes.title}}>
         {appointment.title}
       </Typography>
@@ -73,7 +72,6 @@ const useStyles = () => ({
   },
   title: {
     fontWeight: 'bold',
-    marginLeft: 0.5,
     fontSize: '16px',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',

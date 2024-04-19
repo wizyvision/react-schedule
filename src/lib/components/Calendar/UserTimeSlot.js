@@ -107,12 +107,12 @@ function UserTimeSlot(props) {
   return (
     <Slot colSpan={1} ref={dropRef} index={index} bg={bg} width={width}  onClick={() => handleClick(index)}>
       <div style={{ overflow: 'visible', width: width, height: '100%',}} >
-        {clickedIndex === index && <div style={{width: durationWidth,
+        {/* {clickedIndex === index && <div style={{width: durationWidth,
               height: '100%',
               backgroundColor: 'red',
               position: 'absolute',
               top: 0,
-              left: 0,}} ></div>}
+              left: 0,}} ></div>} */}
         <Appointments
           appointments={filteredAppointments}
           secondaryDuration={secondaryDuration}
