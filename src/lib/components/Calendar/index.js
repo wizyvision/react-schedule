@@ -59,7 +59,7 @@ function Calendar() {
               onChange={onGroupChange}
               size='small'
             >
-              <MenuItem value={null}>None</MenuItem>
+              {/* <MenuItem value={null}>None</MenuItem> */}
               {groups.map((group) => (
                 <MenuItem value={group.id}>{group.name}</MenuItem>
               ))}
@@ -75,14 +75,7 @@ function Calendar() {
     </TableRow>
   );
 
-  const userSlots = users
-    .filter((user) => {
-      if (groupId) {
-        return user.groups.includes(groupId);
-      }
-      return user;
-    })
-    .map((user) => {
+  const userSlots = users.map((user) => {
       return (
         <TableRow key={user.name}>
           <Resources align='left'>
@@ -138,6 +131,7 @@ const useStyles = () => ({
     paddingTop: 2,
     paddingBottom: 2,
     paddingRight: 2,
+    textTransform: 'capitalize'
   },
   resourceBody: {
     fontSize: '14px',

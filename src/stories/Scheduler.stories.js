@@ -15,7 +15,7 @@ export default {
 };
 
 const Template = (args) => {
-  const [selectedGroup, setGroup] = useState(null);
+  const [selectedGroup, setGroup] = useState(groups[0].id);
   const [appointments, setAppointments] = useState(
     cases.filter((appointment) => appointment.user && appointment.schedule)
   );
@@ -94,7 +94,7 @@ const Template = (args) => {
               onNextDate={handleNextDate}
               duration={duration}
               onDurationChange={handleChangeDuration}
-              users={users}
+              users={users.filter((user) => user.groups.includes(selectedGroup))}
             />
           </div>
         </DndProvider>

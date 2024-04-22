@@ -53574,9 +53574,7 @@ function Calendar() {
     label: "Groups",
     onChange: onGroupChange,
     size: "small"
-  }, /*#__PURE__*/React__default["default"].createElement(MenuItem$1, {
-    value: null
-  }, "None"), groups.map(function (group) {
+  }, groups.map(function (group) {
     return /*#__PURE__*/React__default["default"].createElement(MenuItem$1, {
       value: group.id
     }, group.name);
@@ -53586,12 +53584,7 @@ function Calendar() {
       colSpan: colSpan
     }, slot);
   }));
-  var userSlots = users.filter(function (user) {
-    if (groupId) {
-      return user.groups.includes(groupId);
-    }
-    return user;
-  }).map(function (user) {
+  var userSlots = users.map(function (user) {
     return /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
       key: user.name
     }, /*#__PURE__*/React__default["default"].createElement(Resources, {
@@ -53637,7 +53630,8 @@ var useStyles = function useStyles() {
     resourceHead: {
       paddingTop: 2,
       paddingBottom: 2,
-      paddingRight: 2
+      paddingRight: 2,
+      textTransform: 'capitalize'
     },
     resourceBody: {
       fontSize: '14px',
