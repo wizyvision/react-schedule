@@ -15,16 +15,27 @@ export function getFilteredAppointments(
   concurrentMapping
 ) {
   return appointmentList
-    .filter((appointment) => appointment.user === user)
+    .filter((appointment) => {
+      console.log('appointment.user === user', appointment.user === user)
+      return appointment.user === user
+    })
     .filter((appointment) => {
       const startDate = moment(appointment.schedule?.startDate);
 
+      console.log({startDate})
       const currentDate = moment(date);
+    console.log({currentDate})
       const slotStartTime = moment(
         `${currentDate.format('YYYY-MM-DD')} ${timeSlot}`,
         'YYYY-MM-DD hh:mm a'
       );
+      console.log({slotStartTime})
       const slotEndTime = moment(slotStartTime).add(duration, 'minutes');
+      console.log({slotEndTime})
+
+      console.log('(startDate.isSame(currentDate, day) && (startDate.isAfter(slotStartTime) || slotStartTime.isSame(startDate)) && startDate.isBefore(slotEndTime))',   startDate.isSame(currentDate, 'day') &&
+      (startDate.isAfter(slotStartTime) || slotStartTime.isSame(startDate)) &&
+      startDate.isBefore(slotEndTime) )
 
       return (
         startDate.isSame(currentDate, 'day') &&

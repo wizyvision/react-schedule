@@ -53114,13 +53114,27 @@ function getSortAppointments(appointments, user) {
 }
 function getFilteredAppointments(appointmentList, user, timeSlot, date, duration, concurrentMapping) {
   return appointmentList.filter(function (appointment) {
+    console.log('appointment.user === user', appointment.user === user);
     return appointment.user === user;
   }).filter(function (appointment) {
     var _appointment$schedule;
     var startDate = moment((_appointment$schedule = appointment.schedule) === null || _appointment$schedule === void 0 ? void 0 : _appointment$schedule.startDate);
+    console.log({
+      startDate: startDate
+    });
     var currentDate = moment(date);
+    console.log({
+      currentDate: currentDate
+    });
     var slotStartTime = moment("".concat(currentDate.format('YYYY-MM-DD'), " ").concat(timeSlot), 'YYYY-MM-DD hh:mm a');
+    console.log({
+      slotStartTime: slotStartTime
+    });
     var slotEndTime = moment(slotStartTime).add(duration, 'minutes');
+    console.log({
+      slotEndTime: slotEndTime
+    });
+    console.log('(startDate.isSame(currentDate, day) && (startDate.isAfter(slotStartTime) || slotStartTime.isSame(startDate)) && startDate.isBefore(slotEndTime))', startDate.isSame(currentDate, 'day') && (startDate.isAfter(slotStartTime) || slotStartTime.isSame(startDate)) && startDate.isBefore(slotEndTime));
     return startDate.isSame(currentDate, 'day') && (startDate.isAfter(slotStartTime) || slotStartTime.isSame(startDate)) && startDate.isBefore(slotEndTime);
   }).map(function (appointment) {
     var height = concurrentMapping[appointment.id];
