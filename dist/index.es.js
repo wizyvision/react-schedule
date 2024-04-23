@@ -53483,6 +53483,7 @@ function UserTimeSlot(props) {
   // console.log(clickedIndex === index)
   // console.log(index)
 
+  console.log(filteredAppointments);
   var width = getSlotWidth(secondaryDuration);
   getDurationWidth(timeSlot, duration, width);
   var bg = slotBg(canDrop, isOver, slotBackground, theme, color);

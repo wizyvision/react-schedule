@@ -69,6 +69,18 @@ const Template = (args) => {
     setGroup(event.target.value);
   };
 
+  const list = appointments.map((appointment) => {
+    if (appointment.title.includes(appointment.postRef)) {
+      return {
+        ...appointment,
+      };
+    }
+    return {
+      ...appointment,
+      title: `${appointment.postRef}: ${appointment.title}`,
+    };
+  });
+
   users.forEach((user, index) => {
     const colorIndex = index % colors.length;
     const color = colors[colorIndex];
@@ -86,7 +98,7 @@ const Template = (args) => {
               groupId={selectedGroup}
               groups={groups}
               onGroupChange={handleGroupChange}
-              appointmentList={appointments}
+              appointmentList={list}
               onAppointmentChange={handleAppointmentChange}
               date={date}
               onDateChange={handleChangeDate}

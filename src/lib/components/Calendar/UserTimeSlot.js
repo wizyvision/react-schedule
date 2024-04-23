@@ -99,6 +99,7 @@ function UserTimeSlot(props) {
   // console.log(index)
 
 
+  console.log(filteredAppointments)
   const width = getSlotWidth(secondaryDuration);
   const durationWidth = getDurationWidth(timeSlot, duration, width)
   const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
