@@ -81,6 +81,8 @@ function UserTimeSlot(props) {
     previousConcurrentCount = count > 0 ? concurrentAppointments[event.id] : 0;
   });
 
+  console.log({appointmentList})
+
   const filteredAppointments = getFilteredAppointments(
     appointmentList,
     user,

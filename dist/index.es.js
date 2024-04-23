@@ -53477,6 +53477,9 @@ function UserTimeSlot(props) {
     // Update previousConcurrentCount for the next event
     previousConcurrentCount = count > 0 ? concurrentAppointments[event.id] : 0;
   });
+  console.log({
+    appointmentList: appointmentList
+  });
   var filteredAppointments = getFilteredAppointments(appointmentList, user, timeSlot, date, secondaryDuration, concurrentAppointments);
   var _useState = useState(null),
     _useState2 = _slicedToArray(_useState, 2);
