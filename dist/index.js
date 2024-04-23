@@ -53425,10 +53425,16 @@ function Appointments(props) {
   var appointments = props.appointments,
     timeSlot = props.timeSlot,
     secondaryDuration = props.secondaryDuration;
+  console.log({
+    appointments: appointments
+  });
   return appointments && (appointments === null || appointments === void 0 ? void 0 : appointments.map(function (appointment) {
     var startDate = moment(appointment.schedule.startDate);
     var endDate = moment(appointment.schedule.endDate);
     var height = getAppointmentHeight(appointment.height);
+    console.log({
+      appointment: appointment
+    });
     return /*#__PURE__*/React__default["default"].createElement(AppointmentItem, {
       key: appointment.id,
       appointment: appointment,
@@ -53508,7 +53514,6 @@ function UserTimeSlot(props) {
   // console.log(clickedIndex === index)
   // console.log(index)
 
-  console.log(filteredAppointments);
   var width = getSlotWidth(secondaryDuration);
   getDurationWidth(timeSlot, duration, width);
   var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
