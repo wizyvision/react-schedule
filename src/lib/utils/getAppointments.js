@@ -2,7 +2,7 @@ import moment from 'moment';
 
 export function getSortAppointments (appointments, user){
   return appointments.filter(
-    (event) => user === event.user).sort(
+    (event) => user.id === event.user.id).sort(
     (a, b) => a.schedule?.startDate - b.schedule?.startDate)
 }
 

@@ -53106,7 +53106,7 @@ function _nonIterableRest() {
 
 function getSortAppointments(appointments, user) {
   return appointments.filter(function (event) {
-    return user === event.user;
+    return user.id === event.user.id;
   }).sort(function (a, b) {
     var _a$schedule, _b$schedule;
     return ((_a$schedule = a.schedule) === null || _a$schedule === void 0 ? void 0 : _a$schedule.startDate) - ((_b$schedule = b.schedule) === null || _b$schedule === void 0 ? void 0 : _b$schedule.startDate);
@@ -53495,9 +53495,6 @@ function UserTimeSlot(props) {
     concurrentAppointments[event.id] = count > 0 ? count + previousConcurrentCount : 0;
     // Update previousConcurrentCount for the next event
     previousConcurrentCount = count > 0 ? concurrentAppointments[event.id] : 0;
-  });
-  console.log({
-    concurrentAppointments: concurrentAppointments
   });
   var filteredAppointments = getFilteredAppointments(appointmentList, user, timeSlot, date, secondaryDuration, concurrentAppointments);
   var _useState = React$1.useState(null),
