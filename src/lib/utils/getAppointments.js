@@ -14,6 +14,7 @@ export function getFilteredAppointments(
   duration,
   concurrentMapping
 ) {
+  console.log({user})
   return appointmentList
     .filter((appointment) => {
       console.log('appointment.user === user', appointment.user === user)

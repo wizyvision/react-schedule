@@ -53113,6 +53113,9 @@ function getSortAppointments(appointments, user) {
   });
 }
 function getFilteredAppointments(appointmentList, user, timeSlot, date, duration, concurrentMapping) {
+  console.log({
+    user: user
+  });
   return appointmentList.filter(function (appointment) {
     console.log('appointment.user === user', appointment.user === user);
     return appointment.user === user;
