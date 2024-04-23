@@ -53493,6 +53493,9 @@ function UserTimeSlot(props) {
   getDurationWidth(timeSlot, duration, width);
   var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
   drop(dropRef);
+  console.log({
+    filteredAppointments: filteredAppointments
+  });
   return /*#__PURE__*/React__default.createElement(Slot, {
     colSpan: 1,
     ref: dropRef,
