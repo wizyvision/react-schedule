@@ -10,16 +10,12 @@ import AppointmentItem from './AppointmentItem';
 
 function Appointments(props) {
   const { appointments, timeSlot, secondaryDuration } = props;
-
-console.log({appointments})
   return (
     appointments &&
     appointments?.map((appointment) => {
       const startDate = moment(appointment.schedule.startDate);
       const endDate = moment(appointment.schedule.endDate);
       const height = getAppointmentHeight(appointment.height);
-
-      console.log({appointment})
 
       return (
         <AppointmentItem

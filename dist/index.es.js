@@ -53088,31 +53088,14 @@ function getSortAppointments(appointments, user) {
   });
 }
 function getFilteredAppointments(appointmentList, user, timeSlot, date, duration, concurrentMapping) {
-  console.log({
-    user: user
-  });
   return appointmentList.filter(function (appointment) {
-    console.log('appointment.user === user', appointment.user.id === user.id);
     return appointment.user.id === user.id;
   }).filter(function (appointment) {
     var _appointment$schedule;
     var startDate = moment((_appointment$schedule = appointment.schedule) === null || _appointment$schedule === void 0 ? void 0 : _appointment$schedule.startDate);
-    console.log({
-      startDate: startDate
-    });
     var currentDate = moment(date);
-    console.log({
-      currentDate: currentDate
-    });
     var slotStartTime = moment("".concat(currentDate.format('YYYY-MM-DD'), " ").concat(timeSlot), 'YYYY-MM-DD hh:mm a');
-    console.log({
-      slotStartTime: slotStartTime
-    });
     var slotEndTime = moment(slotStartTime).add(duration, 'minutes');
-    console.log({
-      slotEndTime: slotEndTime
-    });
-    console.log('(startDate.isSame(currentDate, day) && (startDate.isAfter(slotStartTime) || slotStartTime.isSame(startDate)) && startDate.isBefore(slotEndTime))', startDate.isSame(currentDate, 'day') && (startDate.isAfter(slotStartTime) || slotStartTime.isSame(startDate)) && startDate.isBefore(slotEndTime));
     return startDate.isSame(currentDate, 'day') && (startDate.isAfter(slotStartTime) || slotStartTime.isSame(startDate)) && startDate.isBefore(slotEndTime);
   }).map(function (appointment) {
     var height = concurrentMapping[appointment.id];
@@ -53417,16 +53400,10 @@ function Appointments(props) {
   var appointments = props.appointments,
     timeSlot = props.timeSlot,
     secondaryDuration = props.secondaryDuration;
-  console.log({
-    appointments: appointments
-  });
   return appointments && (appointments === null || appointments === void 0 ? void 0 : appointments.map(function (appointment) {
     var startDate = moment(appointment.schedule.startDate);
     var endDate = moment(appointment.schedule.endDate);
     var height = getAppointmentHeight(appointment.height);
-    console.log({
-      appointment: appointment
-    });
     return /*#__PURE__*/React__default.createElement(AppointmentItem, {
       key: appointment.id,
       appointment: appointment,
@@ -53513,9 +53490,6 @@ function UserTimeSlot(props) {
   getDurationWidth(timeSlot, duration, width);
   var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
   drop(dropRef);
-  console.log({
-    filteredAppointments: filteredAppointments
-  });
   return /*#__PURE__*/React__default.createElement(Slot, {
     colSpan: 1,
     ref: dropRef,

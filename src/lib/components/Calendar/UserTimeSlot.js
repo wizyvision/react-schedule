@@ -105,8 +105,6 @@ function UserTimeSlot(props) {
   const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
   drop(dropRef);
-
-  console.log({filteredAppointments})
   return (
     <Slot colSpan={1} ref={dropRef} index={index} bg={bg} width={width}  onClick={() => handleClick(index)}>
       <div style={{ overflow: 'visible', width: width, height: '100%',}} >
