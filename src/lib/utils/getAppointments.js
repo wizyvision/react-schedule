@@ -17,8 +17,8 @@ export function getFilteredAppointments(
   console.log({user})
   return appointmentList
     .filter((appointment) => {
-      console.log('appointment.user === user', appointment.user === user)
-      return appointment.user === user
+      console.log('appointment.user === user', appointment.user.id === user.id)
+      return appointment.user.id === user.id
     })
     .filter((appointment) => {
       const startDate = moment(appointment.schedule?.startDate);

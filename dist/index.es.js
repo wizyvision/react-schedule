@@ -53092,8 +53092,8 @@ function getFilteredAppointments(appointmentList, user, timeSlot, date, duration
     user: user
   });
   return appointmentList.filter(function (appointment) {
-    console.log('appointment.user === user', appointment.user === user);
-    return appointment.user === user;
+    console.log('appointment.user === user', appointment.user.id === user.id);
+    return appointment.user.id === user.id;
   }).filter(function (appointment) {
     var _appointment$schedule;
     var startDate = moment((_appointment$schedule = appointment.schedule) === null || _appointment$schedule === void 0 ? void 0 : _appointment$schedule.startDate);
