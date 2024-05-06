@@ -108,10 +108,14 @@ Scheduler.propTypes = {
    */
   color: PropTypes.string,
    /**
-   * Color is used to change the theme of the scheduler: `primary` | `secondary`
+   * Change the resource label
    * @default `"Users"`
    */
-  resourceLabel: PropTypes.string
+  resourceLabel: PropTypes.string,
+    /**
+   * Customized can drop function whether it returns true of false
+   */
+  customCanDrop: PropTypes.func,
 };
 
 Scheduler.defaultProps = {
@@ -125,7 +129,7 @@ Scheduler.defaultProps = {
   color: 'primary',
   SlotProps: SlotDefaultValues,
   AppointmentProps: AppointmentDefaultValue,
-  resourceLabel: 'Userss'
+  resourceLabel: 'Users'
 };
 
 export default Scheduler;

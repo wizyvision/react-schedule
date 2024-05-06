@@ -2,6 +2,8 @@ const WIDTH = 100
 const HEIGHT = 65;
 const MIN_HEIGHT = 35;
 
+const MIN_ROWS = 7
+
 const HEIGHT_REDUCTION_CONCURRENT = 5;
 
 export {
@@ -9,4 +11,5 @@ export {
     HEIGHT,
     MIN_HEIGHT,
     HEIGHT_REDUCTION_CONCURRENT,
+    MIN_ROWS
 }

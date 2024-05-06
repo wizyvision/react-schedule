@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Table,
   TableHead,
@@ -12,6 +12,7 @@ import {
   Typography,
   Avatar,
   darken,
+  TableCell,
 } from '@mui/material';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
@@ -26,9 +27,11 @@ import {
   Wrapper,
 } from '../../container/Calendar';
 import UserTimeSlot from './UserTimeSlot';
+import { MIN_ROWS } from '../../constants/appointment';
+import Slot from '../../container/Slot';
 
 function Calendar() {
-  const { date, users, SlotProps, groups, onGroupChange, groupId, resourceLabel } =
+  const { date, users, SlotProps, groups, onGroupChange, groupId, resourceLabel, minRows } =
     useSchedulerContext();
   const { primaryDuration = 60, secondaryDuration, colSpan } = SlotProps || {};
 
@@ -36,6 +39,17 @@ function Calendar() {
 
   const timeSlotsHead = generateTimeSlotsForShift(date, primaryDuration);
   const timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
+  const [additionalRows, setAdditionalRows] = useState(0);
+
+  const minimumRows = minRows || MIN_ROWS
+
+  useEffect(() => {
+    if (users.length <= minimumRows) {
+      setAdditionalRows(minimumRows - users.length);
+    } else {
+      setAdditionalRows(0);
+    }
+  }, [users]);
 
   const tableHead = (
     <TableRow sx={classes.tableRow}>
@@ -59,7 +73,6 @@ function Calendar() {
               onChange={onGroupChange}
               size='small'
             >
-              {/* <MenuItem value={null}>None</MenuItem> */}
               {groups.map((group) => (
                 <MenuItem value={group.id}>{group.name}</MenuItem>
               ))}
@@ -101,11 +114,30 @@ function Calendar() {
       );
     });
 
+    const additionalRowsContent = Array.from({ length: additionalRows }, (_, index) => (
+      <TableRow key={`additional-row-${index}`}>
+        {/* Additional row content */}
+        <Resources align='left'>
+            <Wrapper>
+              <Resource sx={classes.resourceBody}>
+              </Resource>
+              <Divider></Divider>
+            </Wrapper>
+          </Resources>
+          {timeSlotsBody.map((slot, index) => (
+            <Slot ></Slot>
+          ))}
+      </TableRow>
+    ));
+
   return (
-    <CalendarContainer component={Paper}>
+    <CalendarContainer>
       <Table sx={classes.table} stickyHeader>
         <TableHead>{tableHead}</TableHead>
-        <TableBody>{userSlots}</TableBody>
+        <TableBody>
+          {userSlots}
+          {additionalRowsContent}
+          </TableBody>
       </Table>
     </CalendarContainer>
   );
@@ -115,6 +147,7 @@ const useStyles = () => ({
   table: {
     width: 900,
     overflowX: 'auto',
+    height: '100%'
   },
   resourceLabelText:{
     fontSize: '16px', 

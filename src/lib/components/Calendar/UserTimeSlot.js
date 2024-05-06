@@ -24,6 +24,7 @@ function UserTimeSlot(props) {
     date,
     SlotProps,
     color,
+    customCanDrop
   } = useSchedulerContext();
   const { secondaryDuration = 30, slotBackground } = SlotProps || {};
 
@@ -32,6 +33,9 @@ function UserTimeSlot(props) {
   const dropRef = React.useRef(null);
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: 'APPOINTMENT',
+    canDrop: (appointment) => {
+      return customCanDrop ? customCanDrop(appointment) : true
+    },
     drop: (appointment, monitor) => {
       const dropTargetRect = dropRef.current.getBoundingClientRect();
       // Get the cursor offset

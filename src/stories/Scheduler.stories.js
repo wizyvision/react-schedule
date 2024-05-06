@@ -96,7 +96,7 @@ const Template = (args) => {
             <Scheduler
               {...args}
               groupId={selectedGroup}
-              groups={groups}
+              groups={[...groups, {id: null, name: 'None'}]}
               onGroupChange={handleGroupChange}
               appointmentList={list}
               onAppointmentChange={handleAppointmentChange}
@@ -106,7 +106,8 @@ const Template = (args) => {
               onNextDate={handleNextDate}
               duration={duration}
               onDurationChange={handleChangeDuration}
-              users={users.filter((user) => user.groups.includes(selectedGroup))}
+              users={users.filter((user) => selectedGroup ? user.groups.includes(selectedGroup): null)}
+              isLoading={true}
             />
           </div>
         </DndProvider>

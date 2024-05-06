@@ -8,11 +8,12 @@ const CalendarContainer = styled(TableContainer)({
   },
   margin: '8px',
   width: '100%',
-  height: 500,
-  maxHeight: 600,
+  height: '100%',
+  maxHeight: 700,
   maxWidth: '-webkit-fill-available',
   overflowY: 'auto',
   position: 'relative',
+  border: '1px solid rgba(0,0,0,0.12)'
 });
 
 const Divider = styled(Box)({
@@ -26,7 +27,7 @@ const Resources = styled(TableCell)({
   backgroundColor: 'white',
   minWidth: 200,
   padding: 0,
-  borderRight: '1px solid grey',
+  borderRight: '2px solid rgba(0,0,0,0.12)',
 });
 
 const Resource = styled(Box)({

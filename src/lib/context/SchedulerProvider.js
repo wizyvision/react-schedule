@@ -28,7 +28,9 @@ const SchedulerProvider = (props) => {
     onPrevDate,
     onNextDate,
     color,
-    resourceLabel
+    resourceLabel,
+    isLoading,
+    customCanDrop,
   } = props;
 
   const locales = { en: enUS };
@@ -49,7 +51,9 @@ const SchedulerProvider = (props) => {
     SlotProps,
     AppointmentProps,
     color,
-    resourceLabel
+    resourceLabel,
+    customCanDrop,
+    isLoading
   };
 
   return (

@@ -45356,7 +45356,9 @@ var SchedulerProvider = function SchedulerProvider(props) {
     onPrevDate = props.onPrevDate,
     onNextDate = props.onNextDate,
     color = props.color,
-    resourceLabel = props.resourceLabel;
+    resourceLabel = props.resourceLabel,
+    isLoading = props.isLoading,
+    customCanDrop = props.customCanDrop;
   var locales = {
     en: enUS
   };
@@ -45377,7 +45379,9 @@ var SchedulerProvider = function SchedulerProvider(props) {
     SlotProps: SlotProps,
     AppointmentProps: AppointmentProps,
     color: color,
-    resourceLabel: resourceLabel
+    resourceLabel: resourceLabel,
+    customCanDrop: customCanDrop,
+    isLoading: isLoading
   };
   return /*#__PURE__*/React__default["default"].createElement(DndProvider, {
     backend: HTML5Backend
@@ -45393,6 +45397,105 @@ var SchedulerProvider = function SchedulerProvider(props) {
 var useSchedulerContext = function useSchedulerContext() {
   return React$1.useContext(SchedulerContext);
 };
+
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+function ownKeys(e, r) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r && (o = o.filter(function (r) {
+      return Object.getOwnPropertyDescriptor(e, r).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread2(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+      _defineProperty(e, r, t[r]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+    });
+  }
+  return e;
+}
+function _toPrimitive(t, r) {
+  if ("object" != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != typeof i) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, "string");
+  return "symbol" == typeof i ? i : String(i);
+}
+function _defineProperty(obj, key, value) {
+  key = _toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
 
 const _excluded$8 = ["className", "elementType", "ownerState", "externalForwardedProps", "getSlotOwnerState", "internalForwardedProps"],
   _excluded2 = ["component", "slots", "slotProps"],
@@ -52973,11 +53076,12 @@ var CalendarContainer = styled$3(TableContainer$1)({
   },
   margin: '8px',
   width: '100%',
-  height: 500,
-  maxHeight: 600,
+  height: '100%',
+  maxHeight: 700,
   maxWidth: '-webkit-fill-available',
   overflowY: 'auto',
-  position: 'relative'
+  position: 'relative',
+  border: '1px solid rgba(0,0,0,0.12)'
 });
 var Divider = styled$3(Box$1)({
   border: 'none'
@@ -52989,7 +53093,7 @@ var Resources = styled$3(TableCell$1)({
   backgroundColor: 'white',
   minWidth: 200,
   padding: 0,
-  borderRight: '1px solid grey'
+  borderRight: '2px solid rgba(0,0,0,0.12)'
 });
 var Resource = styled$3(Box$1)({
   border: 'none',
@@ -53004,105 +53108,6 @@ var Wrapper = styled$3(Box$1)({
 var Slots = styled$3(TableCell$1)({
   textAlign: 'center'
 });
-
-function _iterableToArrayLimit(r, l) {
-  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (null != t) {
-    var e,
-      n,
-      i,
-      u,
-      a = [],
-      f = !0,
-      o = !1;
-    try {
-      if (i = (t = t.call(r)).next, 0 === l) {
-        if (Object(t) !== t) return;
-        f = !1;
-      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
-    } catch (r) {
-      o = !0, n = r;
-    } finally {
-      try {
-        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
-      } finally {
-        if (o) throw n;
-      }
-    }
-    return a;
-  }
-}
-function ownKeys(e, r) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r && (o = o.filter(function (r) {
-      return Object.getOwnPropertyDescriptor(e, r).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread2(e) {
-  for (var r = 1; r < arguments.length; r++) {
-    var t = null != arguments[r] ? arguments[r] : {};
-    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
-      _defineProperty(e, r, t[r]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
-      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-    });
-  }
-  return e;
-}
-function _toPrimitive(t, r) {
-  if ("object" != typeof t || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r || "default");
-    if ("object" != typeof i) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r ? String : Number)(t);
-}
-function _toPropertyKey(t) {
-  var i = _toPrimitive(t, "string");
-  return "symbol" == typeof i ? i : String(i);
-}
-function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
 
 function getSortAppointments(appointments, user) {
   return appointments.filter(function (event) {
@@ -53169,6 +53174,7 @@ var getAppointmentDuration = function getAppointmentDuration(schedule) {
 var WIDTH = 100;
 var HEIGHT = 65;
 var MIN_HEIGHT = 35;
+var MIN_ROWS = 7;
 var HEIGHT_REDUCTION_CONCURRENT = 5;
 
 var slotBackgroundColor = function slotBackgroundColor(theme) {
@@ -53448,7 +53454,8 @@ function UserTimeSlot(props) {
     duration = _useSchedulerContext.duration,
     date = _useSchedulerContext.date,
     SlotProps = _useSchedulerContext.SlotProps,
-    color = _useSchedulerContext.color;
+    color = _useSchedulerContext.color,
+    customCanDrop = _useSchedulerContext.customCanDrop;
   var _ref = SlotProps || {},
     _ref$secondaryDuratio = _ref.secondaryDuration,
     secondaryDuration = _ref$secondaryDuratio === void 0 ? 30 : _ref$secondaryDuratio,
@@ -53457,6 +53464,9 @@ function UserTimeSlot(props) {
   var dropRef = React__default["default"].useRef(null);
   var _useDrop = useDrop({
       accept: 'APPOINTMENT',
+      canDrop: function canDrop(appointment) {
+        return customCanDrop ? customCanDrop(appointment) : true;
+      },
       drop: function drop(appointment, monitor) {
         var dropTargetRect = dropRef.current.getBoundingClientRect();
         // Get the cursor offset
@@ -53542,7 +53552,8 @@ function Calendar() {
     groups = _useSchedulerContext.groups,
     onGroupChange = _useSchedulerContext.onGroupChange,
     groupId = _useSchedulerContext.groupId,
-    resourceLabel = _useSchedulerContext.resourceLabel;
+    resourceLabel = _useSchedulerContext.resourceLabel,
+    minRows = _useSchedulerContext.minRows;
   var _ref = SlotProps || {},
     _ref$primaryDuration = _ref.primaryDuration,
     primaryDuration = _ref$primaryDuration === void 0 ? 60 : _ref$primaryDuration,
@@ -53551,6 +53562,18 @@ function Calendar() {
   var classes = useStyles();
   var timeSlotsHead = generateTimeSlotsForShift(date, primaryDuration);
   var timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
+  var _useState = React$1.useState(0),
+    _useState2 = _slicedToArray(_useState, 2),
+    additionalRows = _useState2[0],
+    setAdditionalRows = _useState2[1];
+  var minimumRows = minRows || MIN_ROWS;
+  React$1.useEffect(function () {
+    if (users.length <= minimumRows) {
+      setAdditionalRows(minimumRows - users.length);
+    } else {
+      setAdditionalRows(0);
+    }
+  }, [users]);
   var tableHead = /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
     sx: classes.tableRow
   }, /*#__PURE__*/React__default["default"].createElement(Resources, {
@@ -53603,18 +53626,30 @@ function Calendar() {
       });
     }));
   });
-  return /*#__PURE__*/React__default["default"].createElement(CalendarContainer, {
-    component: Paper$1
-  }, /*#__PURE__*/React__default["default"].createElement(Table$1, {
+  var additionalRowsContent = Array.from({
+    length: additionalRows
+  }, function (_, index) {
+    return /*#__PURE__*/React__default["default"].createElement(TableRow$1, {
+      key: "additional-row-".concat(index)
+    }, /*#__PURE__*/React__default["default"].createElement(Resources, {
+      align: "left"
+    }, /*#__PURE__*/React__default["default"].createElement(Wrapper, null, /*#__PURE__*/React__default["default"].createElement(Resource, {
+      sx: classes.resourceBody
+    }), /*#__PURE__*/React__default["default"].createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
+      return /*#__PURE__*/React__default["default"].createElement(Slot, null);
+    }));
+  });
+  return /*#__PURE__*/React__default["default"].createElement(CalendarContainer, null, /*#__PURE__*/React__default["default"].createElement(Table$1, {
     sx: classes.table,
     stickyHeader: true
-  }, /*#__PURE__*/React__default["default"].createElement(TableHead$1, null, tableHead), /*#__PURE__*/React__default["default"].createElement(TableBody$1, null, userSlots)));
+  }, /*#__PURE__*/React__default["default"].createElement(TableHead$1, null, tableHead), /*#__PURE__*/React__default["default"].createElement(TableBody$1, null, userSlots, additionalRowsContent)));
 }
 var useStyles = function useStyles() {
   return {
     table: {
       width: 900,
-      overflowX: 'auto'
+      overflowX: 'auto',
+      height: '100%'
     },
     resourceLabelText: {
       fontSize: '16px',
@@ -54003,10 +54038,14 @@ Scheduler.propTypes = {
    */
   color: PropTypes.string,
   /**
-  * Color is used to change the theme of the scheduler: `primary` | `secondary`
+  * Change the resource label
   * @default `"Users"`
   */
-  resourceLabel: PropTypes.string
+  resourceLabel: PropTypes.string,
+  /**
+  * Customized can drop function whether it returns true of false
+  */
+  customCanDrop: PropTypes.func
 };
 Scheduler.defaultProps = {
   groupId: '',
@@ -54019,7 +54058,7 @@ Scheduler.defaultProps = {
   color: 'primary',
   SlotProps: SlotDefaultValues,
   AppointmentProps: AppointmentDefaultValue,
-  resourceLabel: 'Userss'
+  resourceLabel: 'Users'
 };
 
 module.exports = Scheduler;
