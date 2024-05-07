@@ -32472,6 +32472,7 @@ function Calendar() {
       });
     }));
   });
+  var width = getSlotWidth(secondaryDuration);
   var additionalRowsContent = Array.from({
     length: additionalRows
   }, function (_, index) {
@@ -32482,7 +32483,16 @@ function Calendar() {
     }, /*#__PURE__*/React__default["default"].createElement(Wrapper, null, /*#__PURE__*/React__default["default"].createElement(Resource, {
       sx: classes.resourceBody
     }), /*#__PURE__*/React__default["default"].createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
-      return /*#__PURE__*/React__default["default"].createElement(Slot, null);
+      return /*#__PURE__*/React__default["default"].createElement(Slot, {
+        key: index,
+        colSpan: 1,
+        width: width
+      }, /*#__PURE__*/React__default["default"].createElement("div", {
+        style: {
+          width: width,
+          height: '100%'
+        }
+      }, "\xA0"));
     }));
   });
   return /*#__PURE__*/React__default["default"].createElement(CalendarContainer, null, /*#__PURE__*/React__default["default"].createElement(material.Table, {

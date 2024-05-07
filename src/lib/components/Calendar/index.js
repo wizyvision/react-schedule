@@ -27,8 +27,9 @@ import {
   Wrapper,
 } from '../../container/Calendar';
 import UserTimeSlot from './UserTimeSlot';
-import { MIN_ROWS } from '../../constants/appointment';
+import { MIN_ROWS, WIDTH } from '../../constants/appointment';
 import Slot from '../../container/Slot';
+import { getSlotWidth } from '../../utils/getAppointmentStyle';
 
 function Calendar() {
   const { date, users, SlotProps, groups, onGroupChange, groupId, resourceLabel, minRows } =
@@ -114,6 +115,7 @@ function Calendar() {
       );
     });
 
+    const width = getSlotWidth(secondaryDuration)
     const additionalRowsContent = Array.from({ length: additionalRows }, (_, index) => (
       <TableRow key={`additional-row-${index}`}>
         {/* Additional row content */}
@@ -125,7 +127,9 @@ function Calendar() {
             </Wrapper>
           </Resources>
           {timeSlotsBody.map((slot, index) => (
-            <Slot ></Slot>
+            <Slot key={index} colSpan={1} width={width} >
+              <div style={{width: width, height: '100%'}}>&nbsp;</div>
+            </Slot>
           ))}
       </TableRow>
     ));
