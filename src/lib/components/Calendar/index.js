@@ -32,7 +32,7 @@ import Slot from '../../container/Slot';
 import { getSlotWidth } from '../../utils/getAppointmentStyle';
 
 function Calendar() {
-  const { date, users, SlotProps, groups, onGroupChange, groupId, resourceLabel, minRows } =
+  const { date, users, SlotProps, groups, onGroupChange, groupId, resourceLabel, minRows, isLoading } =
     useSchedulerContext();
   const { primaryDuration = 60, secondaryDuration, colSpan } = SlotProps || {};
 
@@ -119,7 +119,7 @@ function Calendar() {
     const additionalRowsContent = Array.from({ length: additionalRows }, (_, index) => (
       <TableRow key={`additional-row-${index}`}>
         {/* Additional row content */}
-        <Resources align='left'>
+        <Resources align='left'  sx={{borderBottom: isLoading && 'none'}}>
             <Wrapper>
               <Resource sx={classes.resourceBody}>
               </Resource>
@@ -127,7 +127,7 @@ function Calendar() {
             </Wrapper>
           </Resources>
           {timeSlotsBody.map((slot, index) => (
-            <Slot key={index} colSpan={1} width={width} >
+            <Slot key={index} colSpan={1} width={width}  sx={{borderBottom: isLoading && 'none'}}>
               <div style={{width: width, height: '100%'}}>&nbsp;</div>
             </Slot>
           ))}
@@ -139,7 +139,7 @@ function Calendar() {
       <Table sx={classes.table} stickyHeader>
         <TableHead>{tableHead}</TableHead>
         <TableBody>
-          {userSlots}
+          {!isLoading && userSlots}
           {additionalRowsContent}
           </TableBody>
       </Table>

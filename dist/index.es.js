@@ -32355,7 +32355,8 @@ function Calendar() {
     onGroupChange = _useSchedulerContext.onGroupChange,
     groupId = _useSchedulerContext.groupId,
     resourceLabel = _useSchedulerContext.resourceLabel,
-    minRows = _useSchedulerContext.minRows;
+    minRows = _useSchedulerContext.minRows,
+    isLoading = _useSchedulerContext.isLoading;
   var _ref = SlotProps || {},
     _ref$primaryDuration = _ref.primaryDuration,
     primaryDuration = _ref$primaryDuration === void 0 ? 60 : _ref$primaryDuration,
@@ -32435,14 +32436,20 @@ function Calendar() {
     return /*#__PURE__*/React__default.createElement(TableRow, {
       key: "additional-row-".concat(index)
     }, /*#__PURE__*/React__default.createElement(Resources, {
-      align: "left"
+      align: "left",
+      sx: {
+        borderBottom: isLoading && 'none'
+      }
     }, /*#__PURE__*/React__default.createElement(Wrapper, null, /*#__PURE__*/React__default.createElement(Resource, {
       sx: classes.resourceBody
     }), /*#__PURE__*/React__default.createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
       return /*#__PURE__*/React__default.createElement(Slot, {
         key: index,
         colSpan: 1,
-        width: width
+        width: width,
+        sx: {
+          borderBottom: isLoading && 'none'
+        }
       }, /*#__PURE__*/React__default.createElement("div", {
         style: {
           width: width,
@@ -32454,7 +32461,7 @@ function Calendar() {
   return /*#__PURE__*/React__default.createElement(CalendarContainer, null, /*#__PURE__*/React__default.createElement(Table, {
     sx: classes.table,
     stickyHeader: true
-  }, /*#__PURE__*/React__default.createElement(TableHead, null, tableHead), /*#__PURE__*/React__default.createElement(TableBody, null, userSlots, additionalRowsContent)));
+  }, /*#__PURE__*/React__default.createElement(TableHead, null, tableHead), /*#__PURE__*/React__default.createElement(TableBody, null, !isLoading && userSlots, additionalRowsContent)));
 }
 var useStyles = function useStyles() {
   return {

@@ -107,7 +107,6 @@ const Template = (args) => {
               duration={duration}
               onDurationChange={handleChangeDuration}
               users={users.filter((user) => selectedGroup ? user.groups.includes(selectedGroup): null)}
-              isLoading={true}
             />
           </div>
         </DndProvider>
