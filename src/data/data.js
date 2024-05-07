@@ -154,4 +154,8 @@ export const groups = [
         id: 7,
         name: 'Muntinlupa City'
     },
+    {
+        id: 8,
+        name: 'Somewhere'
+    },
 ]

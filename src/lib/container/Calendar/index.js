@@ -13,7 +13,8 @@ const CalendarContainer = styled(TableContainer)({
   maxWidth: '-webkit-fill-available',
   overflowY: 'auto',
   position: 'relative',
-  border: '1px solid rgba(0,0,0,0.12)'
+  border: '1px solid rgba(0,0,0,0.12)',
+  backgroundColor: '#FFFFFF'
 });
 
 const Divider = styled(Box)({

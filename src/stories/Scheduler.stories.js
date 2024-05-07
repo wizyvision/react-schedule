@@ -123,5 +123,9 @@ ResourceTimeline.args = {
   SlotProps: {
     secondaryDuration: 30,
     colSpan: 2,
+    slotBackground: {
+      dropBg: 'rgba(0,0,0,0.08)',
+      overBg: 'transparent'
+    }
   },
 };
