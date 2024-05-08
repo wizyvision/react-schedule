@@ -12,7 +12,8 @@ import { createTheme, alpha, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#ff0000'
+      main: '#ff0000',
+      
     }
   },
 });
@@ -116,6 +117,7 @@ const Template = (args) => {
               duration={duration}
               onDurationChange={handleChangeDuration}
               users={users.filter((user) => selectedGroup ? user.groups.includes(selectedGroup): null)}
+              color={theme}
             />
           </div>
         </DndProvider>

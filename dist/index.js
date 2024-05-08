@@ -32144,7 +32144,7 @@ var Slot = styled$1(material.TableCell)(function (props) {
     verticalAlign: 'top',
     borderRightWidth: '1px',
     borderRightStyle: 'solid',
-    borderRightColor: theme.palette.borderRightColor.light
+    borderRightColor: 'rgba(0, 0, 0, 0.05)'
   }, style);
 });
 

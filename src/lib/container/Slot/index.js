@@ -52,7 +52,7 @@ const Slot = styled(TableCell)((props) => {
     verticalAlign: 'top',
     borderRightWidth: '1px',
     borderRightStyle: 'solid',
-    borderRightColor: theme.palette.borderRightColor.light,
+    borderRightColor: 'rgba(0, 0, 0, 0.05)',
     // borderRightStyle: borderRightStyle(),
     ...style,
   };
