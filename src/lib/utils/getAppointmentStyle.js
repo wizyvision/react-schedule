@@ -10,17 +10,14 @@ import {
   overBackgroundColor,
 } from './theme';
 
-export const slotBg = (canDrop, isOver, slotBackground, theme, color = 'primary') => {
+export const slotBg = (canDrop, isOver, slotBackground, theme) => {
   const { dropBg, overBg } = slotBackground || {};
-
-  const overColor = overBackgroundColor(theme);
-  const dropColor = dropBackgroundColor(theme);
 
   let backgroundColor =  '#FFFFFF';
   if (canDrop && isOver) {
-    backgroundColor = dropBg || dropColor[color]; // Highlight color when canDrop and isOver
+    backgroundColor = dropBg ||  '#FFFFFF'; // Highlight color when canDrop and isOver
   } else if (canDrop) {
-    backgroundColor = overBg || overColor[color]; // Color when only canDrop is true
+    backgroundColor = overBg ||  '#FFFFFF'; // Color when only canDrop is true
   }
   return backgroundColor;
 };

@@ -32026,31 +32026,15 @@ var MIN_HEIGHT = 35;
 var MIN_ROWS = 7;
 var HEIGHT_REDUCTION_CONCURRENT = 5;
 
-var overBackgroundColor = function overBackgroundColor(theme) {
-  return {
-    primary: theme.palette.drop.main,
-    secondary: theme.palette.drop.mainTwo
-  };
-};
-var dropBackgroundColor = function dropBackgroundColor(theme) {
-  return {
-    primary: theme.palette.drop.light,
-    secondary: theme.palette.drop.lightTwo
-  };
-};
-
 var slotBg = function slotBg(canDrop, isOver, slotBackground, theme) {
-  var color = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'primary';
   var _ref = slotBackground || {},
     dropBg = _ref.dropBg,
     overBg = _ref.overBg;
-  var overColor = overBackgroundColor(theme);
-  var dropColor = dropBackgroundColor(theme);
   var backgroundColor = '#FFFFFF';
   if (canDrop && isOver) {
-    backgroundColor = dropBg || dropColor[color]; // Highlight color when canDrop and isOver
+    backgroundColor = dropBg || '#FFFFFF'; // Highlight color when canDrop and isOver
   } else if (canDrop) {
-    backgroundColor = overBg || overColor[color]; // Color when only canDrop is true
+    backgroundColor = overBg || '#FFFFFF'; // Color when only canDrop is true
   }
   return backgroundColor;
 };
@@ -32295,14 +32279,14 @@ function UserTimeSlot(props) {
     onAppointmentChange = _useSchedulerContext.onAppointmentChange,
     duration = _useSchedulerContext.duration,
     date = _useSchedulerContext.date,
-    SlotProps = _useSchedulerContext.SlotProps,
-    color = _useSchedulerContext.color,
-    customCanDrop = _useSchedulerContext.customCanDrop;
+    SlotProps = _useSchedulerContext.SlotProps;
+    _useSchedulerContext.color;
+    var customCanDrop = _useSchedulerContext.customCanDrop;
   var _ref = SlotProps || {},
     _ref$secondaryDuratio = _ref.secondaryDuration,
     secondaryDuration = _ref$secondaryDuratio === void 0 ? 30 : _ref$secondaryDuratio,
     slotBackground = _ref.slotBackground;
-  var theme = material.useTheme();
+  material.useTheme();
   var dropRef = React__default["default"].useRef(null);
   var _useDrop = useDrop({
       accept: 'APPOINTMENT',
@@ -32362,7 +32346,7 @@ function UserTimeSlot(props) {
 
   var width = getSlotWidth(secondaryDuration);
   getDurationWidth(timeSlot, duration, width);
-  var bg = slotBg(canDrop, isOver, slotBackground, theme, color);
+  var bg = slotBg(canDrop, isOver, slotBackground);
   drop(dropRef);
   return /*#__PURE__*/React__default["default"].createElement(Slot, {
     colSpan: 1,
