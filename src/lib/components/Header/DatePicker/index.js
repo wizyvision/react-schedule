@@ -84,15 +84,15 @@ function SchedulerDatePicker(props) {
       slotProps={{
         field: { setOpen },
       }}
-      // sx={{
-      //   '& .MuiPickersDay-daySelected': {
-      //     backgroundColor: theme.palette[color].main, // Use main color from theme.palette[color]
-      //     color: theme.palette[color].contrastText, // Use contrast text color from theme.palette[color]
-      //   },
-      //   '& .MuiPickersDay-daySelected:hover': {
-      //     backgroundColor: theme.palette[color].main.light, // Use light color from theme.palette[color] on hover
-      //   },
-      // }}
+      sx={{
+        '& .MuiPickersDay-daySelected': {
+          backgroundColor: theme.palette.primary.main, // Use main color from theme.palette[color]
+          color: theme.palette.primary.contrastText, // Use contrast text color from theme.palette[color]
+        },
+        '& .MuiPickersDay-daySelected:hover': {
+          backgroundColor: theme.palette.primary.main.light, // Use light color from theme.palette[color] on hover
+        },
+      }}
     />
   );
 }
