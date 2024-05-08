@@ -49,7 +49,11 @@ function DurationPicker() {
         onClick={handleButtonClick}
         sx={{
           border: 'none',
-          textTransform: 'lowercase'
+          textTransform: 'lowercase',
+          color: 'primary.main', // Default to contrast text color from theme
+          '&:hover': {
+            backgroundColor: 'primary.main.light', // Default to lighter primary color on hover
+          },
         }}
       >
         <Typography>

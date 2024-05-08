@@ -32633,14 +32633,15 @@ function ButtonField(props) {
     id: id,
     disabled: disabled,
     ref: ref,
-    "aria-label": ariaLabel
-    // sx={{
-    //   color: 'primary.main', // Default to contrast text color from theme
-    //   textTransform: 'capitalize',
-    //   '&:hover': {
-    //     backgroundColor: 'primary.main.light', // Default to lighter primary color on hover
-    //   },
-    // }}
+    "aria-label": ariaLabel,
+    sx: {
+      color: 'primary.main',
+      // Default to contrast text color from theme
+      textTransform: 'capitalize',
+      '&:hover': {
+        backgroundColor: 'primary.main.light' // Default to lighter primary color on hover
+      }
+    }
   }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
     sx: {
       textTransform: 'capitalize'
@@ -32751,7 +32752,12 @@ function DurationPicker() {
     onClick: handleButtonClick,
     sx: {
       border: 'none',
-      textTransform: 'lowercase'
+      textTransform: 'lowercase',
+      color: 'primary.main',
+      // Default to contrast text color from theme
+      '&:hover': {
+        backgroundColor: 'primary.main.light' // Default to lighter primary color on hover
+      }
     }
   }, /*#__PURE__*/React__default["default"].createElement(material.Typography, null, optionValue(duration))), /*#__PURE__*/React__default["default"].createElement(material.Menu, {
     id: "duration-options-menu",

@@ -31,13 +31,13 @@ function ButtonField(props) {
       disabled={disabled}
       ref={ref}
       aria-label={ariaLabel}
-      // sx={{
-      //   color: 'primary.main', // Default to contrast text color from theme
-      //   textTransform: 'capitalize',
-      //   '&:hover': {
-      //     backgroundColor: 'primary.main.light', // Default to lighter primary color on hover
-      //   },
-      // }}
+      sx={{
+        color: 'primary.main', // Default to contrast text color from theme
+        textTransform: 'capitalize',
+        '&:hover': {
+          backgroundColor: 'primary.main.light', // Default to lighter primary color on hover
+        },
+      }}
     >
       <Typography
         sx={{
