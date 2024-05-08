@@ -17,6 +17,8 @@ function ButtonField(props) {
     InputProps: { ref } = {},
     inputProps: { 'aria-label': ariaLabel } = {},
   } = props;
+
+  const theme = useTheme()
   // Convert the timestamp to a Date object
   const date = new Date(value);
   const handleOpen = () => {
@@ -32,11 +34,7 @@ function ButtonField(props) {
       ref={ref}
       aria-label={ariaLabel}
       sx={{
-        color: 'primary.main', // Default to contrast text color from theme
-        textTransform: 'capitalize',
-        '&:hover': {
-          backgroundColor: 'primary.main.light', // Default to lighter primary color on hover
-        },
+        color: theme.palette.primary.main, // Default to contrast text color from theme
       }}
     >
       <Typography
@@ -51,10 +49,8 @@ function ButtonField(props) {
 }
 
 function SchedulerDatePicker(props) {
-  const { date, onDateChange, color } = useSchedulerContext();
+  const { date, onDateChange } = useSchedulerContext();
   const [open, setOpen] = useState(false);
-
-  console.log(color)
 
   const theme = useTheme()
 

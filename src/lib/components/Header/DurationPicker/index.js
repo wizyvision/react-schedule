@@ -3,10 +3,11 @@ import { Typography, MenuItem, Menu, Button } from '@mui/material';
 import { ArrowDropDownIcon } from '@mui/x-date-pickers';
 
 import { useSchedulerContext } from '../../../context/SchedulerProvider';
+import { useTheme } from '@mui/system';
 
 function DurationPicker() {
   const { durationOptions, duration, onDurationChange } = useSchedulerContext();
-
+  const theme = useTheme();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const optionValue = (option) => {
@@ -35,7 +36,11 @@ function DurationPicker() {
   };
 
   const options = durationOptions?.map((option) => (
-    <MenuItem key={option} onClick={() => handleMenuItemClick(option)} value={option}>
+    <MenuItem
+      key={option}
+      onClick={() => handleMenuItemClick(option)}
+      value={option}
+    >
       {optionValue(option)}
     </MenuItem>
   ));
@@ -50,15 +55,10 @@ function DurationPicker() {
         sx={{
           border: 'none',
           textTransform: 'lowercase',
-          color: 'primary.main', // Default to contrast text color from theme
-          '&:hover': {
-            backgroundColor: 'primary.main.light', // Default to lighter primary color on hover
-          },
+          color: theme.palette.primary.main, // Default to contrast text color from theme
         }}
       >
-        <Typography>
-        {optionValue(duration)}
-        </Typography>
+        <Typography>{optionValue(duration)}</Typography>
       </Button>
       <Menu
         id='duration-options-menu'

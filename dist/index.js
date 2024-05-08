@@ -32620,6 +32620,7 @@ function ButtonField(props) {
     _props$inputProps = props.inputProps,
     _props$inputProps2 = _props$inputProps === void 0 ? {} : _props$inputProps,
     ariaLabel = _props$inputProps2['aria-label'];
+  var theme = useTheme();
   // Convert the timestamp to a Date object
   var date = new Date(value);
   var handleOpen = function handleOpen() {
@@ -32635,12 +32636,7 @@ function ButtonField(props) {
     ref: ref,
     "aria-label": ariaLabel,
     sx: {
-      color: 'primary.main',
-      // Default to contrast text color from theme
-      textTransform: 'capitalize',
-      '&:hover': {
-        backgroundColor: 'primary.main.light' // Default to lighter primary color on hover
-      }
+      color: theme.palette.primary.main // Default to contrast text color from theme
     }
   }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
     sx: {
@@ -32651,13 +32647,11 @@ function ButtonField(props) {
 function SchedulerDatePicker(props) {
   var _useSchedulerContext = useSchedulerContext(),
     date = _useSchedulerContext.date,
-    onDateChange = _useSchedulerContext.onDateChange,
-    color = _useSchedulerContext.color;
+    onDateChange = _useSchedulerContext.onDateChange;
   var _useState = React.useState(false),
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
     setOpen = _useState2[1];
-  console.log(color);
   var theme = useTheme();
   var handleOpen = function handleOpen() {
     setOpen(true);
@@ -32701,6 +32695,7 @@ function DurationPicker() {
     durationOptions = _useSchedulerContext.durationOptions,
     duration = _useSchedulerContext.duration,
     onDurationChange = _useSchedulerContext.onDurationChange;
+  var theme = useTheme();
   var _useState = React.useState(null),
     _useState2 = _slicedToArray(_useState, 2),
     anchorEl = _useState2[0],
@@ -32753,11 +32748,7 @@ function DurationPicker() {
     sx: {
       border: 'none',
       textTransform: 'lowercase',
-      color: 'primary.main',
-      // Default to contrast text color from theme
-      '&:hover': {
-        backgroundColor: 'primary.main.light' // Default to lighter primary color on hover
-      }
+      color: theme.palette.primary.main // Default to contrast text color from theme
     }
   }, /*#__PURE__*/React__default["default"].createElement(material.Typography, null, optionValue(duration))), /*#__PURE__*/React__default["default"].createElement(material.Menu, {
     id: "duration-options-menu",
