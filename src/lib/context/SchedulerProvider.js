@@ -1,5 +1,5 @@
-import { ThemeProvider } from '@emotion/react';
 import React, { useContext, createContext } from 'react';
+import { ThemeProvider } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { enUS } from 'date-fns/locale';
 import { LocalizationProvider } from '@mui/x-date-pickers';

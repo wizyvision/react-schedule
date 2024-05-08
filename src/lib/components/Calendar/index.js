@@ -10,6 +10,7 @@ import {
   FormControl,
   Typography,
   Avatar,
+  darken,
 } from '@mui/material';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
@@ -105,8 +106,8 @@ function Calendar() {
                 sx={{
                   bgcolor: user.color,
                   marginRight: 2,
-                  borderColor: user.color,
-                  color: user.color,
+                  borderColor: darken(user.color, 0.35),
+                  color: darken(user.color, 0.5),
                 }}
                 variant='square'
               >

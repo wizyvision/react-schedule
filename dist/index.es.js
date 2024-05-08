@@ -1,10 +1,10 @@
 import * as React from 'react';
 import React__default, { Children, isValidElement, cloneElement, createContext, memo, useEffect, useLayoutEffect, useState, useCallback, useMemo, useContext } from 'react';
-import { ThemeContext, ThemeProvider } from '@emotion/react';
+import { ThemeProvider, TableContainer, Box, TableCell, useTheme as useTheme$3, darken as darken$1, Typography as Typography$1, Tooltip, ListItemText, TableRow, FormControl, InputLabel, Select, MenuItem, Avatar, Table, TableHead, TableBody, Button as Button$1, Menu, IconButton as IconButton$1 } from '@mui/material';
 import { useThemeProps, styled as styled$3, useTheme as useTheme$2, alpha, createTheme as createTheme$1 } from '@mui/material/styles';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { TableContainer, Box, TableCell, useTheme as useTheme$3, darken as darken$1, Typography as Typography$1, Tooltip, ListItemText, TableRow, FormControl, InputLabel, Select, MenuItem, Avatar, Table, TableHead, TableBody, Button as Button$1, Menu, IconButton as IconButton$1 } from '@mui/material';
 import emStyled from '@emotion/styled';
+import { ThemeContext } from '@emotion/react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import { createSvgIcon } from '@mui/material/utils';
@@ -32401,8 +32401,8 @@ function Calendar() {
       sx: {
         bgcolor: user.color,
         marginRight: 2,
-        borderColor: user.color,
-        color: user.color
+        borderColor: darken$1(user.color, 0.35),
+        color: darken$1(user.color, 0.5)
       },
       variant: "square"
     }, Array.from(user.name)[0]), user.name), /*#__PURE__*/React__default.createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {

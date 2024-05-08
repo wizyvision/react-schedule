@@ -1,11 +1,11 @@
 'use strict';
 
 var React = require('react');
-var react = require('@emotion/react');
+var material = require('@mui/material');
 var styles = require('@mui/material/styles');
 var jsxRuntime = require('react/jsx-runtime');
-var material = require('@mui/material');
 var emStyled = require('@emotion/styled');
+var react = require('@emotion/react');
 var useMediaQuery = require('@mui/material/useMediaQuery');
 var Typography = require('@mui/material/Typography');
 var utils = require('@mui/material/utils');
@@ -26182,7 +26182,7 @@ var SchedulerProvider = function SchedulerProvider(props) {
     backend: HTML5Backend
   }, /*#__PURE__*/React__default["default"].createElement(SchedulerContext.Provider, {
     value: value
-  }, /*#__PURE__*/React__default["default"].createElement(react.ThemeProvider, {
+  }, /*#__PURE__*/React__default["default"].createElement(material.ThemeProvider, {
     theme: color || theme
   }, /*#__PURE__*/React__default["default"].createElement(LocalizationProvider, {
     dateAdapter: AdapterDateFns,
@@ -32445,8 +32445,8 @@ function Calendar() {
       sx: {
         bgcolor: user.color,
         marginRight: 2,
-        borderColor: user.color,
-        color: user.color
+        borderColor: material.darken(user.color, 0.35),
+        color: material.darken(user.color, 0.5)
       },
       variant: "square"
     }, Array.from(user.name)[0]), user.name), /*#__PURE__*/React__default["default"].createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
