@@ -32401,8 +32401,8 @@ function Calendar() {
       sx: {
         bgcolor: user.color,
         marginRight: 2,
-        borderColor: darken$1(user.color, 0.25),
-        color: darken$1(user.color, 0.5)
+        borderColor: user.color,
+        color: user.color
       },
       variant: "square"
     }, Array.from(user.name)[0]), user.name), /*#__PURE__*/React__default.createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {

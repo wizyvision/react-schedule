@@ -4,15 +4,12 @@ import {
   TableHead,
   TableRow,
   TableBody,
-  Paper,
   Select,
   MenuItem,
   InputLabel,
   FormControl,
   Typography,
   Avatar,
-  darken,
-  TableCell,
 } from '@mui/material';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
@@ -108,8 +105,8 @@ function Calendar() {
                 sx={{
                   bgcolor: user.color,
                   marginRight: 2,
-                  borderColor: darken(user.color, 0.25),
-                  color: darken(user.color, 0.5),
+                  borderColor: user.color,
+                  color: user.color,
                 }}
                 variant='square'
               >
