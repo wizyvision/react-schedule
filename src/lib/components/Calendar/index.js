@@ -115,7 +115,7 @@ function Calendar() {
                   borderRadius: '2px'
                 }}
               >
-                <Typography variant='body1' sx={{ color: darken(user.color, 0.5) }}>
+                <Typography variant='body1' sx={{ color: darken(user.color, 0.5), fontSize: '16px', fontWeight: '600' }}>
                   {Array.from(user.name)[0]}
                 </Typography>
               </Box>

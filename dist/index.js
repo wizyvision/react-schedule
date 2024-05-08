@@ -32456,7 +32456,9 @@ function Calendar() {
     }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
       variant: "body1",
       sx: {
-        color: material.darken(user.color, 0.5)
+        color: material.darken(user.color, 0.5),
+        fontSize: '16px',
+        fontWeight: '600'
       }
     }, Array.from(user.name)[0])), user.name), /*#__PURE__*/React__default["default"].createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
       return /*#__PURE__*/React__default["default"].createElement(UserTimeSlot, {
