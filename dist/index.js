@@ -32651,7 +32651,8 @@ function ButtonField(props) {
 function SchedulerDatePicker(props) {
   var _useSchedulerContext = useSchedulerContext(),
     date = _useSchedulerContext.date,
-    onDateChange = _useSchedulerContext.onDateChange;
+    onDateChange = _useSchedulerContext.onDateChange,
+    color = _useSchedulerContext.color;
   var _useState = React.useState(false),
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
@@ -32683,12 +32684,12 @@ function SchedulerDatePicker(props) {
     },
     sx: {
       '& .MuiPickersDay-daySelected': {
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette[color].main,
         // Use main color from theme.palette[color]
-        color: theme.palette.primary.contrastText // Use contrast text color from theme.palette[color]
+        color: theme.palette[color].contrastText // Use contrast text color from theme.palette[color]
       },
       '& .MuiPickersDay-daySelected:hover': {
-        backgroundColor: theme.palette.primary.main.light // Use light color from theme.palette[color] on hover
+        backgroundColor: theme.palette[color].main.light // Use light color from theme.palette[color] on hover
       }
     }
   });

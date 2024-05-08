@@ -51,7 +51,7 @@ function ButtonField(props) {
 }
 
 function SchedulerDatePicker(props) {
-  const { date, onDateChange } = useSchedulerContext();
+  const { date, onDateChange, color } = useSchedulerContext();
   const [open, setOpen] = useState(false);
 
   const theme = useTheme()
@@ -84,11 +84,11 @@ function SchedulerDatePicker(props) {
       }}
       sx={{
         '& .MuiPickersDay-daySelected': {
-          backgroundColor: theme.palette.primary.main, // Use main color from theme.palette[color]
-          color: theme.palette.primary.contrastText, // Use contrast text color from theme.palette[color]
+          backgroundColor: theme.palette[color].main, // Use main color from theme.palette[color]
+          color: theme.palette[color].contrastText, // Use contrast text color from theme.palette[color]
         },
         '& .MuiPickersDay-daySelected:hover': {
-          backgroundColor: theme.palette.primary.main.light, // Use light color from theme.palette[color] on hover
+          backgroundColor: theme.palette[color].main.light, // Use light color from theme.palette[color] on hover
         },
       }}
     />
