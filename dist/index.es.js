@@ -32593,7 +32593,15 @@ function ButtonField(props) {
     id: id,
     disabled: disabled,
     ref: ref,
-    "aria-label": ariaLabel
+    "aria-label": ariaLabel,
+    sx: {
+      color: 'primary.main',
+      // Default to contrast text color from theme
+      textTransform: 'capitalize',
+      '&:hover': {
+        backgroundColor: 'primary.main.light' // Default to lighter primary color on hover
+      }
+    }
   }, /*#__PURE__*/React__default.createElement(Typography$1, {
     sx: {
       textTransform: 'capitalize'
@@ -32608,6 +32616,7 @@ function SchedulerDatePicker(props) {
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
     setOpen = _useState2[1];
+  var theme = useTheme();
   var handleOpen = function handleOpen() {
     setOpen(true);
   };
@@ -32630,6 +32639,16 @@ function SchedulerDatePicker(props) {
     slotProps: {
       field: {
         setOpen: setOpen
+      }
+    },
+    sx: {
+      '& .MuiPickersDay-daySelected': {
+        backgroundColor: theme.palette.primary.main,
+        // Use main color from theme.palette[color]
+        color: theme.palette.primary.contrastText // Use contrast text color from theme.palette[color]
+      },
+      '& .MuiPickersDay-daySelected:hover': {
+        backgroundColor: theme.palette.primary.main.light // Use light color from theme.palette[color] on hover
       }
     }
   });
