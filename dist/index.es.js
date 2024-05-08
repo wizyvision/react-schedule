@@ -26,6 +26,105 @@ import Chip from '@mui/material/Chip';
 import DialogContent from '@mui/material/DialogContent';
 import MuiDialog, { dialogClasses } from '@mui/material/Dialog';
 
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+function ownKeys(e, r) {
+  var t = Object.keys(e);
+  if (Object.getOwnPropertySymbols) {
+    var o = Object.getOwnPropertySymbols(e);
+    r && (o = o.filter(function (r) {
+      return Object.getOwnPropertyDescriptor(e, r).enumerable;
+    })), t.push.apply(t, o);
+  }
+  return t;
+}
+function _objectSpread2(e) {
+  for (var r = 1; r < arguments.length; r++) {
+    var t = null != arguments[r] ? arguments[r] : {};
+    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+      _defineProperty$5(e, r, t[r]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+    });
+  }
+  return e;
+}
+function _toPrimitive(t, r) {
+  if ("object" != typeof t || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != typeof i) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+function _toPropertyKey(t) {
+  var i = _toPrimitive(t, "string");
+  return "symbol" == typeof i ? i : String(i);
+}
+function _defineProperty$5(obj, key, value) {
+  key = _toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function getDefaultExportFromCjs (x) {
@@ -22803,7 +22902,7 @@ function getDraggableSource(sourceIds, monitor) {
     return sourceId;
 }
 
-function _defineProperty$5(obj, key, value) {
+function _defineProperty$4(obj, key, value) {
     if (key in obj) {
         Object.defineProperty(obj, key, {
             value: value,
@@ -22826,7 +22925,7 @@ function _objectSpread$4(target) {
             }));
         }
         ownKeys.forEach(function(key) {
-            _defineProperty$5(target, key, source[key]);
+            _defineProperty$4(target, key, source[key]);
         });
     }
     return target;
@@ -23758,7 +23857,7 @@ _state = NONE, action) {
     return result;
 }
 
-function _defineProperty$4(obj, key, value) {
+function _defineProperty$3(obj, key, value) {
     if (key in obj) {
         Object.defineProperty(obj, key, {
             value: value,
@@ -23781,7 +23880,7 @@ function _objectSpread$3(target) {
             }));
         }
         ownKeys.forEach(function(key) {
-            _defineProperty$4(target, key, source[key]);
+            _defineProperty$3(target, key, source[key]);
         });
     }
     return target;
@@ -23816,7 +23915,7 @@ function reduce$4(state = initialState$1, action) {
     }
 }
 
-function _defineProperty$3(obj, key, value) {
+function _defineProperty$2(obj, key, value) {
     if (key in obj) {
         Object.defineProperty(obj, key, {
             value: value,
@@ -23839,7 +23938,7 @@ function _objectSpread$2(target) {
             }));
         }
         ownKeys.forEach(function(key) {
-            _defineProperty$3(target, key, source[key]);
+            _defineProperty$2(target, key, source[key]);
         });
     }
     return target;
@@ -23918,7 +24017,7 @@ function reduce$1(state = 0) {
     return state + 1;
 }
 
-function _defineProperty$2(obj, key, value) {
+function _defineProperty$1(obj, key, value) {
     if (key in obj) {
         Object.defineProperty(obj, key, {
             value: value,
@@ -23941,7 +24040,7 @@ function _objectSpread$1(target) {
             }));
         }
         ownKeys.forEach(function(key) {
-            _defineProperty$2(target, key, source[key]);
+            _defineProperty$1(target, key, source[key]);
         });
     }
     return target;
@@ -25097,11 +25196,11 @@ const TEXT = '__NATIVE_TEXT__';
 const HTML = '__NATIVE_HTML__';
 
 var NativeTypes = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	FILE: FILE,
-	URL: URL,
-	TEXT: TEXT,
-	HTML: HTML
+  __proto__: null,
+  FILE: FILE,
+  URL: URL,
+  TEXT: TEXT,
+  HTML: HTML
 });
 
 function getDataFromDataTransfer(dataTransfer, typesToTry, defaultValue) {
@@ -25398,7 +25497,7 @@ class OptionsReader {
     }
 }
 
-function _defineProperty$1(obj, key, value) {
+function _defineProperty(obj, key, value) {
     if (key in obj) {
         Object.defineProperty(obj, key, {
             value: value,
@@ -25421,7 +25520,7 @@ function _objectSpread(target) {
             }));
         }
         ownKeys.forEach(function(key) {
-            _defineProperty$1(target, key, source[key]);
+            _defineProperty(target, key, source[key]);
         });
     }
     return target;
@@ -26040,7 +26139,7 @@ var SchedulerProvider = function SchedulerProvider(props) {
   }, /*#__PURE__*/React__default.createElement(SchedulerContext.Provider, {
     value: value
   }, /*#__PURE__*/React__default.createElement(ThemeProvider, {
-    theme: theme
+    theme: color || theme
   }, /*#__PURE__*/React__default.createElement(LocalizationProvider, {
     dateAdapter: AdapterDateFns,
     adapterLocale: locales['en']
@@ -26049,105 +26148,6 @@ var SchedulerProvider = function SchedulerProvider(props) {
 var useSchedulerContext = function useSchedulerContext() {
   return useContext(SchedulerContext);
 };
-
-function _iterableToArrayLimit(r, l) {
-  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (null != t) {
-    var e,
-      n,
-      i,
-      u,
-      a = [],
-      f = !0,
-      o = !1;
-    try {
-      if (i = (t = t.call(r)).next, 0 === l) {
-        if (Object(t) !== t) return;
-        f = !1;
-      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
-    } catch (r) {
-      o = !0, n = r;
-    } finally {
-      try {
-        if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return;
-      } finally {
-        if (o) throw n;
-      }
-    }
-    return a;
-  }
-}
-function ownKeys(e, r) {
-  var t = Object.keys(e);
-  if (Object.getOwnPropertySymbols) {
-    var o = Object.getOwnPropertySymbols(e);
-    r && (o = o.filter(function (r) {
-      return Object.getOwnPropertyDescriptor(e, r).enumerable;
-    })), t.push.apply(t, o);
-  }
-  return t;
-}
-function _objectSpread2(e) {
-  for (var r = 1; r < arguments.length; r++) {
-    var t = null != arguments[r] ? arguments[r] : {};
-    r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
-      _defineProperty(e, r, t[r]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
-      Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
-    });
-  }
-  return e;
-}
-function _toPrimitive(t, r) {
-  if ("object" != typeof t || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r || "default");
-    if ("object" != typeof i) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r ? String : Number)(t);
-}
-function _toPropertyKey(t) {
-  var i = _toPrimitive(t, "string");
-  return "symbol" == typeof i ? i : String(i);
-}
-function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
 
 function commonjsRequire(path) {
 	throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
@@ -32209,7 +32209,7 @@ var useStyles$1 = function useStyles() {
       whiteSpace: 'nowrap',
       overflow: 'hidden'
     },
-    id: _defineProperty(_defineProperty({
+    id: _defineProperty$5(_defineProperty$5({
       fontSize: '400'
     }, "fontSize", '16px'), "whiteSpace", 'nowrap'),
     name: {
@@ -32589,15 +32589,14 @@ function ButtonField(props) {
     id: id,
     disabled: disabled,
     ref: ref,
-    "aria-label": ariaLabel,
-    sx: {
-      color: 'primary.main',
-      // Default to contrast text color from theme
-      textTransform: 'capitalize',
-      '&:hover': {
-        backgroundColor: 'primary.main.light' // Default to lighter primary color on hover
-      }
-    }
+    "aria-label": ariaLabel
+    // sx={{
+    //   color: 'primary.main', // Default to contrast text color from theme
+    //   textTransform: 'capitalize',
+    //   '&:hover': {
+    //     backgroundColor: 'primary.main.light', // Default to lighter primary color on hover
+    //   },
+    // }}
   }, /*#__PURE__*/React__default.createElement(Typography$1, {
     sx: {
       textTransform: 'capitalize'
@@ -32613,7 +32612,8 @@ function SchedulerDatePicker(props) {
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
     setOpen = _useState2[1];
-  var theme = useTheme();
+  console.log(color);
+  useTheme();
   var handleOpen = function handleOpen() {
     setOpen(true);
   };
@@ -32637,17 +32637,16 @@ function SchedulerDatePicker(props) {
       field: {
         setOpen: setOpen
       }
-    },
-    sx: {
-      '& .MuiPickersDay-daySelected': {
-        backgroundColor: theme.palette[color].main,
-        // Use main color from theme.palette[color]
-        color: theme.palette[color].contrastText // Use contrast text color from theme.palette[color]
-      },
-      '& .MuiPickersDay-daySelected:hover': {
-        backgroundColor: theme.palette[color].main.light // Use light color from theme.palette[color] on hover
-      }
     }
+    // sx={{
+    //   '& .MuiPickersDay-daySelected': {
+    //     backgroundColor: theme.palette[color].main, // Use main color from theme.palette[color]
+    //     color: theme.palette[color].contrastText, // Use contrast text color from theme.palette[color]
+    //   },
+    //   '& .MuiPickersDay-daySelected:hover': {
+    //     backgroundColor: theme.palette[color].main.light, // Use light color from theme.palette[color] on hover
+    //   },
+    // }}
   });
 }
 
@@ -32872,7 +32871,7 @@ Scheduler.propTypes = {
    * Color is used to change the theme of the scheduler: `primary` | `secondary`
    * @default `primary`
    */
-  color: PropTypes.string,
+  color: PropTypes.object,
   /**
   * Change the resource label
   * @default `"Users"`
@@ -32891,7 +32890,7 @@ Scheduler.defaultProps = {
   durationOptions: [30, 60, 120],
   duration: 60,
   date: Date.now(),
-  color: 'primary',
+  color: _objectSpread2({}, theme),
   SlotProps: SlotDefaultValues,
   AppointmentProps: AppointmentDefaultValue,
   resourceLabel: 'Users'

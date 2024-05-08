@@ -7,6 +7,15 @@ import { users, cases, groups } from '../data/data';
 
 import Scheduler from '../lib/components/Scheduler';
 import Events from '../components/Events';
+import { createTheme, alpha, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#ff0000'
+    }
+  },
+});
 
 export default {
   title: 'Scheduler',
@@ -88,7 +97,7 @@ const Template = (args) => {
   })
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <div >
         <DndProvider backend={HTML5Backend}>
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', overflow: 'hidden' }}>
@@ -111,7 +120,7 @@ const Template = (args) => {
           </div>
         </DndProvider>
       </div>
-    </>
+    </ThemeProvider>
   );
 };
 

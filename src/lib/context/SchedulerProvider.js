@@ -59,7 +59,7 @@ const SchedulerProvider = (props) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <SchedulerContext.Provider value={value}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={color || theme}>
           <LocalizationProvider
             dateAdapter={AdapterDateFns}
             adapterLocale={locales['en']}

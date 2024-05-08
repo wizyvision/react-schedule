@@ -9,6 +9,7 @@ import {
 } from '../../propTypes/AppointmentProps';
 import { SlotPropTypes, SlotDefaultValues } from '../../propTypes/SlotProps';
 import Header from '../Header';
+import theme from '../../constants/theme';
 
 /**
  * <p>Scheduler is composed of different libraries such as React-DND, moment, and MUI.</p>
@@ -106,7 +107,7 @@ Scheduler.propTypes = {
    * Color is used to change the theme of the scheduler: `primary` | `secondary`
    * @default `primary`
    */
-  color: PropTypes.string,
+  color: PropTypes.object,
    /**
    * Change the resource label
    * @default `"Users"`
@@ -126,7 +127,7 @@ Scheduler.defaultProps = {
   durationOptions: [30, 60, 120],
   duration: 60,
   date: Date.now(),
-  color: 'primary',
+  color: {...theme},
   SlotProps: SlotDefaultValues,
   AppointmentProps: AppointmentDefaultValue,
   resourceLabel: 'Users'

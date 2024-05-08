@@ -31,13 +31,13 @@ function ButtonField(props) {
       disabled={disabled}
       ref={ref}
       aria-label={ariaLabel}
-      sx={{
-        color: 'primary.main', // Default to contrast text color from theme
-        textTransform: 'capitalize',
-        '&:hover': {
-          backgroundColor: 'primary.main.light', // Default to lighter primary color on hover
-        },
-      }}
+      // sx={{
+      //   color: 'primary.main', // Default to contrast text color from theme
+      //   textTransform: 'capitalize',
+      //   '&:hover': {
+      //     backgroundColor: 'primary.main.light', // Default to lighter primary color on hover
+      //   },
+      // }}
     >
       <Typography
         sx={{
@@ -53,6 +53,8 @@ function ButtonField(props) {
 function SchedulerDatePicker(props) {
   const { date, onDateChange, color } = useSchedulerContext();
   const [open, setOpen] = useState(false);
+
+  console.log(color)
 
   const theme = useTheme()
 
@@ -82,15 +84,15 @@ function SchedulerDatePicker(props) {
       slotProps={{
         field: { setOpen },
       }}
-      sx={{
-        '& .MuiPickersDay-daySelected': {
-          backgroundColor: theme.palette[color].main, // Use main color from theme.palette[color]
-          color: theme.palette[color].contrastText, // Use contrast text color from theme.palette[color]
-        },
-        '& .MuiPickersDay-daySelected:hover': {
-          backgroundColor: theme.palette[color].main.light, // Use light color from theme.palette[color] on hover
-        },
-      }}
+      // sx={{
+      //   '& .MuiPickersDay-daySelected': {
+      //     backgroundColor: theme.palette[color].main, // Use main color from theme.palette[color]
+      //     color: theme.palette[color].contrastText, // Use contrast text color from theme.palette[color]
+      //   },
+      //   '& .MuiPickersDay-daySelected:hover': {
+      //     backgroundColor: theme.palette[color].main.light, // Use light color from theme.palette[color] on hover
+      //   },
+      // }}
     />
   );
 }
