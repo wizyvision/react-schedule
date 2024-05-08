@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Table,
   TableHead,
@@ -27,13 +27,22 @@ import {
   Wrapper,
 } from '../../container/Calendar';
 import UserTimeSlot from './UserTimeSlot';
-import { MIN_ROWS, WIDTH } from '../../constants/appointment';
+import { MIN_ROWS } from '../../constants/appointment';
 import Slot from '../../container/Slot';
 import { getSlotWidth } from '../../utils/getAppointmentStyle';
 
 function Calendar() {
-  const { date, users, SlotProps, groups, onGroupChange, groupId, resourceLabel, minRows, isLoading } =
-    useSchedulerContext();
+  const {
+    date,
+    users,
+    SlotProps,
+    groups,
+    onGroupChange,
+    groupId,
+    resourceLabel,
+    minRows,
+    isLoading,
+  } = useSchedulerContext();
   const { primaryDuration = 60, secondaryDuration, colSpan } = SlotProps || {};
 
   const classes = useStyles();
@@ -42,7 +51,7 @@ function Calendar() {
   const timeSlotsBody = generateTimeSlotsForShift(date, secondaryDuration);
   const [additionalRows, setAdditionalRows] = useState(0);
 
-  const minimumRows = minRows || MIN_ROWS
+  const minimumRows = minRows || MIN_ROWS;
 
   useEffect(() => {
     if (users.length <= minimumRows) {
@@ -90,49 +99,64 @@ function Calendar() {
   );
 
   const userSlots = users.map((user) => {
-      return (
-        <TableRow key={user.name}>
-          <Resources align='left'>
-            <Wrapper>
-              <Resource sx={classes.resourceBody}>
-                <Avatar sx={classes.avatar(user.color)} variant='square'>
-                  {Array.from(user.name)[0]}
-                </Avatar>
-                {user.name}
-              </Resource>
-              <Divider></Divider>
-            </Wrapper>
-          </Resources>
-          {timeSlotsBody.map((slot, index) => (
-            <UserTimeSlot
-              key={`${user.name}-${slot}`}
-              index={index}
-              user={user}
-              timeSlot={slot}
-            />
-          ))}
-        </TableRow>
-      );
-    });
+    return (
+      <TableRow key={user.name}>
+        <Resources align='left'>
+          <Wrapper>
+            <Resource sx={classes.resourceBody}>
+              <Avatar
+                sx={{
+                  bgcolor: user.color,
+                  marginRight: 2,
+                  borderColor: darken(user.color, 0.25),
+                  color: darken(user.color, 0.5),
+                }}
+                variant='square'
+              >
+                {Array.from(user.name)[0]}
+              </Avatar>
+              {user.name}
+            </Resource>
+            <Divider></Divider>
+          </Wrapper>
+        </Resources>
+        {timeSlotsBody.map((slot, index) => (
+          <UserTimeSlot
+            key={`${user.name}-${slot}`}
+            index={index}
+            user={user}
+            timeSlot={slot}
+          />
+        ))}
+      </TableRow>
+    );
+  });
 
-    const width = getSlotWidth(secondaryDuration)
-    const additionalRowsContent = Array.from({ length: additionalRows }, (_, index) => (
+  const width = getSlotWidth(secondaryDuration);
+  const additionalRowsContent = Array.from(
+    { length: additionalRows },
+    (_, index) => (
       <TableRow key={`additional-row-${index}`}>
         {/* Additional row content */}
-        <Resources align='left'  sx={{borderBottom: isLoading && 'none'}}>
-            <Wrapper>
-              <Resource sx={classes.resourceBody}>
-              </Resource>
-              <Divider></Divider>
-            </Wrapper>
-          </Resources>
-          {timeSlotsBody.map((slot, index) => (
-            <Slot key={index} colSpan={1} width={width}  sx={{borderBottom: isLoading && 'none'}}>
-              <div style={{width: width, height: '100%'}}>&nbsp;</div>
-            </Slot>
-          ))}
+        <Resources align='left' sx={{ borderBottom: isLoading && 'none' }}>
+          <Wrapper>
+            <Resource sx={classes.resourceBody}></Resource>
+            <Divider></Divider>
+          </Wrapper>
+        </Resources>
+        {timeSlotsBody.map((slot, index) => (
+          <Slot
+            key={index}
+            colSpan={1}
+            width={width}
+            sx={{ borderBottom: isLoading && 'none' }}
+          >
+            <div style={{ width: width, height: '100%' }}>&nbsp;</div>
+          </Slot>
+        ))}
       </TableRow>
-    ));
+    )
+  );
 
   return (
     <CalendarContainer>
@@ -141,7 +165,7 @@ function Calendar() {
         <TableBody>
           {!isLoading && userSlots}
           {additionalRowsContent}
-          </TableBody>
+        </TableBody>
       </Table>
     </CalendarContainer>
   );
@@ -151,11 +175,11 @@ const useStyles = () => ({
   table: {
     width: 900,
     overflowX: 'auto',
-    height: '100%'
+    height: '100%',
   },
-  resourceLabelText:{
-    fontSize: '16px', 
-    fontWeight: 'bold' 
+  resourceLabelText: {
+    fontSize: '16px',
+    fontWeight: 'bold',
   },
   tableRow: {
     overflowY: 'hidden',
@@ -168,19 +192,13 @@ const useStyles = () => ({
     paddingTop: 2,
     paddingBottom: 2,
     paddingRight: 2,
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
   },
   resourceBody: {
     fontSize: '14px',
     display: 'flex',
     alignItems: 'center',
   },
-  avatar: (color) => ({
-    bgcolor: color,
-    marginRight: 2,
-    borderColor: darken(color, 0.25),
-    color: darken(color, 0.5),
-  }),
 });
 
 export default Calendar;

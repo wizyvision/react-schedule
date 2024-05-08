@@ -32442,7 +32442,12 @@ function Calendar() {
     }, /*#__PURE__*/React__default["default"].createElement(Wrapper, null, /*#__PURE__*/React__default["default"].createElement(Resource, {
       sx: classes.resourceBody
     }, /*#__PURE__*/React__default["default"].createElement(material.Avatar, {
-      sx: classes.avatar(user.color),
+      sx: {
+        bgcolor: user.color,
+        marginRight: 2,
+        borderColor: material.darken(user.color, 0.25),
+        color: material.darken(user.color, 0.5)
+      },
       variant: "square"
     }, Array.from(user.name)[0]), user.name), /*#__PURE__*/React__default["default"].createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
       return /*#__PURE__*/React__default["default"].createElement(UserTimeSlot, {
@@ -32515,14 +32520,6 @@ var useStyles = function useStyles() {
       fontSize: '14px',
       display: 'flex',
       alignItems: 'center'
-    },
-    avatar: function avatar(color) {
-      return {
-        bgcolor: color,
-        marginRight: 2,
-        borderColor: material.darken(color, 0.25),
-        color: material.darken(color, 0.5)
-      };
     }
   };
 };
