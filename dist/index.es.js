@@ -25969,10 +25969,6 @@ const HTML5Backend = function createBackend(manager, context, options) {
 
 var theme = createTheme$1({
   palette: {
-    primary: {
-      main: '#303f9f',
-      light: '#5e35b1'
-    },
     drop: {
       main: alpha('#303f9f', 0.5),
       light: alpha('#303f9f', 0.35),

@@ -2,10 +2,6 @@ import { createTheme, alpha } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
-    primary: {
-      main: '#303f9f',
-      light: '#5e35b1',
-    },
     drop: {
       main: alpha('#303f9f', 0.5),
       light: alpha('#303f9f', 0.35),
