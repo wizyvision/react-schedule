@@ -55,10 +55,15 @@ function DurationPicker() {
         sx={{
           border: 'none',
           textTransform: 'lowercase',
-          color: theme.palette.primary.main, // Default to contrast text color from theme
         }}
       >
-        <Typography>{optionValue(duration)}</Typography>
+        <Typography
+          sx={{
+            color: theme.palette.primary.main, // Default to contrast text color from theme
+          }}
+        >
+          {optionValue(duration)}
+        </Typography>
       </Button>
       <Menu
         id='duration-options-menu'

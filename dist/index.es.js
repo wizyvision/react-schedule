@@ -32590,13 +32590,11 @@ function ButtonField(props) {
     id: id,
     disabled: disabled,
     ref: ref,
-    "aria-label": ariaLabel,
-    sx: {
-      color: theme.palette.primary.main // Default to contrast text color from theme
-    }
+    "aria-label": ariaLabel
   }, /*#__PURE__*/React__default.createElement(Typography$1, {
     sx: {
-      textTransform: 'capitalize'
+      textTransform: 'capitalize',
+      color: theme.palette.primary.main // Default to contrast text color from theme
     }
   }, moment(date).format('ddd, MMM DD, YYYY')));
 }
@@ -32703,10 +32701,13 @@ function DurationPicker() {
     onClick: handleButtonClick,
     sx: {
       border: 'none',
-      textTransform: 'lowercase',
+      textTransform: 'lowercase'
+    }
+  }, /*#__PURE__*/React__default.createElement(Typography$1, {
+    sx: {
       color: theme.palette.primary.main // Default to contrast text color from theme
     }
-  }, /*#__PURE__*/React__default.createElement(Typography$1, null, optionValue(duration))), /*#__PURE__*/React__default.createElement(Menu, {
+  }, optionValue(duration))), /*#__PURE__*/React__default.createElement(Menu, {
     id: "duration-options-menu",
     anchorEl: anchorEl,
     open: Boolean(anchorEl),

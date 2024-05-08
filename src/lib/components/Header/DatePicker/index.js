@@ -33,13 +33,11 @@ function ButtonField(props) {
       disabled={disabled}
       ref={ref}
       aria-label={ariaLabel}
-      sx={{
-        color: theme.palette.primary.main, // Default to contrast text color from theme
-      }}
     >
       <Typography
         sx={{
           textTransform: 'capitalize',
+          color: theme.palette.primary.main, // Default to contrast text color from theme
         }}
       >
         {moment(date).format('ddd, MMM DD, YYYY')}
