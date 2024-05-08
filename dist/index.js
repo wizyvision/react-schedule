@@ -32726,7 +32726,8 @@ function DurationPicker() {
       onClick: function onClick() {
         return handleMenuItemClick(option);
       },
-      value: option
+      value: option,
+      selected: option === duration
     }, optionValue(option));
   });
   return /*#__PURE__*/React__default["default"].createElement("div", {

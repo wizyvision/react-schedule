@@ -40,6 +40,7 @@ function DurationPicker() {
       key={option}
       onClick={() => handleMenuItemClick(option)}
       value={option}
+      selected={option === duration}
     >
       {optionValue(option)}
     </MenuItem>
