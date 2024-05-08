@@ -1,6 +1,6 @@
 import * as React from 'react';
 import React__default, { Children, isValidElement, cloneElement, createContext, memo, useEffect, useLayoutEffect, useState, useCallback, useMemo, useContext } from 'react';
-import { ThemeProvider, TableContainer, Box, TableCell, useTheme as useTheme$3, darken as darken$1, Typography as Typography$1, Tooltip, ListItemText, TableRow, FormControl, InputLabel, Select, MenuItem, Avatar, Table, TableHead, TableBody, Button as Button$1, Menu, IconButton as IconButton$1 } from '@mui/material';
+import { ThemeProvider, TableContainer, Box, TableCell, useTheme as useTheme$3, darken as darken$1, Typography as Typography$1, Tooltip, ListItemText, TableRow, FormControl, InputLabel, Select, MenuItem, Table, TableHead, TableBody, Button as Button$1, Menu, IconButton as IconButton$1 } from '@mui/material';
 import { useThemeProps, styled as styled$3, useTheme as useTheme$2, alpha, createTheme as createTheme$1 } from '@mui/material/styles';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import emStyled from '@emotion/styled';
@@ -32397,15 +32397,24 @@ function Calendar() {
       align: "left"
     }, /*#__PURE__*/React__default.createElement(Wrapper, null, /*#__PURE__*/React__default.createElement(Resource, {
       sx: classes.resourceBody
-    }, /*#__PURE__*/React__default.createElement(Avatar, {
+    }, /*#__PURE__*/React__default.createElement(Box, {
       sx: {
-        bgcolor: user.color,
+        height: '40px',
+        width: '40px',
+        backgroundColor: user.color,
         marginRight: 2,
         borderColor: darken$1(user.color, 0.35),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '2px'
+      }
+    }, /*#__PURE__*/React__default.createElement(Typography$1, {
+      variant: "body1",
+      sx: {
         color: darken$1(user.color, 0.5)
-      },
-      variant: "square"
-    }, Array.from(user.name)[0]), user.name), /*#__PURE__*/React__default.createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
+      }
+    }, Array.from(user.name)[0])), user.name), /*#__PURE__*/React__default.createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
       return /*#__PURE__*/React__default.createElement(UserTimeSlot, {
         key: "".concat(user.name, "-").concat(slot),
         index: index,

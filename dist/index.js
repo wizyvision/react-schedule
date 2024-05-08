@@ -32441,15 +32441,24 @@ function Calendar() {
       align: "left"
     }, /*#__PURE__*/React__default["default"].createElement(Wrapper, null, /*#__PURE__*/React__default["default"].createElement(Resource, {
       sx: classes.resourceBody
-    }, /*#__PURE__*/React__default["default"].createElement(material.Avatar, {
+    }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
       sx: {
-        bgcolor: user.color,
+        height: '40px',
+        width: '40px',
+        backgroundColor: user.color,
         marginRight: 2,
         borderColor: material.darken(user.color, 0.35),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '2px'
+      }
+    }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+      variant: "body1",
+      sx: {
         color: material.darken(user.color, 0.5)
-      },
-      variant: "square"
-    }, Array.from(user.name)[0]), user.name), /*#__PURE__*/React__default["default"].createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
+      }
+    }, Array.from(user.name)[0])), user.name), /*#__PURE__*/React__default["default"].createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
       return /*#__PURE__*/React__default["default"].createElement(UserTimeSlot, {
         key: "".concat(user.name, "-").concat(slot),
         index: index,

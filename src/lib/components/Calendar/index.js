@@ -9,8 +9,8 @@ import {
   InputLabel,
   FormControl,
   Typography,
-  Avatar,
   darken,
+  Box,
 } from '@mui/material';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
@@ -102,17 +102,23 @@ function Calendar() {
         <Resources align='left'>
           <Wrapper>
             <Resource sx={classes.resourceBody}>
-              <Avatar
+              <Box
                 sx={{
-                  bgcolor: user.color,
+                  height: '40px',
+                  width: '40px',
+                  backgroundColor: user.color,
                   marginRight: 2,
                   borderColor: darken(user.color, 0.35),
-                  color: darken(user.color, 0.5),
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '2px'
                 }}
-                variant='square'
               >
-                {Array.from(user.name)[0]}
-              </Avatar>
+                <Typography variant='body1' sx={{ color: darken(user.color, 0.5) }}>
+                  {Array.from(user.name)[0]}
+                </Typography>
+              </Box>
               {user.name}
             </Resource>
             <Divider></Divider>
