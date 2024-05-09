@@ -45,6 +45,7 @@ const Wrapper = styled(Box)({
 
 const Slots = styled(TableCell)({
   textAlign: 'center',
+  backgroundColor: '#FFFFFF'
 });
 
 export { CalendarContainer, Divider, Resources, Resource, Wrapper, Slots };

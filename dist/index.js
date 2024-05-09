@@ -31955,7 +31955,8 @@ var Wrapper = styled$1(material.Box)({
   alignItems: 'center'
 });
 var Slots = styled$1(material.TableCell)({
-  textAlign: 'center'
+  textAlign: 'center',
+  backgroundColor: '#FFFFFF'
 });
 
 function getSortAppointments(appointments, user) {

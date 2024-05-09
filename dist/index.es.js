@@ -31911,7 +31911,8 @@ var Wrapper = styled$1(Box)({
   alignItems: 'center'
 });
 var Slots = styled$1(TableCell)({
-  textAlign: 'center'
+  textAlign: 'center',
+  backgroundColor: '#FFFFFF'
 });
 
 function getSortAppointments(appointments, user) {
