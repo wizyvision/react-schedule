@@ -25,7 +25,6 @@ function UserTimeSlot(props) {
     SlotProps,
     color,
     customCanDrop,
-    canDropErrorMessage
   } = useSchedulerContext();
   const { secondaryDuration = 30, slotBackground } = SlotProps || {};
 
@@ -107,8 +106,6 @@ function UserTimeSlot(props) {
   const durationWidth = getDurationWidth(timeSlot, duration, width)
   const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
-  const canDropErrMsg = !canDrop && canDropErrorMessage
-
   drop(dropRef);
   return (
     <Slot colSpan={1} ref={dropRef} index={index} bg={bg} width={width || '100%'}  onClick={() => handleClick(index)}>
@@ -125,7 +122,6 @@ function UserTimeSlot(props) {
           timeSlot={timeSlot}
         />
       </div>
-      {canDropErrMsg}
     </Slot>
   );
 }
