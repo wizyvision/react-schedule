@@ -31,6 +31,7 @@ const SchedulerProvider = (props) => {
     resourceLabel,
     isLoading,
     customCanDrop,
+    canDropErrorMessage,
   } = props;
 
   const locales = { en: enUS };
@@ -53,7 +54,8 @@ const SchedulerProvider = (props) => {
     color,
     resourceLabel,
     customCanDrop,
-    isLoading
+    isLoading,
+    canDropErrorMessage
   };
 
   return (

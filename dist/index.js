@@ -26153,7 +26153,8 @@ var SchedulerProvider = function SchedulerProvider(props) {
     color = props.color,
     resourceLabel = props.resourceLabel,
     isLoading = props.isLoading,
-    customCanDrop = props.customCanDrop;
+    customCanDrop = props.customCanDrop,
+    canDropErrorMessage = props.canDropErrorMessage;
   var locales = {
     en: enUS
   };
@@ -26176,7 +26177,8 @@ var SchedulerProvider = function SchedulerProvider(props) {
     color: color,
     resourceLabel: resourceLabel,
     customCanDrop: customCanDrop,
-    isLoading: isLoading
+    isLoading: isLoading,
+    canDropErrorMessage: canDropErrorMessage
   };
   return /*#__PURE__*/React__default["default"].createElement(DndProvider, {
     backend: HTML5Backend
@@ -32282,7 +32284,8 @@ function UserTimeSlot(props) {
     date = _useSchedulerContext.date,
     SlotProps = _useSchedulerContext.SlotProps;
     _useSchedulerContext.color;
-    var customCanDrop = _useSchedulerContext.customCanDrop;
+    var customCanDrop = _useSchedulerContext.customCanDrop,
+    canDropErrorMessage = _useSchedulerContext.canDropErrorMessage;
   var _ref = SlotProps || {},
     _ref$secondaryDuratio = _ref.secondaryDuration,
     secondaryDuration = _ref$secondaryDuratio === void 0 ? 30 : _ref$secondaryDuratio,
@@ -32348,6 +32351,7 @@ function UserTimeSlot(props) {
   var width = getSlotWidth(secondaryDuration);
   getDurationWidth(timeSlot, duration, width);
   var bg = slotBg(canDrop, isOver, slotBackground);
+  var canDropErrMsg = !canDrop && canDropErrorMessage;
   drop(dropRef);
   return /*#__PURE__*/React__default["default"].createElement(Slot, {
     colSpan: 1,
@@ -32368,7 +32372,7 @@ function UserTimeSlot(props) {
     appointments: filteredAppointments,
     secondaryDuration: secondaryDuration,
     timeSlot: timeSlot
-  })));
+  })), canDropErrMsg);
 }
 
 function Calendar() {
