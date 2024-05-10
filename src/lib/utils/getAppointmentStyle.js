@@ -46,7 +46,7 @@ export const getAppointmentWidth = (timeSlot, start, end, duration) => {
     .asMinutes();
 
   const width =
-    (appointmentDuration / totalMinutesInSlot) * getSlotWidth(duration);
+    (appointmentDuration / totalMinutesInSlot) * getSlotWidth(duration) + 2;
 
   return width + 'px';
 };

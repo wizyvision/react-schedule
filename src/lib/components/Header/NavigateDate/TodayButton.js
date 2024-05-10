@@ -12,7 +12,7 @@ function TodayButton() {
   return (
     <Button 
         onClick={handleDateChange} 
-        sx={{ textTransform: 'capitalize' }}
+        sx={{ textTransform: 'capitalize', fontSize: '16px' }}
         >
       Today
     </Button>

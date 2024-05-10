@@ -92,7 +92,9 @@ export const getAppointmentDuration = (schedule) => {
   
   if (duration.asHours() < 1) {
     return duration.asMinutes() + ' minutes';
-  } else {
+  } else if(duration.asHours() > 1) {
     return duration.asHours() + ' hours';
+  } else {
+    return duration.asHours() + ' hour';
   }
 }

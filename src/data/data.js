@@ -81,12 +81,12 @@ export const users = [
     {
         id: 1,
         name: 'Ferb Perry',
-        groups: [4, 7]
+        groups: [1, 4, 7]
     }, 
     {
         id: 2,
         name: 'John Dela Cruz',
-        groups: [4]
+        groups: [1, 4]
     }, 
     {
         id: 3,
@@ -96,17 +96,17 @@ export const users = [
     {
         id: 4,
         name: 'Maki Doe',
-        groups: [5]
+        groups: [1, 5]
     }, 
     {
         id: 5,
         name: 'Andre Curtis',
-        groups: [3, 6]
+        groups: [1, 3, 6]
     }, 
     {
         id: 6,
         name: 'Vice Ganda',
-        groups: [2]
+        groups: [1, 2]
     }, 
     {
         id: 7,
@@ -116,12 +116,12 @@ export const users = [
     {
         id: 8,
         name: 'Sofia Andres',
-        groups: [4, 6]
+        groups: [1, 4, 6]
     }, 
     {
         id: 9,
         name: 'Jericho Rosales',
-        groups: [3]
+        groups: [1, 3]
     }, 
 ]
 

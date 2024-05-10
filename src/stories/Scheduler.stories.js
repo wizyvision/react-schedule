@@ -25,7 +25,7 @@ export default {
 };
 
 const Template = (args) => {
-  const [selectedGroup, setGroup] = useState(groups[7].id);
+  const [selectedGroup, setGroup] = useState(groups[0].id);
   const [appointments, setAppointments] = useState(
     cases.filter((appointment) => appointment.user && appointment.schedule)
   );

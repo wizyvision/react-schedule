@@ -37,7 +37,8 @@ function ButtonField(props) {
       <Typography
         sx={{
           textTransform: 'capitalize',
-          color: theme.palette.primary.main, // Default to contrast text color from theme
+          color: theme.palette.primary.main, 
+          fontSize: '18px'
         }}
       >
         {moment(date).format('ddd, MMM DD, YYYY')}

@@ -21,7 +21,7 @@ import {
   Divider,
   Resources,
   Resource,
-  Slots,
+  TimeSlots,
   Wrapper,
 } from '../../container/Calendar';
 import UserTimeSlot from './UserTimeSlot';
@@ -40,6 +40,7 @@ function Calendar() {
     resourceLabel,
     minRows,
     isLoading,
+    groupLabel,
   } = useSchedulerContext();
   const { primaryDuration = 60, secondaryDuration, colSpan } = SlotProps || {};
 
@@ -72,12 +73,12 @@ function Calendar() {
         </Wrapper>
         <Resource sx={{ marginTop: 2 }}>
           <FormControl size='small' fullWidth>
-            <InputLabel id='groups'>Groups</InputLabel>
+            <InputLabel id='groups'>{groupLabel || 'Groups'}</InputLabel>
             <Select
               labelId='groups'
               id='groups'
               value={groupId}
-              label='Groups'
+              label={groupLabel || 'Groups'}
               onChange={onGroupChange}
               size='small'
             >
@@ -89,9 +90,9 @@ function Calendar() {
         </Resource>
       </Resources>
       {timeSlotsHead.map((slot) => (
-        <Slots key={slot} colSpan={colSpan}>
+        <TimeSlots key={slot} colSpan={colSpan}>
           {slot}
-        </Slots>
+        </TimeSlots>
       ))}
     </TableRow>
   );
@@ -166,7 +167,7 @@ function Calendar() {
     <CalendarContainer>
       <Table sx={classes.table} stickyHeader>
         <TableHead>{tableHead}</TableHead>
-        <TableBody>
+        <TableBody sx={{overflow: 'auto'}} >
           {!isLoading && userSlots}
           {additionalRowsContent}
         </TableBody>
@@ -177,8 +178,7 @@ function Calendar() {
 
 const useStyles = () => ({
   table: {
-    width: 900,
-    overflowX: 'auto',
+    width: '100%',
     height: '100%',
   },
   resourceLabelText: {

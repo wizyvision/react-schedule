@@ -31918,16 +31918,11 @@ function generateTimeSlotsForShift(date, intervalInMinutes) {
 }
 
 var CalendarContainer = styled$1(material.TableContainer)({
-  scrollbarWidth: 'none',
-  '&::-webkit-scrollbar': {
-    display: 'none'
-  },
   margin: '8px',
   width: '100%',
   height: '100%',
   maxHeight: 700,
   maxWidth: '-webkit-fill-available',
-  overflowY: 'auto',
   position: 'relative',
   border: '1px solid rgba(0,0,0,0.12)',
   backgroundColor: '#FFFFFF'
@@ -31942,7 +31937,7 @@ var Resources = styled$1(material.TableCell)({
   backgroundColor: 'white',
   minWidth: 200,
   padding: 0,
-  borderRight: '2px solid rgba(0,0,0,0.12)'
+  borderRight: '2px solid rgba(0,0,0,0.2)'
 });
 var Resource = styled$1(material.Box)({
   border: 'none',
@@ -31954,9 +31949,12 @@ var Wrapper = styled$1(material.Box)({
   display: 'flex',
   alignItems: 'center'
 });
-var Slots = styled$1(material.TableCell)({
-  textAlign: 'center',
-  backgroundColor: '#FFFFFF'
+var TimeSlots = styled$1(material.TableCell)({
+  textAlign: 'left',
+  backgroundColor: '#FFFFFF',
+  borderRight: '1px solid  rgba(0,0,0,0.05)',
+  fontSize: '14px',
+  fontWeight: '600'
 });
 
 function getSortAppointments(appointments, user) {
@@ -32016,8 +32014,10 @@ var getAppointmentDuration = function getAppointmentDuration(schedule) {
   var duration = moment.duration(endDate.diff(startDate));
   if (duration.asHours() < 1) {
     return duration.asMinutes() + ' minutes';
-  } else {
+  } else if (duration.asHours() > 1) {
     return duration.asHours() + ' hours';
+  } else {
+    return duration.asHours() + ' hour';
   }
 };
 
@@ -32054,7 +32054,7 @@ var getAppointmentWidth = function getAppointmentWidth(timeSlot, start, end, dur
   var appointmentEnd = moment(end);
   var totalMinutesInSlot = moment.duration(slotEnd.diff(slotStart)).asMinutes();
   var appointmentDuration = moment.duration(appointmentEnd.diff(appointmentStart)).asMinutes();
-  var width = appointmentDuration / totalMinutesInSlot * getSlotWidth(duration);
+  var width = appointmentDuration / totalMinutesInSlot * getSlotWidth(duration) + 2;
   return width + 'px';
 };
 var getDurationWidth = function getDurationWidth(timeSlot, duration, slotWidth) {
@@ -32381,7 +32381,8 @@ function Calendar() {
     groupId = _useSchedulerContext.groupId,
     resourceLabel = _useSchedulerContext.resourceLabel,
     minRows = _useSchedulerContext.minRows,
-    isLoading = _useSchedulerContext.isLoading;
+    isLoading = _useSchedulerContext.isLoading,
+    groupLabel = _useSchedulerContext.groupLabel;
   var _ref = SlotProps || {},
     _ref$primaryDuration = _ref.primaryDuration,
     primaryDuration = _ref$primaryDuration === void 0 ? 60 : _ref$primaryDuration,
@@ -32418,11 +32419,11 @@ function Calendar() {
     fullWidth: true
   }, /*#__PURE__*/React__default["default"].createElement(material.InputLabel, {
     id: "groups"
-  }, "Groups"), /*#__PURE__*/React__default["default"].createElement(material.Select, {
+  }, groupLabel || 'Groups'), /*#__PURE__*/React__default["default"].createElement(material.Select, {
     labelId: "groups",
     id: "groups",
     value: groupId,
-    label: "Groups",
+    label: groupLabel || 'Groups',
     onChange: onGroupChange,
     size: "small"
   }, groups.map(function (group) {
@@ -32430,7 +32431,7 @@ function Calendar() {
       value: group.id
     }, group.name);
   }))))), timeSlotsHead.map(function (slot) {
-    return /*#__PURE__*/React__default["default"].createElement(Slots, {
+    return /*#__PURE__*/React__default["default"].createElement(TimeSlots, {
       key: slot,
       colSpan: colSpan
     }, slot);
@@ -32502,13 +32503,16 @@ function Calendar() {
   return /*#__PURE__*/React__default["default"].createElement(CalendarContainer, null, /*#__PURE__*/React__default["default"].createElement(material.Table, {
     sx: classes.table,
     stickyHeader: true
-  }, /*#__PURE__*/React__default["default"].createElement(material.TableHead, null, tableHead), /*#__PURE__*/React__default["default"].createElement(material.TableBody, null, !isLoading && userSlots, additionalRowsContent)));
+  }, /*#__PURE__*/React__default["default"].createElement(material.TableHead, null, tableHead), /*#__PURE__*/React__default["default"].createElement(material.TableBody, {
+    sx: {
+      overflow: 'auto'
+    }
+  }, !isLoading && userSlots, additionalRowsContent)));
 }
 var useStyles = function useStyles() {
   return {
     table: {
-      width: 900,
-      overflowX: 'auto',
+      width: '100%',
       height: '100%'
     },
     resourceLabelText: {
@@ -32631,7 +32635,8 @@ function ButtonField(props) {
   }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
     sx: {
       textTransform: 'capitalize',
-      color: theme.palette.primary.main // Default to contrast text color from theme
+      color: theme.palette.primary.main,
+      fontSize: '18px'
     }
   }, moment(date).format('ddd, MMM DD, YYYY')));
 }
@@ -32743,7 +32748,8 @@ function DurationPicker() {
     }
   }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
     sx: {
-      color: theme.palette.primary.main // Default to contrast text color from theme
+      color: theme.palette.primary.main,
+      fontSize: '16px'
     }
   }, optionValue(duration))), /*#__PURE__*/React__default["default"].createElement(material.Menu, {
     id: "duration-options-menu",
@@ -32763,7 +32769,8 @@ function TodayButton() {
   return /*#__PURE__*/React__default["default"].createElement(material.Button, {
     onClick: handleDateChange,
     sx: {
-      textTransform: 'capitalize'
+      textTransform: 'capitalize',
+      fontSize: '16px'
     }
   }, "Today");
 }

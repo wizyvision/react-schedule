@@ -60,7 +60,8 @@ function DurationPicker() {
       >
         <Typography
           sx={{
-            color: theme.palette.primary.main, // Default to contrast text color from theme
+            color: theme.palette.primary.main, 
+            fontSize: '16px'
           }}
         >
           {optionValue(duration)}

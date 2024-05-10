@@ -2,19 +2,14 @@ import { TableCell, TableContainer, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
 const CalendarContainer = styled(TableContainer)({
-  scrollbarWidth: 'none',
-  '&::-webkit-scrollbar': {
-    display: 'none',
-  },
   margin: '8px',
   width: '100%',
   height: '100%',
   maxHeight: 700,
   maxWidth: '-webkit-fill-available',
-  overflowY: 'auto',
   position: 'relative',
   border: '1px solid rgba(0,0,0,0.12)',
-  backgroundColor: '#FFFFFF'
+  backgroundColor: '#FFFFFF',
 });
 
 const Divider = styled(Box)({
@@ -28,7 +23,7 @@ const Resources = styled(TableCell)({
   backgroundColor: 'white',
   minWidth: 200,
   padding: 0,
-  borderRight: '2px solid rgba(0,0,0,0.12)',
+  borderRight: '2px solid rgba(0,0,0,0.2)',
 });
 
 const Resource = styled(Box)({
@@ -43,9 +38,12 @@ const Wrapper = styled(Box)({
   alignItems: 'center',
 })
 
-const Slots = styled(TableCell)({
-  textAlign: 'center',
-  backgroundColor: '#FFFFFF'
+const TimeSlots = styled(TableCell)({
+  textAlign: 'left',
+  backgroundColor: '#FFFFFF',
+  borderRight: '1px solid  rgba(0,0,0,0.05)',
+  fontSize: '14px',
+  fontWeight: '600',
 });
 
-export { CalendarContainer, Divider, Resources, Resource, Wrapper, Slots };
+export { CalendarContainer, Divider, Resources, Resource, Wrapper, TimeSlots };
