@@ -31,6 +31,7 @@ const SchedulerProvider = (props) => {
     resourceLabel,
     isLoading,
     customCanDrop,
+    groupLabel,
   } = props;
 
   const locales = { en: enUS };
@@ -54,6 +55,7 @@ const SchedulerProvider = (props) => {
     resourceLabel,
     customCanDrop,
     isLoading,
+    groupLabel
   };
 
   return (

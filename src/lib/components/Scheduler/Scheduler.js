@@ -117,6 +117,10 @@ Scheduler.propTypes = {
    * Customized can drop function whether it returns true of false
    */
   customCanDrop: PropTypes.func,
+    /**
+   * Customized group label
+   */
+  groupLabel: PropTypes.string
 };
 
 Scheduler.defaultProps = {
@@ -130,7 +134,8 @@ Scheduler.defaultProps = {
   color: {...theme},
   SlotProps: SlotDefaultValues,
   AppointmentProps: AppointmentDefaultValue,
-  resourceLabel: 'Users'
+  resourceLabel: 'Users',
+  groupLabel: 'Groups'
 };
 
 export default Scheduler;

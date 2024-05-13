@@ -26153,7 +26153,8 @@ var SchedulerProvider = function SchedulerProvider(props) {
     color = props.color,
     resourceLabel = props.resourceLabel,
     isLoading = props.isLoading,
-    customCanDrop = props.customCanDrop;
+    customCanDrop = props.customCanDrop,
+    groupLabel = props.groupLabel;
   var locales = {
     en: enUS
   };
@@ -26176,7 +26177,8 @@ var SchedulerProvider = function SchedulerProvider(props) {
     color: color,
     resourceLabel: resourceLabel,
     customCanDrop: customCanDrop,
-    isLoading: isLoading
+    isLoading: isLoading,
+    groupLabel: groupLabel
   };
   return /*#__PURE__*/React__default["default"].createElement(DndProvider, {
     backend: HTML5Backend
@@ -32924,7 +32926,11 @@ Scheduler.propTypes = {
   /**
   * Customized can drop function whether it returns true of false
   */
-  customCanDrop: PropTypes.func
+  customCanDrop: PropTypes.func,
+  /**
+  * Customized group label
+  */
+  groupLabel: PropTypes.string
 };
 Scheduler.defaultProps = {
   groupId: '',
@@ -32937,7 +32943,8 @@ Scheduler.defaultProps = {
   color: _objectSpread2({}, theme),
   SlotProps: SlotDefaultValues,
   AppointmentProps: AppointmentDefaultValue,
-  resourceLabel: 'Users'
+  resourceLabel: 'Users',
+  groupLabel: 'Groups'
 };
 
 module.exports = Scheduler;
