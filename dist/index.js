@@ -6,8 +6,10 @@ var styles = require('@mui/material/styles');
 var jsxRuntime = require('react/jsx-runtime');
 var emStyled = require('@emotion/styled');
 var react = require('@emotion/react');
-var useMediaQuery = require('@mui/material/useMediaQuery');
+var Box = require('@mui/material/Box');
+var Grid = require('@mui/material/Grid');
 var Typography = require('@mui/material/Typography');
+var useMediaQuery = require('@mui/material/useMediaQuery');
 var utils = require('@mui/material/utils');
 var Fade = require('@mui/material/Fade');
 var ButtonBase = require('@mui/material/ButtonBase');
@@ -50,8 +52,10 @@ function _interopNamespace(e) {
 var React__namespace = /*#__PURE__*/_interopNamespace(React);
 var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 var emStyled__default = /*#__PURE__*/_interopDefaultLegacy(emStyled);
-var useMediaQuery__default = /*#__PURE__*/_interopDefaultLegacy(useMediaQuery);
+var Box__default = /*#__PURE__*/_interopDefaultLegacy(Box);
+var Grid__default = /*#__PURE__*/_interopDefaultLegacy(Grid);
 var Typography__default = /*#__PURE__*/_interopDefaultLegacy(Typography);
+var useMediaQuery__default = /*#__PURE__*/_interopDefaultLegacy(useMediaQuery);
 var Fade__default = /*#__PURE__*/_interopDefaultLegacy(Fade);
 var ButtonBase__default = /*#__PURE__*/_interopDefaultLegacy(ButtonBase);
 var ReactDOM__default = /*#__PURE__*/_interopDefaultLegacy(ReactDOM);
@@ -31919,20 +31923,17 @@ function generateTimeSlotsForShift(date, intervalInMinutes) {
   return timeSlots;
 }
 
-var CalendarContainer = styled$1(material.TableContainer)({
-  margin: '8px',
+var StyledTableContainer = styled$1(material.TableContainer)({
   width: '100%',
   height: '100%',
   maxHeight: 700,
   maxWidth: '-webkit-fill-available',
   position: 'relative',
   border: '1px solid rgba(0,0,0,0.12)',
-  backgroundColor: '#FFFFFF'
+  backgroundColor: '#FFFFFF',
+  overflow: 'auto'
 });
-var Divider = styled$1(material.Box)({
-  border: 'none'
-});
-var Resources = styled$1(material.TableCell)({
+var StickyCell = styled$1(material.TableCell)({
   left: 0,
   position: 'sticky',
   zIndex: 900,
@@ -31941,13 +31942,13 @@ var Resources = styled$1(material.TableCell)({
   padding: 0,
   borderRight: '2px solid rgba(0,0,0,0.2)'
 });
-var Resource = styled$1(material.Box)({
+var ResourceCell = styled$1(material.Box)({
   border: 'none',
   width: 200,
   paddingLeft: 8,
   paddingRight: 8
 });
-var Wrapper = styled$1(material.Box)({
+var StyledBox = styled$1(material.Box)({
   display: 'flex',
   alignItems: 'center'
 });
@@ -32261,8 +32262,8 @@ function Appointments(props) {
     timeSlot = props.timeSlot,
     secondaryDuration = props.secondaryDuration;
   return appointments && (appointments === null || appointments === void 0 ? void 0 : appointments.map(function (appointment) {
-    var startDate = moment(appointment.schedule.startDate);
-    var endDate = moment(appointment.schedule.endDate);
+    var startDate = appointment.schedule.startDate;
+    var endDate = appointment.schedule.endDate;
     var height = getAppointmentHeight(appointment.height);
     return /*#__PURE__*/React__default["default"].createElement(AppointmentItem, {
       key: appointment.id,
@@ -32311,7 +32312,8 @@ function UserTimeSlot(props) {
           isOver: monitor.isOver({
             shallow: true
           }),
-          canDrop: monitor.canDrop()
+          canDrop: monitor.canDrop(),
+          item: monitor.getItem()
         };
       }
     }),
@@ -32319,6 +32321,7 @@ function UserTimeSlot(props) {
     _useDrop2$ = _useDrop2[0],
     isOver = _useDrop2$.isOver,
     canDrop = _useDrop2$.canDrop,
+    item = _useDrop2$.item,
     drop = _useDrop2[1];
   var sortedAppointments = getSortAppointments(appointmentList, user);
   var concurrentAppointments = {};
@@ -32350,12 +32353,21 @@ function UserTimeSlot(props) {
   var width = getSlotWidth(secondaryDuration);
   getDurationWidth(timeSlot, duration, width);
   var bg = slotBg(canDrop, isOver, slotBackground);
+  var calculateIsOverWidth = function calculateIsOverWidth() {
+    var _item$appointment, _item$appointment2;
+    var start = moment(item === null || item === void 0 || (_item$appointment = item.appointment) === null || _item$appointment === void 0 || (_item$appointment = _item$appointment.schedule) === null || _item$appointment === void 0 ? void 0 : _item$appointment.startDate);
+    var end = moment(item === null || item === void 0 || (_item$appointment2 = item.appointment) === null || _item$appointment2 === void 0 || (_item$appointment2 = _item$appointment2.schedule) === null || _item$appointment2 === void 0 ? void 0 : _item$appointment2.endDate);
+    var existingDuration = moment.duration(end.diff(start)).asMinutes();
+    if (existingDuration) {
+      return getDurationWidth(timeSlot, existingDuration, width);
+    }
+    return getDurationWidth(timeSlot, duration, width);
+  };
   drop(dropRef);
   return /*#__PURE__*/React__default["default"].createElement(Slot, {
     colSpan: 1,
     ref: dropRef,
     index: index,
-    bg: bg,
     width: width || '100%',
     onClick: function onClick() {
       return handleClick(index);
@@ -32366,11 +32378,60 @@ function UserTimeSlot(props) {
       width: width,
       height: '100%'
     }
-  }, /*#__PURE__*/React__default["default"].createElement(Appointments, {
+  }, isOver && /*#__PURE__*/React__default["default"].createElement("div", {
+    style: {
+      backgroundColor: bg,
+      width: calculateIsOverWidth(),
+      height: '100%',
+      position: 'absolute',
+      top: 0
+    }
+  }), /*#__PURE__*/React__default["default"].createElement(Appointments, {
     appointments: filteredAppointments,
     secondaryDuration: secondaryDuration,
     timeSlot: timeSlot
   })));
+}
+
+var StyledAvatar = styled$1(Box__default["default"])({
+  height: '40px',
+  width: '40px',
+  marginRight: 2,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '2px'
+});
+
+function ResourceName(props) {
+  var name = props.name,
+    color = props.color;
+  return /*#__PURE__*/React__default["default"].createElement(Grid__default["default"], {
+    container: true,
+    fullWidth: true
+  }, /*#__PURE__*/React__default["default"].createElement(Grid__default["default"], {
+    item: true,
+    xs: 3
+  }, /*#__PURE__*/React__default["default"].createElement(StyledAvatar, {
+    sx: {
+      backgroundColor: color,
+      borderColor: darken(color, 0.35)
+    }
+  }, /*#__PURE__*/React__default["default"].createElement(Typography__default["default"], {
+    variant: "body1",
+    sx: {
+      color: darken(color, 0.5),
+      fontSize: '16px',
+      fontWeight: '600'
+    }
+  }, Array.from(name)[0]))), /*#__PURE__*/React__default["default"].createElement(Grid__default["default"], {
+    item: true,
+    xs: 9,
+    sx: {
+      display: 'flex',
+      alignItems: 'center'
+    }
+  }, name));
 }
 
 function Calendar() {
@@ -32407,12 +32468,12 @@ function Calendar() {
   }, [users]);
   var tableHead = /*#__PURE__*/React__default["default"].createElement(material.TableRow, {
     sx: classes.tableRow
-  }, /*#__PURE__*/React__default["default"].createElement(Resources, {
+  }, /*#__PURE__*/React__default["default"].createElement(StickyCell, {
     sx: classes.resourceHead,
     align: "left"
-  }, /*#__PURE__*/React__default["default"].createElement(Wrapper, null, /*#__PURE__*/React__default["default"].createElement(Resource, null, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
+  }, /*#__PURE__*/React__default["default"].createElement(StyledBox, null, /*#__PURE__*/React__default["default"].createElement(ResourceCell, null, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
     sx: classes.resourceLabelText
-  }, resourceLabel)), /*#__PURE__*/React__default["default"].createElement(Divider, null)), /*#__PURE__*/React__default["default"].createElement(Resource, {
+  }, resourceLabel))), /*#__PURE__*/React__default["default"].createElement(ResourceCell, {
     sx: {
       marginTop: 2
     }
@@ -32441,30 +32502,14 @@ function Calendar() {
   var userSlots = users.map(function (user) {
     return /*#__PURE__*/React__default["default"].createElement(material.TableRow, {
       key: user.name
-    }, /*#__PURE__*/React__default["default"].createElement(Resources, {
+    }, /*#__PURE__*/React__default["default"].createElement(StickyCell, {
       align: "left"
-    }, /*#__PURE__*/React__default["default"].createElement(Wrapper, null, /*#__PURE__*/React__default["default"].createElement(Resource, {
+    }, /*#__PURE__*/React__default["default"].createElement(ResourceCell, {
       sx: classes.resourceBody
-    }, /*#__PURE__*/React__default["default"].createElement(material.Box, {
-      sx: {
-        height: '40px',
-        width: '40px',
-        backgroundColor: user.color,
-        marginRight: 2,
-        borderColor: material.darken(user.color, 0.35),
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: '2px'
-      }
-    }, /*#__PURE__*/React__default["default"].createElement(material.Typography, {
-      variant: "body1",
-      sx: {
-        color: material.darken(user.color, 0.5),
-        fontSize: '16px',
-        fontWeight: '600'
-      }
-    }, Array.from(user.name)[0])), user.name), /*#__PURE__*/React__default["default"].createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
+    }, /*#__PURE__*/React__default["default"].createElement(ResourceName, {
+      name: user.name,
+      color: user.color
+    }))), timeSlotsBody.map(function (slot, index) {
       return /*#__PURE__*/React__default["default"].createElement(UserTimeSlot, {
         key: "".concat(user.name, "-").concat(slot),
         index: index,
@@ -32474,42 +32519,39 @@ function Calendar() {
     }));
   });
   var width = getSlotWidth(secondaryDuration);
+  var emptySlots = timeSlotsBody.map(function (slot, index) {
+    return /*#__PURE__*/React__default["default"].createElement(Slot, {
+      key: index,
+      colSpan: 1,
+      width: width,
+      sx: {
+        borderBottom: isLoading && 'none'
+      }
+    }, /*#__PURE__*/React__default["default"].createElement("div", {
+      style: {
+        width: width,
+        height: '100%'
+      }
+    }, "\xA0"));
+  });
   var additionalRowsContent = Array.from({
-    length: additionalRows
+    length: users.length ? additionalRows : minimumRows
   }, function (_, index) {
     return /*#__PURE__*/React__default["default"].createElement(material.TableRow, {
       key: "additional-row-".concat(index)
-    }, /*#__PURE__*/React__default["default"].createElement(Resources, {
+    }, /*#__PURE__*/React__default["default"].createElement(StickyCell, {
       align: "left",
       sx: {
         borderBottom: isLoading && 'none'
       }
-    }, /*#__PURE__*/React__default["default"].createElement(Wrapper, null, /*#__PURE__*/React__default["default"].createElement(Resource, {
+    }, /*#__PURE__*/React__default["default"].createElement(StyledBox, null, /*#__PURE__*/React__default["default"].createElement(ResourceCell, {
       sx: classes.resourceBody
-    }), /*#__PURE__*/React__default["default"].createElement(Divider, null))), timeSlotsBody.map(function (slot, index) {
-      return /*#__PURE__*/React__default["default"].createElement(Slot, {
-        key: index,
-        colSpan: 1,
-        width: width,
-        sx: {
-          borderBottom: isLoading && 'none'
-        }
-      }, /*#__PURE__*/React__default["default"].createElement("div", {
-        style: {
-          width: width,
-          height: '100%'
-        }
-      }, "\xA0"));
-    }));
+    }))), emptySlots);
   });
-  return /*#__PURE__*/React__default["default"].createElement(CalendarContainer, null, /*#__PURE__*/React__default["default"].createElement(material.Table, {
+  return /*#__PURE__*/React__default["default"].createElement(StyledTableContainer, null, /*#__PURE__*/React__default["default"].createElement(material.Table, {
     sx: classes.table,
     stickyHeader: true
-  }, /*#__PURE__*/React__default["default"].createElement(material.TableHead, null, tableHead), /*#__PURE__*/React__default["default"].createElement(material.TableBody, {
-    sx: {
-      overflow: 'auto'
-    }
-  }, !isLoading && userSlots, additionalRowsContent)));
+  }, /*#__PURE__*/React__default["default"].createElement(material.TableHead, null, tableHead), /*#__PURE__*/React__default["default"].createElement(material.TableBody, null, !isLoading && userSlots, additionalRowsContent)));
 }
 var useStyles = function useStyles() {
   return {
@@ -32522,7 +32564,6 @@ var useStyles = function useStyles() {
       fontWeight: 'bold'
     },
     tableRow: {
-      overflowY: 'hidden',
       backgroundColor: 'white',
       position: 'sticky',
       top: 0,

@@ -31,7 +31,7 @@ function UserTimeSlot(props) {
   const theme = useTheme();
 
   const dropRef = React.useRef(null);
-  const [{ isOver, canDrop }, drop] = useDrop({
+  const [{ isOver, canDrop, item }, drop] = useDrop({
     accept: 'APPOINTMENT',
     canDrop: (appointment) => {
       return customCanDrop ? customCanDrop(appointment) : true
@@ -61,6 +61,7 @@ function UserTimeSlot(props) {
     collect: (monitor) => ({
       isOver: monitor.isOver({ shallow: true }),
       canDrop: monitor.canDrop(),
+      item: monitor.getItem()
     }),
   });
 
@@ -103,13 +104,29 @@ function UserTimeSlot(props) {
   // console.log(index)
 
   const width = getSlotWidth(secondaryDuration);
+  
   const durationWidth = getDurationWidth(timeSlot, duration, width)
   const bg = slotBg(canDrop, isOver, slotBackground, theme, color);
 
+  const calculateIsOverWidth = () => {
+    const start = moment(item?.appointment?.schedule?.startDate)
+    const end = moment(item?.appointment?.schedule?.endDate)
+
+    const existingDuration = moment
+    .duration(end.diff(start))
+    .asMinutes();
+
+    if(existingDuration){
+      return getDurationWidth(timeSlot, existingDuration, width)
+    }
+    return getDurationWidth(timeSlot, duration, width)
+  }
+
   drop(dropRef);
   return (
-    <Slot colSpan={1} ref={dropRef} index={index} bg={bg} width={width || '100%'}  onClick={() => handleClick(index)}>
+    <Slot colSpan={1} ref={dropRef} index={index} width={width || '100%'}  onClick={() => handleClick(index)}>
       <div style={{ overflow: 'visible', width: width, height: '100%',}} >
+       {isOver && <div style={{backgroundColor: bg, width: calculateIsOverWidth(), height: '100%', position: 'absolute', top: 0}} ></div>}
         {/* {clickedIndex === index && <div style={{width: durationWidth,
               height: '100%',
               backgroundColor: 'red',
