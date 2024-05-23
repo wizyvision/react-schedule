@@ -9,25 +9,23 @@ import {
   InputLabel,
   FormControl,
   Typography,
-  darken,
-  Box,
 } from '@mui/material';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
 import { generateTimeSlotsForShift } from '../../utils/generateTimeSlot';
 
 import {
-  CalendarContainer,
-  Divider,
-  Resources,
-  Resource,
+  StyledTableContainer,
+  StickyCell,
+  ResourceCell,
   TimeSlots,
-  Wrapper,
+  StyledBox,
 } from '../../container/Calendar';
 import UserTimeSlot from './UserTimeSlot';
 import { MIN_ROWS } from '../../constants/appointment';
 import Slot from '../../container/Slot';
 import { getSlotWidth } from '../../utils/getAppointmentStyle';
+import ResourceName from './ResourceName';
 
 function Calendar() {
   const {
@@ -62,16 +60,15 @@ function Calendar() {
 
   const tableHead = (
     <TableRow sx={classes.tableRow}>
-      <Resources sx={classes.resourceHead} align='left'>
-        <Wrapper>
-          <Resource>
+      <StickyCell sx={classes.resourceHead} align='left'>
+        <StyledBox>
+          <ResourceCell>
             <Typography sx={classes.resourceLabelText}>
               {resourceLabel}
             </Typography>
-          </Resource>
-          <Divider></Divider>
-        </Wrapper>
-        <Resource sx={{ marginTop: 2 }}>
+          </ResourceCell>
+        </StyledBox>
+        <ResourceCell sx={{ marginTop: 2 }}>
           <FormControl size='small' fullWidth>
             <InputLabel id='groups'>{groupLabel || 'Groups'}</InputLabel>
             <Select
@@ -87,8 +84,8 @@ function Calendar() {
               ))}
             </Select>
           </FormControl>
-        </Resource>
-      </Resources>
+        </ResourceCell>
+      </StickyCell>
       {timeSlotsHead.map((slot) => (
         <TimeSlots key={slot} colSpan={colSpan}>
           {slot}
@@ -100,31 +97,11 @@ function Calendar() {
   const userSlots = users.map((user) => {
     return (
       <TableRow key={user.name}>
-        <Resources align='left'>
-          <Wrapper>
-            <Resource sx={classes.resourceBody}>
-              <Box
-                sx={{
-                  height: '40px',
-                  width: '40px',
-                  backgroundColor: user.color,
-                  marginRight: 2,
-                  borderColor: darken(user.color, 0.35),
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '2px'
-                }}
-              >
-                <Typography variant='body1' sx={{ color: darken(user.color, 0.5), fontSize: '16px', fontWeight: '600' }}>
-                  {Array.from(user.name)[0]}
-                </Typography>
-              </Box>
-              {user.name}
-            </Resource>
-            <Divider></Divider>
-          </Wrapper>
-        </Resources>
+        <StickyCell align='left'>
+          <ResourceCell sx={classes.resourceBody}>
+            <ResourceName name={user.name} color={user.color} />
+          </ResourceCell>
+        </StickyCell>
         {timeSlotsBody.map((slot, index) => (
           <UserTimeSlot
             key={`${user.name}-${slot}`}
@@ -138,41 +115,47 @@ function Calendar() {
   });
 
   const width = getSlotWidth(secondaryDuration);
+
+  const emptySlots = timeSlotsBody.map((slot, index) => (
+    <Slot
+      key={index}
+      colSpan={1}
+      width={width}
+      sx={{ borderBottom: isLoading && 'none' }}
+    >
+      <div style={{ width: width, height: '100%' }}>&nbsp;</div>
+    </Slot>
+  ));
+
   const additionalRowsContent = Array.from(
-    { length: additionalRows },
+    { length: users.length ? additionalRows : minimumRows },
     (_, index) => (
       <TableRow key={`additional-row-${index}`}>
-        {/* Additional row content */}
-        <Resources align='left' sx={{ borderBottom: isLoading && 'none' }}>
-          <Wrapper>
-            <Resource sx={classes.resourceBody}></Resource>
-            <Divider></Divider>
-          </Wrapper>
-        </Resources>
-        {timeSlotsBody.map((slot, index) => (
-          <Slot
-            key={index}
-            colSpan={1}
-            width={width}
-            sx={{ borderBottom: isLoading && 'none' }}
-          >
-            <div style={{ width: width, height: '100%' }}>&nbsp;</div>
-          </Slot>
-        ))}
+        <StickyCell
+          align='left'
+          sx={{
+            borderBottom: isLoading && 'none',
+          }}
+        >
+          <StyledBox>
+            <ResourceCell sx={classes.resourceBody}></ResourceCell>
+          </StyledBox>
+        </StickyCell>
+        {emptySlots}
       </TableRow>
     )
   );
 
   return (
-    <CalendarContainer>
+    <StyledTableContainer>
       <Table sx={classes.table} stickyHeader>
         <TableHead>{tableHead}</TableHead>
-        <TableBody sx={{overflow: 'auto'}} >
+        <TableBody>
           {!isLoading && userSlots}
           {additionalRowsContent}
         </TableBody>
       </Table>
-    </CalendarContainer>
+    </StyledTableContainer>
   );
 }
 
@@ -186,7 +169,6 @@ const useStyles = () => ({
     fontWeight: 'bold',
   },
   tableRow: {
-    overflowY: 'hidden',
     backgroundColor: 'white',
     position: 'sticky',
     top: 0,

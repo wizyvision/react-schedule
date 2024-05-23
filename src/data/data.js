@@ -120,7 +120,7 @@ export const users = [
     }, 
     {
         id: 9,
-        name: 'Jericho Rosales',
+        name: 'Jericho Christian Mangalindan',
         groups: [1, 3]
     }, 
 ]
