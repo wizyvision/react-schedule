@@ -26112,7 +26112,8 @@ var SchedulerProvider = function SchedulerProvider(props) {
     resourceLabel = props.resourceLabel,
     isLoading = props.isLoading,
     customCanDrop = props.customCanDrop,
-    groupLabel = props.groupLabel;
+    groupLabel = props.groupLabel,
+    onAppointmentClick = props.onAppointmentClick;
   var locales = {
     en: enUS
   };
@@ -26136,7 +26137,8 @@ var SchedulerProvider = function SchedulerProvider(props) {
     resourceLabel: resourceLabel,
     customCanDrop: customCanDrop,
     isLoading: isLoading,
-    groupLabel: groupLabel
+    groupLabel: groupLabel,
+    onAppointmentClick: onAppointmentClick
   };
   return /*#__PURE__*/React__default.createElement(DndProvider, {
     backend: HTML5Backend
@@ -32120,6 +32122,8 @@ var AppointmentContainer = styled$1('div')(function (props) {
 });
 
 function AppointmentItem(props) {
+  var _useSchedulerContext = useSchedulerContext(),
+    onAppointmentClick = _useSchedulerContext.onAppointmentClick;
   var appointment = props.appointment,
     width = props.width,
     height = props.height;
@@ -32169,7 +32173,10 @@ function AppointmentItem(props) {
     isDragging: isDragging,
     height: height,
     width: width,
-    appointmentColor: color
+    appointmentColor: color,
+    onClick: function onClick() {
+      return onAppointmentClick(appointment.id);
+    }
   }, /*#__PURE__*/React__default.createElement("div", {
     style: classes.wrapper
   }, /*#__PURE__*/React__default.createElement(Tooltip, {

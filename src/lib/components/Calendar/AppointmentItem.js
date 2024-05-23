@@ -4,8 +4,10 @@ import { ListItemText, Tooltip, Typography, darken } from '@mui/material';
 
 import AppointmentContainer from '../../container/Appointment';
 import { getAppointmentDuration } from '../../utils/getAppointments';
+import { useSchedulerContext } from '../../context/SchedulerProvider';
 
 function AppointmentItem(props) {
+  const { onAppointmentClick } = useSchedulerContext();
   const { appointment, width, height } = props;
   const classes = useStyles();
 
@@ -18,7 +20,7 @@ function AppointmentItem(props) {
   });
 
   const color = appointment.user.color;
-  const textColor = darken(color, 0.5)
+  const textColor = darken(color, 0.5);
   const duration = getAppointmentDuration(appointment.schedule);
 
   const apptItems = [
@@ -30,7 +32,7 @@ function AppointmentItem(props) {
   const tooltipMessage = <div style={classes.tooltip}>{tip}</div>;
 
   const primaryText = (
-    <div style={{color: textColor, ...classes.name}}>
+    <div style={{ color: textColor, ...classes.name }}>
       {appointment.user.name}
       <span style={{ color: textColor }}> | </span>
       Duration: {duration}
@@ -39,7 +41,7 @@ function AppointmentItem(props) {
 
   const secondaryText = (
     <div style={classes.titleContainer}>
-      <Typography variant='body2'sx={{color: textColor, ...classes.title}}>
+      <Typography variant='body2' sx={{ color: textColor, ...classes.title }}>
         {appointment.title}
       </Typography>
     </div>
@@ -52,6 +54,7 @@ function AppointmentItem(props) {
       height={height}
       width={width}
       appointmentColor={color}
+      onClick={() => onAppointmentClick(appointment.id)}
     >
       <div style={classes.wrapper}>
         <Tooltip title={tooltipMessage}>
