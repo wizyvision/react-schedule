@@ -32496,7 +32496,7 @@ function Calendar() {
     }, "\xA0"));
   });
   var additionalRowsContent = Array.from({
-    length: users.length ? additionalRows : minimumRows
+    length: !isLoading && users.length ? additionalRows : minimumRows
   }, function (_, index) {
     return /*#__PURE__*/React__default.createElement(TableRow, {
       key: "additional-row-".concat(index)

@@ -32542,7 +32542,7 @@ function Calendar() {
     }, "\xA0"));
   });
   var additionalRowsContent = Array.from({
-    length: users.length ? additionalRows : minimumRows
+    length: !isLoading && users.length ? additionalRows : minimumRows
   }, function (_, index) {
     return /*#__PURE__*/React__default["default"].createElement(material.TableRow, {
       key: "additional-row-".concat(index)

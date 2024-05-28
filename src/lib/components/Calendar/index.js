@@ -128,7 +128,7 @@ function Calendar() {
   ));
 
   const additionalRowsContent = Array.from(
-    { length: users.length ? additionalRows : minimumRows },
+    { length: !isLoading && users.length ? additionalRows : minimumRows },
     (_, index) => (
       <TableRow key={`additional-row-${index}`}>
         <StickyCell
