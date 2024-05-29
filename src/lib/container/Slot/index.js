@@ -4,7 +4,7 @@ import { useSchedulerContext } from '../../context/SchedulerProvider';
 import { styled } from '@mui/system';
 
 const Slot = styled(TableCell)((props) => {
-  const { index, bg, width } = props;
+  const { index, width } = props;
   const { SlotProps, } = useSchedulerContext()
   const { style } = SlotProps || {};
   const theme = useTheme()
@@ -39,13 +39,11 @@ const Slot = styled(TableCell)((props) => {
   // };
 
   return {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    paddingTop: theme.spacing(1.05),
+    paddingBottom: theme.spacing(1.05),
     paddingLeft: 0,
     paddingRight: 0,
     position: 'relative',
-    backgroundColor: bg,
-    transition: bg + '0.3s ease',
     width: width,
     height: HEIGHT,
     overflow: 'visible',

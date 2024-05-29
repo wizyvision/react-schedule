@@ -20,7 +20,6 @@ const AppointmentContainer = styled('div')((props) => {
         zIndex: '2',
         position: 'relative',
         top: 0,
-        left: 0,
         borderRadius: 4,
         width: width,
         cursor: 'move',
@@ -31,6 +30,7 @@ const AppointmentContainer = styled('div')((props) => {
         whiteSpace: 'pre-wrap',
         textOverflow: 'ellipsis',
         height: height || HEIGHT + 'px',
+        zIndex: 1,
         ...style
       })
 });

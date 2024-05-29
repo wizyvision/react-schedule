@@ -8,7 +8,7 @@ import {
   getSortAppointments,
   getUpdatedAppointments,
 } from '../../utils/getAppointments';
-import { getDurationWidth, getSlotWidth, slotBg } from '../../utils/getAppointmentStyle';
+import { getAppointmentWidth, getDurationWidth, getSlotWidth, slotBg } from '../../utils/getAppointmentStyle';
 
 import { useSchedulerContext } from '../../context/SchedulerProvider';
 import Slot from '../../container/Slot';
@@ -26,25 +26,43 @@ function UserTimeSlot(props) {
     color,
     customCanDrop,
   } = useSchedulerContext();
-  const { secondaryDuration = 30, slotBackground } = SlotProps || {};
+  const { secondaryDuration = 30, slotBackground } = SlotProps || {}
 
   const theme = useTheme();
 
   const dropRef = React.useRef(null);
+  const [hoveredItem, setHoveredItem] = useState(null)
   const [{ isOver, canDrop, item }, drop] = useDrop({
     accept: 'APPOINTMENT',
     canDrop: (appointment) => {
       return customCanDrop ? customCanDrop(appointment) : true
     },
+    hover: (item, monitor, component) => {
+      const clientOffset = monitor.getClientOffset();
+      const dropTargetRect = dropRef.current.getBoundingClientRect();
+      const appointmentWidth = getAppointmentWidth(timeSlot, item.schedule?.startDate, item.schedule?.endDate, secondaryDuration)
+      if (
+        clientOffset.x >= dropTargetRect.left  &&
+        clientOffset.x <= dropTargetRect.right &&
+        clientOffset.y >= dropTargetRect.top &&
+        clientOffset.y <= dropTargetRect.bottom &&
+        clientOffset.x <= dropTargetRect.right + appointmentWidth
+      ) {
+        setHoveredItem(item);
+      } else {
+        setHoveredItem(null);
+      }
+    },
     drop: (appointment, monitor) => {
       const dropTargetRect = dropRef.current.getBoundingClientRect();
       // Get the cursor offset
       const clientOffset = monitor.getClientOffset();
+      const appointmentWidth = getAppointmentWidth(timeSlot, appointment.schedule?.startDate, appointment.schedule?.endDate, secondaryDuration)
       if (
         clientOffset.x >= dropTargetRect.left &&
         clientOffset.x <= dropTargetRect.right &&
         clientOffset.y >= dropTargetRect.top &&
-        clientOffset.y <= dropTargetRect.bottom
+        clientOffset.y <= dropTargetRect.bottom 
       ) {
         const droppedAppointment = appointment.appointment;
         const updatedAppointments = getUpdatedAppointments(
@@ -124,9 +142,9 @@ function UserTimeSlot(props) {
 
   drop(dropRef);
   return (
-    <Slot colSpan={1} ref={dropRef} index={index} width={width || '100%'}  onClick={() => handleClick(index)}>
-      <div style={{ overflow: 'visible', width: width, height: '100%',}} >
-       {isOver && <div style={{backgroundColor: bg, width: calculateIsOverWidth(), height: '100%', position: 'absolute', top: 0}} ></div>}
+    <Slot colSpan={1} ref={dropRef}  index={index} width={width || '100%'}  onClick={() => handleClick(index)}>
+      <div ref={dropRef} style={{ overflow: 'visible', width: width, height: '100%',}} >
+       {(isOver) && <div style={{backgroundColor: bg, width: calculateIsOverWidth(),  height: '100%', position: 'absolute', top: 0, zIndex: 10}} ></div>}
         {/* {clickedIndex === index && <div style={{width: durationWidth,
               height: '100%',
               backgroundColor: 'red',
